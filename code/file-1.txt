@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ORM\Table('`{{ schema.name }}`')]{{ index }}
+class {{ tree.getClassName(file, schema, action) }}
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private int $id;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+{% for column in columnzz %}
+    #[ORM\Column({{ makeParameter(column) }})]
+    private ${{ column.name }};
+{% endfor %}
+
+{% for relation in relationzz %}
+{{ relation }}
+{% endfor %}
+
+}

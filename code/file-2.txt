@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName(helper.findFile('ModelBase'), schema, action) }}
+{
+}

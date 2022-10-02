@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+use App\Api\AA\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ tree.getClassName(file, schema, action) }} extends AbstractController
+{
+    public function __invoke({{ action + schema.name }}Request $request,
+                             {{ action + schema.name }} $create,
+    )
+    {
+        $data = $request->validated();
+
+        /** @var \{{ helper.getClassFullNameByFileSchema('Model', 'User', action) }} $user */
+        $user = auth()->user();
+
+        $item = $create($user,
+{% for column in columnzz %}
+            $data['{{ column.alias }}'],{% endfor %}
+        );
+
+        return {{ action + schema.name }}Response::sendItem($item);
+    }
+
+}

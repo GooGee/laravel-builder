@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use App\Api\AA\AbstractApiResponse;
+
+class {{ tree.getClassName(file, schema, action) }} extends AbstractApiResponse
+{
+    public function __construct(private {{ tree.getClassName(helper.findFile('Model'), schema, action) }} $item)
+    {
+        parent::__construct();
+    }
+
+    function data(): array
+    {
+        return [
+{% for column in columnzz %}
+            '{{ column.name }}' => $this->item->{{ column.name }},
+{% endfor %}
+        ];
+    }
+}

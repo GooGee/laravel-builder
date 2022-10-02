@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ tree.getClassName(file, schema, action) }}
+{
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    {
+    }
+
+    function __invoke({{ helper.getClassNameByFileSchema('Model', 'User', action) }} $user, int $id)
+    {
+        $item = $this->repository->findOrFail($id);
+        if ($item->dateDelete) {
+            return $item;
+        }
+
+        $item->dateDelete = now();
+        $item->save();
+
+        \Log::info($user->id . ' ' . static::class);
+        event(new {{ action + schema.name }}Event($user, $item));
+
+        return $item;
+    }
+}

@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ tree.getClassName(file, schema, action) }}
+{
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    {
+    }
+
+    function find(int $id)
+    {
+        return $this->repository->findOrFail($id);
+    }
+
+    function findOrFail(int $id)
+    {
+        return $this->repository->findOrFail($id);
+    }
+
+}

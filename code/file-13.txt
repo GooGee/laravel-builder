@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ tree.getClassName(file, schema, action) }}
+{
+    public function __construct(public {{ helper.getClassNameByFileSchema('Model', 'User', action) }} $user,
+                                public {{ tree.getClassName(helper.findFile('Model'), schema, action) }} $item)
+    {
+    }
+}

@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+use App\Api\AA\AbstractController;
+use App\Api\AA\AbstractResponse;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ tree.getClassName(file, schema, action) }} extends AbstractController
+{
+    public function __invoke(int $id, {{ action + schema.name }} $delete)
+    {
+        /** @var \{{ helper.getClassFullNameByFileSchema('Model', 'User', action) }} $user */
+        $user = auth()->user();
+
+        $result = $delete($user, $id);
+
+        return AbstractResponse::sendOK($result);
+    }
+}

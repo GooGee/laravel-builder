@@ -1,0 +1,57 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+/**
+ *{% for property in propertyzz %}
+ * @property {{ property }}{% endfor %}
+ *{% for property in przz %}
+ * @property {{ property }}{% endfor %}
+ */
+class {{ tree.getClassName(file, schema, action) }} extends AbstractModel
+{
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = '{{ schema.name }}';
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+{% for column in columnzz | selectattr('cast') %}
+        '{{ column.name }}' => '{{ column.cast }}',{% endfor %}
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<string>
+     */
+    protected $hidden = [
+{% for column in columnzz | selectattr('wo') %}
+        '{{ column.name }}',{% endfor %}
+    ];
+
+    static function keyzz(): array
+    {
+        return [
+{% for key in keyzz %}
+            '{{ key.name }}',{% endfor %}
+        ];
+    }
+
+{% for relation in relationzz %}
+{{ relation }}{% endfor %}
+
+}
