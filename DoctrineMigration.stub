@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Migrations\Migration;
+
+/**
+ * Auto-generated Migration
+ */
+return new class extends Migration
+{
+    public function up()
+    {
+<up>
+    }
+
+    public function down()
+    {
+<down>
+    }
+};
