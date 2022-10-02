@@ -39,6 +39,12 @@ class FileManager
         return implode(self::DirectorySeparator, $pathzz);
     }
 
+    static function getHtmlDirectory()
+    {
+        $version = Constant::getVersion();
+        return "public/build$version";
+    }
+
     function delete(string $file)
     {
         $this->fs->delete($file);
