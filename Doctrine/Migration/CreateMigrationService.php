@@ -76,8 +76,8 @@ class CreateMigrationService
         $downzz = $comparator->compareSchemas($toSchema, $fromSchema)->toSql($platform);
         $kv = $this->dependencyFactory->getConfiguration()->getMigrationDirectories();
         $fqcn = $this->dependencyFactory->getClassNameGenerator()->generateClassName(array_keys($kv)[0]);
-        $uptext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($upzz);
-        $downtext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($downzz);
+        $uptext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($upzz, true);
+        $downtext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($downzz, true);
         $file = $this->dependencyFactory
             ->getMigrationGenerator()
             ->generateMigration($fqcn, $this->replaceStatement($uptext), $this->replaceStatement($downtext));

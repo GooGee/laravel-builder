@@ -11,6 +11,7 @@
     "minimum-stability": "dev",
     "require": {
         "laravel/framework": ">=6",
+        "doctrine/sql-formatter": "^1.1",
         "doctrine/migrations": "^3.5",
         "doctrine/orm": "^2.12",
         "symfony/cache": "^6.0"
