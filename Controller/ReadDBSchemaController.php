@@ -10,7 +10,8 @@ class ReadDBSchemaController extends AbstractController
 {
     public function __invoke(ReadDBSchema $readDBSchema)
     {
-        return $this->ok($readDBSchema->run());
+        $schema = $readDBSchema->run();
+        return $this->ok($readDBSchema->toArray($schema));
     }
 
 }
