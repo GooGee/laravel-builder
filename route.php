@@ -6,6 +6,7 @@ Route::prefix('laravel-builder')->group(function () {
     Route::put('/', \GooGee\LaravelBuilder\Controller\WriteSettingController::class);
 
     Route::get('/dbmigration', \GooGee\LaravelBuilder\Controller\ReadDBMigrationController::class);
+    Route::get('/dbschema', \GooGee\LaravelBuilder\Controller\ReadDBSchemaController::class);
 
     Route::get('/file', \GooGee\LaravelBuilder\Controller\ReadFileController::class);
     Route::put('/file', \GooGee\LaravelBuilder\Controller\WriteFileController::class);
