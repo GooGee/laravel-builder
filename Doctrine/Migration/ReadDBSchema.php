@@ -78,6 +78,7 @@ class ReadDBSchema
     {
         $data = [
             'name' => $table->getName(),
+            'comment' => $table->getComment(),
             'columnzz' => [],
             'indexzz' => [],
             'relationzz' => [],
@@ -99,10 +100,13 @@ class ReadDBSchema
 
     static function toArray(Schema $schema)
     {
-        $tablezz = [];
+        $data = [
+            'name' => $schema->getName(),
+            'tablezz' => [],
+        ];
         foreach ($schema->getTables() as $item) {
-            $tablezz[] = static::makeTable($item);
+            $data['tablezz'][] = static::makeTable($item);
         }
-        return compact('tablezz');
+        return $data;
     }
 }

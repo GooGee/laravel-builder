@@ -34,6 +34,9 @@ function makeFaker(data) {
      */
     function setFaker(item) {
         const column = {...item}
+        if (column.name === 'id') {
+            return column
+        }
         if (column.fakeText) {
             return column
         }
