@@ -7,7 +7,6 @@ namespace GooGee\LaravelBuilder\Service;
 use GooGee\LaravelBuilder\Constant;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\Filesystem;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\StorageAttributes;
 
 class FileManager
@@ -15,12 +14,8 @@ class FileManager
     const DirectorySeparator = '/';
     const LaravelBuilderDirectory = Constant::NAME2;
 
-    private Filesystem $fs;
-
-    public function __construct()
+    public function __construct(private Filesystem $fs)
     {
-        $adapter = new LocalFilesystemAdapter(base_path());
-        $this->fs = new Filesystem($adapter);
     }
 
     static function concat(string $parent, string $child)
@@ -74,6 +69,20 @@ class FileManager
     {
         $data = pathinfo($file);
         return $data['filename'];
+    }
+
+    function listFilezz(string $folder)
+    {
+        $listing = $this->fs->listContents($folder);
+        $filezz = [];
+        foreach ($listing as $item) {
+            if ($item instanceof FileAttributes) {
+                $path = $item->path();
+                $pi = pathinfo($path);
+                $filezz[] = $pi['basename'];
+            }
+        }
+        return $filezz;
     }
 
     function move(string $from, string $to)

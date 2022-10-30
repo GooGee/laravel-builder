@@ -8,7 +8,7 @@ use GooGee\LaravelBuilder\Service\FileManager;
 
 class Constant
 {
-    const VERSION = '0.1.1';
+    const VERSION = '0.1.3';
 
     const NAME = 'LaravelBuilder';
     const NAME2 = 'laravel-builder';

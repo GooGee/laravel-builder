@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+use App\AbstractBase\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ tree.getClassName(file, schema, action) }} extends AbstractController
+{
+    public function __invoke(int $id, {{ action + schema.name }} $readOne)
+    {
+        $item = $readOne->findOrFail($id);
+
+        return {{ action + schema.name }}Response::sendItem($item);
+    }
+}

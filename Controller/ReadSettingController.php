@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace GooGee\LaravelBuilder\Controller;
 
 use GooGee\LaravelBuilder\Constant;
-use GooGee\LaravelBuilder\Controller\AbstractController;
+use GooGee\LaravelBuilder\Service\FileManager;
 use GooGee\LaravelBuilder\Service\SettingFileService;
 
 class ReadSettingController extends AbstractController
 {
-    public function __invoke(SettingFileService $service)
+    public function __invoke(SettingFileService $service, FileManager $fileManager)
     {
         $version = Constant::VERSION;
-        $packageName = 'googee/laravel-builder';
         $data = $service->read();
-        return $this->ok(compact('version', 'packageName', 'data'));
+        $composer = $fileManager->read('composer.json');
+        return $this->ok(compact('version', 'data', 'composer'));
     }
 }

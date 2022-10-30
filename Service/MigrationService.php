@@ -27,17 +27,7 @@ class MigrationService
 
     function getAllFile()
     {
-        $filezz = [];
-        $all = $this->fileManager->readAll(self::Folder);
-        foreach ($all as $key => $item) {
-            if (str_ends_with($key, '.php')) {
-                $filezz[] = [
-                    'name' => $key,
-                    'content' => $item,
-                ];
-            }
-        }
-        return $filezz;
+        return $this->fileManager->listFilezz(self::Folder);
     }
 
     function getAllInDB()

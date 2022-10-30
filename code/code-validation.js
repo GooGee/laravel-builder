@@ -1,5 +1,5 @@
 function run(data) {
-    /** @type {DataForScript} */
+    /** @type {LB.DataForScript} */
     const ddd = data
 
     /**
@@ -13,8 +13,8 @@ function run(data) {
 
     /**
      *
-     * @param {Column} item
-     * @returns {Column}
+     * @param {LB.Column} item
+     * @returns {LB.Column}
      */
     function setConstraint(item) {
         const column = {...item}
@@ -22,6 +22,7 @@ function run(data) {
             return column
         }
 
+        column.constraintzz.push(makeConstraint('required'))
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
             column.constraintzz.push(makeConstraint('integer'))
             return column
@@ -46,7 +47,7 @@ function run(data) {
      *
      * @param {string} name
      * @param {string} parameter
-     * @returns {ColumnConstraint}
+     * @returns {LB.ColumnConstraint}
      */
     function makeConstraint(name, parameter = '') {
         return {

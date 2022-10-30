@@ -1,10 +1,10 @@
 function run(data) {
-    /** @type {DataForScript} */
+    /** @type {LB.DataForScript} */
     const ddd = data
 
     /**
      * make ORM parameter
-     * @param {Column} column
+     * @param {LB.Column} column
      * @returns {string}
      */
     function makeParameter(column) {
@@ -31,7 +31,7 @@ function run(data) {
             optionzz.push(`"comment" => "${column.comment}"`)
         }
         if (column.default.length) {
-            optionzz.push(`"default" => ${column.default}`)
+            optionzz.push(`"default" => "${column.default}"`)
         }
         if (column.unsigned) {
             optionzz.push('"unsigned" => true')
@@ -44,11 +44,11 @@ function run(data) {
 
     ddd.makeParameter = makeParameter
 
-    /** @type {Map<number, Schema>} */
+    /** @type {Map<number, LB.Schema>} */
     const schemamap = new Map()
     ddd.db.tables.Schema.forEach(item => schemamap.set(item.id, item))
 
-    /** @type {Map<number, Column>} */
+    /** @type {Map<number, LB.Column>} */
     const columnmap = new Map()
     ddd.db.tables.Column.forEach(item => columnmap.set(item.id, item))
 
@@ -65,8 +65,7 @@ function run(data) {
         })
 
     ddd.columnzz = ddd.db.tables.Column
-        .filter((item) => item.schemaId === ddd.schema.id && item.inTable && item.name !== "id")
-        .filter((item) => !fkset.has(item.id)) // exclude foreign key
+        .filter((item) => item.schemaId === ddd.schema.id && item.inTable && !fkset.has(item.id)) // exclude foreign key
 
     const indexzz = ddd.db.tables.Index.filter(item => item.schemaId === ddd.schema.id)
     const indexLinezz = []
@@ -83,7 +82,7 @@ function run(data) {
 
     /**
      *
-     * @param {Index} index
+     * @param {LB.Index} index
      * @returns {string}
      */
     function makeIndex(index) {
@@ -98,14 +97,15 @@ function run(data) {
         if (cnzz.length === 0) {
             return ''
         }
-        const namezz = [ddd.schema.name, index.type, '_'].concat(cnzz)
+        const namezz = [ddd.schema.name].concat(cnzz)
+        namezz.push(index.type)
         return `#[ORM\\${type}(name: "${namezz.join('_')}", columns: ["${cnzz.join('", "')}"])]`
     }
 
     /**
      * OneToOne relation
-     * @param {Relation} relation
-     * @param {Column} fk
+     * @param {LB.Relation} relation
+     * @param {LB.Column} fk
      * @returns {string}
      */
     function makeOneToOne(relation, fk) {
@@ -126,22 +126,23 @@ function run(data) {
 
     /**
      * OneToMany relation
-     * @param {Relation} relation
-     * @param {Column} fk
+     * @param {LB.Relation} relation
+     * @param {LB.Column} fk
      * @returns {string}
      */
     function makeOneToMany(relation, fk) {
         const textzz = []
         const nullable = fk.nullable ? 'true' : 'false'
-        if (relation.schema0Id === ddd.schema.id) {
-            const schema1 = schemamap.get(relation.schema1Id)
-            textzz.push(`    #[ORM\\OneToMany(mappedBy: '${relation.name1}', targetEntity: ${schema1.name}::class)]`)
-            textzz.push(`    private \$${relation.name0};`)
-        } else {
+        // for circular reference
+        if (relation.schema1Id === ddd.schema.id) {
             const schema1 = schemamap.get(relation.schema0Id)
             textzz.push(`    #[ORM\\ManyToOne(targetEntity: ${schema1.name}::class)]`)
             textzz.push(`    #[ORM\\JoinColumn(name: "${fk.name}", referencedColumnName: "id", nullable: ${nullable})]`)
             textzz.push(`    private \$${relation.name1};`)
+        } else {
+            const schema1 = schemamap.get(relation.schema1Id)
+            textzz.push(`    #[ORM\\OneToMany(mappedBy: '${relation.name1}', targetEntity: ${schema1.name}::class)]`)
+            textzz.push(`    private \$${relation.name0};`)
         }
         return textzz.join('\n')
     }

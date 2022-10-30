@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName(helper.findFile('AbstractItemTest'), schema, action) }}
+{
+    public function test{{ action + schema.name }}()
+    {
+        $user = $this->createUser();
+        $item = $this->makeItem($user);
+        $response = $this->postJson($this->makeURI(0), $item->toArray())
+            ->assertStatus(401);
+
+        $this->actingAs($user);
+        $response = $this->postJson($this->makeURI(0), $item->toArray())
+            ->assertStatus(200);
+        $this->seeItem(self::structure(), $response);
+    }
+}

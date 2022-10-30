@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::prefix('laravel-builder')->group(function () {
 
     Route::get('/', \GooGee\LaravelBuilder\Controller\ReadSettingController::class);

@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
+
+abstract class AbstractItemCache
+{
+
+}

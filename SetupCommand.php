@@ -4,6 +4,7 @@ namespace GooGee\LaravelBuilder;
 
 use GooGee\LaravelBuilder\Service\FileManager;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class SetupCommand extends Command
 {
@@ -36,7 +37,13 @@ class SetupCommand extends Command
         $file = FileManager::concat(FileManager::LaravelBuilderDirectory, '.gitignore');
         $fileManager->write($file, '*');
 
-        $fileManager->write(FileManager::getHtmlDirectory() . '/.gitignore', '*');
+        $this->info('copy HTML files');
+        $folder = base_path(FileManager::getHtmlDirectory());
+        File::deleteDirectory($folder);
+        File::copyDirectory(__DIR__ . '/build' . Constant::getVersion(), $folder);
+
+        $file = FileManager::concat(FileManager::getHtmlDirectory(), '.gitignore');
+        $fileManager->write($file, '*');
 
         $this->info('OK');
         return 0;

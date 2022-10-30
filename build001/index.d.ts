@@ -1,322 +1,445 @@
-interface Collection extends SideBarItem {
-    id: number
-    name: string
-    color: string
-    description: string
-    valueDescription: string
-    tagDescription: string
-    reserved: boolean
-}
+declare namespace LB {
+    interface Collection extends SideBarItem {
+        id: number
+        name: string
+        description: string
+        valueDescription: string
+        tagDescription: string
+    }
 
-interface CollectionItem {
-    id: number
-    collectionId: number
-    name: string
-    value: string
-    tag: string
-}
+    interface CollectionItem {
+        id: number
+        collectionId: number
+        name: string
+        value: string
+        tag: string
+    }
 
-interface Column {
-    id: number
-    schemaId: number
-    name: string
-    type: string
-    length: number
-    default: string
-    scale: number
-    unsigned: boolean
-    unique: boolean
-    nullable: boolean
-    comment: string
-    fillable: boolean
-    ro: boolean
-    wo: boolean
-    cast: string
-    fakeRaw: boolean
-    fakeUnique: boolean
-    fakeMethod: string
-    fakeText: string
-    constraintzz: ColumnConstraint[]
-    inTable: boolean
-    tf: TypeFormat
-}
+    interface Column {
+        id: number
+        schemaId: number
+        name: string
+        type: string
+        length: number
+        default: string
+        scale: number
+        unsigned: boolean
+        nullable: boolean
+        comment: string
+        fillable: boolean
+        ro: boolean
+        wo: boolean
+        cast: string
+        fakeRaw: boolean
+        fakeUnique: boolean
+        fakeMethod: string
+        fakeText: string
+        constraintzz: ColumnConstraint[]
+        inTable: boolean
+        tf: TypeFormat
+    }
 
-interface Directory {
-    id: number
-    opened: boolean
-    parentId: number | null
-    name: string
-    folderNamePattern: string
-    nameSpacePattern: string
-}
+    interface Directory {
+        id: number
+        opened: boolean
+        parentId: number | null
+        name: string
+        description: string
+    }
 
-interface File {
-    id: number
-    parentId: number
-    name: string
-    color: string
-    layer: string
-    classNamePattern: string
-    fileNamePattern: string
-    folderNamePattern: string
-    nameSpacePattern: string
-}
+    interface Example extends SideBarItem {
+        summary: string
+        value: string
+    }
 
-interface Index {
-    id: number
-    type: string
-    schemaId: number
-}
+    interface ExampleMap {
+        id: number
+        exampleId: number
+        isRequest: boolean
+        targetId: number
+    }
 
-interface IndexColumn {
-    id: number
-    columnId: number
-    indexId: number
-    sort: number
-}
+    interface File {
+        id: number
+        directoryId: number
+        name: string
+        color: string
+        layer: string
+        description: string
+        fileNamePattern: string
+        nameSpacePattern: string
+    }
 
-interface Path extends SideBarItem {
-    id: number
-    schemaId: number
-    name: string
-    color: string
-    description: string
-    summary: string
-    parameterzz: number[]
-}
+    interface Index {
+        id: number
+        type: string
+        schemaId: number
+    }
 
-interface Relation {
-    id: number
-    type: string
-    name0: string
-    name1: string
-    schema0Id: number
-    schema1Id: number
-    column1Id: number
-}
+    interface IndexColumn {
+        id: number
+        columnId: number
+        indexId: number
+        sort: number
+    }
 
-interface Schema extends SideBarItem {
-    id: number
-    opened: boolean
-    openedColumn: boolean
-    name: string
-    description: string
-    color: string
-    x: number
-    y: number
-}
+    interface Module extends SideBarItem {
+        directoryId: number
+        testDirectoryId: number
+        prefix: string
+    }
 
-interface Wu extends SideBarItem {
-    id: number
-    schemaId: number
-    name: string
-    type: string
-    isRequest: boolean
-    color: string
-    description: string
-}
+    interface ModuleAction {
+        id: number
+        directoryId: number
+        testDirectoryId: number
+        schemaId: number
+        moduleId: number
+        collectionItemId: number
+        deprecated: boolean
+        description: string
+        summary: string
+        requestId: number
+    }
 
-interface WuChild {
-    id: number
-    wuId: number
-    reference: Reference
-}
+    interface ModuleActionFile {
+        id: number
+        moduleActionId: number
+        fileId: number
+        directoryId: number
+    }
 
-interface WuColumn {
-    id: number
-    wuId: number
-    columnId: number
-    alias: string
-}
+    interface ModuleActionResponse {
+        id: number
+        description: string
+        moduleActionId: number
+        responseId: number
+        status: string
+    }
 
-interface WuParameter {
-    id: number
-    wuId: number
-    name: string
-    description: string
-}
+    interface Parameter extends SideBarItem {
+        allowEmptyValue: boolean
+        allowReserved: boolean
+        deprecated: boolean
+        description: string
+        example: string
+        explode: boolean
+        in: string
+        name: string
+        name2: string
+        required: boolean
+        tf: TypeFormat
+    }
 
-interface AbstractSchema {
-    id: number
-}
+    interface ParameterMap {
+        id: number
+        isHeader: boolean
+        isPath: boolean
+        parameterId: number
+        targetId: number
+    }
 
-interface ApiErrorResponse {
-    detail?: string
-    message: string
-    errorzz: Record<string, string[]>
-}
+    interface Path extends SideBarItem {
+        moduleId: number
+        schemaId: number
+        name: string
+        description: string
+        summary: string
+    }
 
-interface ApiResponse<T> {
-    status: number
-    message: string
-    data: T
-}
+    interface PathMethod {
+        id: number
+        method: string
+        middlewarezz: string[]
+        pathId: number
+        moduleActionId: number
+    }
 
-interface ColumnConstraint {
-    name: string
-    parameter: string
-}
+    interface Relation {
+        id: number
+        type: string
+        name0: string
+        name1: string
+        schema0Id: number
+        schema1Id: number
+        column1Id: number
+    }
 
-interface DBData {
-    name: string
-    tables: DBTable
-    version: number
-}
+    interface Request extends Response {
+        required: boolean
+    }
 
-interface DBCountResult {
-    amount: number
-}
+    interface Response extends SideBarItem {
+        description: string
+        example: string
+        mediaType: string
+        tf: TypeFormat
+    }
 
-interface DBTable {
-    Collection: Collection[]
-    CollectionItem: CollectionItem[]
-    Column: Column[]
-    Directory: Directory[]
-    File: File[]
-    Index: Index[]
-    IndexColumn: IndexColumn[]
-    ModuleAction: ModuleAction[]
-    ModuleActionFile: ModuleActionFile[]
-    Relation: Relation[]
-    Path: Path[]
-    Schema: Schema[]
-    Wu: Wu[]
-    WuChild: WuChild[]
-    WuColumn: WuColumn[]
-    WuParameter: WuParameter[]
-}
+    interface Schema extends SideBarItem {
+        opened: boolean
+        openedColumn: boolean
+        name: string
+        description: string
+        x: number
+        y: number
+    }
 
-interface DataForScript {
-    action: string
-    db: DBData
-    dependencyzz: string[]
-    file: File
-    fileMap: Record<string, string>
-    helper: any
-    lodash: lodash
-    ma?: ModuleAction
-    schema: Schema
-    tree: DataForScriptTreeHelper
-    treeMap: Map<number, LinkedTreeNode<Directory>>
-}
+    interface Server extends SideBarItem {}
 
-interface DataForScriptTreeHelper {
-    getClassName: (file: File, schema: Schema, action: string) => string
-    getFullClassName: (file: File, schema: Schema, action: string) => string
-    getFullDirectoryName: (
-        directory: Directory,
-        schema: Schema,
-        action: string,
-    ) => string
-    getFullFileName: (file: File, schema: Schema, action: string) => string
-    getFullNameSpace: (directory: Directory, schema: Schema, action: string) => string
-    getFullNameSpaceOfFile: (file: File, schema: Schema, action: string) => string
-    getNamezz: (directory: Directory, namezz: string[], nameSpace?: boolean) => string[]
-}
+    interface ServerVariable {
+        id: number
+        serverId: number
+        variableId: number
+    }
 
-interface DiskFile {
-    name: string
-    content: string
-}
+    interface Variable extends SideBarItem {
+        default: string
+        enum: string[]
+        type: string
+    }
 
-interface IndexColumnDetail extends IndexColumn {
-    name: string
-}
+    interface Wu extends SideBarItem {
+        schemaId: number
+        name: string
+        type: string
+        isRequest: boolean
+        description: string
+        example: string
+        isMap: boolean
+        tf: TypeFormat
+    }
 
-interface IndexDetail extends Index {
-    columnzz: IndexColumnDetail[]
-}
+    interface WuChild {
+        id: number
+        wuId: number
+        tf: TypeFormat
+    }
 
-interface Info {
-    version: string
-    packageName: string
-    data: string | null
-}
+    interface WuColumn {
+        id: number
+        wuId: number
+        columnId: number
+        alias: string
+    }
 
-interface InfoData {
-    db: DBData
-    setting: Setting
-}
+    interface WuParameter {
+        id: number
+        wuId: number
+        name: string
+        description: string
+    }
 
-interface LinkedTreeNode<T> {
-    childzz: LinkedTreeNode<T>[]
-    parent?: LinkedTreeNode<T>
-}
+    interface AbstractSchema {
+        id: number
+    }
 
-interface Migration {
-    batch: number
-    version: string
-}
+    interface ApiErrorResponse {
+        detail?: string
+        message: string
+        errorzz: Record<string, string[]>
+    }
 
-interface MigrationStatus {
-    dbexist: boolean
-    filezz: DiskFile[]
-    migrationzz: Migration[]
-}
+    interface ApiResponse<T> {
+        status: number
+        message: string
+        data: T
+    }
 
-interface ModuleAction {
-    id: number
-    directoryId: number
-    testDirectoryId: number
-    schemaId: number
-    moduleId: number
-    collectionItemId: number
-    deprecated: boolean
-    description: string
-    summary: string
-    request: OperationRequest
-    responsezz: OperationResponse[]
-    pathId: number
-    method: string
-}
+    interface AppInfo {
+        version: string
+        data: string | null
+        composer: string
+    }
 
-interface ModuleActionFile {
-    id: number
-    moduleActionId: number
-    fileId: number
-    directoryId: number
-}
+    interface AppInfoData {
+        db: DBData
+        oapi: OpenAPIObject
+        setting: Setting
+    }
 
-interface OperationRequest {
-    required: boolean
-    description: string
-    reference: Reference
-}
+    interface ColumnConstraint {
+        name: string
+        parameter: string
+    }
 
-interface OperationResponse {
-    status: string
-    description: string
-    reference: Reference
-}
+    interface Composer {
+        autoload: {
+            "psr-4": StringMap
+        }
+        "autoload-dev": {
+            "psr-4": StringMap
+        }
+    }
 
-interface Reference {
-    kind: string
-    targetId: number
-    argumentzz: Reference[]
-}
+    interface DBData {
+        name: string
+        tables: DBTable
+        version: number
+    }
 
-interface Setting {}
+    interface DBCountResult {
+        amount: number
+    }
 
-interface SideBarItem extends WithId {
-    name: string
-    color: string
-    description: string
-    reserved: boolean
-}
+    interface DBTable {
+        Collection: Collection[]
+        CollectionItem: CollectionItem[]
+        Column: Column[]
+        Directory: Directory[]
+        Example: Example[]
+        ExampleMap: ExampleMap[]
+        File: File[]
+        Index: Index[]
+        IndexColumn: IndexColumn[]
+        Module: Module[]
+        ModuleAction: ModuleAction[]
+        ModuleActionFile: ModuleActionFile[]
+        ModuleActionResponse: ModuleActionResponse[]
+        Parameter: Parameter[]
+        ParameterMap: ParameterMap[]
+        Path: Path[]
+        PathMethod: PathMethod[]
+        Relation: Relation[]
+        Request: Request[]
+        Response: Response[]
+        Schema: Schema[]
+        Server: Server[]
+        ServerVariable: ServerVariable[]
+        Variable: Variable[]
+        Wu: Wu[]
+        WuChild: WuChild[]
+        WuColumn: WuColumn[]
+        WuParameter: WuParameter[]
+    }
 
-declare enum Type {
-    boolean = "boolean",
-    integer = "integer",
-    number = "number",
-    string = "string",
-}
+    interface DataForScript {
+        action: string
+        db: DBData
+        dependencyzz: string[]
+        file: File
+        fileMap: StringMap
+        helper: any
+        lodash: lodash
+        ma?: ModuleAction
+        module?: Module
+        schema: Schema
+        tree: DataForScriptTreeHelper
+        treeMap: Map<number, LinkedTreeNode<Directory>>
+    }
 
-interface TypeFormat {
-    isArray: boolean
-    type: Type
-    format: string
-}
+    interface DataForScriptTreeHelper {
+        getClassName: (file: File, schema: Schema, action: string) => string
+        getClassFullName: (file: File, schema: Schema, action: string) => string
+        getDirectoryFullName: (
+            directory: Directory,
+            schema: Schema,
+            action: string,
+        ) => string
+        getFileName: (file: LB.File, schema: LB.Schema, action: string) => string
+        getFileFullName: (file: File, schema: Schema, action: string) => string
+        getFullNameSpace: (
+            directory: Directory,
+            schema: Schema,
+            action: string,
+        ) => string
+        getFullNameSpaceOfFile: (file: File, schema: Schema, action: string) => string
+        makeNameSpacezz: (directory: LB.Directory, namezz: string[]) => string[]
+        replacePSR4: (name: string) => void
+    }
 
-interface WithId {
-    id: number
+    interface DoctrineColumn {
+        name: string
+        type: string
+        default: string
+        comment: string
+        length: number
+        scale: number
+        nullable: boolean
+        unsigned: boolean
+    }
+
+    interface DoctrineIndex {
+        columnzz: string[]
+        type: string
+    }
+
+    interface DoctrineRelation {
+        columnzz: string[]
+        schema: string
+    }
+
+    interface DoctrineSchema {
+        name: string
+        tablezz: DoctrineTable[]
+    }
+
+    interface DoctrineTable {
+        name: string
+        comment: string
+        columnzz: DoctrineColumn[]
+        included?: boolean
+        indexzz: DoctrineIndex[]
+        relationzz: DoctrineRelation[]
+    }
+
+    interface IdNameItem {
+        id: number
+        name: string
+    }
+
+    interface LinkedTreeNode<T> {
+        childzz: LinkedTreeNode<T>[]
+        parent?: LinkedTreeNode<T>
+    }
+
+    interface Migration {
+        batch: number
+        migration: string
+    }
+
+    interface MigrationStatus {
+        dbexist: boolean
+        filezz: string[]
+        migrationzz: Migration[]
+    }
+
+    enum OapiType {
+        any = "any",
+        boolean = "boolean",
+        integer = "integer",
+        number = "number",
+        string = "string",
+        Enum = "Enum",
+        TypeParameter = "TypeParameter",
+        Wu = "Wu",
+    }
+
+    interface Setting {}
+
+    interface SideBarItem extends WithId {
+        id: number
+        name: string
+        color: string
+        description: string
+        reserved: boolean
+    }
+
+    type StringMap = Record<string, string>
+
+    type TableKey = keyof DBTable
+    type TableEnum = Record<TableKey, TableKey>
+
+    interface TypeFormat {
+        isArray: boolean
+        nullable: boolean
+        type: OapiType
+        format: string
+        targetId: number
+        argumentzz: TypeFormat[]
+    }
+
+    interface WithId {
+        id: number
+    }
 }

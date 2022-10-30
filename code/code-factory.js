@@ -1,16 +1,16 @@
 function makeFaker(data) {
-    /** @type {DataForScript} */
+    /** @type {LB.DataForScript} */
     const ddd = data
 
     /**
      * this code is used for generating model column faker method
      */
 
-    /** @type {Map<string, CollectionItem>} */
+    /** @type {Map<string, LB.CollectionItem>} */
     const fakeForColumnNameMap = new Map()
     ddd.helper.getItemzzInCollection('FakeForColumnName').forEach(item => fakeForColumnNameMap.set(item.name, item))
 
-    /** @type {Map<string, CollectionItem>} */
+    /** @type {Map<string, LB.CollectionItem>} */
     const fakeForColumnTypeMap = new Map()
     ddd.helper.getItemzzInCollection('FakeForColumnType').forEach(item => fakeForColumnTypeMap.set(item.name, item))
 
@@ -29,8 +29,8 @@ function makeFaker(data) {
 
     /**
      *
-     * @param {Column} item
-     * @returns {Column}
+     * @param {LB.Column} item
+     * @returns {LB.Column}
      */
     function setFaker(item) {
         const column = {...item}

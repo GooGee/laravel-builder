@@ -10,17 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table('`{{ schema.name }}`')]{{ index }}
 class {{ tree.getClassName(file, schema, action) }}
 {
+
+{% for column in columnzz %}{% if column.name === 'id' %}
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
-
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-{% for column in columnzz %}
+    #[ORM\GeneratedValue]{% endif %}
     #[ORM\Column({{ makeParameter(column) }})]
     private ${{ column.name }};
 {% endfor %}

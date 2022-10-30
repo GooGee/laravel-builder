@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use App\AbstractBase\AbstractReadManyCache;
+
+class {{ tree.getClassName(file, schema, action) }} extends AbstractReadManyCache
+{
+    static function getModelName(): string
+    {
+        return {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::class;
+    }
+
+}

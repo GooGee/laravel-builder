@@ -1,0 +1,41 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use {{ helper.getClassFullNameByFileSchema('Model', 'User', action) }};
+use Tests\API\AbstractApiTest;
+
+abstract class {{ tree.getClassName(file, schema, action) }} extends AbstractApiTest
+{
+
+    protected function path(): string
+    {
+        return "{{ schema.name }}";
+    }
+
+    /**
+     * @param User $user
+     * @param array<string, mixed> $attributes
+     * @return {{ tree.getClassName(helper.findFile('Model'), schema, action) }}
+     */
+    protected function makeItem(User $user, array $attributes = [])
+    {
+        $item = {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::factory()
+            ->for($user)
+            ->make($attributes);
+        return $item;
+    }
+
+    /**
+     * @return string[]
+     */
+    static function structure(): array
+    {
+        return {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::keyzz();
+    }
+
+}

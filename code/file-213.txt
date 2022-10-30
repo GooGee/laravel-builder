@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+class {{ tree.getClassName(file, schema, action) }}
+{
+    function handle({{ tree.getClassName(helper.findFile('Event'), schema, action) }} $event)
+    {
+    }
+}

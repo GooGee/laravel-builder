@@ -16,9 +16,7 @@ return [
     ],
 
     'ignore_schemas' => [
-        'failed_jobs',
         'migrations',
-        'personal_access_tokens',
     ],
 
 ];

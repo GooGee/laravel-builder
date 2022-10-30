@@ -47,19 +47,16 @@ class ReadDBSchema
     static function makeIndex(Index $index)
     {
         $name = $index->getName();
-        if ($name === 'primary') {
+        if (strtolower($name) === 'primary') {
             return null;
         }
 
         $data = [
+            'name' => $name,
             'type' => 'index',
             'columnzz' => $index->getColumns(),
         ];
-        $zz = explode('_', $name);
-        if (count($zz) < 3) {
-            return null;
-        }
-        if ($zz[1] === 'unique') {
+        if (str_ends_with($name, '_unique')) {
             $data['type'] = 'unique';
         }
         return $data;

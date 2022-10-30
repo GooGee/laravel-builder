@@ -1,0 +1,50 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\AbstractBase;
+
+use Illuminate\Http\JsonResponse;
+
+abstract class AbstractResponse
+{
+    /**
+     * @param object $item
+     * @return array
+     */
+    abstract static function getData($item): array;
+
+    /**
+     * @param array<object> $itemzz
+     * @return array
+     */
+    static function getDatazz(array $itemzz): array
+    {
+        return array_map(function ($item) {
+            return static::getData($item);
+        }, $itemzz);
+    }
+
+    static function sendData(string $message, $data, int $code)
+    {
+        return new JsonResponse(compact('code', 'message', 'data'), $code);
+    }
+
+    static function sendItem(object $item, string $message = 'OK', int $code = 200)
+    {
+        $item = static::getData($item);
+        return new JsonResponse(compact('code', 'message', 'item'), $code);
+    }
+
+    static function sendList(array $itemzz, string $message = 'OK', int $code = 200)
+    {
+        $list = static::getDatazz($itemzz);
+        return new JsonResponse(compact('code', 'message', 'list'), $code);
+    }
+
+    static function sendOK($data = null)
+    {
+        return static::sendData('OK', $data, 200);
+    }
+
+}

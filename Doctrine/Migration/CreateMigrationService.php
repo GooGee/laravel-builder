@@ -47,7 +47,7 @@ class CreateMigrationService
 
     private function replaceStatement(string $sql)
     {
-        return str_replace('$this->addSql', '\\DB::statement', $sql);
+        return str_replace('$this->addSql', 'DB::statement', $sql);
     }
 
     /**

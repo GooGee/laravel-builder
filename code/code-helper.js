@@ -1,5 +1,5 @@
 function makeHelper(data) {
-    /** @type {DataForScript} */
+    /** @type {LB.DataForScript} */
     const ddd = data
 
     /**
@@ -7,52 +7,63 @@ function makeHelper(data) {
      */
 
     /**
+     * @template T
+     * @param {T[]} itemzz
+     * @param {number} id
+     * @return {T|undefined}
+     */
+    function find(itemzz, id) {
+        return itemzz.find((item) => item.id === id)
+    }
+
+    /**
+     * @template T
+     * @param {T[]} itemzz
+     * @param {string} name
+     * @return {T|undefined}
+     */
+    function findByName(itemzz, name) {
+        return itemzz.find((item) => item.name === name)
+    }
+
+    /**
      *
      * @param {string} name
-     * @returns {File}
+     * @returns {LB.File}
      */
     function findFile(name) {
-        return ddd.db.tables.File.find((item) => item.name === name)
-    }
-
-    /**
-     *
-     * @param {string} action
-     * @param {number} schemaId
-     * @returns {ModuleAction | undefined}
-     */
-    function findModuleAction(action, schemaId) {
-        const ci = ddd.helper.getItemzzInCollection("ModuleAction").find(item => item.name === action)
-        return ddd.db.tables.ModuleAction.find(item => item.collectionItemId === ci.id && item.schemaId === schemaId)
+        return findByName(ddd.db.tables.File, name)
     }
 
     /**
      *
      * @param {string} name
-     * @returns {Schema}
+     * @returns {LB.Schema}
      */
     function findSchema(name) {
-        return ddd.db.tables.Schema.find((item) => item.name === name)
+        return findByName(ddd.db.tables.Schema, name)
     }
 
     /**
      *
-     * @param file
-     * @param schema
+     * @param {string} file
+     * @param {string} schema
+     * @param {string} action
      * @returns {string}
      */
-    function getClassNameByFileSchema(file, schema) {
-        return ddd.tree.getClassName(findFile(file), findSchema(schema))
+    function getClassNameByFileSchema(file, schema, action = ddd.action) {
+        return ddd.tree.getClassName(findFile(file), findSchema(schema), action)
     }
 
     /**
      *
-     * @param file
-     * @param schema
+     * @param {string} file
+     * @param {string} schema
+     * @param {string} action
      * @returns {string}
      */
-    function getClassFullNameByFileSchema(file, schema) {
-        return ddd.tree.getFullClassName(findFile(file), findSchema(schema))
+    function getClassFullNameByFileSchema(file, schema, action = ddd.action) {
+        return ddd.tree.getClassFullName(findFile(file), findSchema(schema), action)
     }
 
     /**
@@ -84,7 +95,7 @@ function makeHelper(data) {
                 return []
             }
             return Array.from(set).map((item) =>
-                ddd.tree.getFullClassName(findFile(item), ddd.schema),
+                ddd.tree.getClassFullName(findFile(item), ddd.schema, ddd.action),
             )
         }
 
@@ -95,7 +106,7 @@ function makeHelper(data) {
          */
         function getFileSchemaDependencyzz(zz) {
             const set = new Set(Array.from(zz).map((item) =>
-                ddd.tree.getFullClassName(findFile(item[1]), findSchema(item[2]))
+                ddd.tree.getClassFullName(findFile(item[1]), findSchema(item[2]), ddd.action)
             ))
             if (set.size === 0) {
                 return []
@@ -107,7 +118,7 @@ function makeHelper(data) {
     /**
      *
      * @param {string} name
-     * @returns {CollectionItem[]}
+     * @returns {LB.CollectionItem[]}
      */
     function getItemzzInCollection(name) {
         const parent = ddd.db.tables.Collection.find((item) => item.name === name)
@@ -121,11 +132,16 @@ function makeHelper(data) {
 
     /**
      *
-     * @param {ModuleAction} ma
-     * @returns {Column[]}
+     * @param {LB.ModuleAction} ma
+     * @returns {LB.Column[]}
      */
     function getRequestColumnzz(ma) {
-        const wi = ma.request.reference.targetId
+        const request = ddd.db.tables.Request.find(item => item.id === ma.requestId)
+        if (request === undefined) {
+            return []
+        }
+
+        const wi = request.tf.targetId
         const wu = ddd.db.tables.Wu.find(item => item.id === wi)
         if (wu === undefined) {
             return []
@@ -137,17 +153,20 @@ function makeHelper(data) {
 
     /**
      *
-     * @param {ModuleAction} ma
-     * @returns {Column[]}
+     * @param {LB.ModuleAction} ma
+     * @returns {LB.Column[]}
      */
     function getResponseColumnzz(ma) {
-        if (ma.responsezz.length === 0) {
-            return ddd.db.tables.Column
-                .filter((item) => item.schemaId === ma.schemaId && item.inTable && !item.wo)
-                .map(item => makeAliasColumn(item))
+        const mar = ddd.db.tables.ModuleActionResponse.find(item => item.moduleActionId === ma.id && item.status === '200')
+        if (mar === undefined) {
+            return []
         }
 
-        const wi = ma.responsezz[0].reference.targetId
+        const response = ddd.db.tables.Response.find(item => item.id === mar.responseId)
+        if (response === undefined) {
+            return []
+        }
+        const wi = response.tf.targetId
         const wu = ddd.db.tables.Wu.find(item => item.id === wi)
         if (wu === undefined) {
             return []
@@ -161,7 +180,7 @@ function makeHelper(data) {
      *
      * @param {number} parentId
      * @param {Set<number>} iSet
-     * @returns {WuChild[]}
+     * @returns {LB.WuChild[]}
      */
     function getWuChildzz(parentId, iSet) {
         if (iSet.has(parentId)) {
@@ -183,19 +202,19 @@ function makeHelper(data) {
     /**
      *
      * @param {number} wuId
-     * @returns {WuColumn[]}
+     * @returns {LB.WuColumn[]}
      */
     function getWuColumnzz(wuId) {
         const childzz = getWuChildzz(wuId, new Set)
-        const wiSet = new Set(childzz.map(item => item.reference.targetId))
+        const wiSet = new Set(childzz.map(item => item.tf.targetId))
         wiSet.add(wuId)
         return ddd.db.tables.WuColumn.filter(item => wiSet.has(item.wuId))
     }
 
     /**
      * clone Column with alias
-     * @param {Column} column
-     * @returns {Column}
+     * @param {LB.Column} column
+     * @returns {LB.Column}
      */
     function makeAliasColumn(column) {
         let alias = column.name
@@ -207,11 +226,11 @@ function makeHelper(data) {
 
     /**
      * clone Columns with alias
-     * @param {WuColumn[]} wczz
-     * @returns {Column[]}
+     * @param {LB.WuColumn[]} wczz
+     * @returns {LB.Column[]}
      */
     function makeAliasColumnzz(wczz) {
-        /** @type {Map<number, Column>} */
+        /** @type {Map<number, LB.Column>} */
         const map = new Map()
         ddd.db.tables.Column.forEach(item => map.set(item.id, item))
         return wczz.map(item => {
@@ -221,6 +240,100 @@ function makeHelper(data) {
             }
             return undefined
         })
+    }
+
+    /**
+     *
+     * @param {string} moduleName
+     * @returns {string}
+     */
+    function makeRouteText(moduleName) {
+        const module = ddd.db.tables.Module.find(item => item.name === moduleName)
+        if (module === undefined) {
+            throw new Error(moduleName + ' not found')
+        }
+
+        /** @type {Map<number, LB.PathMethod[]>} */
+        const pmzzm = new Map()
+        ddd.db.tables.PathMethod.forEach(item => {
+            let found = pmzzm.get(item.pathId)
+            if (found === undefined) {
+                found = []
+                pmzzm.set(item.pathId, found)
+            }
+            found.push(item)
+        })
+
+        /** @type {Map<number, LB.ModuleAction>} */
+        const mam = new Map()
+        ddd.db.tables.ModuleAction.forEach(item => mam.set(item.id, item))
+
+        /** @type {Map<number, LB.File>} */
+        const fm = new Map()
+        ddd.db.tables.File.forEach(item => fm.set(item.id, item))
+
+        /** @type {Map<number, LB.Schema>} */
+        const sm = new Map()
+        ddd.db.tables.Schema.forEach(item => sm.set(item.id, item))
+
+        /** @type {Map<number, LB.File>} */
+        const mafm = new Map()
+        ddd.db.tables.ModuleActionFile.forEach(item => {
+            const file = fm.get(item.fileId)
+            if (file === undefined) {
+                return
+            }
+            if (file.name.includes('Controller')) {
+                mafm.set(item.moduleActionId, file)
+            }
+        })
+
+        const textzz = []
+        ddd.db.tables.Path
+            .forEach(function (path) {
+                if (path.moduleId === module.id) {
+                    // ok
+                } else {
+                    return
+                }
+                const pmzz = pmzzm.get(path.id)
+                if (pmzz === undefined) {
+                    return
+                }
+
+                const amount = textzz.length
+                pmzz.forEach(function (pm) {
+                    const ma = mam.get(pm.moduleActionId)
+                    if (ma === undefined) {
+                        return
+                    }
+
+                    const old = mafm.get(ma.id)
+                    if (old === undefined) {
+                        return
+                    }
+                    const file = {...old}
+
+                    const schema = sm.get(ma.schemaId)
+                    if (schema === undefined) {
+                        return
+                    }
+
+                    // the module directory
+                    file.directoryId = ma.directoryId
+                    const cn = ddd.tree.getClassFullName(file, schema, '')
+                    let text = `    Route::${pm.method}('${path.name}', \\${cn}::class)`
+                    if (pm.middlewarezz.length) {
+                        text += `->middleware(['${pm.middlewarezz.join("', '")}'])`
+                    }
+                    textzz.push(text + ';')
+                })
+
+                if (textzz.length > amount) {
+                    textzz.push('')
+                }
+            })
+        return textzz.join('\n')
     }
 
 
@@ -238,8 +351,9 @@ function makeHelper(data) {
      * do not delete ddd.helper
      */
     ddd.helper = {
+        find,
+        findByName,
         findFile,
-        findModuleAction,
         findSchema,
         getClassNameByFileSchema,
         getClassFullNameByFileSchema,
@@ -249,5 +363,6 @@ function makeHelper(data) {
         getWuChildzz,
         getWuColumnzz,
         makeAliasColumnzz,
+        makeRouteText,
     }
 }

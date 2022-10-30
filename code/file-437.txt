@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+
+class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName(helper.findFile('AbstractItemTest'), schema, action) }}
+{
+    public function test{{ action + schema.name }}()
+    {
+        $user = $this->createUser();
+        $item = $this->makeItem($user);
+        $item->save();
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(401);
+
+        $this->actingAs($user);
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(200);
+    }
+}
