@@ -43,7 +43,7 @@ class DoctrineMigrationProvider extends ServiceProvider
             $configuration = new Configuration();
             $configuration->setAllOrNothing(true);
             $configuration->setCheckDatabasePlatform(false);
-            $configuration->setCustomTemplate(base_path('resources/vendor/DoctrineMigration.stub'));
+            $configuration->setCustomTemplate(__DIR__ . '/DoctrineMigration.stub');
             $configuration->addMigrationsDirectory('Database\\Migrations', base_path('database/migrations'));
 
             $storageConfiguration = new TableMetadataStorageConfiguration();
