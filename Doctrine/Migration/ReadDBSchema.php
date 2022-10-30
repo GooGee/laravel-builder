@@ -51,15 +51,11 @@ class ReadDBSchema
             return null;
         }
 
-        $data = [
+        return [
             'name' => $name,
-            'type' => 'index',
+            'type' => $index->isUnique() ? 'unique' : 'index',
             'columnzz' => $index->getColumns(),
         ];
-        if (str_ends_with($name, '_unique')) {
-            $data['type'] = 'unique';
-        }
-        return $data;
     }
 
     static function makeRelation(ForeignKeyConstraint $constraint)
