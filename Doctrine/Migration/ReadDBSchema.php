@@ -31,7 +31,7 @@ class ReadDBSchema
         $data = [
             'name' => $column->getName(),
             'type' => $column->getType()->getName(),
-            'default' => $column->getDefault() ?? '',
+            'default' => $column->getDefault(),
             'comment' => $column->getComment() ?? '',
             'length' => $column->getLength() ?? 0,
             'scale' => $column->getScale(),
