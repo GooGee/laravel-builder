@@ -55,8 +55,8 @@ php artisan setupLaravelBuilder
 
 - make sure Laravel server is running and database is created
 - go to `Migration` page, then click `►|` button to run `php artisan migrate`
-- select `Database` tab, then click `read DB Schema` button, you will see a list of tables
-- select tables you want to import, then click `import selected Schema` button
+- select `Database` tab, then click `read DB tables` button, you will see a list of tables
+- select tables you want to import, then click `import selected tables` button
 - select a newly created Schema in sidebar, then click `▼` button to generate the Entity file
 - skip 3 Schemas (EmptySchema, ApiResponse, Paginator), they are not database talbes
 

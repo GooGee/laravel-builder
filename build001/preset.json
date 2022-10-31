@@ -2920,7 +2920,7 @@
                 },
                 {
                     "parentId": 13,
-                    "name": "CrudService",
+                    "name": "ServiceCrud",
                     "color": "#fff",
                     "layer": "Service",
                     "nameSpacePattern": "",
