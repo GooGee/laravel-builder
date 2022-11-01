@@ -4325,7 +4325,7 @@
                     "schemaId": 1,
                     "type": "allOf",
                     "isRequest": false,
-                    "example": "{\n    \"name\": [\"name is invalid\"],\n    \"password\": [\"password is too short\"]\n}",
+                    "example": "{\n    \"property1\": [\"property1 is required\"],\n    \"property2\": [\"property2 is required\", \"property2 must be an integer\"]\n}",
                     "isMap": true,
                     "tf": {
                         "isArray": true,
@@ -4713,7 +4713,7 @@
                     "color": "#f0f",
                     "deprecated": false,
                     "description": "",
-                    "example": "",
+                    "example": "1",
                     "in": "path",
                     "name": "id",
                     "name2": "id",
@@ -4729,37 +4729,15 @@
                     },
                     "id": 1000,
                     "allowReserved": false,
-                    "explode": false
-                },
-                {
-                    "allowEmptyValue": false,
-                    "color": "#f0f",
-                    "deprecated": false,
-                    "description": "",
-                    "example": "",
-                    "in": "query",
-                    "name": "id-",
-                    "name2": "id",
-                    "required": true,
-                    "reserved": false,
-                    "tf": {
-                        "isArray": false,
-                        "type": "integer",
-                        "format": "int64",
-                        "targetId": 0,
-                        "argumentzz": [],
-                        "nullable": false
-                    },
-                    "id": 1001,
-                    "allowReserved": false,
-                    "explode": false
+                    "explode": false,
+                    "constraintzz": []
                 },
                 {
                     "allowEmptyValue": false,
                     "color": "#f80",
                     "deprecated": false,
                     "description": "",
-                    "example": "",
+                    "example": "1",
                     "in": "path",
                     "name": "page",
                     "name2": "page",
@@ -4775,30 +4753,8 @@
                     },
                     "id": 1002,
                     "allowReserved": false,
-                    "explode": false
-                },
-                {
-                    "allowEmptyValue": false,
-                    "color": "#f80",
-                    "deprecated": false,
-                    "description": "",
-                    "example": "",
-                    "in": "query",
-                    "name": "page-",
-                    "name2": "page",
-                    "required": true,
-                    "reserved": false,
-                    "tf": {
-                        "isArray": false,
-                        "type": "integer",
-                        "format": "int32",
-                        "targetId": 0,
-                        "argumentzz": [],
-                        "nullable": false
-                    },
-                    "id": 1003,
-                    "allowReserved": false,
-                    "explode": false
+                    "explode": false,
+                    "constraintzz": []
                 },
                 {
                     "allowEmptyValue": false,
@@ -4821,7 +4777,8 @@
                     },
                     "id": 1004,
                     "allowReserved": false,
-                    "explode": false
+                    "explode": false,
+                    "constraintzz": []
                 },
                 {
                     "allowEmptyValue": false,
@@ -4844,7 +4801,8 @@
                     },
                     "id": 1005,
                     "allowReserved": false,
-                    "explode": false
+                    "explode": false,
+                    "constraintzz": []
                 },
                 {
                     "allowEmptyValue": false,
@@ -4867,7 +4825,8 @@
                     },
                     "id": 1006,
                     "allowReserved": false,
-                    "explode": false
+                    "explode": false,
+                    "constraintzz": []
                 },
                 {
                     "allowEmptyValue": false,
@@ -4890,7 +4849,8 @@
                     },
                     "id": 1007,
                     "allowReserved": false,
-                    "explode": false
+                    "explode": false,
+                    "constraintzz": []
                 }
             ],
             "ParameterMap": [],
@@ -5014,7 +4974,7 @@
             ],
             "PathMethod": []
         },
-        "version": 17
+        "version": 18
     },
     "oapi": {
         "openapi": "3.0.3",

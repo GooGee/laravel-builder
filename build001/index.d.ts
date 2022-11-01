@@ -129,12 +129,13 @@ declare namespace LB {
         name2: string
         required: boolean
         tf: TypeFormat
+        constraintzz: ColumnConstraint[]
     }
 
     interface ParameterMap {
         id: number
-        isHeader: boolean
-        isPath: boolean
+        inPath: boolean
+        inResponse: boolean
         parameterId: number
         targetId: number
     }
@@ -351,7 +352,7 @@ declare namespace LB {
     interface DoctrineColumn {
         name: string
         type: string
-        default: string
+        default: string | null
         comment: string
         length: number
         scale: number
