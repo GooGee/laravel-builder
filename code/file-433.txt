@@ -14,7 +14,7 @@ abstract class AbstractApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    const API = '/v1/';
+    const URI = '{{ prefix }}/';
 
     protected $seed = true;
 
@@ -43,8 +43,7 @@ abstract class AbstractApiTest extends TestCase
         if (count($parameterzz)) {
             $query = '?' . http_build_query($parameterzz);
         }
-        $uri = static::API . $this->path() . '/' . $path;
-        return $uri . $query;
+        return static::URI . $this->path() . '/' . $path . $query;
     }
 
     /**

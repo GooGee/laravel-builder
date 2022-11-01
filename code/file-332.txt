@@ -13,8 +13,19 @@ class {{ tree.getClassName(file, schema, action) }}
     {
     }
 
-    function __invoke()
+    /**
+     * @param int $start
+     * @return \Illuminate\Database\Eloquent\Collection<{{ tree.getClassName(helper.findFile('Model'), schema, action) }}>
+     */
+    function __invoke(int $start, {% for column in columnzz %}
+                      {{ makeColumnType(column) }} ${{ column.name }},{% endfor %}
+    )
     {
+        return $this->repository->query()
+            ->where('id', '<', $start)
+            ->orderByDesc('id')
+            ->limit({{ tree.getClassName(helper.findFile('Repository'), schema, action) }}::PageSize)
+            ->get();
     }
 
 }

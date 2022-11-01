@@ -7,15 +7,16 @@ namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
 use App\AbstractBase\AbstractController;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Illuminate\Http\Request;
 
 class {{ tree.getClassName(file, schema, action) }} extends AbstractController
 {
-    public function __invoke(Request $request, {{ action + schema.name }} $readMany)
+    public function __invoke({{ action + schema.name }}Request $request, {{ action + schema.name }} $readMany)
     {
         $start = $request->input('start', PHP_INT_MAX);
-        $start = $this->getPositiveIntegerOrNotFound($start);
-        $itemzz = $readMany($start);
+        $itemzz = $readMany($start,
+{% for column in columnzz %}
+            $data['{{ column.alias }}'],{% endfor %}
+        );
 
         return {{ action + schema.name }}Response::sendList($itemzz->all());
     }

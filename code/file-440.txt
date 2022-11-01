@@ -12,7 +12,8 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
         $item = $this->makeItem($user);
         $item->save();
         $response = $this->getJson($this->makeURI())
-            ->assertStatus(401);
+            ->assertStatus(200);
+        $this->seeList(self::structure(), $response);
 
         $this->actingAs($user);
         $response = $this->getJson($this->makeURI())

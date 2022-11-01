@@ -43,6 +43,10 @@ function makeFaker(data) {
         if (column.fakeRaw === false && column.fakeMethod) {
             return column
         }
+        if (column.nullable) {
+            column.fakeText = 'null'
+            return column
+        }
 
         const schema = relationMap.get(column.id)
         if (schema) {

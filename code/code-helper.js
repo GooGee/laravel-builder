@@ -253,6 +253,8 @@ function makeHelper(data) {
             throw new Error(moduleName + ' not found')
         }
 
+        ddd.module = module
+
         /** @type {Map<number, LB.PathMethod[]>} */
         const pmzzm = new Map()
         ddd.db.tables.PathMethod.forEach(item => {

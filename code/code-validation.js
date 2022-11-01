@@ -6,9 +6,12 @@ function run(data) {
      * this code is used for generating column validation constraint
      */
 
-    const excludezz = new Set(['id', 'userId', 'dateCreate', 'dateUpdate', 'dateDelete'])
+    const fkzz = new Set(ddd.db.tables.Relation.map(item => item.column1Id))
+
+    const ignorezz = new Set(['id', 'userId', 'dateCreate', 'dateUpdate', 'dateDelete'])
+
     ddd.result = ddd.db.tables.Column
-        .filter(item => item.schemaId === ddd.schema.id && !(item.ro || excludezz.has(item.name)))
+        .filter(item => item.schemaId === ddd.schema.id && !(item.ro || ignorezz.has(item.name)))
         .map(item => setConstraint(item))
 
     /**
@@ -25,6 +28,9 @@ function run(data) {
         column.constraintzz.push(makeConstraint('required'))
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
             column.constraintzz.push(makeConstraint('integer'))
+            if (fkzz.has(column.id)) {
+                column.constraintzz.push(makeConstraint('min', '1'))
+            }
             return column
         }
 

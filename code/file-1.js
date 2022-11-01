@@ -115,15 +115,16 @@ function run(data) {
     function makeOneToOne(relation, fk) {
         const textzz = []
         const nullable = fk.nullable ? 'true' : 'false'
-        if (relation.schema0Id === ddd.schema.id) {
-            const schema1 = schemamap.get(relation.schema1Id)
-            textzz.push(`    #[ORM\\OneToOne(mappedBy: '${relation.name1}', targetEntity: ${schema1.name}::class)]`)
-            textzz.push(`    private \$${relation.name0};`)
-        } else {
+        // for circular reference (parentId)
+        if (relation.schema1Id === ddd.schema.id) {
             const schema1 = schemamap.get(relation.schema0Id)
             textzz.push(`    #[ORM\\OneToOne(targetEntity: ${schema1.name}::class)]`)
             textzz.push(`    #[ORM\\JoinColumn(name: "${fk.name}", referencedColumnName: "id", nullable: ${nullable})]`)
             textzz.push(`    private \$${relation.name1};`)
+        } else {
+            const schema1 = schemamap.get(relation.schema1Id)
+            textzz.push(`    #[ORM\\OneToOne(mappedBy: '${relation.name1}', targetEntity: ${schema1.name}::class)]`)
+            textzz.push(`    private \$${relation.name0};`)
         }
         return textzz.join('\n')
     }
@@ -137,7 +138,7 @@ function run(data) {
     function makeOneToMany(relation, fk) {
         const textzz = []
         const nullable = fk.nullable ? 'true' : 'false'
-        // for circular reference
+        // for circular reference (parentId)
         if (relation.schema1Id === ddd.schema.id) {
             const schema1 = schemamap.get(relation.schema0Id)
             textzz.push(`    #[ORM\\ManyToOne(targetEntity: ${schema1.name}::class)]`)

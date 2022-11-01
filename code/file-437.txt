@@ -11,11 +11,14 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
         $user = $this->createUser();
         $item = $this->makeItem($user);
         $item->save();
+        self::assertNull($item->dateDelete);
         $response = $this->deleteJson($this->makeURI($item->id))
             ->assertStatus(401);
 
         $this->actingAs($user);
         $response = $this->deleteJson($this->makeURI($item->id))
             ->assertStatus(200);
+        $item->refresh();
+        self::assertNotNull($item->dateDelete);
     }
 }

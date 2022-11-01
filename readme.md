@@ -14,7 +14,7 @@
 
 You no longer need to write migrations yourself, Doctrine will do it for you.
 
-Doctrine compares files in `database/Entity` with database schemas, and generate a migration file of their difference.
+Doctrine compares files in `database/Entity` with the database schemas, and generate a migration file of their difference.
 
 
 ## install
@@ -30,7 +30,7 @@ php artisan setupLaravelBuilder
 ```
 
 
-## page
+## pages
 
 - Collection
 - Diagram
@@ -100,6 +100,8 @@ when `▼` button is clicked, this plugin will do the following:
 - go to `Tree` page, then select a file in sidebar
 - click `edit` script button to modify the code (optional)
 - click `edit` template button to modify the text
+- go to `Schema` page, then select a schema in sidebar
+- select `File` tab, then click `▼` button to generate the file
 
 for example
 

@@ -7,4 +7,8 @@ function run(data) {
      */
 
     ddd.text = ddd.helper.makeRouteText('Api')
+    ddd.prefix = `/v1`
+    if (ddd.module.prefix) {
+        ddd.prefix += ddd.module.prefix
+    }
 }

@@ -3,10 +3,11 @@ function run(data) {
     const ddd = data
 
     /**
-     * this code is used for generating routes
+     * write code below
+     * it will be executed before generating files
      */
 
-    ddd.text = ddd.helper.makeRouteText('Api')
+    ddd.module = ddd.db.tables.Module.find(item => item.name === 'Api')
     ddd.prefix = `/v1`
     if (ddd.module.prefix) {
         ddd.prefix += ddd.module.prefix
