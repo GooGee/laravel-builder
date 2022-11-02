@@ -4734,7 +4734,7 @@
                 },
                 {
                     "allowEmptyValue": false,
-                    "color": "#f80",
+                    "color": "#f0f",
                     "deprecated": false,
                     "description": "",
                     "example": "1",
@@ -4751,10 +4751,68 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1002,
+                    "id": 1001,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": []
+                },
+                {
+                    "color": "#f80",
+                    "description": "",
+                    "name": "start-",
+                    "reserved": false,
+                    "allowEmptyValue": false,
+                    "allowReserved": false,
+                    "deprecated": false,
+                    "example": "",
+                    "explode": false,
+                    "in": "query",
+                    "name2": "start",
+                    "required": false,
+                    "tf": {
+                        "isArray": false,
+                        "nullable": false,
+                        "type": "integer",
+                        "format": "",
+                        "targetId": 0,
+                        "argumentzz": []
+                    },
+                    "constraintzz": [
+                        {
+                            "name": "integer",
+                            "parameter": ""
+                        }
+                    ],
+                    "id": 1002
+                },
+                {
+                    "color": "#f80",
+                    "description": "",
+                    "name": "end-",
+                    "reserved": false,
+                    "allowEmptyValue": false,
+                    "allowReserved": false,
+                    "deprecated": false,
+                    "example": "",
+                    "explode": false,
+                    "in": "query",
+                    "name2": "end",
+                    "required": false,
+                    "tf": {
+                        "isArray": false,
+                        "nullable": false,
+                        "type": "integer",
+                        "format": "",
+                        "targetId": 0,
+                        "argumentzz": []
+                    },
+                    "constraintzz": [
+                        {
+                            "name": "integer",
+                            "parameter": ""
+                        }
+                    ],
+                    "id": 1003
                 },
                 {
                     "allowEmptyValue": false,
