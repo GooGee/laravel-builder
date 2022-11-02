@@ -14,15 +14,15 @@ class {{ tree.getClassName(file, schema, action) }}
     }
 
     /**
-     * @param int $start
+     * @param int $end
      * @return \Illuminate\Database\Eloquent\Collection<{{ tree.getClassName(helper.findFile('Model'), schema, action) }}>
      */
-    function __invoke(int $start, {% for column in columnzz %}
+    function __invoke(int $end, {% for column in columnzz %}
                       {{ makeColumnType(column) }} ${{ column.name }},{% endfor %}
     )
     {
         return $this->repository->query()
-            ->where('id', '<', $start)
+            ->where('id', '<', $end)
             ->orderByDesc('id')
             ->limit({{ tree.getClassName(helper.findFile('Repository'), schema, action) }}::PageSize)
             ->get();

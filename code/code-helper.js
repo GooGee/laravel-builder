@@ -133,6 +133,18 @@ function makeHelper(data) {
     /**
      *
      * @param {LB.ModuleAction} ma
+     * @return {LB.Parameter[]}
+     */
+    function getParameterzz(ma) {
+        const set = new Set(ddd.db.tables.ParameterMap
+            .filter(item => item.targetId === ma.id && item.inPath === false && item.inResponse === false)
+            .map(item => item.parameterId))
+        return ddd.db.tables.Parameter.filter(item => set.has(item.id))
+    }
+
+    /**
+     *
+     * @param {LB.ModuleAction} ma
      * @returns {LB.Column[]}
      */
     function getRequestColumnzz(ma) {
@@ -360,6 +372,7 @@ function makeHelper(data) {
         getClassNameByFileSchema,
         getClassFullNameByFileSchema,
         getItemzzInCollection,
+        getParameterzz,
         getRequestColumnzz,
         getResponseColumnzz,
         getWuChildzz,

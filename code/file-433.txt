@@ -6,7 +6,6 @@ use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\Middleware\ThrottleRequestsWithRedis;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -14,7 +13,7 @@ abstract class AbstractApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    const URI = '{{ prefix }}/';
+    const URI = '/v1/Api/';
 
     protected $seed = true;
 
@@ -25,25 +24,11 @@ abstract class AbstractApiTest extends TestCase
      */
     abstract static function structure(): array;
 
-    protected function beforeRefreshingDatabase()
-    {
-        Redis::connection()->client()->flushDB();
-    }
-
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->withoutMiddleware([ThrottleRequestsWithRedis::class]);
-    }
-
-    protected function makeURI(string|int $path = '', array $parameterzz = [])
-    {
-        $query = '';
-        if (count($parameterzz)) {
-            $query = '?' . http_build_query($parameterzz);
-        }
-        return static::URI . $this->path() . '/' . $path . $query;
     }
 
     /**
@@ -56,12 +41,32 @@ abstract class AbstractApiTest extends TestCase
         return $user->refresh();
     }
 
+    protected function makeURI(string|int $path = '', array $parameterzz = [])
+    {
+        $query = '';
+        if (count($parameterzz)) {
+            $query = '?' . http_build_query($parameterzz);
+        }
+        return static::URI . $this->path() . '/' . $path . $query;
+    }
+
     protected function seeData(array $structure, TestResponse $response)
     {
         $response->assertJsonStructure(
             [
                 'message',
                 'data' => $structure,
+            ]
+        );
+        return $this;
+    }
+
+    protected function seeErrors(array $structure, TestResponse $response)
+    {
+        $response->assertJsonStructure(
+            [
+                'message',
+                'errors' => $structure,
             ]
         );
         return $this;

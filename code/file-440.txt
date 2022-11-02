@@ -14,10 +14,12 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
         $response = $this->getJson($this->makeURI())
             ->assertStatus(200);
         $this->seeList(self::structure(), $response);
+        self::assertEquals(1, count($response->json('list')));
 
         $this->actingAs($user);
         $response = $this->getJson($this->makeURI())
             ->assertStatus(200);
         $this->seeList(self::structure(), $response);
+        self::assertEquals(1, count($response->json('list')));
     }
 }

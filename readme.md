@@ -59,6 +59,7 @@ php artisan setupLaravelBuilder
 - select tables you want to import, then click `import selected tables` button
 - select a newly created Schema in sidebar, then click `▼` button to generate the Entity file
 - skip 3 Schemas (EmptySchema, ApiResponse, Paginator), they are not database talbes
+- to ignore a Schema, add its name to the file `config/laravelbuilder.php`
 
 
 ## how to generate migrations?
@@ -102,6 +103,8 @@ when `▼` button is clicked, this plugin will do the following:
 - click `edit` template button to modify the text
 - go to `Schema` page, then select a schema in sidebar
 - select `File` tab, then click `▼` button to generate the file
+
+Note: if changes didn't work, make sure to save the changed file, PhpStorm doesn't save the changed file immediately.
 
 for example
 

@@ -15,7 +15,7 @@ class {{ tree.getClassName(file, schema, action) }}
 
     function find(int $id)
     {
-        return $this->repository->findOrFail($id);
+        return $this->repository->find($id);
     }
 
     function findOrFail(int $id)

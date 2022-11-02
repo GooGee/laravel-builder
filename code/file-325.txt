@@ -7,13 +7,16 @@ namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
 use App\AbstractBase\AbstractController;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ tree.getClassName(file, schema, action) }} extends AbstractController
 {
     public function __invoke(int $id, {{ action + schema.name }} $readOne)
     {
         $item = $readOne->findOrFail($id);
-
+        if (!is_null($item->dateDelete)) {
+            throw new NotFoundHttpException();
+        }
         return {{ action + schema.name }}Response::sendItem($item);
     }
 }

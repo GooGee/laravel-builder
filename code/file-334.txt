@@ -12,8 +12,8 @@ class {{ tree.getClassName(file, schema, action) }} extends AbstractController
 {
     public function __invoke({{ action + schema.name }}Request $request, {{ action + schema.name }} $readMany)
     {
-        $start = $request->input('start', PHP_INT_MAX);
-        $itemzz = $readMany($start,
+        $end = $request->input('end', PHP_INT_MAX);
+        $itemzz = $readMany($end,
 {% for column in columnzz %}
             $data['{{ column.alias }}'],{% endfor %}
         );
