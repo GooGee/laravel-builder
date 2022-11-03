@@ -14,6 +14,11 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
         $response = $this->patchJson($this->makeURI($item->id), $item->toArray())
             ->assertStatus(401);
 
+        $other = $this->createUser();
+        $this->actingAs($other);
+        $response = $this->patchJson($this->makeURI($item->id), $item->toArray())
+            ->assertStatus(403);
+
         $this->actingAs($user);
 {% for column in columnzz %}
         $data = $item->toArray();
@@ -27,7 +32,6 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
             ->assertStatus(200);
         $this->seeItem(self::structure(), $response);
 {% for column in columnzz %}
-        self::assertEquals($new->{{ column.alias }}, $response->json('item.{{ column.alias }}'));
-{% endfor %}
+        self::assertEquals($new->{{ column.alias }}, $response->json('item.{{ column.alias }}'));{% endfor %}
     }
 }

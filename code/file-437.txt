@@ -16,6 +16,12 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
             ->assertStatus(401);
         self::assertNull($item->dateDelete);
 
+        $other = $this->createUser();
+        $this->actingAs($other);
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(403);
+        self::assertNull($item->dateDelete);
+
         $this->actingAs($user);
         $response = $this->deleteJson($this->makeURI($item->id))
             ->assertStatus(200);

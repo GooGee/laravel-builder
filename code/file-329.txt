@@ -6,8 +6,8 @@ namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ tree.getClassName(file, schema, action) }}
 {
@@ -28,7 +28,7 @@ class {{ tree.getClassName(file, schema, action) }}
         }
 
         if ($item->dateDelete) {
-            throw new AccessDeniedHttpException();
+            throw new NotFoundHttpException();
         }
 
 {% for column in columnzz %}
@@ -36,7 +36,6 @@ class {{ tree.getClassName(file, schema, action) }}
 
         $item->save();
 
-        Log::info($user->id . ' ' . static::class);
         event(new {{ action + schema.name }}Event($user, $item));
 
         return $item;

@@ -25,7 +25,6 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
             ->assertStatus(200);
         $this->seeItem(self::structure(), $response);
 {% for column in columnzz %}
-        self::assertEquals($item->{{ column.alias }}, $response->json('item.{{ column.alias }}'));
-{% endfor %}
+        self::assertEquals($item->{{ column.alias }}, $response->json('item.{{ column.alias }}'));{% endfor %}
     }
 }

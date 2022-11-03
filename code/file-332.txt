@@ -23,6 +23,7 @@ class {{ tree.getClassName(file, schema, action) }}
     {
         return $this->repository->query()
             ->where('id', '<', $end)
+            ->whereNull('dateDelete')
             ->orderByDesc('id')
             ->limit({{ tree.getClassName(helper.findFile('Repository'), schema, action) }}::PageSize)
             ->get();

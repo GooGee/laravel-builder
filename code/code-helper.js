@@ -303,6 +303,7 @@ function makeHelper(data) {
         })
 
         const textzz = []
+        ddd.db.tables.Path.sort((aa, bb) => aa.name.localeCompare(bb.name))
         ddd.db.tables.Path
             .forEach(function (path) {
                 if (path.moduleId === module.id) {
@@ -315,7 +316,7 @@ function makeHelper(data) {
                     return
                 }
 
-                const amount = textzz.length
+                const linezz = []
                 pmzz.forEach(function (pm) {
                     const ma = mam.get(pm.moduleActionId)
                     if (ma === undefined) {
@@ -340,11 +341,12 @@ function makeHelper(data) {
                     if (pm.middlewarezz.length) {
                         text += `->middleware(['${pm.middlewarezz.join("', '")}'])`
                     }
-                    textzz.push(text + ';')
+                    linezz.push(text + ';')
                 })
 
-                if (textzz.length > amount) {
-                    textzz.push('')
+                if (linezz.length) {
+                    linezz.sort((aa, bb) => aa.localeCompare(bb))
+                    textzz.push(...linezz, '')
                 }
             })
         return textzz.join('\n')

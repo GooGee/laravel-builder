@@ -6,7 +6,6 @@ namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Illuminate\Support\Facades\Log;
 
 class {{ tree.getClassName(file, schema, action) }}
 {
@@ -27,7 +26,6 @@ class {{ tree.getClassName(file, schema, action) }}
         $item->save();
         $item->refresh();
 
-        Log::info($user->id . ' ' . static::class);
         event(new {{ action + schema.name }}Event($user, $item));
 
         return $item;
