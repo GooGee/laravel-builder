@@ -99,6 +99,7 @@ declare namespace LB {
         deprecated: boolean
         description: string
         summary: string
+        operationId: string
         requestId: number
     }
 
@@ -186,7 +187,16 @@ declare namespace LB {
         y: number
     }
 
-    interface Server extends SideBarItem {}
+    interface Server extends SideBarItem {
+        global: boolean
+    }
+
+    interface ServerMap {
+        id: number
+        serverId: number
+        targetId: number
+        forPath: boolean
+    }
 
     interface ServerVariable {
         id: number
@@ -306,6 +316,7 @@ declare namespace LB {
         Response: Response[]
         Schema: Schema[]
         Server: Server[]
+        ServerMap: ServerMap[]
         ServerVariable: ServerVariable[]
         Variable: Variable[]
         Wu: Wu[]
