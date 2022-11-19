@@ -234,11 +234,13 @@ declare namespace LB {
         alias: string
     }
 
+    // TypeParameter
     interface WuParameter {
         id: number
         wuId: number
         name: string
         description: string
+        isWu: boolean
     }
 
     interface AbstractSchema {
@@ -395,7 +397,16 @@ declare namespace LB {
         relationzz: DoctrineRelation[]
     }
 
-    interface IdNameItem {
+    interface Finder<T extends IdItem> {
+        find(id: number): T | undefined
+        itemzz: T[]
+    }
+
+    interface IdItem {
+        id: number
+    }
+
+    interface IdNameItem extends IdItem {
         id: number
         name: string
     }
@@ -429,7 +440,7 @@ declare namespace LB {
 
     interface Setting {}
 
-    interface SideBarItem extends WithId {
+    interface SideBarItem extends IdItem {
         id: number
         name: string
         color: string
@@ -449,9 +460,5 @@ declare namespace LB {
         format: string
         targetId: number
         argumentzz: TypeFormat[]
-    }
-
-    interface WithId {
-        id: number
     }
 }

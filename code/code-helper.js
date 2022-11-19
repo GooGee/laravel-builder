@@ -224,19 +224,6 @@ function makeHelper(data) {
     }
 
     /**
-     * clone Column with alias
-     * @param {LB.Column} column
-     * @returns {LB.Column}
-     */
-    function makeAliasColumn(column) {
-        let alias = column.name
-        if (column.alias) {
-            alias = column.alias
-        }
-        return {...column, alias}
-    }
-
-    /**
      * clone Columns with alias
      * @param {LB.WuColumn[]} wczz
      * @returns {LB.Column[]}
@@ -248,7 +235,11 @@ function makeHelper(data) {
         return wczz.map(item => {
             const column = map.get(item.columnId)
             if (column) {
-                return makeAliasColumn(column)
+                let alias = column.name
+                if (item.alias) {
+                    alias = item.alias
+                }
+                return {...column, alias}
             }
             return undefined
         })

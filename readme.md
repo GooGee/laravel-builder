@@ -64,9 +64,8 @@ php artisan setupLaravelBuilder
 
 ## how to generate migrations?
 
-- go to `Schema` page, then click `+` button in sidebar to create a schema
-- select the schema, then add some columns
-- go to `Migration` page, then click `▼` button to generate the Entity file
+- go to `Migration` page, then select a schema in sidebar
+- click `▼` button to generate the Entity file
 - click `diff` button to generate a migration file
 - click `►|` button to run `php artisan migrate`
 
@@ -125,7 +124,7 @@ function run(data) {
 
 in template
 
-```
+```txt
 {{ entity.name }}
 
 {{ toString(entity) }}
