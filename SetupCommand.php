@@ -32,14 +32,7 @@ class SetupCommand extends Command
         $file = FileManager::concat(FileManager::LaravelBuilderDirectory, 'URI');
         $uri = $fileManager->read($file) ?? 'http://localhost';
         $uri = $this->ask('please input the local server URI', $uri);
-        $uri = trim($uri, ' /');
-        $dv = '/build' . Constant::getVersion();
-        if (str_ends_with($uri, $dv)) {
-            //
-        } else {
-            $uri .= $dv;
-        }
-        $fileManager->write($file, $uri);
+        $fileManager->write($file, trim($uri, ' /'));
 
         $file = FileManager::concat(FileManager::LaravelBuilderDirectory, '.gitignore');
         $fileManager->write($file, '*');
@@ -47,7 +40,7 @@ class SetupCommand extends Command
         $this->info('copy HTML files');
         $folder = base_path(FileManager::getHtmlDirectory());
         File::deleteDirectory($folder);
-        File::copyDirectory(__DIR__ . $dv, $folder);
+        File::copyDirectory(__DIR__ . '/build' . Constant::getVersion(), $folder);
 
         $file = FileManager::concat(FileManager::getHtmlDirectory(), '.gitignore');
         $fileManager->write($file, '*');
