@@ -14,7 +14,7 @@ class {{ tree.getClassName(file, schema, action) }} extends AbstractController
     public function __invoke(int $id, {{ action + schema.name }} $readOne)
     {
         $item = $readOne->findOrFail($id);
-        if (!is_null($item->dateDelete)) {
+        if (!is_null($item->dtDelete)) {
             throw new NotFoundHttpException();
         }
         return {{ action + schema.name }}Response::sendItem($item);

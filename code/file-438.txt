@@ -20,6 +20,6 @@ class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName
             ->assertStatus(200);
         $this->seeItem(self::structure(), $response);
         self::assertEquals($item->id, $response->json('item.id'));
-        self::assertNull($response->json('item.dateDelete'));
+        self::assertNull($response->json('item.dtDelete'));
     }
 }

@@ -8,7 +8,7 @@ function run(data) {
 
     const fkzz = new Set(ddd.db.tables.Relation.map(item => item.column1Id))
 
-    const ignorezz = new Set(['id', 'userId', 'dateCreate', 'dateUpdate', 'dateDelete'])
+    const ignorezz = new Set(['id', 'userId', 'dtCreate', 'dtUpdate', 'dtDelete'])
 
     ddd.result = ddd.db.tables.Column
         .filter(item => item.schemaId === ddd.schema.id && !(item.ro || ignorezz.has(item.name)))

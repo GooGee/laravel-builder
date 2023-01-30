@@ -24,7 +24,7 @@ function run(data) {
      * @returns {string}
      */
     function getFieldType(column) {
-        if (['dateCreate', 'dateUpdate'].includes(column.name)) {
+        if (['dtCreate', 'dtUpdate'].includes(column.name)) {
             return '\\Illuminate\\Support\\Carbon'
         }
 

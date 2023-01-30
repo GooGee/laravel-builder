@@ -23,11 +23,11 @@ class {{ tree.getClassName(file, schema, action) }}
             throw new AccessDeniedHttpException();
         }
 
-        if ($item->dateDelete) {
+        if ($item->dtDelete) {
             return $item;
         }
 
-        $item->dateDelete = now();
+        $item->dtDelete = now();
         $item->save();
 
         event(new {{ action + schema.name }}Event($user, $item));

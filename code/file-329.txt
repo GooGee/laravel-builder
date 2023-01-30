@@ -27,7 +27,7 @@ class {{ tree.getClassName(file, schema, action) }}
             throw new AccessDeniedHttpException();
         }
 
-        if ($item->dateDelete) {
+        if ($item->dtDelete) {
             throw new NotFoundHttpException();
         }
 

@@ -15,14 +15,14 @@ abstract class AbstractModel extends Model
      *
      * @var string|null
      */
-    const CREATED_AT = 'dateCreate';
+    const CREATED_AT = 'dtCreate';
 
     /**
      * The name of the "updated at" column.
      *
      * @var string|null
      */
-    const UPDATED_AT = 'dateUpdate';
+    const UPDATED_AT = 'dtUpdate';
 
     /**
      * Prepare a date for array / JSON serialization.
