@@ -6,7 +6,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use {{ helper.getClassFullNameByFileSchema('Model', 'User', action) }};
+use Illuminate\Foundation\Auth\User;
 use Tests\API\AbstractApiTest;
 
 abstract class {{ tree.getClassName(file, schema, action) }} extends AbstractApiTest
@@ -22,7 +22,7 @@ abstract class {{ tree.getClassName(file, schema, action) }} extends AbstractApi
      * @param array<string, mixed> $attributes
      * @return {{ tree.getClassName(helper.findFile('Model'), schema, action) }}
      */
-    protected function makeItem(User $user, array $attributes = [])
+    static function makeItem(User $user, array $attributes = [])
     {
         $item = {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::factory()
             ->for($user)

@@ -36,7 +36,7 @@ class {{ tree.getClassName(file, schema, action) }} extends AbstractModel
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<string>
+     * @var array<int, string>
      */
     protected $hidden = [
 {% for column in columnzz | selectattr('wo') %}

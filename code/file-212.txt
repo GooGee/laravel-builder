@@ -6,10 +6,11 @@ namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Foundation\Auth\User;
 
 class {{ tree.getClassName(file, schema, action) }}
 {
-    public function __construct(public {{ helper.getClassNameByFileSchema('Model', 'User', action) }} $user,
+    public function __construct(public User $user,
                                 public {{ tree.getClassName(helper.findFile('Model'), schema, action) }} $item)
     {
     }

@@ -15,7 +15,7 @@ function run(data) {
         if (item.nullable) {
             type += '|null'
         }
-        return type + ' ' + item.name
+        return type + ' $' + item.name
     })
 
     /**
@@ -24,7 +24,7 @@ function run(data) {
      * @returns {string}
      */
     function getFieldType(column) {
-        if (['dtCreate', 'dtUpdate'].includes(column.name)) {
+        if (column.type === 'datetime') {
             return '\\Illuminate\\Support\\Carbon'
         }
 
