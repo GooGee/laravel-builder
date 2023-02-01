@@ -3349,6 +3349,37 @@
                 },
                 {
                     "schemaId": 1000,
+                    "name": "errors",
+                    "type": "string",
+                    "length": 0,
+                    "scale": 0,
+                    "default": "",
+                    "comment": "",
+                    "unsigned": false,
+                    "unique": false,
+                    "nullable": false,
+                    "cast": "",
+                    "fillable": false,
+                    "ro": false,
+                    "wo": false,
+                    "fakeRaw": true,
+                    "fakeUnique": false,
+                    "fakeMethod": "",
+                    "fakeText": "",
+                    "constraintzz": [],
+                    "inTable": false,
+                    "tf": {
+                        "isArray": false,
+                        "type": "Wu",
+                        "format": "",
+                        "targetId": 1007,
+                        "argumentzz": [],
+                        "nullable": false
+                    },
+                    "id": 1006
+                },
+                {
+                    "schemaId": 1000,
                     "name": "item",
                     "type": "string",
                     "length": 0,
@@ -3447,37 +3478,6 @@
                         "nullable": false
                     },
                     "id": 1005
-                },
-                {
-                    "schemaId": 1000,
-                    "name": "errors",
-                    "type": "string",
-                    "length": 0,
-                    "scale": 0,
-                    "default": "",
-                    "comment": "",
-                    "unsigned": false,
-                    "unique": false,
-                    "nullable": false,
-                    "cast": "",
-                    "fillable": false,
-                    "ro": false,
-                    "wo": false,
-                    "fakeRaw": true,
-                    "fakeUnique": false,
-                    "fakeMethod": "",
-                    "fakeText": "",
-                    "constraintzz": [],
-                    "inTable": false,
-                    "tf": {
-                        "isArray": false,
-                        "type": "Wu",
-                        "format": "",
-                        "targetId": 1007,
-                        "argumentzz": [],
-                        "nullable": false
-                    },
-                    "id": 1006
                 },
                 {
                     "schemaId": 1001,
@@ -3986,7 +3986,7 @@
                     "unsigned": false,
                     "unique": false,
                     "nullable": true,
-                    "cast": "datetime",
+                    "cast": "",
                     "fillable": false,
                     "ro": true,
                     "wo": false,
@@ -4023,7 +4023,7 @@
                     "wo": false,
                     "fakeRaw": false,
                     "fakeUnique": false,
-                    "fakeMethod": "userName",
+                    "fakeMethod": "firstName",
                     "fakeText": "",
                     "constraintzz": [
                         {
@@ -4259,7 +4259,7 @@
                 },
                 {
                     "schemaId": 1000,
-                    "name": "Api",
+                    "name": "ApiData",
                     "color": "#fff",
                     "type": "allOf",
                     "isRequest": false,
@@ -4920,7 +4920,7 @@
                 {
                     "color": "#fff",
                     "description": "",
-                    "name": "ApiResponse",
+                    "name": "ApiDataResponse",
                     "reserved": false,
                     "example": "",
                     "mediaType": "application/json",
