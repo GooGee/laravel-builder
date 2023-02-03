@@ -11,7 +11,7 @@ function run(data) {
     const ignorezz = new Set(['id', 'userId', 'dtCreate', 'dtUpdate', 'dtDelete'])
 
     ddd.result = ddd.db.tables.Column
-        .filter(item => item.schemaId === ddd.schema.id && !(item.ro || ignorezz.has(item.name)))
+        .filter(item => item.entityId === ddd.entity.id && !(item.ro || ignorezz.has(item.name)))
         .map(item => setConstraint(item))
 
     /**

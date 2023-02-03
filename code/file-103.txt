@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
@@ -13,7 +13,7 @@ use {{ dependency }};{% endfor %}
  *{% for property in przz %}
  * @property {{ property }}{% endfor %}
  */
-class {{ tree.getClassName(file, schema, action) }} extends AbstractModel
+class {{ tree.getClassName(file, entity, action) }} extends AbstractModel
 {
 
     /**
@@ -21,7 +21,7 @@ class {{ tree.getClassName(file, schema, action) }} extends AbstractModel
      *
      * @var string
      */
-    protected $table = '{{ schema.name }}';
+    protected $table = '{{ entity.name }}';
 
     /**
      * The attributes that should be cast.

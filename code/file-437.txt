@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName(helper.findFile('AbstractItemTest'), schema, action) }}
+class {{ tree.getClassName(file, entity, action) }} extends {{ tree.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
-    public function test{{ action + schema.name }}()
+    public function test{{ action + entity.name }}()
     {
         $user = $this->createUser();
         $item = $this->makeItem($user);

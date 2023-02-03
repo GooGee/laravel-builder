@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\AbstractBase\AbstractController;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }} extends AbstractController
+class {{ tree.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + schema.name }}Request $request,
-                             {{ action + schema.name }} $create,
+    public function __invoke({{ action + entity.name }}Request $request,
+                             {{ action + entity.name }} $create,
     )
     {
         $data = $request->validated();
 
-        /** @var \{{ helper.getClassFullNameByFileSchema('Model', 'User', action) }} $user */
+        /** @var \{{ helper.getClassFullNameByFileEntity('Model', 'User', action) }} $user */
         $user = auth()->user();
 
         $item = $create($user,
@@ -24,7 +24,7 @@ class {{ tree.getClassName(file, schema, action) }} extends AbstractController
             $data['{{ column.alias }}'],{% endfor %}
         );
 
-        return {{ action + schema.name }}Response::sendItem($item);
+        return {{ action + entity.name }}Response::sendItem($item);
     }
 
 }

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class {{ tree.getClassName(file, schema, action) }}
+class {{ tree.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
     {
     }
 
-    function __invoke(int $id, {{ helper.getClassNameByFileSchema('Model', 'User', action) }} $user,
+    function __invoke(int $id, {{ helper.getClassNameByFileEntity('Model', 'User', action) }} $user,
 {% for column in columnzz %}
                       {{ makeColumnType(column) }} ${{ column.name }},{% endfor %})
     {
@@ -36,7 +36,7 @@ class {{ tree.getClassName(file, schema, action) }}
 
         $item->save();
 
-        event(new {{ action + schema.name }}Event($user, $item));
+        event(new {{ action + entity.name }}Event($user, $item));
 
         return $item;
     }

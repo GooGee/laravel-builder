@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-class {{ tree.getClassName(file, schema, action) }} extends {{ tree.getClassName(helper.findFile('ModelBase'), schema, action) }}
+class {{ tree.getClassName(file, entity, action) }} extends {{ tree.getClassName(helper.findFile('ModelBase'), entity, action) }}
 {
 }

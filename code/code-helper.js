@@ -38,32 +38,32 @@ function makeHelper(data) {
     /**
      *
      * @param {string} name
-     * @returns {LB.Schema}
+     * @returns {LB.Entity}
      */
-    function findSchema(name) {
-        return findByName(ddd.db.tables.Schema, name)
+    function findEntity(name) {
+        return findByName(ddd.db.tables.Entity, name)
     }
 
     /**
      *
      * @param {string} file
-     * @param {string} schema
+     * @param {string} entity
      * @param {string} action
      * @returns {string}
      */
-    function getClassNameByFileSchema(file, schema, action = ddd.action) {
-        return ddd.tree.getClassName(findFile(file), findSchema(schema), action)
+    function getClassNameByFileEntity(file, entity, action = ddd.action) {
+        return ddd.tree.getClassName(findFile(file), findEntity(entity), action)
     }
 
     /**
      *
      * @param {string} file
-     * @param {string} schema
+     * @param {string} entity
      * @param {string} action
      * @returns {string}
      */
-    function getClassFullNameByFileSchema(file, schema, action = ddd.action) {
-        return ddd.tree.getClassFullName(findFile(file), findSchema(schema), action)
+    function getClassFullNameByFileEntity(file, entity, action = ddd.action) {
+        return ddd.tree.getClassFullName(findFile(file), findEntity(entity), action)
     }
 
     /**
@@ -76,7 +76,7 @@ function makeHelper(data) {
             const text = ddd.fileMap[name]
             const set = new Set([
                 ...getFileDependencyzz(text.matchAll(/getClassName\(helper.findFile\(['"]([A-Za-z][A-Za-z0-9_]*)['"]\)/g)),
-                ...getFileSchemaDependencyzz(text.matchAll(/getClassNameByFileSchema\(['"]([A-Za-z][A-Za-z0-9_]*)['"] *, *['"]([A-Za-z][A-Za-z0-9_]*)['"]/g)),
+                ...getFileEntityDependencyzz(text.matchAll(/getClassNameByFileEntity\(['"]([A-Za-z][A-Za-z0-9_]*)['"] *, *['"]([A-Za-z][A-Za-z0-9_]*)['"]/g)),
             ])
             if (set.size) {
                 return Array.from(set.keys()).sort((aa, bb) => aa.localeCompare(bb))
@@ -95,7 +95,7 @@ function makeHelper(data) {
                 return []
             }
             return Array.from(set).map((item) =>
-                ddd.tree.getClassFullName(findFile(item), ddd.schema, ddd.action),
+                ddd.tree.getClassFullName(findFile(item), ddd.entity, ddd.action),
             )
         }
 
@@ -104,9 +104,9 @@ function makeHelper(data) {
          * @param {IterableIterator<RegExpMatchArray>} zz
          * @returns {string[]}
          */
-        function getFileSchemaDependencyzz(zz) {
+        function getFileEntityDependencyzz(zz) {
             const set = new Set(Array.from(zz).map((item) =>
-                ddd.tree.getClassFullName(findFile(item[1]), findSchema(item[2]), ddd.action)
+                ddd.tree.getClassFullName(findFile(item[1]), findEntity(item[2]), ddd.action)
             ))
             if (set.size === 0) {
                 return []
@@ -277,9 +277,9 @@ function makeHelper(data) {
         const fm = new Map()
         ddd.db.tables.File.forEach(item => fm.set(item.id, item))
 
-        /** @type {Map<number, LB.Schema>} */
+        /** @type {Map<number, LB.Entity>} */
         const sm = new Map()
-        ddd.db.tables.Schema.forEach(item => sm.set(item.id, item))
+        ddd.db.tables.Entity.forEach(item => sm.set(item.id, item))
 
         /** @type {Map<number, LB.File>} */
         const mafm = new Map()
@@ -320,14 +320,14 @@ function makeHelper(data) {
                     }
                     const file = {...old}
 
-                    const schema = sm.get(ma.schemaId)
-                    if (schema === undefined) {
+                    const entity = sm.get(ma.entityId)
+                    if (entity === undefined) {
                         return
                     }
 
                     // the module directory
                     file.directoryId = ma.directoryId
-                    const cn = ddd.tree.getClassFullName(file, schema, '')
+                    const cn = ddd.tree.getClassFullName(file, entity, '')
                     let text = `    Route::${pm.method}('${path.name}', \\${cn}::class)`
                     if (pm.middlewarezz.length) {
                         text += `->middleware(['${pm.middlewarezz.join("', '")}'])`
@@ -361,9 +361,9 @@ function makeHelper(data) {
         find,
         findByName,
         findFile,
-        findSchema,
-        getClassNameByFileSchema,
-        getClassFullNameByFileSchema,
+        findEntity,
+        getClassNameByFileEntity,
+        getClassFullNameByFileEntity,
         getItemzzInCollection,
         getParameterzz,
         getRequestColumnzz,

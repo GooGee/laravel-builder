@@ -1,0 +1,7 @@
+namespace YB {
+
+{% for type in typezz %}
+{{ type }}
+{% endfor %}
+
+}

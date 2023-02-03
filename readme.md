@@ -34,6 +34,7 @@ php artisan setupLaravelBuilder
 
 - Collection
 - Diagram
+- Entity: including database talbes and some classes in project
 - Migration: database migration
 - Module: modules in project
 - OpenApi
@@ -47,7 +48,6 @@ php artisan setupLaravelBuilder
     - Response
     - Server
     - Wu: OpenApi Schema
-- Schema: not OpenApi Schema. including database talbes and some classes in project
 - Tree: not the real files in disk
 
 
@@ -57,14 +57,14 @@ php artisan setupLaravelBuilder
 - go to `Migration` page, then click `►|` button to run `php artisan migrate`
 - select `Database` tab, then click `read DB tables` button, you will see a list of tables
 - select tables you want to import, then click `import selected tables` button
-- select a newly created Schema in sidebar, then click `▼` button to generate the Entity file
-- skip 3 Schemas (EmptySchema, ApiResponse, Paginator), they are not database talbes
-- to ignore a Schema, add its name to the file `config/laravelbuilder.php`
+- select a newly created Entity in sidebar, then click `▼` button to generate the Entity file
+- skip 3 Entity (EmptyEntity, ApiResponse, Paginator), they are not database talbes
+- to ignore an Entity, add its name to the file `config/laravelbuilder.php`
 
 
 ## how to generate migrations?
 
-- go to `Migration` page, then select a schema in sidebar
+- go to `Migration` page, then select an Entity in sidebar
 - click `▼` button to generate the Entity file
 - click `diff` button to generate a migration file
 - click `►|` button to run `php artisan migrate`
@@ -72,7 +72,7 @@ php artisan setupLaravelBuilder
 
 ## how to generate CRUD files?
 
-- go to `Schema` page, then select `User` schema in sidebar
+- go to `Entity` page, then select `User` Entity in sidebar
 - select `File` tab, then click `▼` button to generate the file
 
 
@@ -100,7 +100,7 @@ when `▼` button is clicked, this plugin will do the following:
 - go to `Tree` page, then select a file in sidebar
 - click `edit` script button to modify the code (optional)
 - click `edit` template button to modify the text
-- go to `Schema` page, then select a schema in sidebar
+- go to `Entity` page, then select an Entity in sidebar
 - select `File` tab, then click `▼` button to generate the file
 
 Note: if changes didn't work, make sure to save the changed file, PhpStorm doesn't save the changed file immediately.

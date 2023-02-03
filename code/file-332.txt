@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }}
+class {{ tree.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
     {
     }
 
     /**
      * @param int $end
-     * @return \Illuminate\Database\Eloquent\Collection<{{ tree.getClassName(helper.findFile('Model'), schema, action) }}>
+     * @return \Illuminate\Database\Eloquent\Collection<{{ tree.getClassName(helper.findFile('Model'), entity, action) }}>
      */
     function __invoke(int $end, {% for column in columnzz %}
                       {{ makeColumnType(column) }} ${{ column.name }},{% endfor %}
@@ -25,7 +25,7 @@ class {{ tree.getClassName(file, schema, action) }}
             ->where('id', '<', $end)
             ->whereNull('dtDelete')
             ->orderByDesc('id')
-            ->limit({{ tree.getClassName(helper.findFile('Repository'), schema, action) }}::PageSize)
+            ->limit({{ tree.getClassName(helper.findFile('Repository'), entity, action) }}::PageSize)
             ->get();
     }
 

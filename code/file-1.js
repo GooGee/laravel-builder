@@ -48,9 +48,9 @@ function run(data) {
 
     ddd.makeParameter = makeParameter
 
-    /** @type {Map<number, LB.Schema>} */
-    const schemamap = new Map()
-    ddd.db.tables.Schema.forEach(item => schemamap.set(item.id, item))
+    /** @type {Map<number, LB.Entity>} */
+    const entitymap = new Map()
+    ddd.db.tables.Entity.forEach(item => entitymap.set(item.id, item))
 
     /** @type {Map<number, LB.Column>} */
     const columnmap = new Map()
@@ -58,7 +58,7 @@ function run(data) {
 
     const fkset = new Set()
     ddd.relationzz = ddd.db.tables.Relation
-        .filter((item) => item.schema0Id === ddd.schema.id || item.schema1Id === ddd.schema.id)
+        .filter((item) => item.entity0Id === ddd.entity.id || item.entity1Id === ddd.entity.id)
         .map((item) => {
             fkset.add(item.column1Id)
             const fk = columnmap.get(item.column1Id)
@@ -69,9 +69,9 @@ function run(data) {
         })
 
     ddd.columnzz = ddd.db.tables.Column
-        .filter((item) => item.schemaId === ddd.schema.id && item.inTable && !fkset.has(item.id)) // exclude foreign key
+        .filter((item) => item.entityId === ddd.entity.id && item.inTable && !fkset.has(item.id)) // exclude foreign key
 
-    const indexzz = ddd.db.tables.Index.filter(item => item.schemaId === ddd.schema.id)
+    const indexzz = ddd.db.tables.Index.filter(item => item.entityId === ddd.entity.id)
     const indexLinezz = []
     indexzz.forEach(item => {
         const text = makeIndex(item)
@@ -101,7 +101,7 @@ function run(data) {
         if (cnzz.length === 0) {
             return ''
         }
-        const namezz = [ddd.schema.name].concat(cnzz)
+        const namezz = [ddd.entity.name].concat(cnzz)
         namezz.push(index.type)
         return `#[ORM\\${type}(name: "${namezz.join('_')}", columns: ["${cnzz.join('", "')}"])]`
     }
@@ -116,14 +116,14 @@ function run(data) {
         const textzz = []
         const nullable = fk.nullable ? 'true' : 'false'
         // for circular reference (parentId)
-        if (relation.schema1Id === ddd.schema.id) {
-            const schema1 = schemamap.get(relation.schema0Id)
-            textzz.push(`    #[ORM\\OneToOne(targetEntity: ${schema1.name}::class)]`)
+        if (relation.entity1Id === ddd.entity.id) {
+            const entity1 = entitymap.get(relation.entity0Id)
+            textzz.push(`    #[ORM\\OneToOne(targetEntity: ${entity1.name}::class)]`)
             textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "id", nullable: ${nullable})]`)
             textzz.push(`    private \$${relation.name1};`)
         } else {
-            const schema1 = schemamap.get(relation.schema1Id)
-            textzz.push(`    #[ORM\\OneToOne(mappedBy: '${relation.name1}', targetEntity: ${schema1.name}::class)]`)
+            const entity1 = entitymap.get(relation.entity1Id)
+            textzz.push(`    #[ORM\\OneToOne(mappedBy: '${relation.name1}', targetEntity: ${entity1.name}::class)]`)
             textzz.push(`    private \$${relation.name0};`)
         }
         return textzz.join('\n')
@@ -139,14 +139,14 @@ function run(data) {
         const textzz = []
         const nullable = fk.nullable ? 'true' : 'false'
         // for circular reference (parentId)
-        if (relation.schema1Id === ddd.schema.id) {
-            const schema1 = schemamap.get(relation.schema0Id)
-            textzz.push(`    #[ORM\\ManyToOne(targetEntity: ${schema1.name}::class)]`)
+        if (relation.entity1Id === ddd.entity.id) {
+            const entity1 = entitymap.get(relation.entity0Id)
+            textzz.push(`    #[ORM\\ManyToOne(targetEntity: ${entity1.name}::class)]`)
             textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "id", nullable: ${nullable})]`)
             textzz.push(`    private \$${relation.name1};`)
         } else {
-            const schema1 = schemamap.get(relation.schema1Id)
-            textzz.push(`    #[ORM\\OneToMany(mappedBy: '${relation.name1}', targetEntity: ${schema1.name}::class)]`)
+            const entity1 = entitymap.get(relation.entity1Id)
+            textzz.push(`    #[ORM\\OneToMany(mappedBy: '${relation.name1}', targetEntity: ${entity1.name}::class)]`)
             textzz.push(`    private \$${relation.name0};`)
         }
         return textzz.join('\n')

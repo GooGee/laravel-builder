@@ -2,7 +2,7 @@ function run(data) {
     /** @type {LB.DataForScript} */
     const ddd = data
 
-    const columnzz = ddd.db.tables.Column.filter((item) => item.schemaId === ddd.schema.id && item.name !== "id")
+    const columnzz = ddd.db.tables.Column.filter((item) => item.entityId === ddd.entity.id && item.name !== "id")
 
     const itemzz = []
     columnzz.forEach(item => {

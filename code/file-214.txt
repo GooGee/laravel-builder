@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class {{ tree.getClassName(file, schema, action) }} extends FormRequest
+class {{ tree.getClassName(file, entity, action) }} extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

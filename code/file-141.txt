@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\AbstractBase\AbstractReadManyCache;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Builder;
 
-class {{ tree.getClassName(file, schema, action) }} extends AbstractWarmup
+class {{ tree.getClassName(file, entity, action) }} extends AbstractWarmup
 {
 
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository,
-                                private {{ tree.getClassName(helper.findFile('ItemCache'), schema, action) }} $cache,
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository,
+                                private {{ tree.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache,
     )
     {
     }

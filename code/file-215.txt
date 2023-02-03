@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\AbstractBase\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }} extends AbstractResponse
+class {{ tree.getClassName(file, entity, action) }} extends AbstractResponse
 {
     /**
-     * @param {{ tree.getClassName(helper.findFile('Model'), schema, action) }} $item
+     * @param {{ tree.getClassName(helper.findFile('Model'), entity, action) }} $item
      * @return array
      */
     static function getData($item): array

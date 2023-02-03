@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class {{ tree.getClassName(file, schema, action) }} extends Factory
+class {{ tree.getClassName(file, entity, action) }} extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::class;
+    protected $model = {{ tree.getClassName(helper.findFile('Model'), entity, action) }}::class;
 
     /**
      * Define the model's default state.

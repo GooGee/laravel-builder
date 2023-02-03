@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use App\AbstractBase\AbstractReadManyCache;
 
-class {{ tree.getClassName(file, schema, action) }} extends AbstractReadManyCache
+class {{ tree.getClassName(file, entity, action) }} extends AbstractReadManyCache
 {
     static function getModelName(): string
     {
-        return {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::class;
+        return {{ tree.getClassName(helper.findFile('Model'), entity, action) }}::class;
     }
 
 }

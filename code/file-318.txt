@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\AbstractBase\AbstractController;
 use App\AbstractBase\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }} extends AbstractController
+class {{ tree.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $id, {{ action + schema.name }} $delete)
+    public function __invoke(int $id, {{ action + entity.name }} $delete)
     {
-        /** @var \{{ helper.getClassFullNameByFileSchema('Model', 'User', action) }} $user */
+        /** @var \{{ helper.getClassFullNameByFileEntity('Model', 'User', action) }} $user */
         $user = auth()->user();
 
         $result = $delete($user, $id);

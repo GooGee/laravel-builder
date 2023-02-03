@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table('`{{ schema.name }}`')]{{ index }}
-class {{ tree.getClassName(file, schema, action) }}
+#[ORM\Table('`{{ entity.name }}`')]{{ index }}
+class {{ tree.getClassName(file, entity, action) }}
 {
 
 {% for column in columnzz %}{% if column.name === 'id' %}

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Console\Command;
 
-class {{ tree.getClassName(file, schema, action) }} extends Command
+class {{ tree.getClassName(file, entity, action) }} extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = '{{ tree.getClassName(file, schema, action) }}';
+    protected $signature = '{{ tree.getClassName(file, entity, action) }}';
 
     /**
      * The console command description.

@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }}
+class {{ tree.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
     {
     }
 
-    function __invoke({{ helper.getClassNameByFileSchema('Model', 'User', action) }} $user,
+    function __invoke({{ helper.getClassNameByFileEntity('Model', 'User', action) }} $user,
 {% for column in columnzz %}
                       {{ makeColumnType(column) }} ${{ column.name }},{% endfor %}
     )
     {
-        $item = new {{ tree.getClassName(helper.findFile('Model'), schema, action) }}();
+        $item = new {{ tree.getClassName(helper.findFile('Model'), entity, action) }}();
         $item->userId = $user->id;
 {% for column in columnzz %}
         $item->{{ column.name }} = ${{ column.name }};{% endfor %}
@@ -26,7 +26,7 @@ class {{ tree.getClassName(file, schema, action) }}
         $item->save();
         $item->refresh();
 
-        event(new {{ action + schema.name }}Event($user, $item));
+        event(new {{ action + entity.name }}Event($user, $item));
 
         return $item;
     }

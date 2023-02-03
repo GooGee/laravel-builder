@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class {{ tree.getClassName(file, schema, action) }}
+class {{ tree.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
     {
     }
 
-    function __invoke({{ helper.getClassNameByFileSchema('Model', 'User', action) }} $user, int $id)
+    function __invoke({{ helper.getClassNameByFileEntity('Model', 'User', action) }} $user, int $id)
     {
         $item = $this->repository->findOrFail($id);
         if ($user->id === $item->userId) {
@@ -30,7 +30,7 @@ class {{ tree.getClassName(file, schema, action) }}
         $item->dtDelete = now();
         $item->save();
 
-        event(new {{ action + schema.name }}Event($user, $item));
+        event(new {{ action + entity.name }}Event($user, $item));
 
         return $item;
     }

@@ -14,18 +14,18 @@ function makeFaker(data) {
     const fakeForColumnTypeMap = new Map()
     ddd.helper.getItemzzInCollection('FakeForColumnType').forEach(item => fakeForColumnTypeMap.set(item.name, item))
 
-    const schemaMap = new Map()
-    ddd.db.tables.Schema.forEach(item => schemaMap.set(item.id, item))
+    const entityMap = new Map()
+    ddd.db.tables.Entity.forEach(item => entityMap.set(item.id, item))
 
     /** @type {Map<number, string>} */
     const relationMap = new Map()
     ddd.db.tables.Relation.forEach(item => {
-        if (item.schema1Id === ddd.schema.id) {
-            relationMap.set(item.column1Id, schemaMap.get(item.schema0Id).name)
+        if (item.entity1Id === ddd.entity.id) {
+            relationMap.set(item.column1Id, entityMap.get(item.entity0Id).name)
         }
     })
 
-    ddd.result = ddd.db.tables.Column.filter(item => item.schemaId === ddd.schema.id).map(item => setFaker(item))
+    ddd.result = ddd.db.tables.Column.filter(item => item.entityId === ddd.entity.id).map(item => setFaker(item))
 
     /**
      *
@@ -48,11 +48,11 @@ function makeFaker(data) {
             return column
         }
 
-        const schema = relationMap.get(column.id)
-        if (schema) {
+        const entity = relationMap.get(column.id)
+        if (entity) {
             column.fakeRaw = true
             column.fakeMethod = ''
-            column.fakeText = schema + 'Factory::new()'
+            column.fakeText = entity + 'Factory::new()'
             return column
         }
 

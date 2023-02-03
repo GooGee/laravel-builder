@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }}
+class {{ tree.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), schema, action) }} $repository)
+    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
     {
     }
 

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\AbstractBase\AbstractController;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ tree.getClassName(file, schema, action) }} extends AbstractController
+class {{ tree.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + schema.name }}Request $request, {{ action + schema.name }} $readMany)
+    public function __invoke({{ action + entity.name }}Request $request, {{ action + entity.name }} $readMany)
     {
         $end = $request->input('end', PHP_INT_MAX);
         $itemzz = $readMany($end,
@@ -18,6 +18,6 @@ class {{ tree.getClassName(file, schema, action) }} extends AbstractController
             $data['{{ column.alias }}'],{% endfor %}
         );
 
-        return {{ action + schema.name }}Response::sendList($itemzz->all());
+        return {{ action + entity.name }}Response::sendList($itemzz->all());
     }
 }

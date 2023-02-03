@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, schema, action) }};
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method {{ schema.name }}|null find(int $id)
- * @method {{ schema.name }} findOrFail(int $id)
+ * @method {{ entity.name }}|null find(int $id)
+ * @method {{ entity.name }} findOrFail(int $id)
  */
-class {{ tree.getClassName(file, schema, action) }} extends AbstractRepository
+class {{ tree.getClassName(file, entity, action) }} extends AbstractRepository
 {
 
     function query(): Builder
     {
-        return {{ tree.getClassName(helper.findFile('Model'), schema, action) }}::query();
+        return {{ tree.getClassName(helper.findFile('Model'), entity, action) }}::query();
     }
 
 }
