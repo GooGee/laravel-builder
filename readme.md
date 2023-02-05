@@ -1,8 +1,10 @@
 # Laravel Builder
 
-[demo](https://googee.github.io/laravel-builder/build002)
+You no longer need to write migrations, Doctrine will do it for you.
 
-![diagram](image/diagram.png)
+Doctrine compares files in `database/Entity` with the database schemas, and generate a migration file of their difference.
+
+[demo](https://googee.github.io/laravel-builder/build002)
 
 
 ## features
@@ -11,10 +13,6 @@
 - manage database migrations
 - generate OpenApi document
 - generate CRUD files
-
-You no longer need to write migrations, Doctrine will do it for you.
-
-Doctrine compares files in `database/Entity` with the database schemas, and generate a migration file of their difference.
 
 
 ## install
@@ -36,40 +34,26 @@ php artisan setupLaravelBuilder
 - Diagram
 - Entity: including database talbes and some classes in project
 - Flow
-- Migration: database migration
+- Migration
 - OpenApi
-    - Info
-    - Enum
-    - Example
-    - Header
-    - Parameter
-    - Path
-    - Request
-    - Response
-    - Server
-    - Wu: OpenApi Schema
 - Toast: message list
 - Tree: not the real files in disk
 
 
-## import schema from database
-
-- make sure Laravel server is running and database is created
-- go to `Migration` page, then click `►|` button to run `php artisan migrate`
-- select `Database` tab, then click `read DB tables` button, you will see a list of tables
-- select tables you want to import, then click `import selected tables` button
-- to ignore an Entity, add its name to the file `config/laravelbuilder.php`
-
-
 ## how to generate migrations?
+
+![migration](image/migration.gif)
 
 - go to `Migration` page, then select the `User` in sidebar
 - click `▼` button to generate the `Entity` file
 - click `diff` button to generate a migration file
 - click `►|` button to run `php artisan migrate`
+- to ignore a table, add its name to the file `config/laravelbuilder.php`
 
 
 ## how to generate CRUD files?
+
+![crud](image/crud.gif)
 
 - go to `Entity` page, then select `User` in sidebar
 - select `File` tab, then click `▼` button to generate the file
@@ -102,7 +86,7 @@ when `▼` button is clicked, this plugin will do the following:
 - go to `Entity` page, then select `User` in sidebar
 - select `File` tab, then click `▼` button to generate the file
 
-Note: if changes didn't work, make sure to save the changed file, PhpStorm doesn't save the changed file immediately.
+Note: if changes didn't work, make sure to save the changed file manually, PhpStorm doesn't save the changed file immediately.
 
 for example
 
@@ -111,8 +95,8 @@ function run(data) {
     /** @type {DataForScript} */
     const ddd = data
 
-    // define variable `entity`
-    ddd.entity = ddd.db.tables.File.find(item => item.name === 'Entity')
+    // define variable `model`
+    ddd.model = ddd.db.tables.File.find(item => item.name === 'Model')
 
     // define function `toString`
     ddd.toString = function(object) {
@@ -124,9 +108,9 @@ function run(data) {
 in template
 
 ```txt
-{{ entity.name }}
+{{ model.name }}
 
-{{ toString(entity) }}
+{{ toString(model) }}
 ```
 
 [templating engine](https://mozilla.github.io/nunjucks/templating.html)
