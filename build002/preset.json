@@ -118,7 +118,7 @@
                     "valueDescription": "",
                     "tagDescription": "",
                     "reserved": true,
-                    "id": 1000
+                    "id": 16
                 }
             ],
             "CollectionItem": [
@@ -2496,63 +2496,63 @@
                     "id": 418
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "auth",
                     "value": "",
                     "tag": "",
-                    "id": 1000
+                    "id": 427
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "auth.basic",
                     "value": "",
                     "tag": "",
                     "id": 419
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "bindings",
                     "value": "",
                     "tag": "",
                     "id": 420
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "cache.headers",
                     "value": "",
                     "tag": "",
                     "id": 421
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "can",
                     "value": "",
                     "tag": "",
                     "id": 422
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "guest",
                     "value": "",
                     "tag": "",
                     "id": 423
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "signed",
                     "value": "",
                     "tag": "",
                     "id": 424
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "throttle",
                     "value": "",
                     "tag": "",
                     "id": 425
                 },
                 {
-                    "collectionId": 1000,
+                    "collectionId": 16,
                     "name": "verified",
                     "value": "",
                     "tag": "",
@@ -2563,14 +2563,14 @@
                     "name": "419",
                     "value": "",
                     "tag": "",
-                    "id": 1001
+                    "id": 428
                 },
                 {
                     "collectionId": 7,
                     "name": "422",
                     "value": "",
                     "tag": "",
-                    "id": 1002
+                    "id": 429
                 }
             ],
             "Directory": [
@@ -2593,7 +2593,7 @@
                     "description": "",
                     "opened": true,
                     "name": "AbstractBase",
-                    "id": 1000
+                    "id": 100
                 },
                 {
                     "parentId": 10,
@@ -2797,6 +2797,16 @@
                     "directoryId": 60
                 },
                 {
+                    "directoryId": 10,
+                    "name": "AbstractModel",
+                    "color": "#fff",
+                    "layer": "Model",
+                    "description": "",
+                    "nameSpacePattern": "Models",
+                    "fileNamePattern": "AbstractModel.php",
+                    "id": 100
+                },
+                {
                     "name": "Model",
                     "color": "#f00",
                     "layer": "Model",
@@ -2825,6 +2835,16 @@
                     "id": 104,
                     "description": "",
                     "directoryId": 60
+                },
+                {
+                    "directoryId": 10,
+                    "name": "AbstractRepository",
+                    "color": "#fff",
+                    "layer": "Repository",
+                    "description": "",
+                    "nameSpacePattern": "Repository",
+                    "fileNamePattern": "AbstractRepository.php",
+                    "id": 111
                 },
                 {
                     "name": "Repository",
@@ -2865,6 +2885,46 @@
                     "id": 143,
                     "description": "",
                     "directoryId": 10
+                },
+                {
+                    "name": "api.php",
+                    "color": "#fff",
+                    "layer": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "api.php",
+                    "id": 151,
+                    "description": "",
+                    "directoryId": 65
+                },
+                {
+                    "name": "channels.php",
+                    "color": "#fff",
+                    "layer": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "channels.php",
+                    "id": 152,
+                    "description": "",
+                    "directoryId": 65
+                },
+                {
+                    "name": "console.php",
+                    "color": "#fff",
+                    "layer": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "console.php",
+                    "id": 153,
+                    "description": "",
+                    "directoryId": 65
+                },
+                {
+                    "name": "web.php",
+                    "color": "#fff",
+                    "layer": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "web.php",
+                    "id": 154,
+                    "description": "",
+                    "directoryId": 65
                 },
                 {
                     "name": "Event",
@@ -3117,54 +3177,14 @@
                     "directoryId": 81
                 },
                 {
-                    "name": "api.php",
-                    "color": "#fff",
-                    "layer": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "api.php",
-                    "id": 151,
-                    "description": "",
-                    "directoryId": 65
-                },
-                {
-                    "name": "channels.php",
-                    "color": "#fff",
-                    "layer": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "channels.php",
-                    "id": 152,
-                    "description": "",
-                    "directoryId": 65
-                },
-                {
-                    "name": "console.php",
-                    "color": "#fff",
-                    "layer": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "console.php",
-                    "id": 153,
-                    "description": "",
-                    "directoryId": 65
-                },
-                {
-                    "name": "web.php",
-                    "color": "#fff",
-                    "layer": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "web.php",
-                    "id": 154,
-                    "description": "",
-                    "directoryId": 65
-                },
-                {
                     "name": "AbstractItemCache.php",
                     "color": "#fff",
                     "layer": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "AbstractItemCache.php",
-                    "id": 1000,
+                    "id": 500,
                     "description": "",
-                    "directoryId": 1000
+                    "directoryId": 100
                 },
                 {
                     "name": "AbstractController.php",
@@ -3172,9 +3192,9 @@
                     "layer": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "AbstractController.php",
-                    "id": 1001,
+                    "id": 501,
                     "description": "",
-                    "directoryId": 1000
+                    "directoryId": 100
                 },
                 {
                     "name": "AbstractResponse.php",
@@ -3182,29 +3202,9 @@
                     "layer": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "AbstractResponse.php",
-                    "id": 1002,
+                    "id": 502,
                     "description": "",
-                    "directoryId": 1000
-                },
-                {
-                    "directoryId": 10,
-                    "name": "AbstractModel",
-                    "color": "#fff",
-                    "layer": "Model",
-                    "description": "",
-                    "nameSpacePattern": "Models",
-                    "fileNamePattern": "AbstractModel.php",
-                    "id": 100
-                },
-                {
-                    "directoryId": 10,
-                    "name": "AbstractRepository",
-                    "color": "#fff",
-                    "layer": "Repository",
-                    "description": "",
-                    "nameSpacePattern": "Repository",
-                    "fileNamePattern": "AbstractRepository.php",
-                    "id": 111
+                    "directoryId": 100
                 },
                 {
                     "directoryId": 70,
@@ -3214,7 +3214,7 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "index.d.ts",
-                    "id": 1003
+                    "id": 503
                 }
             ],
             "Entity": [
@@ -3238,7 +3238,7 @@
                     "opened": false,
                     "openedColumn": true,
                     "reserved": false,
-                    "id": 1000
+                    "id": 2
                 },
                 {
                     "name": "Paginator",
@@ -3249,7 +3249,7 @@
                     "opened": false,
                     "openedColumn": true,
                     "reserved": false,
-                    "id": 1001
+                    "id": 3
                 },
                 {
                     "name": "User",
@@ -3260,12 +3260,12 @@
                     "opened": true,
                     "openedColumn": true,
                     "reserved": false,
-                    "id": 1002
+                    "id": 4
                 }
             ],
             "Column": [
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "code",
                     "type": "integer",
                     "length": 0,
@@ -3293,10 +3293,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1000
+                    "id": 1
                 },
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "message",
                     "type": "string",
                     "length": 0,
@@ -3324,10 +3324,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1001
+                    "id": 2
                 },
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "data",
                     "type": "string",
                     "length": 0,
@@ -3349,16 +3349,16 @@
                     "inTable": false,
                     "tf": {
                         "isArray": false,
-                        "type": "string",
+                        "nullable": true,
+                        "type": "TypeParameter",
                         "format": "",
-                        "targetId": 0,
-                        "argumentzz": [],
-                        "nullable": true
+                        "targetId": 1,
+                        "argumentzz": []
                     },
-                    "id": 1002
+                    "id": 3
                 },
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "errors",
                     "type": "string",
                     "length": 0,
@@ -3382,14 +3382,14 @@
                         "isArray": false,
                         "type": "Wu",
                         "format": "",
-                        "targetId": 1007,
+                        "targetId": 3,
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1006
+                    "id": 4
                 },
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "item",
                     "type": "string",
                     "length": 0,
@@ -3411,16 +3411,16 @@
                     "inTable": false,
                     "tf": {
                         "isArray": false,
+                        "nullable": false,
                         "type": "TypeParameter",
                         "format": "",
-                        "targetId": 1002,
-                        "argumentzz": [],
-                        "nullable": false
+                        "targetId": 2,
+                        "argumentzz": []
                     },
-                    "id": 1003
+                    "id": 5
                 },
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "list",
                     "type": "string",
                     "length": 0,
@@ -3442,16 +3442,16 @@
                     "inTable": false,
                     "tf": {
                         "isArray": true,
+                        "nullable": false,
                         "type": "TypeParameter",
                         "format": "",
-                        "targetId": 1003,
-                        "argumentzz": [],
-                        "nullable": false
+                        "targetId": 3,
+                        "argumentzz": []
                     },
-                    "id": 1004
+                    "id": 6
                 },
                 {
-                    "entityId": 1000,
+                    "entityId": 2,
                     "name": "page",
                     "type": "string",
                     "length": 0,
@@ -3475,22 +3475,23 @@
                         "isArray": false,
                         "type": "Wu",
                         "format": "",
-                        "targetId": 1005,
+                        "targetId": 7,
                         "argumentzz": [
                             {
                                 "isArray": false,
+                                "nullable": false,
                                 "type": "TypeParameter",
                                 "format": "",
-                                "targetId": 1004,
+                                "targetId": 5,
                                 "argumentzz": []
                             }
                         ],
                         "nullable": false
                     },
-                    "id": 1005
+                    "id": 7
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "current_page",
                     "type": "integer",
                     "length": 0,
@@ -3518,10 +3519,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1007
+                    "id": 8
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "data",
                     "type": "string",
                     "length": 0,
@@ -3543,16 +3544,16 @@
                     "inTable": false,
                     "tf": {
                         "isArray": true,
+                        "nullable": false,
                         "type": "TypeParameter",
                         "format": "",
-                        "targetId": 1005,
-                        "argumentzz": [],
-                        "nullable": false
+                        "targetId": 4,
+                        "argumentzz": []
                     },
-                    "id": 1008
+                    "id": 9
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "first_page_url",
                     "type": "string",
                     "length": 0,
@@ -3580,10 +3581,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1009
+                    "id": 10
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "from",
                     "type": "string",
                     "length": 0,
@@ -3611,10 +3612,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1010
+                    "id": 11
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "next_page_url",
                     "type": "string",
                     "length": 0,
@@ -3642,10 +3643,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1011
+                    "id": 12
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "path",
                     "type": "string",
                     "length": 0,
@@ -3673,10 +3674,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1012
+                    "id": 13
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "per_page",
                     "type": "integer",
                     "length": 0,
@@ -3704,10 +3705,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1013
+                    "id": 14
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "prev_page_url",
                     "type": "string",
                     "length": 0,
@@ -3735,10 +3736,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1014
+                    "id": 15
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "to",
                     "type": "integer",
                     "length": 0,
@@ -3766,10 +3767,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1015
+                    "id": 16
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "total",
                     "type": "integer",
                     "length": 0,
@@ -3797,10 +3798,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1016
+                    "id": 17
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "last_page",
                     "type": "integer",
                     "length": 0,
@@ -3828,10 +3829,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1017
+                    "id": 18
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "last_page_url",
                     "type": "string",
                     "length": 0,
@@ -3859,10 +3860,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1018
+                    "id": 19
                 },
                 {
-                    "entityId": 1001,
+                    "entityId": 3,
                     "name": "links",
                     "type": "string",
                     "length": 0,
@@ -3890,10 +3891,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1019
+                    "id": 20
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "id",
                     "type": "integer",
                     "length": 0,
@@ -3921,10 +3922,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1020
+                    "id": 21
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "dtCreate",
                     "type": "datetime",
                     "length": 0,
@@ -3952,10 +3953,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1021
+                    "id": 22
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "dtUpdate",
                     "type": "datetime",
                     "length": 0,
@@ -3983,10 +3984,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1022
+                    "id": 23
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "dtDelete",
                     "type": "datetime",
                     "length": 0,
@@ -4014,10 +4015,10 @@
                         "argumentzz": [],
                         "nullable": true
                     },
-                    "id": 1023
+                    "id": 24
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "name",
                     "type": "string",
                     "length": 33,
@@ -4058,10 +4059,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1024
+                    "id": 25
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "email",
                     "type": "string",
                     "length": 111,
@@ -4110,10 +4111,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1025
+                    "id": 26
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "password",
                     "type": "string",
                     "length": 111,
@@ -4158,10 +4159,10 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1026
+                    "id": 27
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "remember_token",
                     "type": "string",
                     "length": 111,
@@ -4189,10 +4190,10 @@
                         "argumentzz": [],
                         "nullable": true
                     },
-                    "id": 1027
+                    "id": 28
                 },
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "name": "remember",
                     "type": "boolean",
                     "length": 0,
@@ -4225,37 +4226,34 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1028
+                    "id": 29
                 }
             ],
             "Relation": [],
             "Index": [
                 {
-                    "entityId": 1002,
+                    "entityId": 4,
                     "type": "unique",
-                    "id": 1000,
-                    "columnzz": []
+                    "id": 1
                 }
             ],
             "IndexColumn": [
                 {
-                    "indexId": 1000,
-                    "columnId": 1025,
+                    "indexId": 1,
+                    "columnId": 26,
                     "sort": 0,
-                    "id": 1000,
-                    "name": "email"
+                    "id": 1
                 }
             ],
             "Wu": [
                 {
-                    "entityId": 1,
-                    "name": "Empty",
                     "color": "#fff",
+                    "description": "",
+                    "name": "Empty",
+                    "reserved": false,
+                    "entityId": 1,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": true,
-                    "id": 1,
                     "example": "",
                     "isMap": false,
                     "tf": {
@@ -4265,27 +4263,28 @@
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
+                    },
+                    "id": 1
                 },
                 {
-                    "entityId": 1000,
-                    "name": "ApiData",
                     "color": "#fff",
+                    "description": "",
+                    "name": "ApiData",
+                    "reserved": false,
+                    "entityId": 2,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1000,
                     "example": "",
                     "isMap": false,
                     "tf": {
                         "isArray": false,
-                        "nullable": true,
+                        "nullable": false,
                         "type": "string",
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
+                    },
+                    "id": 2
                 },
                 {
                     "color": "#fff",
@@ -4305,17 +4304,16 @@
                         "targetId": 0,
                         "argumentzz": []
                     },
-                    "id": 1007
+                    "id": 3
                 },
                 {
-                    "entityId": 1000,
+                    "color": "#fff",
+                    "description": "",
                     "name": "ApiError",
-                    "color": "#fff",
+                    "reserved": false,
+                    "entityId": 2,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1001,
                     "example": "",
                     "isMap": false,
                     "tf": {
@@ -4325,17 +4323,17 @@
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
+                    },
+                    "id": 4
                 },
                 {
-                    "entityId": 1000,
+                    "color": "#fff",
+                    "description": "",
                     "name": "ApiItem",
-                    "color": "#fff",
+                    "reserved": false,
+                    "entityId": 2,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1002,
                     "example": "",
                     "isMap": false,
                     "tf": {
@@ -4345,17 +4343,17 @@
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
+                    },
+                    "id": 5
                 },
                 {
-                    "entityId": 1000,
+                    "color": "#fff",
+                    "description": "",
                     "name": "ApiList",
-                    "color": "#fff",
+                    "reserved": false,
+                    "entityId": 2,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1003,
                     "example": "",
                     "isMap": false,
                     "tf": {
@@ -4365,17 +4363,17 @@
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
+                    },
+                    "id": 6
                 },
                 {
-                    "entityId": 1001,
+                    "color": "#fff",
+                    "description": "",
                     "name": "Paginator",
-                    "color": "#fff",
+                    "reserved": false,
+                    "entityId": 3,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1005,
                     "example": "",
                     "isMap": false,
                     "tf": {
@@ -4385,17 +4383,17 @@
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
+                    },
+                    "id": 7
                 },
                 {
-                    "entityId": 1000,
+                    "color": "#fff",
+                    "description": "",
                     "name": "ApiPage",
-                    "color": "#fff",
+                    "reserved": false,
+                    "entityId": 2,
                     "type": "allOf",
                     "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1004,
                     "example": "",
                     "isMap": false,
                     "tf": {
@@ -4405,244 +4403,216 @@
                         "format": "",
                         "targetId": 0,
                         "argumentzz": []
-                    }
-                },
-                {
-                    "entityId": 1,
-                    "name": "ApiPaginator",
-                    "color": "#fff",
-                    "type": "allOf",
-                    "isRequest": false,
-                    "description": "",
-                    "reserved": false,
-                    "id": 1006,
-                    "example": "",
-                    "isMap": false,
-                    "tf": {
-                        "isArray": false,
-                        "nullable": false,
-                        "type": "string",
-                        "format": "",
-                        "targetId": 0,
-                        "argumentzz": []
-                    }
+                    },
+                    "id": 8
                 }
             ],
-            "WuChild": [
-                {
-                    "wuId": 1006,
-                    "tf": {
-                        "isArray": false,
-                        "type": "Wu",
-                        "format": "",
-                        "targetId": 1000,
-                        "argumentzz": [],
-                        "nullable": false
-                    },
-                    "id": 1000
-                },
-                {
-                    "wuId": 1006,
-                    "tf": {
-                        "isArray": false,
-                        "type": "Wu",
-                        "format": "",
-                        "targetId": 1005,
-                        "argumentzz": [
-                            {
-                                "isArray": false,
-                                "type": "TypeParameter",
-                                "format": "",
-                                "targetId": 1006,
-                                "argumentzz": []
-                            }
-                        ],
-                        "nullable": false
-                    },
-                    "id": 1001
-                }
-            ],
+            "WuChild": [],
             "WuColumn": [
                 {
-                    "wuId": 1000,
-                    "columnId": 1000,
+                    "wuId": 2,
+                    "columnId": 1,
                     "alias": "",
-                    "id": 1000
+                    "id": 1
                 },
                 {
-                    "wuId": 1000,
-                    "columnId": 1001,
+                    "wuId": 2,
+                    "columnId": 2,
                     "alias": "",
-                    "id": 1001
+                    "id": 2
                 },
                 {
-                    "wuId": 1000,
-                    "columnId": 1002,
+                    "wuId": 2,
+                    "columnId": 3,
                     "alias": "",
-                    "id": 1002
+                    "id": 3
                 },
                 {
-                    "wuId": 1001,
-                    "columnId": 1000,
+                    "wuId": 4,
+                    "columnId": 1,
                     "alias": "",
-                    "id": 1003
+                    "id": 4
                 },
                 {
-                    "wuId": 1001,
-                    "columnId": 1001,
+                    "wuId": 4,
+                    "columnId": 2,
                     "alias": "",
-                    "id": 1004
+                    "id": 5
                 },
                 {
-                    "wuId": 1001,
-                    "columnId": 1006,
+                    "wuId": 4,
+                    "columnId": 4,
                     "alias": "",
-                    "id": 1005
+                    "id": 6
                 },
                 {
-                    "wuId": 1002,
-                    "columnId": 1000,
+                    "wuId": 5,
+                    "columnId": 1,
                     "alias": "",
-                    "id": 1006
+                    "id": 7
                 },
                 {
-                    "wuId": 1002,
-                    "columnId": 1001,
+                    "wuId": 5,
+                    "columnId": 2,
                     "alias": "",
-                    "id": 1007
+                    "id": 8
                 },
                 {
-                    "wuId": 1002,
-                    "columnId": 1003,
+                    "wuId": 5,
+                    "columnId": 5,
                     "alias": "",
-                    "id": 1008
+                    "id": 9
                 },
                 {
-                    "wuId": 1003,
-                    "columnId": 1000,
+                    "wuId": 6,
+                    "columnId": 1,
                     "alias": "",
-                    "id": 1009
+                    "id": 10
                 },
                 {
-                    "wuId": 1003,
-                    "columnId": 1001,
+                    "wuId": 6,
+                    "columnId": 2,
                     "alias": "",
-                    "id": 1010
+                    "id": 11
                 },
                 {
-                    "wuId": 1003,
-                    "columnId": 1004,
+                    "wuId": 6,
+                    "columnId": 6,
                     "alias": "",
-                    "id": 1011
+                    "id": 12
                 },
                 {
-                    "wuId": 1004,
-                    "columnId": 1000,
+                    "wuId": 7,
+                    "columnId": 8,
                     "alias": "",
-                    "id": 1012
+                    "id": 13
                 },
                 {
-                    "wuId": 1004,
-                    "columnId": 1001,
+                    "wuId": 7,
+                    "columnId": 9,
                     "alias": "",
-                    "id": 1013
+                    "id": 14
                 },
                 {
-                    "wuId": 1004,
-                    "columnId": 1005,
+                    "wuId": 7,
+                    "columnId": 10,
                     "alias": "",
-                    "id": 1014
+                    "id": 15
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1007,
+                    "wuId": 7,
+                    "columnId": 11,
                     "alias": "",
-                    "id": 1015
+                    "id": 16
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1008,
+                    "wuId": 7,
+                    "columnId": 12,
                     "alias": "",
-                    "id": 1016
+                    "id": 17
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1009,
+                    "wuId": 7,
+                    "columnId": 13,
                     "alias": "",
-                    "id": 1017
+                    "id": 18
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1010,
+                    "wuId": 7,
+                    "columnId": 14,
                     "alias": "",
-                    "id": 1018
+                    "id": 19
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1011,
+                    "wuId": 7,
+                    "columnId": 15,
                     "alias": "",
-                    "id": 1019
+                    "id": 20
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1012,
+                    "wuId": 7,
+                    "columnId": 16,
                     "alias": "",
-                    "id": 1020
+                    "id": 21
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1013,
+                    "wuId": 7,
+                    "columnId": 17,
                     "alias": "",
-                    "id": 1021
+                    "id": 22
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1014,
+                    "wuId": 7,
+                    "columnId": 18,
                     "alias": "",
-                    "id": 1022
+                    "id": 23
                 },
                 {
-                    "wuId": 1005,
-                    "columnId": 1015,
+                    "wuId": 7,
+                    "columnId": 19,
                     "alias": "",
-                    "id": 1023
+                    "id": 24
+                },
+                {
+                    "wuId": 7,
+                    "columnId": 20,
+                    "alias": "",
+                    "id": 25
+                },
+                {
+                    "wuId": 8,
+                    "columnId": 1,
+                    "alias": "",
+                    "id": 26
+                },
+                {
+                    "wuId": 8,
+                    "columnId": 2,
+                    "alias": "",
+                    "id": 27
+                },
+                {
+                    "wuId": 8,
+                    "columnId": 7,
+                    "alias": "",
+                    "id": 28
                 }
             ],
             "WuParameter": [
                 {
-                    "wuId": 1002,
+                    "wuId": 2,
                     "name": "ItemType",
                     "description": "",
-                    "id": 1002,
-                    "isWu": false
+                    "isWu": false,
+                    "id": 1
                 },
                 {
-                    "wuId": 1003,
+                    "wuId": 5,
                     "name": "ItemType",
                     "description": "",
-                    "id": 1003,
-                    "isWu": false
+                    "isWu": true,
+                    "id": 2
                 },
                 {
-                    "wuId": 1004,
+                    "wuId": 6,
                     "name": "ItemType",
                     "description": "",
-                    "id": 1004,
-                    "isWu": false
+                    "isWu": true,
+                    "id": 3
                 },
                 {
-                    "wuId": 1005,
+                    "wuId": 7,
                     "name": "ItemType",
                     "description": "",
-                    "id": 1005,
-                    "isWu": false
+                    "isWu": true,
+                    "id": 4
                 },
                 {
-                    "wuId": 1006,
+                    "wuId": 8,
                     "name": "ItemType",
                     "description": "",
-                    "id": 1006,
-                    "isWu": false
+                    "isWu": true,
+                    "id": 5
                 }
             ],
             "Module": [
@@ -4665,7 +4635,7 @@
                     "directoryId": 13,
                     "testDirectoryId": 81,
                     "prefix": "/Api",
-                    "id": 1000,
+                    "id": 2,
                     "fileId": 154
                 }
             ],
@@ -4678,7 +4648,7 @@
                     "summary": "",
                     "parameterzz": [],
                     "reserved": false,
-                    "id": 1000,
+                    "id": 1,
                     "moduleId": 1
                 }
             ],
@@ -4704,7 +4674,7 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1000,
+                    "id": 1,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": [
@@ -4733,7 +4703,7 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1001,
+                    "id": 2,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": [
@@ -4770,7 +4740,7 @@
                             "parameter": ""
                         }
                     ],
-                    "id": 1002
+                    "id": 3
                 },
                 {
                     "color": "#f80",
@@ -4799,7 +4769,7 @@
                             "parameter": ""
                         }
                     ],
-                    "id": 1003
+                    "id": 4
                 },
                 {
                     "allowEmptyValue": false,
@@ -4820,7 +4790,7 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1004,
+                    "id": 5,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": []
@@ -4844,7 +4814,7 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1005,
+                    "id": 6,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": []
@@ -4868,7 +4838,7 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1006,
+                    "id": 7,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": [
@@ -4897,7 +4867,7 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1007,
+                    "id": 8,
                     "allowReserved": false,
                     "explode": false,
                     "constraintzz": [
@@ -4960,11 +4930,20 @@
                         "isArray": false,
                         "type": "Wu",
                         "format": "",
-                        "targetId": 1000,
-                        "argumentzz": [],
+                        "targetId": 2,
+                        "argumentzz": [
+                            {
+                                "isArray": false,
+                                "nullable": false,
+                                "type": "string",
+                                "format": "",
+                                "targetId": 0,
+                                "argumentzz": []
+                            }
+                        ],
                         "nullable": false
                     },
-                    "id": 1000
+                    "id": 2
                 },
                 {
                     "color": "#fff",
@@ -4977,11 +4956,11 @@
                         "isArray": false,
                         "type": "Wu",
                         "format": "",
-                        "targetId": 1001,
+                        "targetId": 4,
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1001
+                    "id": 3
                 }
             ],
             "ModuleActionResponse": [],
@@ -4993,7 +4972,7 @@
                     "reserved": false,
                     "summary": "",
                     "value": "{\n    \"code\": 200,\n    \"message\": \"OK\"\n}",
-                    "id": 1000
+                    "id": 1
                 }
             ],
             "ExampleMap": [],
@@ -5003,7 +4982,7 @@
                     "description": "",
                     "name": "http://localhost/{ApiVersion}",
                     "reserved": false,
-                    "id": 1000,
+                    "id": 1,
                     "global": true
                 }
             ],
@@ -5018,20 +4997,20 @@
                     "enum": [
                         "v1"
                     ],
-                    "id": 1000,
+                    "id": 1,
                     "type": "string"
                 }
             ],
             "ServerVariable": [
                 {
-                    "serverId": 1000,
-                    "variableId": 1000,
-                    "id": 1000
+                    "serverId": 1,
+                    "variableId": 1,
+                    "id": 1
                 }
             ],
             "PathMethod": []
         },
-        "version": 24
+        "version": 25
     },
     "oapi": {
         "openapi": "3.0.3",
