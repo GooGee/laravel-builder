@@ -42,7 +42,7 @@ php artisan setupLaravelBuilder
 
 ## how to generate migrations?
 
-![migration](image/migration.gif)
+![migration](https://googee.github.io/laravel-builder/image/migration.gif)
 
 - go to `Migration` page, then select the `User` in sidebar
 - click `▼` button to generate the `Entity` file
@@ -53,7 +53,7 @@ php artisan setupLaravelBuilder
 
 ## how to generate CRUD files?
 
-![crud](image/crud.gif)
+![crud](https://googee.github.io/laravel-builder/image/crud.gif)
 
 - go to `Entity` page, then select `User` in sidebar
 - select `File` tab, then click `▼` button to generate the file

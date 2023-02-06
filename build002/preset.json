@@ -4250,7 +4250,7 @@
                     "color": "#fff",
                     "description": "",
                     "name": "Empty",
-                    "reserved": false,
+                    "reserved": true,
                     "entityId": 1,
                     "type": "allOf",
                     "isRequest": false,
@@ -4647,12 +4647,26 @@
                     "description": "",
                     "summary": "",
                     "parameterzz": [],
-                    "reserved": false,
+                    "reserved": true,
                     "id": 1,
                     "moduleId": 1
                 }
             ],
-            "ModuleAction": [],
+            "ModuleAction": [
+                {
+                    "deprecated": false,
+                    "description": "",
+                    "summary": "Do not delete",
+                    "operationId": "Admin_CacheEmptyEntity",
+                    "directoryId": 40,
+                    "testDirectoryId": 82,
+                    "entityId": 1,
+                    "moduleId": 1,
+                    "collectionItemId": 394,
+                    "requestId": 1,
+                    "id": 1
+                }
+            ],
             "ModuleActionFile": [],
             "Parameter": [
                 {
