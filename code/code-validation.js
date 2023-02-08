@@ -7,56 +7,70 @@ function run(data) {
      */
 
     const fkzz = new Set(ddd.db.tables.Relation.map(item => item.column1Id))
+    const ignorezz = new Set(['id', 'userId'])
 
-    const ignorezz = new Set(['id', 'userId', 'dtCreate', 'dtUpdate', 'dtDelete'])
+    const ColumnConstraintzz = []
+    ddd.result = ColumnConstraintzz
 
-    ddd.result = ddd.db.tables.Column
+    const indexzz = ddd.db.tables.Index.filter(item => item.entityId === ddd.entity.id && item.type === 'unique')
+    if (indexzz.length) {
+        indexzz.forEach(item => {
+            const iczz = ddd.db.tables.IndexColumn.filter(ic => ic.indexId === item.id)
+            if (iczz.length === 1) {
+                ColumnConstraintzz.push(makeConstraint('unique', iczz[0].columnId, ddd.entity.name))
+            }
+        })
+    }
+
+    ddd.db.tables.Column
         .filter(item => item.entityId === ddd.entity.id && !(item.ro || ignorezz.has(item.name)))
-        .map(item => setConstraint(item))
+        .forEach(item => setConstraint(item))
 
     /**
      *
-     * @param {LB.Column} item
-     * @returns {LB.Column}
+     * @param {LB.Column} column
      */
-    function setConstraint(item) {
-        const column = {...item}
-        if (column.constraintzz.length) {
-            return column
+    function setConstraint(column) {
+        if (ddd.db.tables.ColumnConstraint.find(item => item.columnId === column.id)) {
+            return
         }
 
-        column.constraintzz.push(makeConstraint('required'))
+        if (column.nullable) {
+            ColumnConstraintzz.push(makeConstraint('nullable', column.id))
+        }
+
+        ColumnConstraintzz.push(makeConstraint('required', column.id))
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
-            column.constraintzz.push(makeConstraint('integer'))
+            ColumnConstraintzz.push(makeConstraint('integer', column.id))
             if (fkzz.has(column.id)) {
-                column.constraintzz.push(makeConstraint('min', '1'))
+                ColumnConstraintzz.push(makeConstraint('min', column.id, '1'))
             }
-            return column
+            return
         }
 
         if (['decimal', 'float'].includes(column.type)) {
-            column.constraintzz.push(makeConstraint('numeric'))
-            return column
+            ColumnConstraintzz.push(makeConstraint('numeric', column.id))
+            return
         }
 
         if (['string', 'text'].includes(column.type)) {
-            column.constraintzz.push(makeConstraint('string'))
+            ColumnConstraintzz.push(makeConstraint('string', column.id))
             if (column.length) {
-                column.constraintzz.push(makeConstraint('max', column.length.toString()))
+                ColumnConstraintzz.push(makeConstraint('max', column.id, column.length.toString()))
             }
         }
-
-        return column
     }
 
     /**
      *
      * @param {string} name
+     * @param {number} columnId
      * @param {string} parameter
      * @returns {LB.ColumnConstraint}
      */
-    function makeConstraint(name, parameter = '') {
+    function makeConstraint(name, columnId, parameter = '') {
         return {
+            columnId,
             name,
             parameter
         }

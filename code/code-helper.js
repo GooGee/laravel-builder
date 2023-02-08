@@ -68,6 +68,18 @@ function makeHelper(data) {
 
     /**
      *
+     * @param {LB.WuColumn} column
+     * @returns {LB.ColumnConstraint[]}
+     */
+    function getColumnConstraintzz(column) {
+        const set = new Set(ddd.db.tables.WuColumnConstraint
+            .filter(item => item.wuColumnId === column.wuColumnId)
+            .map(item => item.columnConstraintId))
+        return ddd.db.tables.ColumnConstraint.filter(item => set.has(item.id))
+    }
+
+    /**
+     *
      * @returns {string[]}
      */
     function getDependencyzz() {
@@ -132,44 +144,50 @@ function makeHelper(data) {
 
     /**
      *
-     * @param {LB.ModuleAction} ma
-     * @return {LB.Parameter[]}
+     * @return {LB.Column[]}
      */
-    function getParameterzz(ma) {
-        const set = new Set(ddd.db.tables.ParameterMap
-            .filter(item => item.targetId === ma.id && item.inPath === false && item.inResponse === false)
-            .map(item => item.parameterId))
-        return ddd.db.tables.Parameter.filter(item => set.has(item.id))
+    function getParameterzz() {
+        const map = new Map(ddd.db.tables.ParameterMap
+            .filter(item => item.requestId === ddd.ma.requestId)
+            .map(item => [item.columnId, item]))
+        const zz = ddd.db.tables.Column.filter(item => map.has(item.id))
+        zz.forEach(function (column) {
+            const item = map.get(column.id)
+            if (item.alias) {
+                column.alias = item.alias
+            } else {
+                column.alias = column.name
+            }
+            column.constraintzz = ddd.db.tables.ColumnConstraint.filter(item => item.columnId === column.id)
+        })
+        return zz
     }
 
     /**
      *
-     * @param {LB.ModuleAction} ma
      * @returns {LB.Column[]}
      */
-    function getRequestColumnzz(ma) {
-        const request = ddd.db.tables.Request.find(item => item.id === ma.requestId)
+    function getRequestColumnzz() {
+        const request = ddd.db.tables.Request.find(item => item.id === ddd.ma.requestId)
         if (request === undefined) {
             return []
         }
 
-        const wi = request.tf.targetId
-        const wu = ddd.db.tables.Wu.find(item => item.id === wi)
-        if (wu === undefined) {
-            return []
-        }
-
-        const wczz = getWuColumnzz(wi)
-        return makeAliasColumnzz(wczz)
+        const wczz = getWuColumnzz(request.tf.targetId)
+        const zz = makeAliasColumnzz(wczz)
+        zz.forEach(function (column) {
+            column.constraintzz = getColumnConstraintzz(column)
+        })
+        return zz
     }
 
     /**
      *
-     * @param {LB.ModuleAction} ma
      * @returns {LB.Column[]}
      */
-    function getResponseColumnzz(ma) {
-        const mar = ddd.db.tables.ModuleActionResponse.find(item => item.moduleActionId === ma.id && item.status === '200')
+    function getResponseColumnzz() {
+        const mar = ddd.db.tables.ModuleActionResponse
+            .find(item => item.moduleActionId === ddd.ma.id && item.status === '200')
         if (mar === undefined) {
             return []
         }
@@ -178,12 +196,11 @@ function makeHelper(data) {
         if (response === undefined) {
             return []
         }
-        const wi = response.tf.targetId
-        const wu = ddd.db.tables.Wu.find(item => item.id === wi)
-        if (wu === undefined) {
-            return []
-        }
 
+        let wi = response.tf.targetId
+        if (response.tf.argumentzz.length) {
+            wi = response.tf.argumentzz[0].targetId
+        }
         const wczz = getWuColumnzz(wi)
         return makeAliasColumnzz(wczz)
     }
@@ -239,7 +256,7 @@ function makeHelper(data) {
                 if (item.alias) {
                     alias = item.alias
                 }
-                return {...column, alias}
+                return {...item, ...column, alias, wuColumnId: item.id}
             }
             return undefined
         })

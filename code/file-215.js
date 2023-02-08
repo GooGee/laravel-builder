@@ -2,8 +2,7 @@ function run(data) {
     /** @type {LB.DataForScript} */
     const ddd = data
 
-    const name = `${ddd.entity.name}_${ddd.action}_DTO`
-    const wu = ddd.db.tables.Wu.find(item => item.name === name)
+    const wu = ddd.db.tables.Wu.find(item => item.name === ddd.entity.name)
     if (wu === undefined) {
         ddd.columnzz = []
         return
