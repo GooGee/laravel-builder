@@ -1,4 +1,4 @@
-namespace YB {
+namespace LB {
 
 {% for type in typezz %}
 {{ type }}

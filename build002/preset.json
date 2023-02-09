@@ -2780,7 +2780,7 @@
                 {
                     "parentId": 80,
                     "description": "",
-                    "opened": true,
+                    "opened": false,
                     "name": "Admin",
                     "id": 82
                 }
@@ -3215,6 +3215,306 @@
                     "nameSpacePattern": "",
                     "fileNamePattern": "index.d.ts",
                     "id": 503
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AbstractAdminTest.php",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "AbstractAdminTest.php",
+                    "id": 505
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminAbstractItemTest",
+                    "color": "#f00",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "Abstract${entity.name}Test.php",
+                    "id": 506
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminCreateOneItemTest",
+                    "color": "#f80",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "CreateOne${entity.name}Test.php",
+                    "id": 507
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminDeleteOneItemTest",
+                    "color": "#0f0",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "DeleteOne${entity.name}Test.php",
+                    "id": 508
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminReadManyItemTest",
+                    "color": "#0ff",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "ReadMany${entity.name}Test.php",
+                    "id": 509
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminReadOneItemTest",
+                    "color": "#00f",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "ReadOne${entity.name}Test.php",
+                    "id": 510
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminUpdateOneItemTest",
+                    "color": "#80f",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "UpdateOne${entity.name}Test.php",
+                    "id": 511
+                },
+                {
+                    "directoryId": 31,
+                    "name": "AdminCreateOneItem",
+                    "color": "#f80",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "CreateOne${entity.name}.php",
+                    "id": 512
+                },
+                {
+                    "directoryId": 31,
+                    "name": "AdminCreateOneItemController",
+                    "color": "#f80",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "CreateOne${entity.name}Controller.php",
+                    "id": 513
+                },
+                {
+                    "directoryId": 33,
+                    "name": "AdminDeleteOneItem",
+                    "color": "#0f0",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "DeleteOne${entity.name}.php",
+                    "id": 514
+                },
+                {
+                    "directoryId": 33,
+                    "name": "AdminDeleteOneItemController",
+                    "color": "#0f0",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "DeleteOne${entity.name}Controller.php",
+                    "id": 515
+                },
+                {
+                    "directoryId": 34,
+                    "name": "AdminReadManyItem",
+                    "color": "#0ff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadMany${entity.name}.php",
+                    "id": 516
+                },
+                {
+                    "directoryId": 34,
+                    "name": "AdminReadManyItemController",
+                    "color": "#0ff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadMany${entity.name}Controller.php",
+                    "id": 517
+                },
+                {
+                    "directoryId": 35,
+                    "name": "AdminReadOneItem",
+                    "color": "#00f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadOne${entity.name}.php",
+                    "id": 518
+                },
+                {
+                    "directoryId": 35,
+                    "name": "AdminReadOneItemController",
+                    "color": "#00f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadOne${entity.name}Controller.php",
+                    "id": 519
+                },
+                {
+                    "directoryId": 37,
+                    "name": "AdminUpdateOneItem",
+                    "color": "#80f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "UpdateOne${entity.name}.php",
+                    "id": 520
+                },
+                {
+                    "directoryId": 37,
+                    "name": "AdminUpdateOneItemController",
+                    "color": "#80f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "UpdateOne${entity.name}Controller.php",
+                    "id": 521
+                },
+                {
+                    "directoryId": 14,
+                    "name": "AdminEvent",
+                    "color": "#fff",
+                    "layer": "Event",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "${action + entity.name}Event.php",
+                    "id": 523
+                },
+                {
+                    "directoryId": 14,
+                    "name": "AdminListener",
+                    "color": "#fff",
+                    "layer": "Event",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "${action + entity.name}Listener.php",
+                    "id": 524
+                },
+                {
+                    "directoryId": 14,
+                    "name": "AdminRequest",
+                    "color": "#fff",
+                    "layer": "Request",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "${action + entity.name}Request.php",
+                    "id": 525
+                },
+                {
+                    "directoryId": 14,
+                    "name": "AdminResponse",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "${action + entity.name}Response.php",
+                    "id": 526
+                },
+                {
+                    "directoryId": 32,
+                    "name": "AdminDeleteManyItem",
+                    "color": "#ff0",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "DeleteMany${entity.name}.php",
+                    "id": 527
+                },
+                {
+                    "directoryId": 32,
+                    "name": "AdminDeleteManyItemController",
+                    "color": "#ff0",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "DeleteMany${entity.name}Controller.php",
+                    "id": 528
+                },
+                {
+                    "directoryId": 36,
+                    "name": "AdminUpdateManyItem",
+                    "color": "#08f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "UpdateMany${entity.name}.php",
+                    "id": 529
+                },
+                {
+                    "directoryId": 36,
+                    "name": "AdminUpdateManyItemController",
+                    "color": "#08f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "UpdateMany${entity.name}Controller.php",
+                    "id": 530
+                },
+                {
+                    "directoryId": 30,
+                    "name": "AdminCreateManyItem",
+                    "color": "#f0f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "CreateMany${entity.name}.php",
+                    "id": 531
+                },
+                {
+                    "directoryId": 30,
+                    "name": "AdminCreateManyItemController",
+                    "color": "#f0f",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "CreateMany${entity.name}Controller.php",
+                    "id": 532
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminCreateManyItemTest",
+                    "color": "#f0f",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "CreateMany${entity.name}Test.php",
+                    "id": 533
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminDeleteManyItemTest",
+                    "color": "#ff0",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "DeleteMany${entity.name}Test.php",
+                    "id": 534
+                },
+                {
+                    "directoryId": 82,
+                    "name": "AdminUpdateManyItemTest",
+                    "color": "#08f",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "UpdateMany${entity.name}Test.php",
+                    "id": 535
                 }
             ],
             "Entity": [
@@ -3223,7 +3523,7 @@
                     "color": "#fff",
                     "description": "do not add column to this entity.",
                     "x": 11,
-                    "y": 66,
+                    "y": 55,
                     "opened": false,
                     "openedColumn": true,
                     "reserved": true,
@@ -3235,10 +3535,10 @@
                     "description": "OpenAPI Header",
                     "name": "Header",
                     "reserved": true,
-                    "x": 264,
-                    "y": 11,
+                    "x": 11,
+                    "y": 110,
                     "isTable": false,
-                    "opened": true,
+                    "opened": false,
                     "openedColumn": true,
                     "id": 5
                 },
@@ -3247,10 +3547,10 @@
                     "description": "OpenAPI Parameter",
                     "name": "ParameterInCookie",
                     "reserved": true,
-                    "x": 317,
-                    "y": 11,
+                    "x": 11,
+                    "y": 165,
                     "isTable": false,
-                    "opened": true,
+                    "opened": false,
                     "openedColumn": true,
                     "id": 6
                 },
@@ -3259,10 +3559,10 @@
                     "description": "OpenAPI Parameter",
                     "name": "ParameterInPath",
                     "reserved": true,
-                    "x": 316,
-                    "y": 11,
+                    "x": 11,
+                    "y": 220,
                     "isTable": false,
-                    "opened": true,
+                    "opened": false,
                     "openedColumn": true,
                     "id": 7
                 },
@@ -3271,10 +3571,10 @@
                     "description": "OpenAPI Parameter",
                     "name": "ParameterInQuery",
                     "reserved": true,
-                    "x": 322,
-                    "y": 11,
+                    "x": 11,
+                    "y": 275,
                     "isTable": false,
-                    "opened": true,
+                    "opened": false,
                     "openedColumn": true,
                     "id": 8
                 },
@@ -3283,7 +3583,7 @@
                     "color": "#fff",
                     "description": "",
                     "x": 11,
-                    "y": 166,
+                    "y": 330,
                     "opened": false,
                     "openedColumn": true,
                     "reserved": false,
@@ -3295,7 +3595,7 @@
                     "color": "#fff",
                     "description": "",
                     "x": 11,
-                    "y": 266,
+                    "y": 385,
                     "opened": false,
                     "openedColumn": true,
                     "reserved": false,
@@ -3345,7 +3645,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 1
+                    "id": 1,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 2,
@@ -3376,7 +3685,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 2
+                    "id": 2,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 2,
@@ -3407,7 +3725,16 @@
                         "targetId": 1,
                         "argumentzz": []
                     },
-                    "id": 3
+                    "id": 3,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 2,
@@ -3438,7 +3765,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 4
+                    "id": 4,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 2,
@@ -3469,7 +3805,16 @@
                         "targetId": 2,
                         "argumentzz": []
                     },
-                    "id": 5
+                    "id": 5,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 2,
@@ -3500,7 +3845,16 @@
                         "targetId": 3,
                         "argumentzz": []
                     },
-                    "id": 6
+                    "id": 6,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 2,
@@ -3540,7 +3894,16 @@
                         ],
                         "nullable": false
                     },
-                    "id": 7
+                    "id": 7,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3571,7 +3934,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 8
+                    "id": 8,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3602,7 +3974,16 @@
                         "targetId": 4,
                         "argumentzz": []
                     },
-                    "id": 9
+                    "id": 9,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3633,7 +4014,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 10
+                    "id": 10,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3664,7 +4054,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 11
+                    "id": 11,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3695,7 +4094,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 12
+                    "id": 12,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3726,7 +4134,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 13
+                    "id": 13,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3757,7 +4174,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 14
+                    "id": 14,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3788,7 +4214,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 15
+                    "id": 15,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3819,7 +4254,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 16
+                    "id": 16,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3850,7 +4294,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 17
+                    "id": 17,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3881,7 +4334,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 18
+                    "id": 18,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3912,7 +4374,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 19
+                    "id": 19,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 3,
@@ -3943,7 +4414,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 20
+                    "id": 20,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -3974,7 +4454,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 21
+                    "id": 21,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4005,7 +4494,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 22
+                    "id": 22,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4036,7 +4534,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 23
+                    "id": 23,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4067,7 +4574,16 @@
                         "argumentzz": [],
                         "nullable": true
                     },
-                    "id": 24
+                    "id": 24,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4098,7 +4614,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 25
+                    "id": 25,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4129,7 +4654,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 26
+                    "id": 26,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4160,7 +4694,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 27
+                    "id": 27,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4191,7 +4734,16 @@
                         "argumentzz": [],
                         "nullable": true
                     },
-                    "id": 28
+                    "id": 28,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "entityId": 4,
@@ -4222,7 +4774,16 @@
                         "argumentzz": [],
                         "nullable": false
                     },
-                    "id": 29
+                    "id": 29,
+                    "allowReserved": false,
+                    "color": "#fff",
+                    "deprecated": false,
+                    "description": "",
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "reserved": false,
+                    "style": ""
                 },
                 {
                     "color": "#fff",
