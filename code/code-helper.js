@@ -9,16 +9,6 @@ function makeHelper(data) {
     /**
      * @template T
      * @param {T[]} itemzz
-     * @param {number} id
-     * @return {T|undefined}
-     */
-    function find(itemzz, id) {
-        return itemzz.find((item) => item.id === id)
-    }
-
-    /**
-     * @template T
-     * @param {T[]} itemzz
      * @param {string} name
      * @return {T|undefined}
      */
@@ -46,24 +36,40 @@ function makeHelper(data) {
 
     /**
      *
-     * @param {string} file
-     * @param {string} entity
+     * @param {LB.File} file
+     * @param {LB.Entity} entity
      * @param {string} action
+     * @param {number} directoryId
      * @returns {string}
      */
-    function getClassNameByFileEntity(file, entity, action = ddd.action) {
-        return ddd.tree.getClassName(findFile(file), findEntity(entity), action)
+    function getClassName(file, entity, action, directoryId = 0) {
+        // change dependency file directory. e.g. Event file
+        if (directoryId) {
+            file = {...file, directoryId}
+        }
+        ddd.dependencyzz.push(ddd.tree.getClassFullName(file, entity, action))
+        return ddd.tree.getClassName(file, entity, action)
     }
 
     /**
      *
-     * @param {string} file
-     * @param {string} entity
-     * @param {string} action
-     * @returns {string}
+     * @param {LB.ColumnWithAlias[]} columnzz
+     * @returns {[LB.ColumnWithAlias[], [string,string][]]}
      */
-    function getClassFullNameByFileEntity(file, entity, action = ddd.action) {
-        return ddd.tree.getClassFullName(findFile(file), findEntity(entity), action)
+    function getColumnzzAndReferencezz(columnzz) {
+        const columnmap = new Map(columnzz.map(item => [item.id, item]))
+
+        const fks = new Set()
+        const entitymap = ddd.makeIdNameMap(ddd.db.tables.Entity)
+        const rzz = ddd.db.tables.Relation
+            .filter(item => columnmap.has(item.column1Id))
+            .map(item => {
+                fks.add(item.column1Id)
+                return [columnmap.get(item.column1Id)?.alias, entitymap.get(item.entity0Id)]
+            })
+
+        const czz = columnzz.filter(item => !fks.has(item.id))
+        return [czz, rzz]
     }
 
     /**
@@ -76,55 +82,6 @@ function makeHelper(data) {
             .filter(item => item.wuColumnId === column.wuColumnId)
             .map(item => item.columnConstraintId))
         return ddd.db.tables.ColumnConstraint.filter(item => set.has(item.id))
-    }
-
-    /**
-     *
-     * @returns {string[]}
-     */
-    function getDependencyzz() {
-        const name = `file-${ddd.file.id}.txt`
-        if (name in ddd.fileMap) {
-            const text = ddd.fileMap[name]
-            const set = new Set([
-                ...getFileDependencyzz(text.matchAll(/getClassName\(helper.findFile\(['"]([A-Za-z][A-Za-z0-9_]*)['"]\)/g)),
-                ...getFileEntityDependencyzz(text.matchAll(/getClassNameByFileEntity\(['"]([A-Za-z][A-Za-z0-9_]*)['"] *, *['"]([A-Za-z][A-Za-z0-9_]*)['"]/g)),
-            ])
-            if (set.size) {
-                return Array.from(set.keys()).sort((aa, bb) => aa.localeCompare(bb))
-            }
-        }
-        return []
-
-        /**
-         *
-         * @param {IterableIterator<RegExpMatchArray>} zz
-         * @returns {string[]}
-         */
-        function getFileDependencyzz(zz) {
-            const set = new Set(Array.from(zz).map((item) => item[1]))
-            if (set.size === 0) {
-                return []
-            }
-            return Array.from(set).map((item) =>
-                ddd.tree.getClassFullName(findFile(item), ddd.entity, ddd.action),
-            )
-        }
-
-        /**
-         *
-         * @param {IterableIterator<RegExpMatchArray>} zz
-         * @returns {string[]}
-         */
-        function getFileEntityDependencyzz(zz) {
-            const set = new Set(Array.from(zz).map((item) =>
-                ddd.tree.getClassFullName(findFile(item[1]), findEntity(item[2]), ddd.action)
-            ))
-            if (set.size === 0) {
-                return []
-            }
-            return Array.from(set.keys())
-        }
     }
 
     /**
@@ -165,7 +122,7 @@ function makeHelper(data) {
 
     /**
      *
-     * @returns {LB.Column[]}
+     * @returns {LB.ColumnWithAlias[]}
      */
     function getRequestColumnzz() {
         const request = ddd.db.tables.Request.find(item => item.id === ddd.ma.requestId)
@@ -173,8 +130,11 @@ function makeHelper(data) {
             return []
         }
 
-        const wczz = getWuColumnzz(request.tf.targetId)
-        const zz = makeAliasColumnzz(wczz)
+        const tf = ddd.db.tables.TypeFormat.find(item => item.ownerRequestId === request.id)
+        if (tf === undefined) {
+            return []
+        }
+        const zz = ddd.getTypeFormatColumnzz(tf, [], ddd.db)
         zz.forEach(function (column) {
             column.constraintzz = getColumnConstraintzz(column)
         })
@@ -183,83 +143,38 @@ function makeHelper(data) {
 
     /**
      *
-     * @returns {LB.Column[]}
+     * @param {boolean} excludeId
+     * @returns {LB.ColumnWithAlias[]}
      */
-    function getResponseColumnzz() {
-        const mar = ddd.db.tables.ModuleActionResponse
-            .find(item => item.moduleActionId === ddd.ma.id && item.status === '200')
-        if (mar === undefined) {
+    function getResponseContentColumnzz(excludeId = false) {
+        const marzz = ddd.db.tables.ModuleActionResponse.filter(item => item.status === '200' && item.moduleActionId === ddd.ma.id)
+        if (marzz.length === 0) {
             return []
         }
-
-        const response = ddd.db.tables.Response.find(item => item.id === mar.responseId)
+        const set = new Set(marzz.map(item => item.responseId))
+        const response = ddd.db.tables.Response.find(item => set.has(item.id))
         if (response === undefined) {
             return []
         }
 
-        let wi = response.tf.targetId
-        if (response.tf.argumentzz.length) {
-            wi = response.tf.argumentzz[0].targetId
-        }
-        const wczz = getWuColumnzz(wi)
-        return makeAliasColumnzz(wczz)
+        return ddd.getResponseContentColumnzz(response.id, ddd.db).filter(item => !(item.name === 'id' && excludeId))
     }
 
     /**
-     *
-     * @param {number} parentId
-     * @param {Set<number>} iSet
-     * @returns {LB.WuChild[]}
+     * get PHP type of column
+     * @param {LB.Column} column
+     * @returns {string}
      */
-    function getWuChildzz(parentId, iSet) {
-        if (iSet.has(parentId)) {
-            return []
+    function makeColumnType(column) {
+        const found = ddd.db.tables.DoctrineColumnType.find((item) => item.name === column.type)
+        if (found) {
+            if (column.nullable) {
+                return '?' + found.phpType
+            }
+            return found.phpType
         }
 
-        iSet.add(parentId)
-        const childzz = ddd.db.tables.WuChild.filter(item => item.wuId === parentId)
-        const zz = [...childzz]
-        childzz.forEach(item => {
-            const czz = getWuChildzz(item.id, iSet)
-            if (czz.length) {
-                zz.push(...czz)
-            }
-        })
-        return zz
-    }
-
-    /**
-     *
-     * @param {number} wuId
-     * @returns {LB.WuColumn[]}
-     */
-    function getWuColumnzz(wuId) {
-        const childzz = getWuChildzz(wuId, new Set)
-        const wiSet = new Set(childzz.map(item => item.tf.targetId))
-        wiSet.add(wuId)
-        return ddd.db.tables.WuColumn.filter(item => wiSet.has(item.wuId))
-    }
-
-    /**
-     * clone Columns with alias
-     * @param {LB.WuColumn[]} wczz
-     * @returns {LB.Column[]}
-     */
-    function makeAliasColumnzz(wczz) {
-        /** @type {Map<number, LB.Column>} */
-        const map = new Map()
-        ddd.db.tables.Column.forEach(item => map.set(item.id, item))
-        return wczz.map(item => {
-            const column = map.get(item.columnId)
-            if (column) {
-                let alias = column.name
-                if (item.alias) {
-                    alias = item.alias
-                }
-                return {...item, ...column, alias, wuColumnId: item.id}
-            }
-            return undefined
-        })
+        return ""
     }
 
     /**
@@ -362,32 +277,49 @@ function makeHelper(data) {
 
 
     /**
-     * do not call any function
      * some property is undefined in DataForScript
      * e.g.
      * when running code, not generating file, the `ddd.file` is undefined
      */
     if (ddd.file) {
-        ddd.dependencyzz = getDependencyzz()
+    }
+
+    ddd.DirectoryIdEnum = {
+        AdminCreateMany: 30,
+        AdminCreateOne: 31,
+        AdminDeleteMany: 32,
+        AdminDeleteOne: 33,
+        AdminReadMany: 34,
+        AdminReadOne: 35,
+        AdminReadPage: 38,
+        AdminUpdateMany: 36,
+        AdminUpdateOne: 37,
+
+        CreateMany: 20,
+        CreateOne: 21,
+        DeleteMany: 22,
+        DeleteOne: 23,
+        ReadMany: 24,
+        ReadOne: 25,
+        ReadPage: 28,
+        UpdateMany: 26,
+        UpdateOne: 27,
     }
 
     /**
      * do not delete ddd.helper
      */
     ddd.helper = {
-        find,
         findByName,
         findFile,
         findEntity,
-        getClassNameByFileEntity,
-        getClassFullNameByFileEntity,
+        getClassName,
+        getColumnzzAndReferencezz,
         getItemzzInCollection,
         getParameterzz,
         getRequestColumnzz,
-        getResponseColumnzz,
-        getWuChildzz,
-        getWuColumnzz,
-        makeAliasColumnzz,
+        getResponseContentColumnzz,
+        makeColumnType,
         makeRouteText,
     }
 }

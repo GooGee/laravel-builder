@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\Admin;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    {
+    }
+
+    function __invoke(Admin $user, int $id)
+    {
+        $item = $this->repository->findOrFail($id);
+
+        if ($item->dtDelete) {
+            throw new NotFoundHttpException();
+        }
+
+        $item->dtDelete = now();
+        $item->save();
+
+        event(new {{ action + entity.name }}Event($user, $item));
+
+        return $item;
+    }
+}

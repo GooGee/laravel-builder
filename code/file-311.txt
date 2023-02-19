@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use Illuminate\Support\Facades\Log;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    function handle({{ helper.getClassName(helper.findFile('Event'), entity, action) }} $event)
+    {
+        Log::channel('admin')->info({{ helper.getClassName(helper.findFile('Event'), entity, action) }}::class, ['userId' => $event->user->id, 'idzz' => $event->idzz]);
+    }
+}

@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke({{ action + entity.name }}Request $request,
+                             {{ action + entity.name }} $create,
+    )
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        $data = $request->validated();
+        $item = $create($user,
+{% for column in columnzz %}
+            $data['{{ column.alias }}'],{% endfor %}
+        );
+
+        return {{ action + entity.name }}Response::sendItem($item);
+    }
+}

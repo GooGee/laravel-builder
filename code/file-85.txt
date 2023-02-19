@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
+{
+    public function test{{ action + entity.name }}()
+    {
+        $admin = $this->createAdmin();
+        $item = $this->makeItem($admin);
+        $item->save();
+
+        $user = $this->createUser();
+        $this->actingAs($user);
+
+        $response = $this->getJson($this->makeURI($item->id))
+            ->assertStatus(401);
+
+        $this->actingAs($admin, 'admin');
+
+        $response = $this->getJson($this->makeURI($item->id))
+            ->assertStatus(200);
+        $this->seeItem(self::structure(), $response);
+        self::assertEquals($item->id, $response->json('item.id'));
+        self::assertNull($response->json('item.dtDelete'));
+
+        $item->dtDelete = now();
+        $item->save();
+        $response = $this->getJson($this->makeURI($item->id))
+            ->assertStatus(404);
+    }
+}

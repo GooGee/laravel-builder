@@ -1,38 +1,39 @@
 <?php
 
-namespace App\Models;
+declare(strict_types=1);
 
-use DateTimeInterface;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-abstract class AbstractModel extends Model
+use App\Models\Admin;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
 {
-    use HasFactory;
-
-    /**
-     * The name of the "created at" column.
-     *
-     * @var string|null
-     */
-    const CREATED_AT = 'dtCreate';
-
-    /**
-     * The name of the "updated at" column.
-     *
-     * @var string|null
-     */
-    const UPDATED_AT = 'dtUpdate';
-
-    /**
-     * Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository, private {{ helper.getClassName(helper.findFile('AdminCreateOneItem'), entity, action) }} $createOne)
     {
-        return $date->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * @param Admin $user
+     * @param array<int, array> $datazz
+     * @return array<int>
+     */
+    function __invoke(Admin $user, array $datazz)
+    {
+        $idzz = [];
+        $itemzz = [];
+        foreach ($datazz as $data) {
+            $item = $this->createOne->__invoke($user,
+{% for column in columnzz %}
+                      $data['{{ column.name }}'],{% endfor %});
+            $idzz[] = $item->id;
+            $itemzz[] = $item;
+        }
+
+        event(new {{ action + entity.name }}Event($user, $idzz));
+
+        return $itemzz;
     }
 
 }

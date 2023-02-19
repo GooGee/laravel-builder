@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractReadManyCache;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Database\Eloquent\Builder;
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractWarmup
+{
+
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository,
+                                private {{ helper.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache,
+    )
+    {
+    }
+
+    function getCache(): AbstractReadManyCache
+    {
+        return $this->cache;
+    }
+
+    function getQueryBuilder(): Builder
+    {
+        return $this->repository->query();
+    }
+
+}

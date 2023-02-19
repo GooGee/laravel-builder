@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\User;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    {
+    }
+
+    /**
+     * @param User $user
+     * @param array<string, mixed> $data
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    function __invoke(User $user, array $data)
+    {
+        $perPage = $data['pagination']['perPage'] ?? {{ helper.getClassName(helper.findFile('Repository'), entity, action) }}::PageSize;
+        $page = $data['pagination']['page'] ?? 1;
+
+        $qb = $this->repository->query()
+            ->where('userId', $user->id)
+            ->whereNull('dtDelete');
+        if (isset($data['sort']['field'])) {
+            $qb->orderBy($data['sort']['field'], $data['sort']['order'] ?? "asc");
+        }
+        return $qb->paginate($perPage, ['*'], 'page', $page);
+    }
+
+}

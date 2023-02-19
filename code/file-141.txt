@@ -4,28 +4,20 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\AbstractBase\AbstractReadManyCache;
+use App\AbstractBase\AbstractController;
+use App\AbstractBase\ReadManyRequest;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Illuminate\Database\Eloquent\Builder;
 
-class {{ tree.getClassName(file, entity, action) }} extends AbstractWarmup
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-
-    public function __construct(private {{ tree.getClassName(helper.findFile('Repository'), entity, action) }} $repository,
-                                private {{ tree.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache,
-    )
+    public function __invoke(ReadManyRequest $request, {{ action + entity.name }} $readMany)
     {
-    }
+        /** @var \App\Models\Admin $user */
+        $user = auth()->guard('admin')->user();
 
-    function getCache(): AbstractReadManyCache
-    {
-        return $this->cache;
-    }
+        $itemzz = $readMany($request->input('idzz'))->all();
 
-    function getQueryBuilder(): Builder
-    {
-        return $this->repository->query();
+        return {{ helper.getClassName(helper.findFile('AdminResponse'), entity, 'CreateOne', DirectoryIdEnum.AdminCreateOne) }}::sendItemzz($itemzz);
     }
-
 }

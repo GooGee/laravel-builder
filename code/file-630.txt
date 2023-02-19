@@ -1,0 +1,25 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractResponse;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractResponse
+{
+    /**
+     * @param {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item
+     * @return array
+     */
+    static function getData($item): array
+    {
+        return [
+{% for column in columnzz %}
+            '{{ column.alias }}' => $item->{{ column.name }},
+{% endfor %}
+        ];
+    }
+}

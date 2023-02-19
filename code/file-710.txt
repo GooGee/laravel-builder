@@ -1,0 +1,52 @@
+import { AuthProvider } from "react-admin"
+import makeAxiosClient from "../Service/makeAxiosClient"
+
+const StorageKey = "Admin"
+
+const client = makeAxiosClient("v1/Ad")
+
+export function readMe() {
+    return client.get<CC.ApiItemResponse<CC.Admin>>("/Me/0")
+}
+
+export default function makeAuthProvider(): AuthProvider {
+    return {
+        // called when the user attempts to log in
+        login(data) {
+            return client
+                .post<CC.ApiItemResponse<CC.Admin>>("/AdminSession/0", {
+                    name: data.username,
+                    password: data.password,
+                })
+                .then(function (response) {
+                    localStorage.setItem(StorageKey, JSON.stringify(response.data.item))
+                    return response
+                })
+        },
+        // called when the user clicks on the logout button
+        logout() {
+            return client
+                .delete<CC.ApiDataResponse>("/AdminSession/0")
+                .then(() => Promise.resolve())
+                .catch(() => Promise.resolve())
+        },
+        // called when the API returns an error
+        checkError({ status }) {
+            if (status === 401 || status === 403) {
+                return Promise.reject()
+            }
+            return Promise.resolve()
+        },
+        // called when the user navigates to a new location, to check for authentication
+        checkAuth() {
+            return readMe().then((response) =>
+                response.data.item === undefined ? Promise.reject() : Promise.resolve(),
+            )
+        },
+        getIdentity() {
+            return readMe().then((response) => response.data.item)
+        },
+        // called when the user navigates to a new location, to check for permissions / roles
+        getPermissions: () => Promise.resolve(),
+    }
+}

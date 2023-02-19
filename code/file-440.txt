@@ -4,22 +4,28 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-class {{ tree.getClassName(file, entity, action) }} extends {{ tree.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
-{
-    public function test{{ action + entity.name }}()
-    {
-        $user = $this->createUser();
-        $item = $this->makeItem($user);
-        $item->save();
-        $response = $this->getJson($this->makeURI())
-            ->assertStatus(200);
-        $this->seeList(self::structure(), $response);
-        self::assertEquals(1, count($response->json('list')));
+use App\Models\User;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
 
-        $this->actingAs($user);
-        $response = $this->getJson($this->makeURI())
-            ->assertStatus(200);
-        $this->seeList(self::structure(), $response);
-        self::assertEquals(1, count($response->json('list')));
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    {
     }
+
+    /**
+     * @param User $user
+     * @param array<int> $idzz
+     * @return \Illuminate\Database\Eloquent\Collection<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
+     */
+    function __invoke(User $user, array $idzz)
+    {
+        return $this->repository->query()
+            ->where('userId', $user->id)
+            ->whereIn('id', $idzz)
+            ->whereNull('dtDelete')
+            ->get();
+    }
+
 }

@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
+{
+    protected function path(): string
+    {
+        return "{{ entity.name }}Page";
+    }
+
+    public function test{{ action + entity.name }}()
+    {
+        $admin = $this->createAdmin();
+        $item = $this->makeItem($admin);
+        $item->save();
+
+        $user = $this->createUser();
+        $this->actingAs($user);
+
+        $data = [
+            'pagination' => [
+                'page' => 1,
+                'perPage' => 10,
+            ],
+            'sort' => [
+                'field' => 'id',
+                'order' => 'desc',
+            ],
+            'filter' => [
+
+            ],
+        ];
+        $response = $this->json('GET', $this->makeURI(), $data)
+            ->assertStatus(401);
+
+        $this->actingAs($admin, 'admin');
+
+        $response = $this->json('GET', $this->makeURI(), $data)
+            ->assertStatus(200);
+        $this->seePage(self::structure(), $response);
+        self::assertEquals(1, count($response->json('page.data')));
+    }
+}

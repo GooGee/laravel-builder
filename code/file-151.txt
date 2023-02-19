@@ -1,24 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+declare(strict_types=1);
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+use App\AbstractBase\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-Route::prefix('{{ module.prefix }}')->group(function () {
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke(int $id, {{ action + entity.name }} $readOne)
+    {
+        /** @var \App\Models\Admin $user */
+        $user = auth()->guard('admin')->user();
 
-{{ text }}
-
-});
+        $item = $readOne->findOrFail($id);
+        if ($item->dtDelete) {
+            throw new NotFoundHttpException();
+        }
+        return {{ helper.getClassName(helper.findFile('AdminResponse'), entity, 'CreateOne', DirectoryIdEnum.AdminCreateOne) }}::sendItem($item);
+    }
+}

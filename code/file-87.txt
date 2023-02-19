@@ -1,0 +1,44 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
+{
+    public function test{{ action + entity.name }}()
+    {
+        $admin = $this->createAdmin();
+        $item = $this->makeItem($admin);
+        $item->save();
+
+        $user = $this->createUser();
+        $this->actingAs($user);
+
+        $data = $item->toArray();
+        $response = $this->putJson($this->makeURI($item->id), $data)
+            ->assertStatus(401);
+
+        $this->actingAs($admin, 'admin');
+
+{% for column in columnzz %}
+        $data = $item->toArray();
+        unset($data['{{ column.alias }}']);
+        $response = $this->putJson($this->makeURI($item->id), $data)
+            ->assertStatus(422);
+        $this->seeErrors(['{{ column.alias }}'], $response);
+{% endfor %}
+        $item->dtUpdate = now();
+        $data = $item->toArray();
+        $response = $this->putJson($this->makeURI($item->id), $data)
+            ->assertStatus(200);
+        $this->seeItem(self::structure(), $response);
+{% for column in columnzz %}
+        self::assertEquals($item->{{ column.alias }}, $response->json('item.{{ column.alias }}'));{% endfor %}
+
+        $item->dtDelete = now();
+        $item->save();
+        $response = $this->putJson($this->makeURI($item->id), $data)
+            ->assertStatus(404);
+    }
+}

@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke(int $id, {{ action + entity.name }} $readOne)
+    {
+        $item = $readOne->findOrFail($id);
+        if ($item->dtDelete) {
+            throw new NotFoundHttpException();
+        }
+
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        if ($item->userId === $user->id) {
+            return {{ helper.getClassName(helper.findFile('Response'), entity, 'CreateOne', DirectoryIdEnum.CreateOne) }}::sendItem($item);
+        }
+        throw new AccessDeniedHttpException();
+    }
+}

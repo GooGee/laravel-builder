@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractRequest;
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractRequest
+{
+    static function getRulezz()
+    {
+        return [
+{% for column in columnzz %}
+            '{{ column.alias }}' => [{% for constraint in column.constraintzz %}
+                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
+            ],
+{% endfor %}
+{% for parameter in parameterzz %}
+            '{{ parameter.alias }}' => [{% for constraint in parameter.constraintzz %}
+                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
+            ],
+{% endfor %}
+        ];
+    }
+}

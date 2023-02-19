@@ -1,22 +1,28 @@
 <?php
 
-namespace App\Repository;
+declare(strict_types=1);
 
-use Illuminate\Database\Eloquent\Builder;
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-abstract class AbstractRepository
+use App\AbstractBase\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    const PageSize = 20;
-
-    abstract function query(): Builder;
-
-    function find(int $id)
+    public function __invoke({{ action + entity.name }}Request $request,
+                             {{ action + entity.name }} $create,
+    )
     {
-        return $this->query()->find($id);
-    }
+        /** @var \App\Models\Admin $user */
+        $user = auth()->guard('admin')->user();
 
-    function findOrFail(int $id)
-    {
-        return $this->query()->findOrFail($id);
+        $data = $request->validated();
+        $item = $create($user,
+{% for column in columnzz %}
+            $data['{{ column.alias }}'],{% endfor %}
+        );
+
+        return {{ action + entity.name }}Response::sendItem($item);
     }
 }

@@ -1,0 +1,29 @@
+import {
+    DateField,
+    ImageField,
+    NumberField,
+    ReferenceField,
+    RichTextField,
+    Show,
+    SimpleShowLayout,
+    TextField,
+} from "react-admin"
+
+export default function {{ entity.name }}Form() {
+    return (
+        <Show>
+            <SimpleShowLayout>
+                <TextField source="id" />
+
+{% for item in columnzz %}
+                <{{ item.raField }} source="{{ item.alias }}" />
+{% endfor %}
+{% for reference in referencezz %}
+                <ReferenceField source="{{ reference[0] }}" reference="{{ reference[1] }}">
+                    <TextField source="name" />
+                </ReferenceField>
+{% endfor %}
+            </SimpleShowLayout>
+        </Show>
+    )
+}

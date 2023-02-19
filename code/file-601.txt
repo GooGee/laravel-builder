@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Foundation\Auth\User;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    /**
+     * @param User $user
+     * @param array<int> $idzz
+     */
+    public function __construct(public User $user, public array $idzz)
+    {
+    }
+}

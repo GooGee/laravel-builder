@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
+{
+    public function test{{ action + entity.name }}()
+    {
+        $admin = $this->createAdmin();
+        $item = $this->makeItem($admin);
+        $item->save();
+
+        $user = $this->createUser();
+        $this->actingAs($user);
+
+        $idzz = [$item->id];
+        $response = $this->deleteJson($this->makeURI(), compact('idzz'))
+            ->assertStatus(401);
+
+        $this->actingAs($admin, 'admin');
+
+        $response = $this->deleteJson($this->makeURI(), [])
+            ->assertStatus(422);
+        $this->seeErrors(['idzz'], $response);
+
+        self::assertNull($item->dtDelete);
+        $idzz = [$item->id];
+        $response = $this->deleteJson($this->makeURI(), compact('idzz'))
+            ->assertStatus(200);
+        $response->assertJsonCount(1, 'data');
+        $item->refresh();
+        self::assertNotNull($item->dtDelete);
+
+    }
+}

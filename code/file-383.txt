@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
+{
+    public function test{{ action + entity.name }}()
+    {
+        $user = $this->createUser();
+        $item = $this->makeItem($user);
+        $item->save();
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(401);
+
+        $other = $this->createUser();
+        $this->actingAs($other);
+
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(403);
+
+        $this->actingAs($user);
+
+        self::assertNull($item->dtDelete);
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(200);
+        $item->refresh();
+        self::assertNotNull($item->dtDelete);
+
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(404);
+    }
+}

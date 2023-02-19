@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\Admin;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    {
+    }
+
+    function __invoke(Admin $user,
+{% for column in columnzz %}
+                      {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
+    )
+    {
+        $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+{% for column in columnzz %}
+        $item->{{ column.name }} = ${{ column.name }};{% endfor %}
+
+        $item->save();
+        $item->refresh();
+
+        event(new {{ action + entity.name }}Event($user, $item));
+
+        return $item;
+    }
+
+}

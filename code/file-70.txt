@@ -1,0 +1,23 @@
+<?php
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\Admin;
+use Database\Factories\AdminFactory;
+use Tests\Api\AbstractApiTest;
+
+abstract class AbstractAdminTest extends AbstractApiTest
+{
+
+    const URI = '/v1{{ module.prefix }}/';
+
+    /**
+     * @param array<string, mixed> $attributes
+     * @return Admin
+     */
+    protected function createAdmin(array $attributes = [])
+    {
+        $admin = AdminFactory::new()->createOne($attributes);
+        return $admin->refresh();
+    }
+}

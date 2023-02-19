@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    {
+    }
+
+    /**
+     * @param array<int> $idzz
+     * @return \Illuminate\Database\Eloquent\Collection<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
+     */
+    function __invoke(array $idzz)
+    {
+        return $this->repository->query()
+            ->whereIn('id', $idzz)
+            ->whereNull('dtDelete')
+            ->get();
+    }
+
+}

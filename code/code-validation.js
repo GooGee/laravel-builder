@@ -6,9 +6,6 @@ function run(data) {
      * this code is used for generating column validation constraint
      */
 
-    const fkzz = new Set(ddd.db.tables.Relation.map(item => item.column1Id))
-    const ignorezz = new Set(['id', 'userId'])
-
     const ColumnConstraintzz = []
     ddd.result = ColumnConstraintzz
 
@@ -17,13 +14,20 @@ function run(data) {
         indexzz.forEach(item => {
             const iczz = ddd.db.tables.IndexColumn.filter(ic => ic.indexId === item.id)
             if (iczz.length === 1) {
+                if (ddd.db.tables.ColumnConstraint.find(cc => cc.columnId === iczz[0].columnId && cc.name === 'unique')) {
+                    return
+                }
                 ColumnConstraintzz.push(makeConstraint('unique', iczz[0].columnId, ddd.entity.name))
             }
         })
     }
 
+    const relationzz = ddd.db.tables.Relation.filter(item => item.entity1Id === ddd.entity.id)
+    const entityMap = new Map(ddd.db.tables.Entity.map(item => [item.id, item]))
+    const cienm = new Map(relationzz.map(item => [item.column1Id, entityMap.get(item.entity0Id)]))
+
     ddd.db.tables.Column
-        .filter(item => item.entityId === ddd.entity.id && !(item.ro || ignorezz.has(item.name)))
+        .filter(item => item.entityId === ddd.entity.id && !item.ro)
         .forEach(item => setConstraint(item))
 
     /**
@@ -37,14 +41,21 @@ function run(data) {
 
         if (column.nullable) {
             ColumnConstraintzz.push(makeConstraint('nullable', column.id))
+            ColumnConstraintzz.push(makeConstraint('present', column.id))
+        } else {
+            ColumnConstraintzz.push(makeConstraint('required', column.id))
         }
 
-        ColumnConstraintzz.push(makeConstraint('required', column.id))
+        const entity = cienm.get(column.id)
+        if (entity) {
+            ColumnConstraintzz.push(
+                makeConstraint('exists', column.id, (entity.table ? entity.table : entity.name) + ',id'))
+        }
+
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
             ColumnConstraintzz.push(makeConstraint('integer', column.id))
-            if (fkzz.has(column.id)) {
-                ColumnConstraintzz.push(makeConstraint('min', column.id, '1'))
-            }
+            const parameter = column.name === 'id' || column.name.includes('Id') ? '1' : '0'
+            ColumnConstraintzz.push(makeConstraint('min', column.id, parameter))
             return
         }
 

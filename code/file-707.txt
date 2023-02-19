@@ -1,0 +1,19 @@
+import { Admin, Resource } from "react-admin"
+import makeAuthProvider from "./Service/makeAuthProvider"
+import makeDataProvider from "./Service/makeDataProvider"
+import Dashboard from "./View/Dashboard"
+{% for entity in entityzz %}
+import {{ helper.getClassName(rf, entity, '') }} from "./View/{{ entity.name }}/{{ helper.getClassName(rf, entity, '') }}"{% endfor %}
+
+const ap = makeAuthProvider()
+const dp = makeDataProvider()
+
+export default function App() {
+    return (
+        <Admin authProvider={ap} dataProvider={dp} dashboard={Dashboard}>
+{% for entity in entityzz %}
+            <Resource {...{{ helper.getClassName(rf, entity, '') }}()}></Resource>
+{% endfor %}
+        </Admin>
+    )
+}

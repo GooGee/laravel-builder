@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractController;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke({{ action + entity.name }}Request $request,
+                             {{ action + entity.name }} $updateMany,
+    )
+    {
+        /** @var \App\Models\Admin $user */
+        $user = auth()->guard('admin')->user();
+
+        $itemzz = $updateMany($user, $request->validated('itemzz'));
+
+        return {{ helper.getClassName(helper.findFile('AdminResponse'), entity, 'CreateOne', DirectoryIdEnum.AdminCreateOne) }}::sendItemzz($itemzz);
+    }
+}

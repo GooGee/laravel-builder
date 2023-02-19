@@ -1,0 +1,45 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\User;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    {
+    }
+
+    function __invoke(int $id, User $user,
+{% for column in columnzz %}
+                      {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %})
+    {
+        $item = $this->repository->findOrFail($id);
+
+        if ($user->id === $item->userId) {
+            //
+        } else {
+            throw new AccessDeniedHttpException();
+        }
+
+        if ($item->dtDelete) {
+            throw new NotFoundHttpException();
+        }
+
+{% for column in columnzz %}
+        $item->{{ column.name }} = ${{ column.name }};{% endfor %}
+
+        $item->save();
+
+        event(new {{ action + entity.name }}Event($user, $item));
+
+        return $item;
+    }
+
+}

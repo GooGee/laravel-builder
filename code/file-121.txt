@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractController;
+use App\AbstractBase\AbstractResponse;
+use App\AbstractBase\DeleteManyRequest;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke(DeleteManyRequest $request, {{ action + entity.name }} $deleteMany)
+    {
+        /** @var \App\Models\Admin $user */
+        $user = auth()->guard('admin')->user();
+
+        $result = $deleteMany($user, $request->input('idzz'));
+
+        return AbstractResponse::sendOK($result);
+    }
+}

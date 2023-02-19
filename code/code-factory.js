@@ -10,9 +10,9 @@ function makeFaker(data) {
     const fakeForColumnNameMap = new Map()
     ddd.helper.getItemzzInCollection('FakeForColumnName').forEach(item => fakeForColumnNameMap.set(item.name, item))
 
-    /** @type {Map<string, LB.CollectionItem>} */
+    /** @type {Map<string, LB.DoctrineColumnType>} */
     const fakeForColumnTypeMap = new Map()
-    ddd.helper.getItemzzInCollection('FakeForColumnType').forEach(item => fakeForColumnTypeMap.set(item.name, item))
+    ddd.db.tables.DoctrineColumnType.forEach(item => fakeForColumnTypeMap.set(item.name, item))
 
     const entityMap = new Map()
     ddd.db.tables.Entity.forEach(item => entityMap.set(item.id, item))
@@ -56,14 +56,18 @@ function makeFaker(data) {
             return column
         }
 
-        let found = fakeForColumnNameMap.get(column.name)
-        if (found === undefined) {
-            found = fakeForColumnTypeMap.get(column.type)
-        }
+        const found = fakeForColumnNameMap.get(column.name)
         if (found) {
             column.fakeRaw = found.tag.length === 0
             column.fakeMethod = found.tag
             column.fakeText = found.value
+        } else {
+            const found = fakeForColumnTypeMap.get(column.type)
+            if (found) {
+                column.fakeRaw = found.fakeMethod.length === 0
+                column.fakeMethod = found.fakeMethod
+                column.fakeText = found.fakeText
+            }
         }
 
         return column

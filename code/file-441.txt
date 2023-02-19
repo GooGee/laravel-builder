@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\AbstractController;
+use App\AbstractBase\ReadManyRequest;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke(ReadManyRequest $request, {{ action + entity.name }} $readMany)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+
+        $itemzz = $readMany($user, $request->input('idzz'))->all();
+
+        return {{ helper.getClassName(helper.findFile('Response'), entity, 'CreateOne', DirectoryIdEnum.CreateOne) }}::sendItemzz($itemzz);
+    }
+}

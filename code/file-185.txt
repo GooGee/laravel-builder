@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\AbstractBase\ReadPageRequest;
+
+class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return static::getRulezzForPage();
+    }
+
+    static function getRulezz()
+    {
+        return [
+{% for column in columnzz %}
+            '{{ column.alias }}' => [{% for constraint in column.constraintzz %}
+                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
+                'sometimes',
+            ],
+{% endfor %}
+{% for parameter in parameterzz %}
+            '{{ parameter.alias }}' => [{% for constraint in parameter.constraintzz %}
+                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
+            ],
+{% endfor %}
+        ];
+    }
+}

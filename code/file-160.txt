@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\Admin;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository, private {{ helper.getClassName(helper.findFile('AdminUpdateOneItem'), entity, action) }} $updateOne)
+    {
+    }
+
+    /**
+     * @param Admin $user
+     * @param array<int, array> $datazz
+     * @return array<int>
+     */
+    function __invoke(Admin $user, array $datazz)
+    {
+        $idzz = [];
+        $itemzz = [];
+        foreach ($datazz as $data) {
+            $item = $this->updateOne->__invoke($data['id'], $user,
+{% for column in columnzz %}
+                      $data['{{ column.name }}'],{% endfor %});
+            $idzz[] = $item->id;
+            $itemzz[] = $item;
+        }
+
+        event(new {{ action + entity.name }}Event($user, $idzz));
+
+        return $itemzz;
+    }
+
+}

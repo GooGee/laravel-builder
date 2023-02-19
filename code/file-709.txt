@@ -1,0 +1,68 @@
+import { DataProvider, HttpError } from "react-admin"
+import getAxiosErrorMessage from "./getAxiosErrorMessage"
+import makeAxiosClient from "./makeAxiosClient"
+
+const client = makeAxiosClient("v1/Ad")
+
+export default function makeDataProvider<T extends CC.IdItem>(): DataProvider {
+    return {
+        getList(path, params) {
+            return client
+                .get<CC.ApiPageResponse<T>>(path + "Page", { data: params })
+                .then((response) => convert(response.data))
+        },
+        getMany(path, params) {
+            return client
+                .put<CC.ApiListResponse<T>>(path, { data: params })
+                .then((response) => ({ data: response.data.list }))
+        },
+        getManyReference(path, params) {
+            return client
+                .get<CC.ApiPageResponse<T>>(path + "Page", { data: params })
+                .then((response) => convert(response.data))
+        },
+        getOne(path, params) {
+            return client
+                .get<CC.ApiItemResponse<T>>(path + "/" + params.id)
+                .then((response) => ({ data: response.data.item }))
+        },
+        create(path, params) {
+            console.log(params)
+            return client
+                .post<CC.ApiItemResponse<T>>(path + "/0", params.data)
+                .then((response) => ({ data: response.data.item }))
+                .catch((error) =>
+                    Promise.reject(
+                        new HttpError(getAxiosErrorMessage(error), 400, error),
+                    ),
+                )
+        },
+        delete(path, params) {
+            return client
+                .delete<CC.ApiItemResponse<T>>(path + "/" + params.id)
+                .then((response) => ({ data: response.data.item }))
+        },
+        deleteMany(path, params) {
+            return client
+                .delete<CC.ApiListResponse<T>>(path, { data: params })
+                .then((response) => ({ data: response.data.list }))
+        },
+        update(path, params) {
+            return client
+                .put<CC.ApiItemResponse<T>>(path + "/" + params.id, params.data)
+                .then((response) => ({ data: response.data.item }))
+        },
+        updateMany(path, params) {
+            return client
+                .put<CC.ApiListResponse<T>>(path, { data: params })
+                .then((response) => ({ data: response.data.list }))
+        },
+    }
+}
+
+function convert<T extends CC.IdItem>(response: CC.ApiPageResponse<T>) {
+    return {
+        data: response.page.data,
+        total: response.page.total,
+    }
+}
