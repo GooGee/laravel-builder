@@ -2,7 +2,8 @@ function run(data) {
     /** @type {LB.DataForScript} */
     const ddd = data
 
-    const columnzz = ddd.db.tables.Column.filter((item) => item.entityId === ddd.entity.id && item.name !== "id")
+    const columnzz = ddd.db.tables.Column
+        .filter((item) => item.entityId === ddd.entity.id && item.inTable && item.name !== "id")
 
     const itemzz = []
     columnzz.forEach(item => {
@@ -13,12 +14,12 @@ function run(data) {
             return
         }
 
-        $text = '$this->faker->'
+        let text = '$this->faker->'
         if (item.fakeUnique) {
-            $text += 'unique()->'
+            text += 'unique()->'
         }
-        $text += item.fakeMethod
-        itemzz.push(`'${item.name}' => ${$text}(${item.fakeText})`)
+        text += item.fakeMethod
+        itemzz.push(`'${item.name}' => ${text}(${item.fakeText})`)
     })
     ddd.itemzz = itemzz
 }

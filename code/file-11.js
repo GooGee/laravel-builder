@@ -9,13 +9,27 @@ function run(data) {
 
     const castzz = ddd.helper.getItemzzInCollection('ModelFieldTypeCast')
 
-    ddd.propertyzz = columnzz.map(item => {
+    ddd.propertyzz = columnzz.map(function (item) {
         let type = getFieldType(item)
         if (item.nullable) {
             type += '|null'
         }
         return type + ' $' + item.name
     })
+
+    /** @type {Map<string, string>} */
+    const castMap = new Map()
+    columnzz.forEach(function (item) {
+        if (item.cast) {
+            castMap.set(item.name, item.cast)
+            return
+        }
+
+        if (item.type.includes('date')) {
+            castMap.set(item.name, 'datetime')
+        }
+    })
+    ddd.castzz = Array.from(castMap)
 
     /**
      * get PHP type of field

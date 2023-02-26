@@ -1,5 +1,6 @@
 import { RichTextInput } from "ra-input-rich-text"
 import {
+    ChipField,
     NumberInput,
     ReferenceInput,
     SelectInput,
@@ -11,13 +12,13 @@ import {
 export default function {{ entity.name }}Form() {
     return (
         <SimpleForm>
-            <TextField source="id" />
+            <ChipField source="id" variant="outlined" />
 
 {% for item in columnzz %}
-            <{{ item.raInput }} source="{{ item.alias }}" />
+            <{{ item.raInput }} source="{{ item.alias }}" required />
 {% endfor %}
 {% for reference in referencezz %}
-            <ReferenceInput source="{{ reference[0] }}" reference="{{ reference[1] }}">
+            <ReferenceInput source="{{ reference[0] }}" reference="{{ reference[1] }}" required>
                 <SelectInput optionText="name"></SelectInput>
             </ReferenceInput>
 {% endfor %}

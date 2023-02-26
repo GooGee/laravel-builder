@@ -8,6 +8,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {
     public function test{{ action + entity.name }}()
     {
+        $permission = $this->createPermission('{{ action + entity.name }}');
         $admin = $this->createAdmin();
         $item = $this->makeItem($admin);
         $item->save();
@@ -28,6 +29,14 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(422);
         $this->seeErrors(['{{ column.alias }}'], $response);
 {% endfor %}
+
+        $item->dtUpdate = now();
+        $data = $item->toArray();
+        $response = $this->putJson($this->makeURI($item->id), $data)
+            ->assertStatus(403);
+        $response->assertSeeText($permission->name);
+
+        $admin->givePermissionTo($permission);
         $item->dtUpdate = now();
         $data = $item->toArray();
         $response = $this->putJson($this->makeURI($item->id), $data)

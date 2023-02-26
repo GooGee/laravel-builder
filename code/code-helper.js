@@ -161,11 +161,14 @@ function makeHelper(data) {
     }
 
     /**
-     * get PHP type of column
+     * get PHP type of field in request
      * @param {LB.Column} column
      * @returns {string}
      */
     function makeColumnType(column) {
+        if (['array', 'object'].includes(column.cast)) {
+            return 'array'
+        }
         const found = ddd.db.tables.DoctrineColumnType.find((item) => item.name === column.type)
         if (found) {
             if (column.nullable) {
@@ -174,7 +177,28 @@ function makeHelper(data) {
             return found.phpType
         }
 
-        return ""
+        return "mixed"
+    }
+
+    function makePermissionzz() {
+        const ci = ddd.db.tables.Collection.find(item => item.name === 'ModuleAction')?.id
+        const actionMap = new Map(ddd.db.tables.CollectionItem
+            .filter(item => item.collectionId === ci)
+            .map(item => [item.id, item.name])
+        )
+        const entityMap = new Map(ddd.db.tables.Entity.map(item => [item.id, item]))
+        const moduleMap = new Map(ddd.db.tables.Module.map(item => [item.id, item]))
+        const permissionzz = ddd.db.tables.ModuleAction.map(function (ma) {
+            const action = actionMap.get(ma.collectionItemId)
+            const entity = entityMap.get(ma.entityId)
+            const module = moduleMap.get(ma.moduleId)
+            return {
+                permission: action + entity?.name,
+                entity: entity?.name,
+                module: module?.name,
+            }
+        })
+        return permissionzz
     }
 
     /**
@@ -285,25 +309,25 @@ function makeHelper(data) {
     }
 
     ddd.DirectoryIdEnum = {
-        AdminCreateMany: 30,
-        AdminCreateOne: 31,
-        AdminDeleteMany: 32,
-        AdminDeleteOne: 33,
-        AdminReadMany: 34,
-        AdminReadOne: 35,
-        AdminReadPage: 38,
-        AdminUpdateMany: 36,
-        AdminUpdateOne: 37,
+        AdminCreateMany: 100,
+        AdminCreateOne: 110,
+        AdminDeleteMany: 120,
+        AdminDeleteOne: 130,
+        AdminReadMany: 140,
+        AdminReadOne: 150,
+        AdminReadPage: 180,
+        AdminUpdateMany: 160,
+        AdminUpdateOne: 170,
 
-        CreateMany: 20,
-        CreateOne: 21,
-        DeleteMany: 22,
-        DeleteOne: 23,
-        ReadMany: 24,
-        ReadOne: 25,
-        ReadPage: 28,
-        UpdateMany: 26,
-        UpdateOne: 27,
+        CreateMany: 400,
+        CreateOne: 410,
+        DeleteMany: 420,
+        DeleteOne: 430,
+        ReadMany: 440,
+        ReadOne: 450,
+        ReadPage: 480,
+        UpdateMany: 460,
+        UpdateOne: 470,
     }
 
     /**
@@ -320,6 +344,7 @@ function makeHelper(data) {
         getRequestColumnzz,
         getResponseContentColumnzz,
         makeColumnType,
+        makePermissionzz,
         makeRouteText,
     }
 }

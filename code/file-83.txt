@@ -8,6 +8,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {
     public function test{{ action + entity.name }}()
     {
+        $permission = $this->createPermission('{{ action + entity.name }}');
         $admin = $this->createAdmin();
         $item = $this->makeItem($admin);
         $item->save();
@@ -20,6 +21,11 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $this->actingAs($admin, 'admin');
 
+        $response = $this->deleteJson($this->makeURI($item->id))
+            ->assertStatus(403);
+        $response->assertSeeText($permission->name);
+
+        $admin->givePermissionTo($permission);
         self::assertNull($item->dtDelete);
         $response = $this->deleteJson($this->makeURI($item->id))
             ->assertStatus(200);

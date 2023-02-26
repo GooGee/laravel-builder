@@ -8,6 +8,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {
     public function test{{ action + entity.name }}()
     {
+        $permission = $this->createPermission('{{ action + entity.name }}');
         $admin = $this->createAdmin();
         $item = $this->makeItem($admin);
         $item->save();
@@ -23,8 +24,14 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $idzz = [$item->id];
         $response = $this->json('GET', $this->makeURI(), compact('idzz'))
+            ->assertStatus(403);
+        $response->assertSeeText($permission->name);
+
+        $admin->givePermissionTo($permission);
+        $idzz = [$item->id];
+        $response = $this->json('GET', $this->makeURI(), compact('idzz'))
             ->assertStatus(200);
         $this->seeItemzz(self::structure(), $response);
-        self::assertEquals(1, count($response->json('itemzz')));
+        $response->assertJsonCount(1, 'itemzz');
     }
 }

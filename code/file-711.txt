@@ -1,0 +1,38 @@
+import { PermissionEnum, RoleEnum } from "@/State/TypeScriptEnum"
+import { CircularProgress, Grid } from "@mui/material"
+import { Menu, useGetIdentity } from "react-admin"
+{% for entity in entityzz %}
+import make{{ entity.name }}Resource from "./{{ entity.name }}/make{{ entity.name }}Resource"{% endfor %}
+
+export default function AppMenu() {
+    const result = useGetIdentity()
+
+    if (result.isLoading) {
+        return (
+            <Grid
+                alignItems="center"
+                container
+                justifyContent="center"
+                height="100%"
+                width={222}
+            >
+                <CircularProgress />
+            </Grid>
+        )
+    }
+
+    const user = result.data as CC.Me
+
+    return (
+        <Menu>
+            <Menu.DashboardItem />
+
+{% for entity in entityzz %}
+            {user.permissionzz.includes(PermissionEnum.ReadPage{{ entity.name }}) ? (
+                <Menu.ResourceItem {...make{{ entity.name }}Resource()} />
+            ) : null}
+{% endfor %}
+
+        </Menu>
+    )
+}

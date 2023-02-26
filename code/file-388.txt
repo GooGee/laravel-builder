@@ -38,6 +38,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $response = $this->json('GET', $this->makeURI(), $data)
             ->assertStatus(200);
         $this->seePage(self::structure(), $response);
-        self::assertEquals(1, count($response->json('page.data')));
+        $response->assertJsonCount(1, 'page.data');
     }
 }

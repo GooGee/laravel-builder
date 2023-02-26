@@ -9,7 +9,7 @@ import {
     TextField,
 } from "react-admin"
 
-export default function {{ entity.name }}Form() {
+export default function {{ entity.name }}Show() {
     return (
         <Show>
             <SimpleShowLayout>

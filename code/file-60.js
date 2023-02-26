@@ -2,6 +2,12 @@ function run(data) {
     /** @type {LB.DataForScript} */
     const ddd = data
 
+    /** @type {Map<number, LB.TypeFormat>} */
+    const citfm = new Map()
+    ddd.db.tables.TypeFormat
+        .filter(item => item.ownerColumnId > 0)
+        .forEach(item => citfm.set(item.ownerColumnId, item))
+
     /** @type {Map<number, LB.Column[]>} */
     const eiczzm = new Map()
     ddd.db.tables.Column.forEach((item) => {
@@ -38,13 +44,16 @@ function run(data) {
         found.push(item)
     })
 
-    ddd.typezz = ddd.db.tables.Entity.map((item) => {
+    const ignore = new Set(['ParameterInCookie', 'ParameterInHeader'])
+    const entityzz = ddd.db.tables.Entity.filter(item => !ignore.has(item.name))
+        .sort((aa, bb) => aa.name.localeCompare(bb.name))
+    ddd.typezz = entityzz.map((item) => {
         const linezz = [`    interface ${item.name} {`]
         const columnzz = eiczzm.get(item.id)
         if (columnzz) {
-            columnzz.forEach((item) => {
+            columnzz.forEach((item) =>
                 linezz.push(`        ${item.name}: ${makeType(item)}`)
-            })
+            )
         }
         linezz.push("    }")
         return linezz.join("\n")
@@ -55,24 +64,17 @@ function run(data) {
      * @param {LB.Column} item
      * @returns {string}
      */
-    function getType(item) {
-        if (item.tf.type === "integer") {
-            return "number"
-        }
-        return item.tf.type
-    }
-
-    /**
-     *
-     * @param {LB.Column} item
-     * @returns {string}
-     */
     function makeType(item) {
-        let zz = getType(item)
-        if (item.tf.isArray) {
+        const tf = citfm.get(item.id)
+        if (tf === undefined) {
+            return 'any'
+        }
+
+        let zz = tf.type === "integer" ? "number" : tf.type
+        if (tf.isArray) {
             zz += '[]'
         }
-        if (item.tf.nullable) {
+        if (tf.nullable) {
             zz += ' | null'
         }
         return zz

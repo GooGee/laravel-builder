@@ -21,7 +21,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
      *
      * @var string
      */
-    protected $table = '{{ entity.name }}';
+    protected $table = '{{ entity.table if entity.table else entity.name }}';
 
     /**
      * The attributes that should be cast.
@@ -29,8 +29,8 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
      * @var array<string, string>
      */
     protected $casts = [
-{% for column in columnzz | selectattr('cast') %}
-        '{{ column.name }}' => '{{ column.cast }}',{% endfor %}
+{% for nc in castzz %}
+        '{{ nc[0] }}' => '{{ nc[1] }}',{% endfor %}
     ];
 
     /**

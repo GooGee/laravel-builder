@@ -7,6 +7,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 use App\AbstractBase\AbstractController;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
@@ -16,6 +17,10 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
     {
         /** @var \App\Models\Admin $user */
         $user = auth()->guard('admin')->user();
+
+        if ($user->cannot('{{ action + entity.name }}')) {
+            throw new AccessDeniedHttpException('Permission {{ action + entity.name }} required');
+        }
 
         $itemzz = $createMany($user, $request->validated('itemzz'));
 

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+use App\AbstractBase\AbstractReadPage;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-class {{ helper.getClassName(file, entity, action) }}
+class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {
     public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
     {
@@ -19,15 +20,19 @@ class {{ helper.getClassName(file, entity, action) }}
      */
     function __invoke(array $data)
     {
-        $perPage = $data['pagination']['perPage'] ?? {{ helper.getClassName(helper.findFile('Repository'), entity, action) }}::PageSize;
-        $page = $data['pagination']['page'] ?? 1;
+        $parameter = self::makePageParameter($data, {{ helper.getClassName(helper.findFile('Repository'), entity, action) }}::PageSize);
 
         $qb = $this->repository->query()
             ->whereNull('dtDelete');
-        if (isset($data['sort']['field'])) {
-            $qb->orderBy($data['sort']['field'], $data['sort']['order'] ?? "asc");
-        }
-        return $qb->paginate($perPage, ['*'], 'page', $page);
+
+        $builder = self::makeReadPageQueryBuilder($qb, $parameter);
+
+        $builder->addFilterzzSearch([
+{% for column in columnzz %}
+            '{{ column.name }}',{% endfor %}
+        ]);
+        $builder->addSort();
+        return $builder->paginate();
     }
 
 }

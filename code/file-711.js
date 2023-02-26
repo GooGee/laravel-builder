@@ -10,5 +10,7 @@ function run(data) {
     const set = new Set(ddd.db.tables.ModuleAction
         .filter(item => mais.has(item.id) && item.moduleId === 1)
         .map(item => item.entityId))
-    ddd.entityzz = ddd.db.tables.Entity.filter(item => set.has(item.id))
+    ddd.entityzz = ddd.db.tables.Entity
+        .filter(item => set.has(item.id))
+        .sort((aa, bb) => aa.name.localeCompare(bb.name))
 }

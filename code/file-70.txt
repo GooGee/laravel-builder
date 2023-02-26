@@ -1,15 +1,18 @@
 <?php
 
-namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+declare(strict_types=1);
+
+namespace Tests\Ad;
 
 use App\Models\Admin;
+use App\Models\Permission;
 use Database\Factories\AdminFactory;
 use Tests\Api\AbstractApiTest;
 
 abstract class AbstractAdminTest extends AbstractApiTest
 {
 
-    const URI = '/v1{{ module.prefix }}/';
+    const URI = '/v1/Ad/';
 
     /**
      * @param array<string, mixed> $attributes
@@ -19,5 +22,18 @@ abstract class AbstractAdminTest extends AbstractApiTest
     {
         $admin = AdminFactory::new()->createOne($attributes);
         return $admin->refresh();
+    }
+
+    /**
+     * @param string $name
+     * @return Permission
+     */
+    protected function createPermission(string $name)
+    {
+        return Permission::create([
+            'name' => $name,
+            'guard_name' => 'admin',
+            'moderator' => 'admin',
+        ]);
     }
 }
