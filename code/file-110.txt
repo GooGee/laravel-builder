@@ -10,11 +10,11 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    public function __construct()
     {
     }
 
-    function __invoke(Admin $user,
+    function run(Admin $user,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     )

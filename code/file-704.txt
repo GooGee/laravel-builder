@@ -9,13 +9,13 @@ import {
     NumberField,
     ShowButton,
     TextField,
-    TopToolbar,
 } from "react-admin"
 
 export default function {{ entity.name }}List() {
     return (
         <List
             hasCreate={true}
+            sort={ { field: "id", order: "DESC" } }
             actions={
                 <>
                     <CreateButton />
@@ -23,7 +23,7 @@ export default function {{ entity.name }}List() {
             }
         >
             <Datagrid bulkActionButtons={<></>} isRowSelectable={() => false}>
-                <TextField source="id" />
+                <NumberField source="id" />
                 <DateField source="dtCreate" />
 {% for item in columnzz %}
                 <{{ item.raField }} source="{{ item.alias }}" />

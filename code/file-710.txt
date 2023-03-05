@@ -1,7 +1,7 @@
 import { AuthProvider } from "react-admin"
 import makeAxiosClient from "../Service/makeAxiosClient"
 
-const client = makeAxiosClient("v1{{ module.prefix }}")
+const client = makeAxiosClient()
 
 export function readMe() {
     return client.get<CC.ApiItemResponse<CC.Me>>("/Me/0")

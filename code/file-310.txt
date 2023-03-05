@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function handle({{ helper.getClassName(helper.findFile('Event'), entity, action) }} $event)
+    public function __construct()
     {
-        Log::channel('admin')->info({{ helper.getClassName(helper.findFile('Event'), entity, action) }}::class, ['userId' => $event->user->id, 'id' => $event->item->id]);
+    }
+
+    function handle({{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }} $event)
+    {
+        Log::channel('admin')->info({{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }}::class, ['userId' => $event->user->id, 'id' => $event->item->id]);
     }
 }

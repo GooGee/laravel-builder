@@ -10,7 +10,7 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    public function __construct()
     {
     }
 
@@ -19,12 +19,12 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param array<string, mixed> $data
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    function __invoke(User $user, array $data)
+    function run(User $user, array $data)
     {
-        $perPage = $data['pagination']['perPage'] ?? {{ helper.getClassName(helper.findFile('Repository'), entity, action) }}::PageSize;
+        $perPage = $data['pagination']['perPage'] ?? {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize;
         $page = $data['pagination']['page'] ?? 1;
 
-        $qb = $this->repository->query()
+        $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->where('userId', $user->id)
             ->whereNull('dtDelete');
         if (isset($data['sort']['field'])) {

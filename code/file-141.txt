@@ -21,7 +21,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             throw new AccessDeniedHttpException('Permission {{ action + entity.name }} required');
         }
 
-        $itemzz = $readMany($request->input('idzz'))->all();
+        $itemzz = $readMany->run($request->input('idzz'))->all();
 
         return {{ helper.getClassName(helper.findFile('AdminResponse'), entity, 'CreateOne', DirectoryIdEnum.AdminCreateOne) }}::sendItemzz($itemzz);
     }

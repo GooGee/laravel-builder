@@ -11,13 +11,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    public function __construct()
     {
     }
 
-    function __invoke(Admin $user, int $id)
+    function run(Admin $user, int $id)
     {
-        $item = $this->repository->findOrFail($id);
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
         if ($item->dtDelete) {
             throw new NotFoundHttpException();

@@ -10,7 +10,7 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository, private {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, action) }} $updateOne)
+    public function __construct(private {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, action) }} $updateOne)
     {
     }
 
@@ -19,7 +19,7 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param array<int, array> $datazz
      * @return array<int>
      */
-    function __invoke(User $user, array $datazz)
+    function run(User $user, array $datazz)
     {
         $idzz = [];
         $itemzz = [];

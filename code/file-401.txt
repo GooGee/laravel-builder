@@ -17,7 +17,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $itemzz = $createMany($user, $request->validated('itemzz'));
+        $itemzz = $createMany->run($user, $request->validated('itemzz'));
 
         return {{ helper.getClassName(helper.findFile('Response'), entity, 'CreateOne', DirectoryIdEnum.CreateOne) }}::sendItemzz($itemzz);
     }

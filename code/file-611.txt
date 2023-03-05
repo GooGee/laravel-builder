@@ -10,6 +10,6 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     function handle({{ helper.getClassName(helper.findFile('Event'), entity, action) }} $event)
     {
-        Log::channel('admin')->info({{ helper.getClassName(helper.findFile('Event'), entity, action) }}::class, ['userId' => $event->user->id, 'idzz' => $event->idzz]);
+        Log::channel('user')->info({{ helper.getClassName(helper.findFile('Event'), entity, action) }}::class, ['userId' => $event->user->id, 'idzz' => $event->idzz]);
     }
 }

@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    public function __construct()
     {
     }
 
@@ -20,9 +20,9 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param array<int> $idzz
      * @return array<int>
      */
-    function __invoke(Admin $user, array $idzz)
+    function run(Admin $user, array $idzz)
     {
-        $result = $this->repository->query()
+        $result = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->whereIn('id', $idzz)
             ->update(['dtDelete' => now()]);
 

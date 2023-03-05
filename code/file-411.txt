@@ -17,7 +17,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $item = $create($user,
+        $item = $create->run($user,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}
         );

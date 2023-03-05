@@ -15,7 +15,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $page = $readPage($user, $request->validated());
+        $page = $readPage->run($user, $request->validated());
 
         return {{ helper.getClassName(helper.findFile('Response'), entity, 'CreateOne', DirectoryIdEnum.CreateOne) }}::sendPage($page);
     }

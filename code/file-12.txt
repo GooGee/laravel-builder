@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+/**
+ * @method static self|null find(int $id)
+ * @method static self findOrFail(int $id)
+ */
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('ModelBase'), entity, action) }}
 {
+    const PageSize = 20;
+
 }

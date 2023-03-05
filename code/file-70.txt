@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ad;
+namespace Tests\Admin;
 
 use App\Models\Admin;
 use App\Models\Permission;
@@ -12,7 +12,7 @@ use Tests\Api\AbstractApiTest;
 abstract class AbstractAdminTest extends AbstractApiTest
 {
 
-    const URI = '/v1/Ad/';
+    const URI = '/v1/Admin/';
 
     /**
      * @param array<string, mixed> $attributes

@@ -39,6 +39,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(200);
         $this->seeItem(self::structure(), $response);
 {% for column in columnzz %}
-        self::assertEquals($item->{{ column.alias }}, $response->json('item.{{ column.alias }}'));{% endfor %}
+        $response->assertJsonPath('item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
     }
 }

@@ -10,7 +10,7 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    public function __construct()
     {
     }
 
@@ -19,9 +19,9 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param array<int> $idzz
      * @return \Illuminate\Database\Eloquent\Collection<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function __invoke(User $user, array $idzz)
+    function run(User $user, array $idzz)
     {
-        return $this->repository->query()
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->where('userId', $user->id)
             ->whereIn('id', $idzz)
             ->whereNull('dtDelete')

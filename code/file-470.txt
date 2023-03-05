@@ -12,15 +12,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository)
+    public function __construct()
     {
     }
 
-    function __invoke(int $id, User $user,
+    function run(int $id, User $user,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %})
     {
-        $item = $this->repository->findOrFail($id);
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
         if ($user->id === $item->userId) {
             //

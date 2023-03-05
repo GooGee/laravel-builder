@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 class {{ helper.getClassName(file, entity, action) }} extends AbstractWarmup
 {
 
-    public function __construct(private {{ helper.getClassName(helper.findFile('Repository'), entity, action) }} $repository,
-                                private {{ helper.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache,
+    public function __construct(private {{ helper.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache,
     )
     {
     }
@@ -25,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractWarmup
 
     function getQueryBuilder(): Builder
     {
-        return $this->repository->query();
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
     }
 
 }
