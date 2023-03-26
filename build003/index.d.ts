@@ -136,7 +136,6 @@ namespace LB {
         testDirectoryId: number
         entityId: number
         moduleId: number
-        collectionItemId: number
         deprecated: boolean
         description: string
         summary: string

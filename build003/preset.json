@@ -1248,6 +1248,13 @@
                     "id": 430
                 },
                 {
+                    "collectionId": 10,
+                    "name": "ReadHome",
+                    "value": "get Home",
+                    "tag": "get",
+                    "id": 383
+                },
+                {
                     "collectionId": 5,
                     "name": "value",
                     "value": "",
@@ -2828,7 +2835,7 @@
                     "parentId": 2,
                     "description": "",
                     "opened": true,
-                    "name": "AbstractBase",
+                    "name": "Base",
                     "id": 30
                 },
                 {
@@ -2984,6 +2991,13 @@
                     "opened": true,
                     "description": "",
                     "id": 480
+                },
+                {
+                    "parentId": 41,
+                    "name": "ReadHome",
+                    "opened": true,
+                    "description": "",
+                    "id": 490
                 },
                 {
                     "parentId": 41,
@@ -3568,7 +3582,7 @@
                     "directoryId": 65
                 },
                 {
-                    "directoryId": 610,
+                    "directoryId": 70,
                     "name": "TypeScriptDeclaration",
                     "color": "#f00",
                     "layer": "",
@@ -3578,7 +3592,7 @@
                     "id": 60
                 },
                 {
-                    "directoryId": 610,
+                    "directoryId": 70,
                     "name": "TypeScriptEnum.ts",
                     "color": "#f00",
                     "layer": "",
@@ -3699,12 +3713,12 @@
                 },
                 {
                     "directoryId": 81,
-                    "name": "AdminReadPageItemTest",
+                    "name": "AdminReadItemPageTest",
                     "color": "#0ff",
                     "layer": "Test",
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "ReadPage${entity.name}Test.php",
+                    "fileNamePattern": "Read${entity.name}PageTest.php",
                     "id": 88
                 },
                 {
@@ -3889,32 +3903,32 @@
                 },
                 {
                     "directoryId": 180,
-                    "name": "AdminReadPageItem",
+                    "name": "AdminReadItemPage",
                     "color": "#0ff",
                     "layer": "",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "ReadPage${entity.name}.php",
+                    "fileNamePattern": "Read${entity.name}Page.php",
                     "id": 180
                 },
                 {
                     "directoryId": 180,
-                    "name": "AdminReadPageItemController",
+                    "name": "AdminReadItemPageController",
                     "color": "#0ff",
                     "layer": "",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "ReadPage${entity.name}Controller.php",
+                    "fileNamePattern": "Read${entity.name}PageController.php",
                     "id": 181
                 },
                 {
                     "directoryId": 180,
-                    "name": "AdminReadPageItemRequest",
+                    "name": "AdminReadItemPageRequest",
                     "color": "#0ff",
                     "layer": "Request",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "ReadPage${entity.name}Request.php",
+                    "fileNamePattern": "Read${entity.name}PageRequest.php",
                     "id": 185
                 },
                 {
@@ -4109,13 +4123,23 @@
                 },
                 {
                     "directoryId": 84,
-                    "name": "ReadPageItemTest",
+                    "name": "ReadItemPageTest",
                     "color": "#0ff",
                     "layer": "Test",
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "ReadPage${entity.name}Test.php",
+                    "fileNamePattern": "Read${entity.name}PageTest.php",
                     "id": 388
+                },
+                {
+                    "directoryId": 84,
+                    "name": "ReadItemHomeTest",
+                    "color": "#00f",
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "Read${entity.name}",
+                    "fileNamePattern": "Read${entity.name}HomeTest.php",
+                    "id": 389
                 },
                 {
                     "directoryId": 400,
@@ -4299,32 +4323,32 @@
                 },
                 {
                     "directoryId": 480,
-                    "name": "ReadPageItem",
+                    "name": "ReadItemPage",
                     "color": "#0ff",
                     "layer": "",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "ReadPage${entity.name}.php",
+                    "fileNamePattern": "Read${entity.name}Page.php",
                     "id": 480
                 },
                 {
                     "directoryId": 480,
-                    "name": "ReadPageItemController",
+                    "name": "ReadItemPageController",
                     "color": "#0ff",
                     "layer": "",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "ReadPage${entity.name}Controller.php",
+                    "fileNamePattern": "Read${entity.name}PageController.php",
                     "id": 481
                 },
                 {
                     "directoryId": 480,
-                    "name": "ReadPageItemRequest",
+                    "name": "ReadItemPageRequest",
                     "color": "#0ff",
                     "layer": "Request",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "ReadPage${entity.name}Request.php",
+                    "fileNamePattern": "Read${entity.name}PageRequest.php",
                     "id": 485
                 },
                 {
@@ -4516,6 +4540,26 @@
                     "nameSpacePattern": "",
                     "fileNamePattern": "CanAccess.tsx",
                     "id": 712
+                },
+                {
+                    "directoryId": 490,
+                    "name": "ReadItemHome",
+                    "color": "#00f",
+                    "layer": "Action",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "Read${entity.name}Home.php",
+                    "id": 490
+                },
+                {
+                    "directoryId": 490,
+                    "name": "ReadItemHomeController",
+                    "color": "#00f",
+                    "layer": "Controller",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "Read${entity.name}HomeController.php",
+                    "id": 491
                 }
             ],
             "Entity": [
