@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\AbstractBase\AbstractReadPage;
+use App\Base\AbstractReadPage;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {
-    public function __construct()
-    {
-    }
-
     /**
      * @param array<string, mixed> $data
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(array $data)
+    function run(array $data): LengthAwarePaginator
     {
         $parameter = self::makePageParameter($data, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize);
 

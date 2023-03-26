@@ -2,75 +2,73 @@
 
 declare(strict_types=1);
 
-namespace App\AbstractBase;
+namespace App\Base;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class AbstractResponse
 {
     /**
-     * @param object $item
      * @return array<string, mixed>
      */
-    abstract static function getData($item): array;
+    abstract public static function getData(Model $item): array;
 
     /**
-     * @param array<int, object> $itemzz
+     * @param  Model[]  $itemzz
      * @return array<int, array<string, mixed>>
      */
-    static function getDatazz(array $itemzz): array
+    public static function getDatazz(array $itemzz): array
     {
         return array_map(function ($item) {
             return static::getData($item);
         }, $itemzz);
     }
 
-    static function sendData(string $message, $data, int $code)
+    public static function sendData(string $message, mixed $data, int $code): JsonResponse
     {
         return new JsonResponse(compact('code', 'message', 'data'), $code);
     }
 
-    static function sendItem(object $item, string $message = 'OK', int $code = 200)
+    public static function sendItem(Model $item, string $message = 'OK', int $code = 200): JsonResponse
     {
         $item = static::getData($item);
+
         return new JsonResponse(compact('code', 'message', 'item'), $code);
     }
 
     /**
-     * @param array<int, object> $itemzz
-     * @param string $message
-     * @param int $code
-     * @return JsonResponse
+     * @param  Model[]  $itemzz
      */
-    static function sendItemzz(array $itemzz, string $message = 'OK', int $code = 200)
+    public static function sendItemzz(array $itemzz, string $message = 'OK', int $code = 200): JsonResponse
     {
         $itemzz = static::getDatazz($itemzz);
+
         return new JsonResponse(compact('code', 'message', 'itemzz'), $code);
     }
 
-    static function sendOK($data = null)
+    public static function sendOK(mixed $data = null): JsonResponse
     {
         return static::sendData('OK', $data, 200);
     }
 
-    static function sendPage(LengthAwarePaginator $paginator, string $message = 'OK', int $code = 200)
+    /**
+     * @template T of Model
+     *
+     * @param  LengthAwarePaginator<T>  $paginator
+     */
+    public static function sendPage(LengthAwarePaginator $paginator, string $message = 'OK', int $code = 200): JsonResponse
     {
+        /** @phpstan-ignore-next-line */
+        $paginator->transform(function (Model $item) {
+            return static::getData($item);
+        });
+
         return new JsonResponse([
             'code' => $code,
             'message' => $message,
             'page' => $paginator,
         ]);
     }
-
-    static function sendTotal(LengthAwarePaginator $paginator, string $message = 'OK', int $code = 200)
-    {
-        return new JsonResponse(
-            collect([
-                'code' => $code,
-                'message' => $message,
-            ])->merge($paginator)
-        );
-    }
-
 }

@@ -89,14 +89,16 @@ function run(data) {
             const entity2 = entitymap.get(item.entity0Id)
             const relation = pivotzz.find(one => one.entity1Id === item.entity1Id)
             const fk0 = columnmap.get(relation.column1Id)
-            przz.push(`${entity2.name}[] ${item.name1}zz`)
+            przz.push(`${entity2.name}[] \$${item.name1}zz`)
             return `
+    /** @phpstan-ignore-next-line */
     public function ${item.name1}zz()
     {
         return $this->belongsToMany(${entity2.name}::class, '${pivot.name}', '${fk0.name}', '${fk1.name}');
     }`
         })
-    ddd.relationzz = textzz.concat(m2mzz)
+    // ddd.relationzz = textzz.concat(m2mzz)
+    ddd.relationzz = textzz
     ddd.przz = przz
 
     /**
@@ -112,8 +114,9 @@ function run(data) {
         if (method === 'hasMany') {
             type += '[]'
         }
-        przz.push(`${type} ${relation.name0}`)
+        przz.push(type + ' $' + relation.name0)
         return `
+    /** @phpstan-ignore-next-line */
     public function ${relation.name0}()
     {
         return $this->${method}(${entity1.name}::class, '${fk.name}');
@@ -128,8 +131,9 @@ function run(data) {
      */
     function makeBelongsTo(relation, fk) {
         const entity1 = entitymap.get(relation.entity0Id)
-        przz.push(`${entity1.name} ${relation.name1}`)
+        przz.push(entity1.name + ' $' + relation.name1)
         return `
+    /** @phpstan-ignore-next-line */
     public function ${relation.name1}()
     {
         return $this->belongsTo(${entity1.name}::class, '${fk.name}');

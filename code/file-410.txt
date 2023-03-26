@@ -17,7 +17,7 @@ class {{ helper.getClassName(file, entity, action) }}
     function run(User $user,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
-    )
+    ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
         $item->userId = $user->id;

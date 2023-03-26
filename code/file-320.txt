@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\AbstractBase\AbstractRequest;
+use App\Base\AbstractRequest;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractRequest
 {

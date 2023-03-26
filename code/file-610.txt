@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function handle({{ helper.getClassName(helper.findFile('Event'), entity, action) }} $event)
+    function handle({{ helper.getClassName(helper.findFile('Event'), entity, action) }} $event): void
     {
         Log::channel('user')->info({{ helper.getClassName(helper.findFile('Event'), entity, action) }}::class, ['userId' => $event->user->id, 'id' => $event->item->id]);
     }

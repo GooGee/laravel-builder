@@ -6,7 +6,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use App\AbstractBase\AbstractReadManyCache;
+use App\Base\AbstractReadManyCache;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractReadManyCache
 {

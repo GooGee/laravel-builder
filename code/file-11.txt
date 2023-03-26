@@ -43,6 +43,9 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
         '{{ column.name }}',{% endfor %}
     ];
 
+    /**
+     * @return string[]
+     */
     static function keyzz(): array
     {
         return [

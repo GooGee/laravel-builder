@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\AbstractBase\AbstractController;
-use App\AbstractBase\ReadManyRequest;
+use App\Base\AbstractController;
+use App\Base\ReadManyRequest;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Http\JsonResponse;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(ReadManyRequest $request, {{ action + entity.name }} $readMany)
+    public function __invoke(ReadManyRequest $request, {{ action + entity.name }} $readMany): JsonResponse
     {
         /** @var \App\Models\User $user */
         $user = auth()->user();

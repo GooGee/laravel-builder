@@ -1,6 +1,8 @@
 <?php
 
-namespace App\AbstractBase;
+declare(strict_types=1);
+
+namespace App\Base;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -17,29 +19,30 @@ abstract class AbstractRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
+     * @return array<string, string[]>
      */
-    public function rules()
+    public function rules(): array
     {
         return static::getRulezz();
     }
 
-    static function getRulezzForItemzz()
+    /**
+     * @return array<string, string[]>
+     */
+    public static function getRulezzForItemzz(): array
     {
         $rulezz = [
             'itemzz' => ['array', 'max:111', 'required'],
         ];
         foreach (static::getRulezz() as $key => $item) {
-            $rulezz['itemzz.*.' . $key] = $item;
+            $rulezz['itemzz.*.'.$key] = $item;
         }
+
         return $rulezz;
     }
 
     /**
      * @return array<string, string[]>
      */
-    abstract static function getRulezz();
-
+    abstract public static function getRulezz(): array;
 }

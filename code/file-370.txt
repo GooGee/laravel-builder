@@ -22,7 +22,7 @@ abstract class AbstractApiTest extends TestCase
     protected abstract function path(): string;
 
     /**
-     * @return array<int, string>
+     * @return string[]
      */
     abstract static function structure(): array;
 

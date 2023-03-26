@@ -18,7 +18,7 @@ class {{ helper.getClassName(file, entity, action) }}
 
     function run(int $id, User $user,
 {% for column in columnzz %}
-                      {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %})
+                      {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\AbstractBase\AbstractController;
-use App\AbstractBase\AbstractResponse;
+use App\Base\AbstractController;
+use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;

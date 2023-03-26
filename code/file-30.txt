@@ -6,6 +6,10 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static static|null find(int $id)
+ * @method static static findOrFail(int $id)
+ */
 abstract class AbstractModel extends Model
 {
     use HasFactory;

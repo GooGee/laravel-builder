@@ -19,7 +19,7 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param array<int, array> $datazz
      * @return array<int>
      */
-    function run(User $user, array $datazz)
+    function run(User $user, array $datazz): array
     {
         $idzz = [];
         $itemzz = [];

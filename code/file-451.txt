@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\AbstractBase\AbstractController;
+use App\Base\AbstractController;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $id, {{ action + entity.name }} $readOne)
+    public function __invoke(int $id, {{ action + entity.name }} $readOne): JsonResponse
     {
         $item = $readOne->findOrFail($id);
         if ($item->dtDelete) {

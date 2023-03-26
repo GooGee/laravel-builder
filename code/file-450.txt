@@ -13,12 +13,12 @@ class {{ helper.getClassName(file, entity, action) }}
     {
     }
 
-    function find(int $id)
+    function find(int $id): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}|null
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::find($id);
     }
 
-    function findOrFail(int $id)
+    function findOrFail(int $id): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
     }

@@ -4,33 +4,36 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+use App\Base\AbstractReadPage;
 use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-class {{ helper.getClassName(file, entity, action) }}
+class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {
-    public function __construct()
-    {
-    }
-
     /**
      * @param User $user
      * @param array<string, mixed> $data
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator<Model>
      */
-    function run(User $user, array $data)
+    public function run(User $user, array $data): LengthAwarePaginator
     {
-        $perPage = $data['pagination']['perPage'] ?? {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize;
-        $page = $data['pagination']['page'] ?? 1;
+        $parameter = self::makePageParameter($data, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize);
 
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->where('userId', $user->id)
             ->whereNull('dtDelete');
-        if (isset($data['sort']['field'])) {
-            $qb->orderBy($data['sort']['field'], $data['sort']['order'] ?? "asc");
-        }
-        return $qb->paginate($perPage, ['*'], 'page', $page);
+
+        $builder = self::makeReadPageQueryBuilder($qb, $parameter);
+
+        $builder->addFilterzzSearch([
+{% for column in columnzz %}
+            '{{ column.name }}',{% endfor %}
+        ]);
+        $builder->addSort();
+        return $builder->paginate();
     }
 
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
     protected function path(): string
     {
@@ -39,5 +39,24 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(200);
         $this->seePage(self::structure(), $response);
         $response->assertJsonCount(1, 'page.data');
+
+{% for column in columnzz %}
+        $data['filter'] = [
+            '{{ column.alias }}' => $item->{{ column.alias }},
+        ];
+        $response = $this->json('GET', $this->makeURI(), $data)
+            ->assertStatus(200);
+        $this->seePage(self::structure(), $response);
+        $response->assertJsonPath('page.data.0.{{ column.alias }}', $item->{{ column.alias }});
+{% endfor %}
+
+{% for column in columnzz %}
+        $data['filter'] = [
+            '{{ column.alias }}' => '{{ column.alias }} should not exist',
+        ];
+        $response = $this->json('GET', $this->makeURI(), $data)
+            ->assertStatus(200);
+        $response->assertJsonCount(0, 'page.data');
+{% endfor %}
     }
 }
