@@ -67,15 +67,6 @@
                     "id": 9
                 },
                 {
-                    "name": "ModuleAction",
-                    "color": "#fff",
-                    "description": "",
-                    "valueDescription": "",
-                    "tagDescription": "REST method",
-                    "reserved": true,
-                    "id": 10
-                },
-                {
                     "name": "ReadOnlyColumn",
                     "color": "#fff",
                     "description": "create ReadOnly column when column name found in this collection",
@@ -1176,83 +1167,6 @@
                     "value": "integer",
                     "tag": "",
                     "id": 377
-                },
-                {
-                    "collectionId": 10,
-                    "name": "Cache",
-                    "tag": "",
-                    "value": "",
-                    "id": 394
-                },
-                {
-                    "collectionId": 10,
-                    "name": "CreateMany",
-                    "tag": "post",
-                    "value": "",
-                    "id": 384
-                },
-                {
-                    "collectionId": 10,
-                    "name": "DeleteMany",
-                    "tag": "delete",
-                    "value": "",
-                    "id": 386
-                },
-                {
-                    "collectionId": 10,
-                    "name": "ReadMany",
-                    "tag": "get",
-                    "value": "get list of item by idzz",
-                    "id": 388
-                },
-                {
-                    "collectionId": 10,
-                    "name": "UpdateMany",
-                    "tag": "put",
-                    "value": "",
-                    "id": 390
-                },
-                {
-                    "collectionId": 10,
-                    "name": "CreateOne",
-                    "tag": "post",
-                    "value": "",
-                    "id": 385
-                },
-                {
-                    "collectionId": 10,
-                    "name": "DeleteOne",
-                    "tag": "delete",
-                    "value": "",
-                    "id": 387
-                },
-                {
-                    "collectionId": 10,
-                    "name": "ReadOne",
-                    "tag": "get",
-                    "value": "",
-                    "id": 389
-                },
-                {
-                    "collectionId": 10,
-                    "name": "UpdateOne",
-                    "tag": "put",
-                    "value": "",
-                    "id": 391
-                },
-                {
-                    "collectionId": 10,
-                    "name": "ReadPage",
-                    "value": "get Paginator",
-                    "tag": "get",
-                    "id": 430
-                },
-                {
-                    "collectionId": 10,
-                    "name": "ReadHome",
-                    "value": "get Home",
-                    "tag": "get",
-                    "id": 383
                 },
                 {
                     "collectionId": 5,
@@ -4703,7 +4617,7 @@
                 },
                 {
                     "isArray": false,
-                    "nullable": false,
+                    "nullable": true,
                     "type": "WuParameter",
                     "format": "",
                     "ownerId": null,

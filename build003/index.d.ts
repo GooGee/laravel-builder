@@ -133,21 +133,15 @@ namespace LB {
     interface ModuleAction {
         id: number
         directoryId: number
-        testDirectoryId: number
         entityId: number
+        filezz: ModuleActionFile[]
         moduleId: number
         deprecated: boolean
+        name: string
         description: string
         summary: string
         operationId: string
         requestId: number
-    }
-
-    interface ModuleActionFile {
-        id: number
-        moduleActionId: number
-        fileId: number
-        directoryId: number
     }
 
     interface ModuleActionResponse {
@@ -344,7 +338,6 @@ namespace LB {
         IndexColumn: IndexColumn[]
         Module: Module[]
         ModuleAction: ModuleAction[]
-        ModuleActionFile: ModuleActionFile[]
         ModuleActionResponse: ModuleActionResponse[]
         ParameterMap: ParameterMap[]
         Path: Path[]
@@ -480,6 +473,10 @@ namespace LB {
         dbexist: boolean
         filezz: string[]
         migrationzz: Migration[]
+    }
+
+    interface ModuleActionFile extends File {
+        isExtra: boolean
     }
 
     enum OapiType {
