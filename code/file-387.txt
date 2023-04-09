@@ -27,7 +27,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         unset($data['{{ column.alias }}']);
         $response = $this->putJson($this->makeURI($item->id), $data)
             ->assertStatus(422);
-        $this->seeErrors(['{{ column.alias }}'], $response);
+        $response->assertJsonValidationErrors('{{ column.alias }}');
 {% endfor %}
         $item->dtUpdate = now();
         $data = $item->toArray();

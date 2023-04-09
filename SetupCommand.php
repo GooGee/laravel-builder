@@ -39,7 +39,7 @@ class SetupCommand extends Command
         } else {
             $uri .= $dv;
         }
-        $fileManager->write($file, $uri . '?ide=idea');
+        $fileManager->write($file, $uri . '/?ide=idea');
 
         $file = FileManager::concat(FileManager::LaravelBuilderDirectory, '.gitignore');
         $fileManager->write($file, '*');

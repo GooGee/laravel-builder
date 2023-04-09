@@ -27,12 +27,6 @@ class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
                 'sometimes',
             ],
 {% endfor %}
-{% for parameter in parameterzz %}
-            '{{ parameter.alias }}' => [{% for constraint in parameter.constraintzz %}
-                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
-                'sometimes',
-            ],
-{% endfor %}
         ];
     }
 }

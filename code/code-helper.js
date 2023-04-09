@@ -181,24 +181,19 @@ function makeHelper(data) {
     }
 
     function makePermissionzz() {
-        const ci = ddd.db.tables.Collection.find(item => item.name === 'ModuleAction')?.id
-        const actionMap = new Map(ddd.db.tables.CollectionItem
-            .filter(item => item.collectionId === ci)
-            .map(item => [item.id, item.name])
-        )
+        const directoryMap = new Map(ddd.db.tables.Directory.map(item => [item.id, item]))
         const entityMap = new Map(ddd.db.tables.Entity.map(item => [item.id, item]))
         const moduleMap = new Map(ddd.db.tables.Module.map(item => [item.id, item]))
-        const permissionzz = ddd.db.tables.ModuleAction.map(function (ma) {
-            const action = actionMap.get(ma.collectionItemId)
+        return ddd.db.tables.ModuleAction.map(function (ma) {
+            const directory = directoryMap.get(ma.directoryId)
             const entity = entityMap.get(ma.entityId)
             const module = moduleMap.get(ma.moduleId)
             return {
-                permission: action + entity?.name,
+                permission: directory?.name + entity?.name,
                 entity: entity?.name,
                 module: module?.name,
             }
         })
-        return permissionzz
     }
 
     /**
@@ -237,18 +232,6 @@ function makeHelper(data) {
         const sm = new Map()
         ddd.db.tables.Entity.forEach(item => sm.set(item.id, item))
 
-        /** @type {Map<number, LB.File>} */
-        const mafm = new Map()
-        ddd.db.tables.ModuleActionFile.forEach(item => {
-            const file = fm.get(item.fileId)
-            if (file === undefined) {
-                return
-            }
-            if (file.name.includes('Controller')) {
-                mafm.set(item.moduleActionId, file)
-            }
-        })
-
         const textzz = []
         ddd.db.tables.Path.sort((aa, bb) => aa.name.localeCompare(bb.name))
         ddd.db.tables.Path
@@ -270,19 +253,16 @@ function makeHelper(data) {
                         return
                     }
 
-                    const old = mafm.get(ma.id)
-                    if (old === undefined) {
+                    const file = ma.filezz.find(item => item.name.includes('Controller'))
+                    if (file === undefined) {
                         return
                     }
-                    const file = {...old}
 
                     const entity = sm.get(ma.entityId)
                     if (entity === undefined) {
                         return
                     }
 
-                    // the module directory
-                    file.directoryId = ma.directoryId
                     const cn = ddd.tree.getClassFullName(file, entity, '')
                     let text = `    Route::${pm.method}('${path.name}', \\${cn}::class)`
                     if (pm.middlewarezz.length) {

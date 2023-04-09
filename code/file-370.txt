@@ -15,16 +15,16 @@ abstract class AbstractApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    const URI = '/v1{{ module.prefix }}/';
+    const URI = '/v1/Api/';
 
     protected $seed = true;
 
-    protected abstract function path(): string;
+    abstract protected function path(): string;
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
-    abstract static function structure(): array;
+    abstract public static function structure(): array;
 
     protected function setUp(): void
     {
@@ -34,12 +34,13 @@ abstract class AbstractApiTest extends TestCase
     }
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param  array<string, mixed>  $attributes
      * @return User
      */
     protected function createUser(array $attributes = [])
     {
         $user = UserFactory::new()->createOne($attributes);
+
         return $user->refresh();
     }
 
@@ -47,9 +48,10 @@ abstract class AbstractApiTest extends TestCase
     {
         $query = '';
         if (count($parameterzz)) {
-            $query = '?' . http_build_query($parameterzz);
+            $query = '?'.http_build_query($parameterzz);
         }
-        return static::URI . $this->path() . '/' . $path . $query;
+
+        return static::URI.$this->path().'/'.$path.$query;
     }
 
     protected function seeData(array $structure, TestResponse $response)
@@ -60,17 +62,7 @@ abstract class AbstractApiTest extends TestCase
                 'data' => $structure,
             ]
         );
-        return $this;
-    }
 
-    protected function seeErrors(array $structure, TestResponse $response)
-    {
-        $response->assertJsonStructure(
-            [
-                'message',
-                'errors' => $structure,
-            ]
-        );
         return $this;
     }
 
@@ -82,6 +74,7 @@ abstract class AbstractApiTest extends TestCase
                 'item' => $structure,
             ]
         );
+
         return $this;
     }
 
@@ -95,6 +88,7 @@ abstract class AbstractApiTest extends TestCase
                 ],
             ]
         );
+
         return $this;
     }
 
@@ -119,6 +113,7 @@ abstract class AbstractApiTest extends TestCase
             'message',
             'page' => $page,
         ]);
+
         return $this;
     }
 

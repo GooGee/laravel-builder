@@ -3,4 +3,5 @@ function run(data) {
     const ddd = data
 
     ddd.columnzz = ddd.helper.getRequestColumnzz()
+    ddd.czz = ddd.helper.getResponseContentColumnzz()
 }

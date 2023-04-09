@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ helper.getClassName(helper.findFile('AdminReadPageItemRequest'), entity, action) }} $request, {{ action + entity.name }} $readPage)
+    public function __invoke({{ helper.getClassName(helper.findFile('AdminReadItemPageRequest'), entity, action) }} $request, {{ action + entity.name }} $readPage)
     {
         /** @var \App\Models\Admin $user */
         $user = auth()->guard('admin')->user();

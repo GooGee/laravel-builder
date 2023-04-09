@@ -20,7 +20,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $response = $this->deleteJson($this->makeURI(), [])
             ->assertStatus(422);
-        $this->seeErrors(['idzz'], $response);
+        $response->assertJsonValidationErrors('idzz');
 
         self::assertNull($item->dtDelete);
         $idzz = [$item->id];
