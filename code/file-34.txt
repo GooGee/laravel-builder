@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+namespace App\Base;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;

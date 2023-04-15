@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Base;
+
+use Illuminate\Database\Eloquent\Builder;
+
+abstract class AbstractReadPage
+{
+    /**
+     * @param  array<string, mixed>  $data
+     */
+    public static function makePageParameter(array $data, int $perPage): PageParameter
+    {
+        return new PageParameter($data, $perPage);
+    }
+
+    /**
+     * @template T of \Illuminate\Database\Eloquent\Model
+     *
+     * @param  Builder<T>  $qb
+     */
+    public static function makeReadPageQueryBuilder(Builder $qb, PageParameter $parameter): ReadPageQueryBuilder
+    {
+        return new ReadPageQueryBuilder($qb, $parameter);
+    }
+}

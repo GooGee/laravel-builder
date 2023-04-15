@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Base;
+
+class ReadManyRequest extends AbstractRequest
+{
+    /**
+     * @return array<string, string[]>
+     */
+    public static function getRulezz(): array
+    {
+        return [
+
+            'idzz' => ['array', 'max:111', 'required'],
+            'idzz.*' => ['integer'],
+
+        ];
+    }
+}

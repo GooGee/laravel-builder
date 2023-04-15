@@ -28,7 +28,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 
         $builder = self::makeReadPageQueryBuilder($qb, $parameter);
 
-        $builder->addFilterzzSearch([
+        $builder->addFilterzz([
 {% for column in columnzz %}
             '{{ column.name }}',{% endfor %}
         ]);

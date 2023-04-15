@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Base;
+
+use Illuminate\Validation\Rule;
+
+class ReadPageRequest extends AbstractRequest
+{
+    /**
+     * @return array<string, mixed[]>
+     */
+    public static function getRulezzForPage(): array
+    {
+        $rulezz = [
+            'pagination.page' => ['integer', 'min:1'],
+            'pagination.perPage' => ['integer', 'min:5', 'max:1222'],
+            'sort.field' => ['string'],
+            'sort.order' => ['string', Rule::in(['asc', 'desc'])],
+        ];
+        foreach (static::getRulezz() as $key => $item) {
+            $rulezz['filter.'.$key] = $item;
+        }
+
+        return $rulezz;
+    }
+
+    /**
+     * @return array<string, string[]>
+     */
+    public static function getRulezz(): array
+    {
+        return [
+        ];
+    }
+}

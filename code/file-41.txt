@@ -1,0 +1,93 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Base;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+class ReadPageQueryBuilder
+{
+    /**
+     * @param  Builder<Model>  $qb
+     */
+    public function __construct(private Builder $qb, private PageParameter $parameter)
+    {
+    }
+
+    public function addDateFilter(string $key = 'dtCreate'): self
+    {
+        if (isset($this->parameter->filter['dtStart'])) {
+            $this->qb->where($key, '>=', $this->parameter->filter['dtStart']);
+        }
+        if (isset($this->parameter->filter['dtEnd'])) {
+            $this->qb->where($key, '<', $this->parameter->filter['dtEnd']);
+        }
+
+        return $this;
+    }
+
+    public function addFilter(string $key, string $operator = '='): self
+    {
+        if (isset($this->parameter->filter[$key])) {
+            $this->qb->where($key, $operator, $this->parameter->filter[$key]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  string[]  $keyzz
+     * @return $this
+     */
+    public function addFilterzz(array $keyzz): self
+    {
+        foreach ($keyzz as $key) {
+            $this->addFilter($key);
+        }
+
+        return $this;
+    }
+
+    public function addFilterSearch(string $key): self
+    {
+        if (isset($this->parameter->filter[$key])) {
+            $this->qb->where($key, 'LIKE', "%{$this->parameter->filter[$key]}%");
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  string[]  $keyzz
+     * @return $this
+     */
+    public function addFilterzzSearch(array $keyzz): self
+    {
+        foreach ($keyzz as $key) {
+            $this->addFilterSearch($key);
+        }
+
+        return $this;
+    }
+
+    public function addSort(): self
+    {
+        if (isset($this->parameter->sortField)) {
+            $this->qb->orderBy($this->parameter->sortField, $this->parameter->sortOrder);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  string[]  $columnzz
+     * @return LengthAwarePaginator<Model>
+     */
+    public function paginate(array $columnzz = ['*']): LengthAwarePaginator
+    {
+        return $this->qb->paginate($this->parameter->perPage, $columnzz, 'page', $this->parameter->page);
+    }
+}
