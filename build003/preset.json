@@ -51,7 +51,7 @@
                 {
                     "name": "MediaType",
                     "color": "#fff",
-                    "description": "https://swagger.io/specification/#media-type-object",
+                    "description": "https://spec.openapis.org/oas/v3.0.3#media-type-object",
                     "valueDescription": "",
                     "tagDescription": "",
                     "reserved": true,
@@ -101,6 +101,15 @@
                     "valueDescription": "",
                     "tagDescription": "",
                     "id": 17
+                },
+                {
+                    "color": "#fff",
+                    "description": "https://spec.openapis.org/oas/v3.0.3#data-types",
+                    "name": "TypeFormat",
+                    "reserved": true,
+                    "valueDescription": "",
+                    "tagDescription": "",
+                    "id": 18
                 }
             ],
             "CollectionItem": [
@@ -2728,6 +2737,90 @@
                     "value": "",
                     "tag": "",
                     "id": 88
+                },
+                {
+                    "collectionId": 18,
+                    "name": "byte",
+                    "value": "",
+                    "tag": "string",
+                    "id": 496
+                },
+                {
+                    "collectionId": 18,
+                    "name": "binary",
+                    "value": "",
+                    "tag": "string",
+                    "id": 497
+                },
+                {
+                    "collectionId": 18,
+                    "name": "double",
+                    "value": "",
+                    "tag": "number",
+                    "id": 498
+                },
+                {
+                    "collectionId": 18,
+                    "name": "float",
+                    "value": "",
+                    "tag": "number",
+                    "id": 499
+                },
+                {
+                    "collectionId": 18,
+                    "name": "int32",
+                    "value": "",
+                    "tag": "integer",
+                    "id": 500
+                },
+                {
+                    "collectionId": 18,
+                    "name": "int64",
+                    "value": "",
+                    "tag": "integer",
+                    "id": 501
+                },
+                {
+                    "collectionId": 18,
+                    "name": "email",
+                    "value": "",
+                    "tag": "string",
+                    "id": 502
+                },
+                {
+                    "collectionId": 18,
+                    "name": "date",
+                    "value": "",
+                    "tag": "string",
+                    "id": 503
+                },
+                {
+                    "collectionId": 18,
+                    "name": "date-time",
+                    "value": "",
+                    "tag": "string",
+                    "id": 504
+                },
+                {
+                    "collectionId": 18,
+                    "name": "time",
+                    "value": "",
+                    "tag": "string",
+                    "id": 505
+                },
+                {
+                    "collectionId": 18,
+                    "name": "password",
+                    "value": "",
+                    "tag": "string",
+                    "id": 506
+                },
+                {
+                    "collectionId": 18,
+                    "name": "uuid",
+                    "value": "",
+                    "tag": "string",
+                    "id": 507
                 }
             ],
             "Directory": [
@@ -2961,6 +3054,13 @@
                     "opened": true,
                     "name": "Admin",
                     "id": 81
+                },
+                {
+                    "parentId": 80,
+                    "name": "Feature",
+                    "opened": true,
+                    "description": "",
+                    "id": 88
                 },
                 {
                     "parentId": 1,
@@ -3397,6 +3497,16 @@
                 },
                 {
                     "directoryId": 2,
+                    "name": "ApiEvent",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "Providers",
+                    "fileNamePattern": "ApiEvent.php",
+                    "id": 20
+                },
+                {
+                    "directoryId": 2,
                     "name": "AbstractModel",
                     "color": "#fff",
                     "layer": "Model",
@@ -3454,6 +3564,56 @@
                     "nameSpacePattern": "",
                     "fileNamePattern": "AbstractRequest.php",
                     "id": 37
+                },
+                {
+                    "directoryId": 30,
+                    "name": "AbstractReadPage",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "AbstractReadPage.php",
+                    "id": 38
+                },
+                {
+                    "directoryId": 30,
+                    "name": "PageParameter",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "PageParameter.php",
+                    "id": 39
+                },
+                {
+                    "directoryId": 30,
+                    "name": "ReadManyRequest",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadManyRequest.php",
+                    "id": 40
+                },
+                {
+                    "directoryId": 30,
+                    "name": "ReadPageQueryBuilder",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadPageQueryBuilder.php",
+                    "id": 41
+                },
+                {
+                    "directoryId": 30,
+                    "name": "ReadPageRequest",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadPageRequest.php",
+                    "id": 42
                 },
                 {
                     "name": "api.php",
@@ -4264,6 +4424,16 @@
                     "nameSpacePattern": "",
                     "fileNamePattern": "Read${entity.name}PageRequest.php",
                     "id": 485
+                },
+                {
+                    "directoryId": 88,
+                    "name": "AbstractFeatureTest",
+                    "color": "#fff",
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "AbstractFeatureTest.php",
+                    "id": 570
                 },
                 {
                     "name": "Event",
@@ -7146,7 +7316,6 @@
                 }
             ],
             "ModuleAction": [],
-            "ModuleActionFile": [],
             "ParameterMap": [],
             "Request": [
                 {
@@ -7238,7 +7407,7 @@
             ],
             "PathMethod": []
         },
-        "version": 38
+        "version": 40
     },
     "oapi": {
         "openapi": "3.0.3",
