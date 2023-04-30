@@ -10,12 +10,12 @@ use App\Base\AbstractItemInGroupCache;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractItemInGroupCache
 {
-    static function getModelName(): string
+    public static function getModelName(): string
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::class;
     }
 
-    static function makeKey(int $groupId, string $groupName = 'Group')
+    public static function makeKey(int $groupId, string $groupName = 'Group')
     {
         return parent::makeKey($groupId, $groupName);
     }

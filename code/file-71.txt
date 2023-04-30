@@ -21,7 +21,7 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends {{ helper
      * @param array<string, mixed> $attributes
      * @return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
      */
-    static function makeItem(User $user, array $attributes = [])
+    public static function makeItem(User $user, array $attributes = [])
     {
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::factory()
             ->makeOne($attributes);
@@ -31,7 +31,7 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends {{ helper
     /**
      * @return string[]
      */
-    static function structure(): array
+    public static function structure(): array
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::keyzz();
     }

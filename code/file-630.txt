@@ -14,7 +14,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractResponse
      * @param {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item
      * @return array<string, mixed>
      */
-    static function getData($item): array
+    public static function getData($item): array
     {
         return [
 {% for column in columnzz %}

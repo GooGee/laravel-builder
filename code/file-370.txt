@@ -116,5 +116,4 @@ abstract class AbstractApiTest extends TestCase
 
         return $this;
     }
-
 }

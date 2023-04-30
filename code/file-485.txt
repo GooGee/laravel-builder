@@ -18,7 +18,7 @@ class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
         return static::getRulezzForPage();
     }
 
-    static function getRulezz(): array
+    public static function getRulezz(): array
     {
         return [
 {% for column in columnzz %}
