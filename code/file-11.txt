@@ -6,6 +6,9 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  *{% for property in propertyzz %}
@@ -49,7 +52,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
     public static function keyzz(): array
     {
         return [
-{% for key in keyzz %}
+{% for key in columnzz | rejectattr('wo') %}
             '{{ key.name }}',{% endfor %}
         ];
     }

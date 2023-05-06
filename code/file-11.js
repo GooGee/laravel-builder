@@ -5,8 +5,6 @@ function run(data) {
     const columnzz = ddd.db.tables.Column.filter((item) => item.entityId === ddd.entity.id && item.inTable)
     ddd.columnzz = columnzz
 
-    ddd.keyzz = columnzz.filter(item => !item.wo)
-
     const castzz = ddd.helper.getItemzzInCollection('ModelFieldTypeCast')
 
     ddd.propertyzz = columnzz.map(function (item) {
@@ -92,7 +90,7 @@ function run(data) {
             // przz.push(`${entity2.name}[] \$${item.name1}zz`)
             return `
     /** @phpstan-ignore-next-line */
-    public function ${item.name1}zz(): \\Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany
+    public function ${item.name1}zz(): BelongsToMany
     {
         return $this->belongsToMany(${entity2.name}::class, '${pivot.name}', '${fk0.name}', '${fk1.name}');
     }`
@@ -117,7 +115,7 @@ function run(data) {
         przz.push(type + ' $' + relation.name0)
         return `
     /** @phpstan-ignore-next-line */
-    public function ${relation.name0}(): \\Illuminate\\Database\\Eloquent\\Relations\\HasMany
+    public function ${relation.name0}(): HasMany
     {
         return $this->${method}(${entity1.name}::class, '${fk.name}');
     }`
@@ -131,10 +129,14 @@ function run(data) {
      */
     function makeBelongsTo(relation, fk) {
         const entity1 = entitymap.get(relation.entity0Id)
-        przz.push(entity1.name + ' $' + relation.name1)
+        let type = entity1.name
+        if (fk.nullable) {
+            type += '|null'
+        }
+        przz.push(type + ' $' + relation.name1)
         return `
     /** @phpstan-ignore-next-line */
-    public function ${relation.name1}(): \\Illuminate\\Database\\Eloquent\\Relations\\BelongsTo
+    public function ${relation.name1}(): BelongsTo
     {
         return $this->belongsTo(${entity1.name}::class, '${fk.name}');
     }`
