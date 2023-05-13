@@ -18,10 +18,12 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $item = $create->run($user,
+        $item = $create->make($user->id,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}
         );
+
+        $item = $create->create($user, $item);
 
         return {{ action + entity.name }}Response::sendItem($item);
     }

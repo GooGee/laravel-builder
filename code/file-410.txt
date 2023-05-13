@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
+    function create(User $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
+        $item->save();
+        $item->refresh();
+
+        event(new {{ action + entity.name }}Event($user, $item));
+
+        return $item;
     }
 
-    function run(User $user,
+    function make(int $userId,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
-        $item->userId = $user->id;
+        $item->userId = $userId;
+
 {% for column in columnzz %}
         $item->{{ column.name }} = ${{ column.name }};{% endfor %}
-
-        $item->save();
-        $item->refresh();
-
-        event(new {{ action + entity.name }}Event($user, $item));
 
         return $item;
     }

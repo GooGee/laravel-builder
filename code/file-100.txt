@@ -24,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }}
         $idzz = [];
         $itemzz = [];
         foreach ($datazz as $data) {
-            $item = $this->createOne->__invoke($user,
+            $item = $this->createOne->run($user,
 {% for column in columnzz %}
                       $data['{{ column.name }}'],{% endfor %});
             $idzz[] = $item->id;
