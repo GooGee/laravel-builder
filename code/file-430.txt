@@ -23,12 +23,7 @@ class {{ helper.getClassName(file, entity, action) }}
             throw new AccessDeniedHttpException();
         }
 
-        if ($item->dtDelete) {
-            throw new NotFoundHttpException();
-        }
-
-        $item->dtDelete = now();
-        $item->save();
+        $item->delete();
 
         event(new {{ action + entity.name }}Event($user, $item));
 
