@@ -23,8 +23,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
         $parameter = self::makePageParameter($data, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize);
 
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->where('userId', $user->id)
-            ->whereNull('dtDelete');
+            ->where('userId', $user->id);
 
         $builder = self::makeReadPageQueryBuilder($qb, $parameter);
 

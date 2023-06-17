@@ -6,7 +6,7 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\AbstractPaginator;
 
 abstract class AbstractResponse
 {
@@ -26,7 +26,7 @@ abstract class AbstractResponse
         }, $itemzz);
     }
 
-    public static function sendData(string $message, mixed $data, int $code): JsonResponse
+    public static function sendData(string $message, mixed $data, int $code = 200): JsonResponse
     {
         return new JsonResponse(compact('code', 'message', 'data'), $code);
     }
@@ -56,9 +56,9 @@ abstract class AbstractResponse
     /**
      * @template T of Model
      *
-     * @param  LengthAwarePaginator<T>  $paginator
+     * @param  AbstractPaginator<T>  $paginator
      */
-    public static function sendPage(LengthAwarePaginator $paginator, string $message = 'OK', int $code = 200): JsonResponse
+    public static function sendPage(AbstractPaginator $paginator, string $message = 'OK', int $code = 200): JsonResponse
     {
         /** @phpstan-ignore-next-line */
         $paginator->transform(function (Model $item) {
