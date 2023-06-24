@@ -37,7 +37,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {% for column in columnzz %}
         $response->assertJsonPath('item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
 
-        $item->dtDelete = now();
+        $item->delete();
         $item->save();
         $response = $this->putJson($this->makeURI($item->id), $data)
             ->assertStatus(404);

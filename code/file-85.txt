@@ -32,7 +32,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $response->assertJsonPath('item.id', $item->id);
         self::assertNull($response->json('item.dtDelete'));
 
-        $item->dtDelete = now();
+        $item->delete();
         $item->save();
         $response = $this->getJson($this->makeURI($item->id))
             ->assertStatus(404);
