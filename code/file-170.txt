@@ -7,7 +7,6 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 use App\Models\Admin;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
@@ -20,10 +19,6 @@ class {{ helper.getClassName(file, entity, action) }}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %})
     {
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
-
-        if ($item->dtDelete) {
-            throw new NotFoundHttpException();
-        }
 
 {% for column in columnzz %}
         $item->{{ column.name }} = ${{ column.name }};{% endfor %}

@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
- * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} createOne(array $attributes = [])
- * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} makeOne(array $attributes = [])
+ *
+ * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} createOne($attributes = [])
+ * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} makeOne($attributes = [])
  */
 class {{ helper.getClassName(file, entity, action) }} extends Factory
 {

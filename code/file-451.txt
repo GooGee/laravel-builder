@@ -9,16 +9,12 @@ use App\Base\AbstractController;
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
     public function __invoke(int $id, {{ action + entity.name }} $readOne): JsonResponse
     {
         $item = $readOne->findOrFail($id);
-        if ($item->dtDelete) {
-            throw new NotFoundHttpException();
-        }
 
         /** @var \App\Models\User $user */
         $user = auth()->user();

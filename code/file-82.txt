@@ -24,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $response = $this->deleteJson($this->makeURI(), [])
             ->assertStatus(422);
-        $response->assertJsonValidationErrors('idzz');
+        $response->assertJsonValidationErrorFor('idzz');
 
         $idzz = [$item->id];
         $response = $this->deleteJson($this->makeURI(), compact('idzz'))

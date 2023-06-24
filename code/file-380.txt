@@ -23,7 +23,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $itemzz = [$data];
         $response = $this->postJson($this->makeURI(), compact('itemzz'))
             ->assertStatus(422);
-        $response->assertJsonValidationErrors('itemzz.0.{{ column.alias }}');
+        $response->assertJsonValidationErrorFor('itemzz.0.{{ column.alias }}');
 {% endfor %}
         $data = $item->toArray();
         $itemzz = [$data];

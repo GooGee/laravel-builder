@@ -26,7 +26,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         unset($data['{{ column.alias }}']);
         $response = $this->postJson($this->makeURI(0), $data)
             ->assertStatus(422);
-        $response->assertJsonValidationErrors('{{ column.alias }}');
+        $response->assertJsonValidationErrorFor('{{ column.alias }}');
 {% endfor %}
         $data = $item->toArray();
         $response = $this->postJson($this->makeURI(0), $data)

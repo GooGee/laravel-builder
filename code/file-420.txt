@@ -24,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }}
     {
         $result = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->whereIn('id', $idzz)
-            ->update(['dtDelete' => now()]);
+            ->delete();
 
         event(new {{ action + entity.name }}Event($user, $idzz));
 

@@ -21,7 +21,6 @@ class {{ helper.getClassName(file, entity, action) }}
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->whereIn('id', $idzz)
-            ->whereNull('dtDelete')
             ->get();
     }
 
