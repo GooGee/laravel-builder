@@ -17,7 +17,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
      */
     function run(array $data): LengthAwarePaginator
     {
-        $parameter = self::makePageParameter($data, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize);
+        $parameter = self::makePageParameter($data);
 
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
 
@@ -27,8 +27,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {% for column in columnzz %}
             '{{ column.name }}',{% endfor %}
         ]);
+
         $builder->addSort();
-        return $builder->paginate();
+
+        /* @phpstan-ignore-next-line */
+        return $qb->paginate();
     }
 
 }

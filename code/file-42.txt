@@ -14,8 +14,8 @@ class ReadPageRequest extends AbstractRequest
     public static function getRulezzForPage(): array
     {
         $rulezz = [
-            'pagination.page' => ['integer', 'min:1'],
-            'pagination.perPage' => ['integer', 'min:5', 'max:1222'],
+            'page' => ['integer', 'min:1'],
+            'perPage' => ['integer', 'min:5', 'max:1222'],
             'sort.field' => ['string'],
             'sort.order' => ['string', Rule::in(['asc', 'desc'])],
         ];

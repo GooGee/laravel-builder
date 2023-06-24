@@ -17,18 +17,6 @@ class ReadPageQueryBuilder
     {
     }
 
-    public function addDateFilter(string $key = 'dtCreate'): self
-    {
-        if (isset($this->parameter->filter['dtStart'])) {
-            $this->qb->where($key, '>=', $this->parameter->filter['dtStart']);
-        }
-        if (isset($this->parameter->filter['dtEnd'])) {
-            $this->qb->where($key, '<', $this->parameter->filter['dtEnd']);
-        }
-
-        return $this;
-    }
-
     public function addFilter(string $key, string $operator = '='): self
     {
         if (isset($this->parameter->filter[$key])) {
@@ -60,19 +48,6 @@ class ReadPageQueryBuilder
         return $this;
     }
 
-    /**
-     * @param  string[]  $keyzz
-     * @return $this
-     */
-    public function addFilterzzSearch(array $keyzz): self
-    {
-        foreach ($keyzz as $key) {
-            $this->addFilterSearch($key);
-        }
-
-        return $this;
-    }
-
     public function addSort(): self
     {
         if (isset($this->parameter->sortField)) {
@@ -82,12 +57,4 @@ class ReadPageQueryBuilder
         return $this;
     }
 
-    /**
-     * @param  string[]  $columnzz
-     * @return LengthAwarePaginator<Model>
-     */
-    public function paginate(array $columnzz = ['*']): LengthAwarePaginator
-    {
-        return $this->qb->paginate($this->parameter->perPage, $columnzz, 'page', $this->parameter->page);
-    }
 }

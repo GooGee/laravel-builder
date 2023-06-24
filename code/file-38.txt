@@ -11,9 +11,9 @@ abstract class AbstractReadPage
     /**
      * @param  array<string, mixed>  $data
      */
-    public static function makePageParameter(array $data, int $perPage): PageParameter
+    public static function makePageParameter(array $data): PageParameter
     {
-        return new PageParameter($data, $perPage);
+        return new PageParameter($data);
     }
 
     /**

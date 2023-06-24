@@ -9,10 +9,6 @@ class PageParameter
     /** @var array<string, int|string> */
     public array $filter = [];
 
-    public int $page;
-
-    public int $perPage;
-
     public string|null $sortField;
 
     public string $sortOrder;
@@ -20,12 +16,9 @@ class PageParameter
     /**
      * @param  array<string, mixed>  $data
      */
-    public function __construct(array $data, int $perPage)
+    public function __construct(array $data)
     {
         $this->filter = $data['filter'] ?? [];
-
-        $this->page = isset($data['pagination']['page']) ? intval($data['pagination']['page']) : 1;
-        $this->perPage = isset($data['pagination']['perPage']) ? intval($data['pagination']['perPage']) : $perPage;
 
         $this->sortField = $data['sort']['field'] ?? null;
         $this->sortOrder = $data['sort']['order'] ?? 'asc';

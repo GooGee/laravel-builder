@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractReadPage;
-use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Model;
@@ -14,16 +13,18 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {
     /**
-     * @param User $user
      * @param array<string, mixed> $data
      * @return LengthAwarePaginator<Model>
      */
-    public function run(User $user, array $data): LengthAwarePaginator
+    public function run(?int $userId, array $data): LengthAwarePaginator
     {
-        $parameter = self::makePageParameter($data, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::PageSize);
+        $parameter = self::makePageParameter($data);
 
-        $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->where('userId', $user->id);
+        $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
+
+        if ($userId) {
+            $qb->where('userId', $userId);
+        }
 
         $builder = self::makeReadPageQueryBuilder($qb, $parameter);
 
@@ -31,8 +32,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {% for column in columnzz %}
             '{{ column.name }}',{% endfor %}
         ]);
+
         $builder->addSort();
-        return $builder->paginate();
+
+        /* @phpstan-ignore-next-line */
+        return $qb->paginate();
     }
 
 }
