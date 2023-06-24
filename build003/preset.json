@@ -4211,7 +4211,7 @@
                     "color": "#00f",
                     "layer": "Test",
                     "description": "",
-                    "nameSpacePattern": "Read${entity.name}",
+                    "nameSpacePattern": "${entity.name}",
                     "fileNamePattern": "Read${entity.name}HomeTest.php",
                     "id": 389
                 },
@@ -5621,7 +5621,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 2,
@@ -5655,7 +5656,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 2,
@@ -5689,7 +5691,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 2,
@@ -5723,7 +5726,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 2,
@@ -5757,7 +5761,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 2,
@@ -5791,7 +5796,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 2,
@@ -5825,7 +5831,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -5859,7 +5866,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -5893,7 +5901,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -5927,7 +5936,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -5961,7 +5971,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -5995,7 +6006,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6029,7 +6041,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6063,7 +6076,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6097,7 +6111,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6131,7 +6146,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6165,7 +6181,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6199,7 +6216,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6233,7 +6251,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 3,
@@ -6267,7 +6286,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6301,7 +6321,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6335,7 +6356,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "DateField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6369,7 +6391,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "DateField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6403,7 +6426,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "DateField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6437,7 +6461,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextInput"
+                    "raInput": "TextInput",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6471,7 +6496,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextInput"
+                    "raInput": "TextInput",
+                    "hidden": false
                 },
                 {
                     "entityId": 4,
@@ -6505,7 +6531,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "PasswordInput"
+                    "raInput": "PasswordInput",
+                    "hidden": true
                 },
                 {
                     "entityId": 4,
@@ -6520,7 +6547,7 @@
                     "nullable": true,
                     "cast": "",
                     "fillable": false,
-                    "ro": true,
+                    "ro": false,
                     "wo": true,
                     "fakeRaw": true,
                     "fakeUnique": false,
@@ -6539,7 +6566,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": true
                 },
                 {
                     "entityId": 4,
@@ -6573,7 +6601,8 @@
                     "reserved": false,
                     "style": "",
                     "raField": "TextField",
-                    "raInput": "BooleanInput"
+                    "raInput": "BooleanInput",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6599,13 +6628,14 @@
                     "inTable": false,
                     "allowReserved": false,
                     "deprecated": false,
-                    "example": "",
+                    "example": "1",
                     "explode": false,
                     "required": true,
                     "style": "simple",
                     "id": 30,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6631,13 +6661,14 @@
                     "inTable": false,
                     "allowReserved": false,
                     "deprecated": false,
-                    "example": "",
+                    "example": "1",
                     "explode": false,
                     "required": true,
                     "style": "form",
                     "id": 31,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6663,13 +6694,14 @@
                     "inTable": false,
                     "allowReserved": false,
                     "deprecated": false,
-                    "example": "",
+                    "example": "1",
                     "explode": false,
                     "required": true,
                     "style": "simple",
                     "id": 32,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6695,13 +6727,14 @@
                     "inTable": false,
                     "allowReserved": false,
                     "deprecated": false,
-                    "example": "",
+                    "example": "1",
                     "explode": false,
                     "required": true,
                     "style": "form",
                     "id": 33,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6727,13 +6760,14 @@
                     "inTable": false,
                     "allowReserved": false,
                     "deprecated": false,
-                    "example": "",
+                    "example": "1",
                     "explode": false,
                     "required": false,
                     "style": "form",
                     "id": 34,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6765,7 +6799,8 @@
                     "style": "simple",
                     "id": 35,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6797,7 +6832,8 @@
                     "style": "simple",
                     "id": 36,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6829,7 +6865,8 @@
                     "style": "simple",
                     "id": 37,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 },
                 {
                     "color": "#fff",
@@ -6861,7 +6898,8 @@
                     "style": "simple",
                     "id": 38,
                     "raField": "TextField",
-                    "raInput": "TextField"
+                    "raInput": "TextField",
+                    "hidden": false
                 }
             ],
             "ColumnConstraint": [

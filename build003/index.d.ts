@@ -385,6 +385,14 @@ namespace LB {
             itemzz: IdNameItem[],
             map?: Map<number, string>,
         ) => Map<number, string>
+        makeTypeFormatText: (
+            tf: LB.TypeFormat,
+            tfzz: LB.TypeFormat[],
+            variablezz: LB.Variable[],
+            wpzz: LB.WuParameter[],
+            wuzz: LB.Wu[],
+            prefix: string,
+        ) => string
         ma?: ModuleAction
         module?: Module
         tree: DataForScriptTreeHelper
