@@ -33,8 +33,9 @@ class MigrationService
     function getAllInDB()
     {
         try {
+            $table = self::Table;
             $all = $this->em->getConnection()
-                ->prepare('SELECT * FROM ' . self::Table)
+                ->prepare("SELECT * FROM `$table`")
                 ->executeQuery()
                 ->fetchAllAssociative();
             return $all;
