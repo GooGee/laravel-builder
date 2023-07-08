@@ -141,6 +141,7 @@ namespace LB {
         name: string
         description: string
         summary: string
+        routeName: string
         operationId: string
         requestId: number
     }
@@ -275,8 +276,7 @@ namespace LB {
         description: string
         isWu: boolean
     }
-}
-namespace LB {
+
     interface ApiErrorResponse {
         message: string
         errors: Record<string, string[]>
@@ -452,11 +452,6 @@ namespace LB {
         included?: boolean
         indexzz: DoctrineIndex[]
         relationzz: DoctrineRelation[]
-    }
-
-    interface Finder<T extends IdItem> {
-        find(id: number): T | undefined
-        itemzz: T[]
     }
 
     interface IdItem {
