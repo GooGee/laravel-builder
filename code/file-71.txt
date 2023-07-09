@@ -23,7 +23,7 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends {{ helper
      */
     public static function makeItem(User $user, array $attributes = [])
     {
-        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::factory()
+        $item = {{ helper.getClassName(helper.findFile('Factory'), entity, action) }}::new()
             ->makeOne($attributes);
         return $item;
     }

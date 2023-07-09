@@ -268,6 +268,9 @@ function makeHelper(data) {
                     if (pm.middlewarezz.length) {
                         text += `->middleware(['${pm.middlewarezz.join("', '")}'])`
                     }
+                    if (ma.routeName) {
+                        text += `->name('${ma.routeName}')`
+                    }
                     linezz.push(text + ';')
                 })
 
