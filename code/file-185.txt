@@ -15,10 +15,10 @@ class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
      */
     public function rules()
     {
-        return static::getRulezzForPage();
+        return static::getRuleMapForPage();
     }
 
-    public static function getRulezz()
+    public static function getRuleMap()
     {
         return [
 {% for column in columnzz %}

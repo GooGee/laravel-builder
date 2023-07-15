@@ -23,26 +23,26 @@ abstract class AbstractRequest extends FormRequest
      */
     public function rules(): array
     {
-        return static::getRulezz();
+        return static::getRuleMap();
     }
 
     /**
      * @return array<string, string[]>
      */
-    public static function getRulezzForItemzz(): array
+    public static function getRuleMapForItemzz(): array
     {
-        $rulezz = [
+        $ruleMap = [
             'itemzz' => ['array', 'max:111', 'required'],
         ];
-        foreach (static::getRulezz() as $key => $item) {
-            $rulezz['itemzz.*.'.$key] = $item;
+        foreach (static::getRuleMap() as $key => $item) {
+            $ruleMap['itemzz.*.'.$key] = $item;
         }
 
-        return $rulezz;
+        return $ruleMap;
     }
 
     /**
      * @return array<string, string[]>
      */
-    abstract public static function getRulezz(): array;
+    abstract public static function getRuleMap(): array;
 }

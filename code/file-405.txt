@@ -16,6 +16,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
      */
     public function rules()
     {
-        return static::getRulezzForItemzz();
+        return static::getRuleMapForItemzz();
     }
 }

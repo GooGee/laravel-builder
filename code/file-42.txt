@@ -11,25 +11,25 @@ class ReadPageRequest extends AbstractRequest
     /**
      * @return array<string, mixed[]>
      */
-    public static function getRulezzForPage(): array
+    public static function getRuleMapForPage(): array
     {
-        $rulezz = [
-            'page' => ['integer', 'min:1'],
-            'perPage' => ['integer', 'min:5', 'max:1222'],
+        $ruleMap = [
+            'pagination.page' => ['integer', 'min:1'],
+            'pagination.perPage' => ['integer', 'min:5', 'max:1222'],
             'sort.field' => ['string'],
             'sort.order' => ['string', Rule::in(['asc', 'desc'])],
         ];
-        foreach (static::getRulezz() as $key => $item) {
-            $rulezz['filter.'.$key] = $item;
+        foreach (static::getRuleMap() as $key => $item) {
+            $ruleMap['filter.'.$key] = $item;
         }
 
-        return $rulezz;
+        return $ruleMap;
     }
 
     /**
      * @return array<string, string[]>
      */
-    public static function getRulezz(): array
+    public static function getRuleMap(): array
     {
         return [
         ];
