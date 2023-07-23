@@ -45,7 +45,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
      * @var array<int, string>
      */
     protected $hidden = [
-{% for column in columnzz | selectattr('wo') %}
+{% for column in columnzz | selectattr('hidden') %}
         '{{ column.name }}',{% endfor %}
     ];
 
