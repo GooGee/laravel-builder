@@ -6,22 +6,20 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ReadPageQueryBuilder
 {
     /**
      * @param  Builder<Model>  $qb
+     * @param  array<string, mixed>  $data
      */
-    public function __construct(private Builder $qb, private PageParameter $parameter)
+    public function __construct(public Builder $qb, private array $data)
     {
     }
 
-    public function addFilter(string $key, string $operator = '='): self
+    public function addFilter(string $key): self
     {
-        if (isset($this->parameter->filter[$key])) {
-            $this->qb->where($key, $operator, $this->parameter->filter[$key]);
-        }
+        $this->qb->where($key, $this->getFilterValue($key));
 
         return $this;
     }
@@ -41,20 +39,27 @@ class ReadPageQueryBuilder
 
     public function addFilterSearch(string $key): self
     {
-        if (isset($this->parameter->filter[$key])) {
-            $this->qb->where($key, 'LIKE', "%{$this->parameter->filter[$key]}%");
-        }
+        $this->qb->where($key, 'LIKE', "%{$this->getFilterValue($key)}%");
 
         return $this;
     }
 
     public function addSort(): self
     {
-        if (isset($this->parameter->sortField)) {
-            $this->qb->orderBy($this->parameter->sortField, $this->parameter->sortOrder);
+        $sortField = $this->data['sortField'] ?? null;
+        $sortOrder = $this->data['sortOrder'] ?? 'asc';
+
+        if (is_null($sortField)) {
+            return $this;
         }
+
+        $this->qb->orderBy($sortField, $sortOrder);
 
         return $this;
     }
 
+    public function getFilterValue(string $key): int|string|null
+    {
+        return $this->data['filter'][$key] ?? null;
+    }
 }

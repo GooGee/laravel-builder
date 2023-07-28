@@ -9,20 +9,13 @@ use Illuminate\Database\Eloquent\Builder;
 abstract class AbstractReadPage
 {
     /**
-     * @param  array<string, mixed>  $data
-     */
-    public static function makePageParameter(array $data): PageParameter
-    {
-        return new PageParameter($data);
-    }
-
-    /**
      * @template T of \Illuminate\Database\Eloquent\Model
      *
      * @param  Builder<T>  $qb
+     * @param  array<string, mixed>  $data
      */
-    public static function makeReadPageQueryBuilder(Builder $qb, PageParameter $parameter): ReadPageQueryBuilder
+    public static function makeReadPageQueryBuilder(Builder $qb, array $data): ReadPageQueryBuilder
     {
-        return new ReadPageQueryBuilder($qb, $parameter);
+        return new ReadPageQueryBuilder($qb, $data);
     }
 }

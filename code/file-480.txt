@@ -18,15 +18,13 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
      */
     public function run(?int $userId, array $data): LengthAwarePaginator
     {
-        $parameter = self::makePageParameter($data);
-
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
 
         if ($userId) {
             $qb->where('userId', $userId);
         }
 
-        $builder = self::makeReadPageQueryBuilder($qb, $parameter);
+        $builder = self::makeReadPageQueryBuilder($qb, $data);
 
         $builder->addFilterzz([
 {% for column in columnzz %}
