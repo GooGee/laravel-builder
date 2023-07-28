@@ -97,8 +97,7 @@ function run(data) {
         if (cnzz.length === 0) {
             return ''
         }
-        const namezz = [ddd.entity.name].concat(cnzz)
-        namezz.push(index.type)
+        const namezz = [ddd.entity.name, index.type].concat(cnzz)
         return `#[ORM\\${type}(name: "${namezz.join('_')}", columns: ["${cnzz.join('", "')}"])]`
     }
 
