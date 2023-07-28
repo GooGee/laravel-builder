@@ -20,7 +20,7 @@ class PageParameter
     {
         $this->filter = $data['filter'] ?? [];
 
-        $this->sortField = $data['sort']['field'] ?? null;
-        $this->sortOrder = $data['sort']['order'] ?? 'asc';
+        $this->sortField = $data['sortField'] ?? null;
+        $this->sortOrder = $data['sortOrder'] ?? 'asc';
     }
 }

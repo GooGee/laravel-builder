@@ -31,7 +31,7 @@ function run(data) {
             optionzz.push(`"comment" => "${column.comment}"`)
         }
         if (column.default.length) {
-            optionzz.push(`"default" => "${column.default}"`)
+            optionzz.push(`"default" => ${column.default}`)
         }
         if (column.unsigned) {
             optionzz.push('"unsigned" => true')

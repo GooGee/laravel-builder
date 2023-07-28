@@ -9,15 +9,23 @@ use Illuminate\Validation\Rule;
 class ReadPageRequest extends AbstractRequest
 {
     /**
+     * Get the validation rules that apply to the request.
+     */
+    public function rules(): array
+    {
+        return static::getRuleMapForPage();
+    }
+
+    /**
      * @return array<string, mixed[]>
      */
     public static function getRuleMapForPage(): array
     {
         $ruleMap = [
-            'pagination.page' => ['integer', 'min:1'],
-            'pagination.perPage' => ['integer', 'min:5', 'max:1222'],
-            'sort.field' => ['string'],
-            'sort.order' => ['string', Rule::in(['asc', 'desc'])],
+            'page' => ['integer', 'min:1'],
+            'perPage' => ['integer', 'min:5', 'max:1222'],
+            'sortField' => ['string'],
+            'sortOrder' => ['string', Rule::in(['asc', 'desc'])],
         ];
         foreach (static::getRuleMap() as $key => $item) {
             $ruleMap['filter.'.$key] = $item;
