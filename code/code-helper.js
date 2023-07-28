@@ -252,6 +252,9 @@ function makeHelper(data) {
                     if (ma === undefined) {
                         return
                     }
+                    if (ma.inRoute === false) {
+                        return
+                    }
 
                     const file = ma.filezz.find(item => item.name.includes('Controller'))
                     if (file === undefined) {
