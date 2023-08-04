@@ -10,11 +10,17 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
+    function create(Admin $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
+        $item->save();
+        $item->refresh();
+
+        event(new {{ action + entity.name }}Event($user, $item));
+
+        return $item;
     }
 
-    function run(Admin $user,
+    function make(Admin $user,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}

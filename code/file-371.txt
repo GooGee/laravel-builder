@@ -20,9 +20,8 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractA
     /**
      * @param User $user
      * @param array<string, mixed> $attributes
-     * @return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
      */
-    public static function makeItem(User $user, array $attributes = [])
+    public static function makeItem(User $user, array $attributes = []): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         $item = {{ helper.getClassName(helper.findFile('Factory'), entity, action) }}::new()
             ->for($user)

@@ -14,7 +14,6 @@ class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
 {% for column in columnzz %}
             '{{ column.alias }}' => [{% for constraint in column.constraintzz %}
                 '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
-                'sometimes',
             ],
 {% endfor %}
         ];
