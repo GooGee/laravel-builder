@@ -10,10 +10,6 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
-    {
-    }
-
     function run(int $id, Admin $user,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %})

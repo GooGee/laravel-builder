@@ -11,10 +11,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
-    {
-    }
-
     function run(int $id, User $user,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}

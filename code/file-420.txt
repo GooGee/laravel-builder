@@ -11,10 +11,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
-    {
-    }
-
     /**
      * @param User $user
      * @param array<int> $idzz

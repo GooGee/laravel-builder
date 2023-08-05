@@ -10,10 +10,6 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
-    {
-    }
-
     function run(Admin $user, int $id)
     {
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);

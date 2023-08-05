@@ -9,10 +9,6 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct()
-    {
-    }
-
     function find(int $id)
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::find($id);
