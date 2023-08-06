@@ -35,16 +35,15 @@ abstract class AbstractApiTest extends TestCase
 
     /**
      * @param  array<string, mixed>  $attributes
-     * @return User
      */
-    protected function createUser(array $attributes = [])
+    protected function createUser(array $attributes = []): User
     {
         $user = UserFactory::new()->createOne($attributes);
 
         return $user->refresh();
     }
 
-    protected function makeURI(string|int $path = '', array $parameterzz = [])
+    protected function makeURI(string|int $path = '', array $parameterzz = []): string
     {
         $query = '';
         if (count($parameterzz)) {

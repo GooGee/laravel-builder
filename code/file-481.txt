@@ -13,7 +13,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
     public function __invoke({{ helper.getClassName(helper.findFile('ReadItemPageRequest'), entity, action) }} $request, Read{{ entity.name }}Page $readPage): JsonResponse
     {
-        /** @var \App\Models\User $user */
+        /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
         $page = $readPage->run($user?->id, $request->validated());

@@ -29,11 +29,6 @@ class {{ helper.getClassName(file, entity, action) }}
 {% for column in columnzz %}
         $item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
-        $item->save();
-        $item->refresh();
-
-        event(new {{ action + entity.name }}Event($user, $item));
-
         return $item;
     }
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,4 +14,15 @@ abstract class AbstractFeatureTest extends TestCase
     use RefreshDatabase;
 
     protected $seed = true;
+
+    /**
+     * @param array<string, mixed> $attributes
+     */
+    protected function createUser(array $attributes = []): User
+    {
+        $user = UserFactory::new()->createOne($attributes);
+
+        return $user->refresh();
+    }
+
 }
