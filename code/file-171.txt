@@ -23,8 +23,10 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             throw new AccessDeniedHttpException('Permission {{ action + entity.name }} required');
         }
 
-        $item = $update->run($id,
-            $user,
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+
+        $item = $update->run($user,
+            $item,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}
         );

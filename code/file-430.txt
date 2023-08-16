@@ -12,9 +12,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function run(User $user, int $id): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function run(User $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
         if ($user->id !== $item->userId) {
             throw new AccessDeniedHttpException();
         }

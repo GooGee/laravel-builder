@@ -17,7 +17,9 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $result = $delete->run($user, $id);
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+
+        $result = $delete->run($user, $item);
 
         return AbstractResponse::sendOK($result);
     }

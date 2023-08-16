@@ -19,8 +19,10 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $item = $update->run($id,
-            $user,
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+
+        $item = $update->run($user,
+            $item,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}
         );
