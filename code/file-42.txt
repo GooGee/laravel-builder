@@ -23,7 +23,7 @@ class ReadPageRequest extends AbstractRequest
     {
         $ruleMap = [
             'page' => ['integer', 'min:1'],
-            'perPage' => ['integer', 'min:5', 'max:1222'],
+            'perPage' => ['integer', 'min:5', 'max:100'],
             'sortField' => ['string'],
             'sortOrder' => ['string', Rule::in(['asc', 'desc'])],
         ];

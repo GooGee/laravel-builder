@@ -6,7 +6,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {

@@ -32,10 +32,10 @@ abstract class AbstractRequest extends FormRequest
     public static function getRuleMapForItemzz(): array
     {
         $ruleMap = [
-            'itemzz' => ['array', 'max:111', 'required'],
+            'itemzz' => ['array', 'max:100', 'required'],
         ];
         foreach (static::getRuleMap() as $key => $item) {
-            $ruleMap['itemzz.*.'.$key] = $item;
+            $ruleMap["itemzz.*.$key"] = $item;
         }
 
         return $ruleMap;
