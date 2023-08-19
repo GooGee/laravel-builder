@@ -16,9 +16,8 @@ abstract class AbstractAdminTest extends AbstractApiTest
 
     /**
      * @param array<string, mixed> $attributes
-     * @return Admin
      */
-    protected function createAdmin(array $attributes = [])
+    protected function createAdmin(array $attributes = []): Admin
     {
         $admin = AdminFactory::new()->createOne($attributes);
         return $admin->refresh();
@@ -26,9 +25,8 @@ abstract class AbstractAdminTest extends AbstractApiTest
 
     /**
      * @param string $name
-     * @return Permission
      */
-    protected function createPermission(string $name)
+    protected function createPermission(string $name): Permission
     {
         return Permission::create([
             'name' => $name,

@@ -43,47 +43,63 @@ abstract class AbstractApiTest extends TestCase
         return $user->refresh();
     }
 
-    protected function makeURI(string|int $path = '', array $parameterzz = []): string
+    /**
+     * @param  array<string, mixed>  $filter
+     * @return array<string, mixed>
+     */
+    protected function makePageParameter(array $filter = [],
+                                         string $sortField = 'id',
+                                         string $sortOrder = 'desc',
+                                         int $page = 1,
+                                         int $perPage = 10,
+    ): array {
+        return compact('filter', 'sortField', 'sortOrder', 'page', 'perPage');
+    }
+
+    /**
+     * @param  array<string, mixed>  $parameter
+     */
+    protected function makeURI(string|int $path = '', array $parameter = []): string
     {
         $query = '';
-        if (count($parameterzz)) {
-            $query = '?'.http_build_query($parameterzz);
+        if (count($parameter)) {
+            $query = '?'.http_build_query($parameter);
         }
 
         return static::URI.$this->path().'/'.$path.$query;
     }
 
-    protected function seeData(array $structure, TestResponse $response)
+    protected function seeData(TestResponse $response): self
     {
         $response->assertJsonStructure(
             [
                 'message',
-                'data' => $structure,
+                'data' => static::structure(),
             ]
         );
 
         return $this;
     }
 
-    protected function seeItem(array $structure, TestResponse $response)
+    protected function seeItem(TestResponse $response): self
     {
         $response->assertJsonStructure(
             [
                 'message',
-                'item' => $structure,
+                'item' => static::structure(),
             ]
         );
 
         return $this;
     }
 
-    protected function seeItemzz(array $structure, TestResponse $response)
+    protected function seeItemzz(TestResponse $response): self
     {
         $response->assertJsonStructure(
             [
                 'message',
                 'itemzz' => [
-                    '*' => $structure,
+                    '*' => static::structure(),
                 ],
             ]
         );
@@ -91,7 +107,7 @@ abstract class AbstractApiTest extends TestCase
         return $this;
     }
 
-    protected function seePage(array $structure, TestResponse $response, bool $simple = true, bool $empty = false)
+    protected function seePage(TestResponse $response, bool $simple = true, bool $empty = false): self
     {
         $page = [
             'from',
@@ -106,7 +122,7 @@ abstract class AbstractApiTest extends TestCase
         if ($empty) {
             $response->assertJsonPath('data.data', []);
         } else {
-            $page['data'] = ['*' => $structure];
+            $page['data'] = ['*' => static::structure()];
         }
         $response->assertJsonStructure([
             'message',

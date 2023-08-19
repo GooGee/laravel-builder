@@ -17,19 +17,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $item = $this->makeItem($user);
         $item->save();
 
-        $data = [
-            'pagination' => [
-                'page' => 1,
-                'perPage' => 10,
-            ],
-            'sort' => [
-                'field' => 'id',
-                'order' => 'desc',
-            ],
-            'filter' => [
-
-            ],
-        ];
+        $data = $this->makePageParameter();
         $response = $this->json('GET', $this->makeURI(), $data)
             ->assertStatus(401);
 
@@ -37,7 +25,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $response = $this->json('GET', $this->makeURI(), $data)
             ->assertStatus(200);
-        $this->seePage(self::structure(), $response);
+        $this->seePage($response);
         $response->assertJsonCount(1, 'page.data');
 
 {% for column in columnzz %}
@@ -46,7 +34,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         ];
         $response = $this->json('GET', $this->makeURI(), $data)
             ->assertStatus(200);
-        $this->seePage(self::structure(), $response);
+        $this->seePage($response);
         $response->assertJsonPath('page.data.0.{{ column.alias }}', $item->{{ column.alias }});
 {% endfor %}
 
