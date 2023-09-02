@@ -16,7 +16,6 @@ class {{ helper.getClassName(file, entity, action) }}
 
     function handle({{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }} $event)
     {
-        Log::channel('admin')->info({{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }}::class, ['userId' => $event->user->id, 'id' => $event->item->id]);
         $this->createOneOperation->run($event->user, {{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }}::class, strval($event->item->id));
     }
 }

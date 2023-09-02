@@ -6,11 +6,12 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(public User $user, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item)
+    public function __construct(public int $userId, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item)
     {
+        Log::channel('user')->info(self::class, ['userId' => $userId, 'id' => $item->id]);
     }
 }

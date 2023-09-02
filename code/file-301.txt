@@ -14,7 +14,7 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param User $user
      * @param array<int> $idzz
      */
-    public function __construct(public User $user, public array $idzz)
+    public function __construct(public int $userId, public array $idzz)
     {
     }
 }

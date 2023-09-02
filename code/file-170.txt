@@ -19,7 +19,7 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $item->save();
 
-        event(new {{ action + entity.name }}Event($user, $item));
+        event(new {{ action + entity.name }}Event($user->id, $item));
 
         return $item;
     }

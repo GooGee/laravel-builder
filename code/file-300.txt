@@ -10,7 +10,7 @@ use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(public User $user, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item)
+    public function __construct(public int $userId, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item)
     {
     }
 }
