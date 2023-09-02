@@ -26,7 +26,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $data = $item->toArray();
         $response = $this->postJson($this->makeURI(0), $data)
             ->assertStatus(200);
-        $this->seeItem(self::structure(), $response);
+        $this->seeItem($response);
 {% for column in czz %}
         $response->assertJsonPath('item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
     }

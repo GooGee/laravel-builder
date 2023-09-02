@@ -41,7 +41,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $data = $item->toArray();
         $response = $this->putJson($this->makeURI($item->id), $data)
             ->assertStatus(200);
-        $this->seeItem(self::structure(), $response);
+        $this->seeItem($response);
 {% for column in columnzz %}
         $response->assertJsonPath('item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
 
