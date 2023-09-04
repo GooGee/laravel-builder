@@ -20,7 +20,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $response = $this->json('GET', $this->makeURI(), compact('idzz'))
             ->assertStatus(200);
-        $this->seeItemzz(self::structure(), $response);
+        $this->seeItemzz($response);
         $response->assertJsonCount(1, 'itemzz');
     }
 }

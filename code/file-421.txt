@@ -6,14 +6,14 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
 use App\Base\AbstractResponse;
-use App\Base\DeleteManyRequest;
+use App\Base\ReadManyRequest;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(DeleteManyRequest $request, {{ action + entity.name }} $deleteMany): JsonResponse
+    public function __invoke(ReadManyRequest $request, {{ action + entity.name }} $deleteMany): JsonResponse
     {
         /** @var \App\Models\User $user */
         $user = auth()->user();

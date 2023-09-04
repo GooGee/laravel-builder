@@ -7,6 +7,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Database\Eloquent\Collection;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
@@ -16,24 +17,32 @@ class {{ helper.getClassName(file, entity, action) }}
 
     /**
      * @param User $user
-     * @param array<int, array> $datazz
-     * @return array<int>
+     * @param  array<int, array<string, mixed>>  $datazz
+     * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
     function run(User $user, array $datazz): array
     {
-        $idzz = [];
-        $itemzz = [];
+        /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
+        $itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->whereIn('id', array_column($datazz, 'id'))
+            ->get();
+        /** @var array<int, array<string, mixed>> $map */
+        $map = [];
         foreach ($datazz as $data) {
-            $item = $this->updateOne->run($data['id'], $user,
+            $map[$data['id']] = $data;
+        }
+        foreach ($itemzz as $item) {
+            $data = $map[$item->id];
+            $this->updateOne->run($user,
+                $item,
 {% for column in columnzz %}
-                      $data['{{ column.name }}'],{% endfor %});
-            $idzz[] = $item->id;
-            $itemzz[] = $item;
+                      $data['{{ column.name }}'],{% endfor %}
+            );
         }
 
-        event(new {{ action + entity.name }}Event($user->id, $idzz));
+        event(new {{ action + entity.name }}Event($user->id, $itemzz->pluck('id')->toArray()));
 
-        return $itemzz;
+        return $itemzz->all();
     }
 
 }

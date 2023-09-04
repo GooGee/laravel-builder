@@ -13,7 +13,7 @@ class ReadManyRequest extends AbstractRequest
     {
         return [
 
-            'idzz' => ['array', 'max:111', 'required'],
+            'idzz' => ['array', 'max:100', 'required'],
             'idzz.*' => ['integer'],
 
         ];

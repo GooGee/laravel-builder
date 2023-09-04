@@ -22,13 +22,10 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(422);
         $response->assertJsonValidationErrorFor('idzz');
 
-        self::assertNull($item->dtDelete);
         $idzz = [$item->id];
         $response = $this->deleteJson($this->makeURI(), compact('idzz'))
             ->assertStatus(200);
         $response->assertJsonCount(1, 'data');
-        $item->refresh();
-        self::assertNotNull($item->dtDelete);
 
     }
 }

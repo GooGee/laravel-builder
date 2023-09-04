@@ -26,12 +26,12 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(422);
         $response->assertJsonValidationErrorFor('itemzz.0.{{ column.alias }}');
 {% endfor %}
-        $item->dtUpdate = now();
+
         $data = $item->toArray();
         $itemzz = [$data];
         $response = $this->putJson($this->makeURI(), compact('itemzz'))
             ->assertStatus(200);
-        $this->seeItemzz(self::structure(), $response);
+        $this->seeItemzz($response);
         $response->assertJsonCount(1, 'itemzz');
 {% for column in columnzz %}
         $response->assertJsonPath('item.0.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}

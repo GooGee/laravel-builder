@@ -13,8 +13,8 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     /**
      * @param User $user
-     * @param array<int> $idzz
-     * @return array<int>
+     * @param array<int, int> $idzz
+     * @return array<int, int>
      */
     function run(User $user, array $idzz): array
     {

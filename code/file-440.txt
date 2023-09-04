@@ -13,8 +13,8 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     /**
      * @param User $user
-     * @param array<int> $idzz
-     * @return Collection<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
+     * @param array<int, int> $idzz
+     * @return Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
     function run(User $user, array $idzz): Collection
     {

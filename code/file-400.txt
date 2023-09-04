@@ -16,17 +16,20 @@ class {{ helper.getClassName(file, entity, action) }}
 
     /**
      * @param User $user
-     * @param array<int, array> $datazz
-     * @return array<int>
+     * @param  array<int, array<string, mixed>>  $datazz
+     * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
     function run(User $user, array $datazz): array
     {
+        /** @var array<int, int> $idzz */
         $idzz = [];
+        /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
         $itemzz = [];
         foreach ($datazz as $data) {
-            $item = $this->createOne->run($user,
+            $item = $this->createOne->make($user->id,
 {% for column in columnzz %}
                       $data['{{ column.name }}'],{% endfor %});
+            $this->createOne->create($user, $item);
             $idzz[] = $item->id;
             $itemzz[] = $item;
         }
