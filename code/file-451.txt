@@ -12,9 +12,9 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $id, {{ action + entity.name }} $readOne): JsonResponse
+    public function __invoke(int $id): JsonResponse
     {
-        $item = $readOne->findOrFail($id);
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
         /** @var \App\Models\User $user */
         $user = auth()->user();

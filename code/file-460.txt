@@ -20,7 +20,7 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param  array<int, array<string, mixed>>  $datazz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(User $user, array $datazz): array
+    function run(int $userId, array $datazz): array
     {
         /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
         $itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
@@ -40,7 +40,7 @@ class {{ helper.getClassName(file, entity, action) }}
             );
         }
 
-        event(new {{ action + entity.name }}Event($user->id, $itemzz->pluck('id')->toArray()));
+        event(new {{ action + entity.name }}Event($userId, $itemzz->pluck('id')->toArray()));
 
         return $itemzz->all();
     }

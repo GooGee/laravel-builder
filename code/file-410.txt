@@ -10,12 +10,12 @@ use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function create(User $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function create(int $userId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         $item->save();
         $item->refresh();
 
-        event(new {{ action + entity.name }}Event($user->id, $item));
+        event(new {{ action + entity.name }}Event($userId, $item));
 
         return $item;
     }

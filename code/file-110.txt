@@ -15,7 +15,7 @@ class {{ helper.getClassName(file, entity, action) }}
         $item->save();
         $item->refresh();
 
-        event(new {{ action + entity.name }}Event($user->id, $item));
+        event(new {{ action + entity.name }}Event($userId, $item));
 
         return $item;
     }

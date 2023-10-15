@@ -12,14 +12,13 @@ use Illuminate\Database\Eloquent\Collection;
 class {{ helper.getClassName(file, entity, action) }}
 {
     /**
-     * @param User $user
      * @param array<int, int> $idzz
      * @return Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(User $user, array $idzz): Collection
+    function run(int $userId, array $idzz): Collection
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->where('userId', $user->id)
+            ->where('userId', $userId)
             ->whereIn('id', $idzz)
             ->get();
     }

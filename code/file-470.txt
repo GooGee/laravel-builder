@@ -11,11 +11,11 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function run(User $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item,
+    function run(int $userId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        if ($user->id !== $item->userId) {
+        if ($userId !== $item->userId) {
             throw new AccessDeniedHttpException();
         }
 
@@ -24,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $item->save();
 
-        event(new {{ action + entity.name }}Event($user->id, $item));
+        event(new {{ action + entity.name }}Event($userId, $item));
 
         return $item;
     }

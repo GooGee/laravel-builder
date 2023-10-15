@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
     public function __invoke({{ action + entity.name }}Request $request,
-                             {{ action + entity.name }} $create,
+                             {{ action + entity.name }} $createOne,
     )
     {
         /** @var \App\Models\Admin $user */
@@ -23,13 +23,13 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             throw new AccessDeniedHttpException('Permission {{ action + entity.name }} required');
         }
 
-        $item = $create->make($user,
+        $item = $createOne->make($user,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}
         );
 
         DB::beginTransaction();
-        $item = $create->create($user, $item);
+        $item = $createOne->create($user, $item);
         DB::commit();
 
         return {{ action + entity.name }}Response::sendItem($item);

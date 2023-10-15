@@ -13,7 +13,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
     public function __invoke(int $id,
                              {{ action + entity.name }}Request $request,
-                             {{ action + entity.name }}        $update,
+                             {{ action + entity.name }}        $updateOne,
     ): JsonResponse
     {
         /** @var \App\Models\User $user */
@@ -21,7 +21,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
-        $item = $update->run($user,
+        $item = $updateOne->run($user->id,
             $item,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}
