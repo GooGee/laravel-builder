@@ -94,9 +94,7 @@ function makeHelper(data) {
         if (parent === undefined) {
             return []
         }
-        return ddd.db.tables.CollectionItem.filter(
-            (item) => item.collectionId === parent.id,
-        )
+        return ddd.db.tables.CollectionItem.filter((item) => item.collectionId === parent.id,)
     }
 
     /**
@@ -205,9 +203,7 @@ function makeHelper(data) {
             const entity = entityMap.get(ma.entityId)
             const module = moduleMap.get(ma.moduleId)
             return {
-                permission: directory?.name + entity?.name,
-                entity: entity?.name,
-                module: module?.name,
+                permission: directory?.name + entity?.name, entity: entity?.name, module: module?.name,
             }
         })
     }
@@ -248,6 +244,7 @@ function makeHelper(data) {
         const sm = new Map()
         ddd.db.tables.Entity.forEach(item => sm.set(item.id, item))
 
+        let entityId = 0
         const textzz = []
         ddd.db.tables.Path.sort((aa, bb) => aa.name.localeCompare(bb.name))
         ddd.db.tables.Path
@@ -294,11 +291,16 @@ function makeHelper(data) {
                 })
 
                 if (linezz.length) {
+                    if (entityId !== path.entityId) {
+                        entityId = path.entityId
+                        textzz.push('')
+                    }
                     linezz.sort((aa, bb) => aa.localeCompare(bb))
                     textzz.push(...linezz, '')
                 }
             })
-        return textzz.join('\n')
+
+        return textzz.join('\n').replaceAll('\n\n', '\n')
     }
 
 
