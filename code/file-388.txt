@@ -8,7 +8,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {
     protected function path(): string
     {
-        return "{{ entity.name }}_Page";
+        return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
@@ -46,5 +46,12 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(200);
         $response->assertJsonCount(0, 'page.data');
 {% endfor %}
+
+        $other = $this->createUser();
+        $this->actingAs($other);
+
+        $response = $this->json('GET', $this->makeURI(), $data)
+            ->assertStatus(200);
+        $response->assertJsonCount(0, 'page.data');
     }
 }

@@ -12,11 +12,6 @@ use Tests\API\AbstractApiTest;
 abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractApiTest
 {
 
-    protected function path(): string
-    {
-        return "{{ entity.name }}";
-    }
-
     /**
      * @param User $user
      * @param array<string, mixed> $attributes

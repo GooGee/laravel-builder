@@ -6,6 +6,11 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
 {
+    protected function path(): string
+    {
+        return "{{ entity.name }}/{{ action }}";
+    }
+
     public function test{{ action + entity.name }}()
     {
         $permission = $this->createPermission('{{ action + entity.name }}');
@@ -46,7 +51,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $response->assertJsonPath('item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
 
         $item->delete();
-        $item->save();
         $response = $this->putJson($this->makeURI($item->id), $data)
             ->assertStatus(404);
     }
