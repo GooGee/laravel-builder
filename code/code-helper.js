@@ -180,6 +180,22 @@ function makeHelper(data) {
         return "mixed"
     }
 
+    /**
+     * @param {LB.ColumnConstraint} item
+     * @returns {string}
+     */
+    function makeConstraintText(item) {
+        if (item.parameter.startsWith("Rule::")) {
+            return item.parameter
+        }
+
+        if (item.parameter) {
+            return `'${item.name}:${item.parameter}'`
+        }
+
+        return `'${item.name}'`
+    }
+
     function makePermissionzz() {
         const directoryMap = new Map(ddd.db.tables.Directory.map(item => [item.id, item]))
         const entityMap = new Map(ddd.db.tables.Entity.map(item => [item.id, item]))
@@ -330,6 +346,7 @@ function makeHelper(data) {
         getRequestColumnzz,
         getResponseContentColumnzz,
         makeColumnType,
+        makeConstraintText,
         makePermissionzz,
         makeRouteText,
     }

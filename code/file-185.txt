@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\ReadPageRequest;
+use Illuminate\Validation\Rule;
 
 class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
 {
@@ -13,12 +14,12 @@ class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
         return [
 {% for column in columnzz %}
             '{{ column.alias }}' => [{% for constraint in column.constraintzz %}
-                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
+                {{ helper.makeConstraintText(constraint) }},{% endfor %}
             ],
 {% endfor %}
 {% for parameter in parameterzz %}
             '{{ parameter.alias }}' => [{% for constraint in parameter.constraintzz %}
-                '{{ constraint.name }}{{ ":" + constraint.parameter if constraint.parameter }}',{% endfor %}
+                {{ helper.makeConstraintText(constraint) }},{% endfor %}
             ],
 {% endfor %}
         ];
