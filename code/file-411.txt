@@ -25,7 +25,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         );
 
         DB::beginTransaction();
-        $item = $createOne->create($user->id, $item);
+        $createOne->create($user->id, $item);
         DB::commit();
 
         return {{ action + entity.name }}Response::sendItem($item);

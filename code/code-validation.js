@@ -48,8 +48,7 @@ function run(data) {
 
         const entity = cienm.get(column.id)
         if (entity) {
-            ColumnConstraintzz.push(
-                makeConstraint('exists', column.id, (entity.table ? entity.table : entity.name) + ',id'))
+            ColumnConstraintzz.push(makeConstraint('exists', column.id, (entity.table ? entity.table : entity.name) + ',id'))
         }
 
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
@@ -61,6 +60,11 @@ function run(data) {
 
         if (['decimal', 'float'].includes(column.type)) {
             ColumnConstraintzz.push(makeConstraint('numeric', column.id))
+            return
+        }
+
+        if (column.type.startsWith('date')) {
+            ColumnConstraintzz.push(makeConstraint('date', column.id))
             return
         }
 

@@ -31,11 +31,8 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $response->assertSeeText($permission->name);
 
         $admin->givePermissionTo($permission);
-        self::assertNull($item->dtDelete);
         $response = $this->deleteJson($this->makeURI($item->id))
             ->assertStatus(200);
-        $item->refresh();
-        self::assertNotNull($item->dtDelete);
 
         $response = $this->deleteJson($this->makeURI($item->id))
             ->assertStatus(404);

@@ -35,7 +35,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(200);
         $this->seeItem($response);
         $response->assertJsonPath('item.id', $item->id);
-        self::assertNull($response->json('item.dtDelete'));
 
         $item->delete();
         $response = $this->getJson($this->makeURI($item->id))

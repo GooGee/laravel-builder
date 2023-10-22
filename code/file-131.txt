@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $id, {{ action + entity.name }} $delete)
+    public function __invoke(int $id, {{ action + entity.name }} $deleteOne)
     {
         /** @var \App\Models\Admin $user */
         $user = auth()->guard('admin')->user();
@@ -23,7 +23,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
-        $result = $delete->run($user, $item);
+        $result = $deleteOne->run($user->id, $item);
 
         return AbstractResponse::sendOK($result);
     }

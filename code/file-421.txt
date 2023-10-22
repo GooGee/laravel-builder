@@ -18,7 +18,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $user */
         $user = auth()->user();
 
-        $result = $deleteMany->run($user, $request->input('idzz'));
+        $result = $deleteMany->run($user->id, $request->input('idzz'));
 
         return AbstractResponse::sendOK($result);
     }
