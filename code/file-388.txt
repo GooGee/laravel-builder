@@ -17,7 +17,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $item = $this->makeItem($user);
         $item->save();
 
-        $data = $this->makePageParameter();
+        $data = AbstractReadPage::makeParameter();
         $response = $this->json('GET', $this->makeURI(), $data)
             ->assertStatus(401);
 

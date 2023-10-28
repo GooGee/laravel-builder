@@ -9,6 +9,19 @@ use Illuminate\Database\Eloquent\Builder;
 abstract class AbstractReadPage
 {
     /**
+     * @param  array<string, mixed>  $filter
+     * @return array<string, mixed>
+     */
+    public static function makeParameter(array $filter = [],
+                                  int $page = 1,
+                                  int $perPage = 10,
+                                  string $sortField = 'id',
+                                  string $sortOrder = 'desc',
+    ): array {
+        return compact('filter', 'page', 'perPage', 'sortField', 'sortOrder');
+    }
+
+    /**
      * @template T of \Illuminate\Database\Eloquent\Model
      *
      * @param  Builder<T>  $qb

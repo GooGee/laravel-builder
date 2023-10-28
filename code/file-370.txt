@@ -44,19 +44,6 @@ abstract class AbstractApiTest extends TestCase
     }
 
     /**
-     * @param  array<string, mixed>  $filter
-     * @return array<string, mixed>
-     */
-    protected function makePageParameter(array $filter = [],
-                                         string $sortField = 'id',
-                                         string $sortOrder = 'desc',
-                                         int $page = 1,
-                                         int $perPage = 10,
-    ): array {
-        return compact('filter', 'sortField', 'sortOrder', 'page', 'perPage');
-    }
-
-    /**
      * @param  array<string, mixed>  $parameter
      */
     protected function makeURI(string|int $path = '', array $parameter = []): string
