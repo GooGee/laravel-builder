@@ -1,0 +1,27 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
+{
+    protected function path(): string
+    {
+        return "{{ entity.name }}/{{ action }}";
+    }
+
+    public function test{{ action + entity.name }}()
+    {
+        $user = $this->createUser();
+
+        $response = $this->json('GET', $this->makeURI())
+            ->assertStatus(401);
+
+        $this->actingAs($user);
+
+        $response = $this->json('GET', $this->makeURI())
+            ->assertStatus(200);
+        $this->seeData($response);
+    }
+}
