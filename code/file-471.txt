@@ -21,7 +21,8 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
-        $item = $updateOne->run($user->id,
+        $item = $updateOne->run(
+            $user->id,
             $item,
 {% for column in columnzz %}
             $request->validated('{{ column.name }}'),{% endfor %}

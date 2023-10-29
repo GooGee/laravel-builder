@@ -1,4 +1,6 @@
 function run(data) {
+    // resources/TypeScriptEnum.ts
+
     /** @type {LB.DataForScript} */
     const ddd = data
 

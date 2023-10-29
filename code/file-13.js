@@ -1,4 +1,6 @@
 function run(data) {
+    // Database/Factory
+
     /** @type {LB.DataForScript} */
     const ddd = data
 

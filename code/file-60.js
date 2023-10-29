@@ -1,4 +1,6 @@
 function run(data) {
+    // resources/TypeScriptDeclaration
+
     /** @type {LB.DataForScript} */
     const ddd = data
 
