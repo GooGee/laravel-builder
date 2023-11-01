@@ -20,9 +20,10 @@ class {{ helper.getClassName(file, entity, action) }}
         return $item;
     }
 
-    function make(int $userId,
+    function make(
+        int $userId,
 {% for column in columnzz %}
-                      {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
+        {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();

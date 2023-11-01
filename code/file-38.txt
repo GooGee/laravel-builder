@@ -12,11 +12,12 @@ abstract class AbstractReadPage
      * @param  array<string, mixed>  $filter
      * @return array<string, mixed>
      */
-    public static function makeParameter(array $filter = [],
-                                  int $page = 1,
-                                  int $perPage = 10,
-                                  string $sortField = 'id',
-                                  string $sortOrder = 'desc',
+    public static function makeParameter(
+        array  $filter = [],
+        int    $page = 1,
+        int    $perPage = 10,
+        string $sortField = 'id',
+        string $sortOrder = 'desc',
     ): array {
         return compact('filter', 'page', 'perPage', 'sortField', 'sortOrder');
     }

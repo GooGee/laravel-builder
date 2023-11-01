@@ -4,7 +4,22 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Support\Facades\Log;
+
 class {{ helper.getClassName(file, entity, action) }}
 {
+    public function run(int $userId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        Log::channel('user')->info(self::class, compact('userId'));
 
+        try {
+
+        } catch (\Exception $exception) {
+            Log::channel('user')->error($exception->getMessage());
+
+            throw $exception;
+        }
+    }
 }

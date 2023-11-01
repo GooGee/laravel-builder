@@ -6,10 +6,13 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Pagination\AbstractPaginator;
+use Illuminate\Pagination\Paginator;
+use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractResponse
 {
+    const MessageOk = 'OK';
+
     /**
      * @return array<string, mixed>
      */
@@ -26,12 +29,12 @@ abstract class AbstractResponse
         }, $itemzz);
     }
 
-    public static function sendData(string $message, mixed $data, int $code = 200): JsonResponse
+    public static function sendData(string $message, mixed $data, int $code): JsonResponse
     {
         return new JsonResponse(compact('code', 'message', 'data'), $code);
     }
 
-    public static function sendItem(Model $item, string $message = 'OK', int $code = 200): JsonResponse
+    public static function sendItem(Model $item, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
     {
         $item = static::getData($item);
 
@@ -41,7 +44,7 @@ abstract class AbstractResponse
     /**
      * @param  Model[]  $itemzz
      */
-    public static function sendItemzz(array $itemzz, string $message = 'OK', int $code = 200): JsonResponse
+    public static function sendItemzz(array $itemzz, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
     {
         $itemzz = static::getDatazz($itemzz);
 
@@ -50,17 +53,16 @@ abstract class AbstractResponse
 
     public static function sendOK(mixed $data = null): JsonResponse
     {
-        return static::sendData('OK', $data, 200);
+        return static::sendData(self::MessageOk, $data, Response::HTTP_OK);
     }
 
     /**
      * @template T of Model
      *
-     * @param  AbstractPaginator<T>  $paginator
+     * @param  Paginator<T>  $paginator
      */
-    public static function sendPage(AbstractPaginator $paginator, string $message = 'OK', int $code = 200): JsonResponse
+    public static function sendPage(Paginator $paginator, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
     {
-        /** @phpstan-ignore-next-line */
         $paginator->transform(function (Model $item) {
             return static::getData($item);
         });
