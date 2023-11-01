@@ -1,6 +1,7 @@
 {
     "name": "googee/laravel-builder",
     "description": "Laravel Builder",
+    "keywords": ["dev"],
     "license": "MIT",
     "authors": [
         {
