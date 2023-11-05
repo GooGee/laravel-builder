@@ -16,13 +16,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
      * @param array<string, mixed> $data
      * @return Paginator<Model>
      */
-    public function run(?int $userId, array $data): Paginator
+    public function run(int $userId, array $data): Paginator
     {
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
 
-        if ($userId) {
-            $qb->where('userId', $userId);
-        }
+        $qb->where('userId', $userId);
 
         $builder = self::makeReadPageQueryBuilder($qb, $data);
 

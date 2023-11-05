@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+use App\Base\AbstractReadPage;
+
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
     protected function path(): string

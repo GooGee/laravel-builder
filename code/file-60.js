@@ -12,10 +12,7 @@ function run(data) {
 
     /** @type {Map<number, LB.Column[]>} */
     const eiczzm = new Map()
-    ddd.db.tables.Column.forEach((item) => {
-        // if (item.inTable === false) {
-        //     return
-        // }
+    ddd.db.tables.Column.filter(item => item.inTable).forEach((item) => {
         let found = eiczzm.get(item.entityId)
         if (found === undefined) {
             found = []

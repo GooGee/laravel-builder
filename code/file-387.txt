@@ -18,12 +18,12 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $old->save();
         $item = $this->makeItem($user);
         $data = $item->toArray();
-        $response = $this->putJson($this->makeURI($old->id), $data)
+        $response = $this->patchJson($this->makeURI($old->id), $data)
             ->assertStatus(401);
 
         $other = $this->createUser();
         $this->actingAs($other);
-        $response = $this->putJson($this->makeURI($old->id), $data)
+        $response = $this->patchJson($this->makeURI($old->id), $data)
             ->assertStatus(403);
 
         $this->actingAs($user);
@@ -31,20 +31,20 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {% for column in columnzz %}
         $data = $item->toArray();
         unset($data['{{ column.alias }}']);
-        $response = $this->putJson($this->makeURI($old->id), $data)
+        $response = $this->patchJson($this->makeURI($old->id), $data)
             ->assertStatus(422);
         $response->assertJsonValidationErrorFor('{{ column.alias }}');
 {% endfor %}
 
         $data = $item->toArray();
-        $response = $this->putJson($this->makeURI($old->id), $data)
+        $response = $this->patchJson($this->makeURI($old->id), $data)
             ->assertStatus(200);
         $this->seeItem($response);
 {% for column in columnzz %}
         $response->assertJsonPath('item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
 
         $old->delete();
-        $response = $this->putJson($this->makeURI($old->id), $data)
+        $response = $this->patchJson($this->makeURI($old->id), $data)
             ->assertStatus(404);
     }
 }
