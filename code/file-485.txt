@@ -17,6 +17,11 @@ class {{ helper.getClassName(file, entity, action) }} extends ReadPageRequest
                 {{ helper.makeConstraintText(constraint) }},{% endfor %}
             ],
 {% endfor %}
+{% for parameter in parameterzz %}
+            '{{ parameter.alias }}' => [{% for constraint in parameter.constraintzz %}
+                {{ helper.makeConstraintText(constraint) }},{% endfor %}
+            ],
+{% endfor %}
         ];
     }
 }

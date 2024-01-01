@@ -4,32 +4,13 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\Base\AbstractRequest;
-use Illuminate\Validation\Rule;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
 
-class {{ helper.getClassName(file, entity, action) }} extends AbstractRequest
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('Request'), entity, 'UpdateOne', DirectoryIdEnum.UpdateOne) }}
 {
-    public static function getRuleMap(): array
-    {
-        return [
-{% for column in columnzz %}
-            '{{ column.alias }}' => [{% for constraint in column.constraintzz %}
-                {{ helper.makeConstraintText(constraint) }},{% endfor %}
-            ],
-{% endfor %}
-{% for parameter in parameterzz %}
-            '{{ parameter.alias }}' => [{% for constraint in parameter.constraintzz %}
-                {{ helper.makeConstraintText(constraint) }},{% endfor %}
-            ],
-{% endfor %}
-        ];
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     */
     public function rules(): array
     {
-        return static::getRuleMapForItemzz();
+        return static::getRuleMapForItemzz(true);
     }
 }

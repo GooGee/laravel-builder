@@ -29,11 +29,14 @@ abstract class AbstractRequest extends FormRequest
     /**
      * @return array<string, string[]>
      */
-    public static function getRuleMapForItemzz(): array
+    public static function getRuleMapForItemzz(bool $hasId = false): array
     {
         $ruleMap = [
             'itemzz' => ['array', 'max:100', 'required'],
         ];
+        if ($hasId) {
+            $ruleMap['itemzz.*.id'] = ['integer', 'min:1', 'required'];
+        }
         foreach (static::getRuleMap() as $key => $item) {
             $ruleMap["itemzz.*.$key"] = $item;
         }
