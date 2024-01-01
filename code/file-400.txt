@@ -10,12 +10,12 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, action) }} $createOne)
+    public function __construct(private {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }} $createOne)
     {
     }
 
     /**
-     * @param User $user
+     * @param int $userId
      * @param  array<int, array<string, mixed>>  $datazz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
@@ -26,9 +26,11 @@ class {{ helper.getClassName(file, entity, action) }}
         /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
         $itemzz = [];
         foreach ($datazz as $data) {
-            $item = $this->createOne->make($userId,
+            $item = $this->createOne->make(
+                $userId,
 {% for column in columnzz %}
-                      $data['{{ column.name }}'],{% endfor %});
+                $data['{{ column.name }}'],{% endfor %}
+            );
             $this->createOne->create($userId, $item);
             $idzz[] = $item->id;
             $itemzz[] = $item;

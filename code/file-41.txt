@@ -6,13 +6,12 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class ReadPageQueryBuilder
 {
     /**
-     * @param Builder<Model> $qb
-     * @param array<string, mixed> $data
+     * @param  Builder<Model>  $qb
+     * @param  array<string, mixed>  $data
      */
     public function __construct(public Builder $qb, private array $data)
     {
@@ -29,7 +28,7 @@ class ReadPageQueryBuilder
     }
 
     /**
-     * @param string[] $keyzz
+     * @param  string[]  $keyzz
      * @return $this
      */
     public function addFilterzz(array $keyzz): self
@@ -68,5 +67,18 @@ class ReadPageQueryBuilder
     public function getFilterValue(string $key): int|string|null
     {
         return $this->data['filter'][$key] ?? null;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function getFilterValueArray(string $key): array
+    {
+        $value = $this->data['filter'][$key] ?? null;
+        if (is_array($value)) {
+            return $value;
+        }
+
+        return [];
     }
 }

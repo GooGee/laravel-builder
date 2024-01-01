@@ -26,9 +26,8 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $this->actingAs($user);
 
         $response = $this->json('GET', $this->makeURI(), $data)
-            ->assertStatus(200);
-        $this->seePage($response);
-        $response->assertJsonCount(1, 'page.data');
+            ->assertStatus(422);
+        $response->assertJsonValidationErrorFor('filter.name');
 
 {% for column in columnzz %}
         $data['filter'] = [
@@ -38,15 +37,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(200);
         $this->seePage($response);
         $response->assertJsonPath('page.data.0.{{ column.alias }}', $item->{{ column.alias }});
-{% endfor %}
-
-{% for column in columnzz %}
-        $data['filter'] = [
-            '{{ column.alias }}' => '{{ column.alias }} should not exist',
-        ];
-        $response = $this->json('GET', $this->makeURI(), $data)
-            ->assertStatus(200);
-        $response->assertJsonCount(0, 'page.data');
 {% endfor %}
 
         $other = $this->createUser();

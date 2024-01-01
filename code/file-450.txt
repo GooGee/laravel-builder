@@ -9,14 +9,18 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function find(int $id): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}|null
+    function find(int $id, int $userId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}|null
     {
-        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::find($id);
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('userId', $userId)
+            ->find($id);
     }
 
-    function findOrFail(int $id): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function findOrFail(int $id, int $userId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('userId', $userId)
+            ->findOrFail($id);
     }
 
 }

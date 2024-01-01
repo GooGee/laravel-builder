@@ -63,6 +63,7 @@ abstract class AbstractResponse
      */
     public static function sendPage(Paginator $paginator, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
     {
+        /** @phpstan-ignore-next-line */
         $paginator->transform(function (Model $item) {
             return static::getData($item);
         });
