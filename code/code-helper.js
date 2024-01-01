@@ -122,8 +122,8 @@ function makeHelper(data) {
      *
      * @returns {LB.ColumnWithAlias[]}
      */
-    function getRequestColumnzz() {
-        const request = ddd.db.tables.Request.find(item => item.id === ddd.ma.requestId)
+    function getRequestColumnzz(requestId = ddd.ma.requestId) {
+        const request = ddd.db.tables.Request.find(item => item.id === requestId)
         if (request === undefined) {
             return []
         }
@@ -140,6 +140,7 @@ function makeHelper(data) {
     }
 
     /**
+     * return content Columnzz of Response (not wrapper)
      *
      * @param {boolean} excludeId
      * @returns {LB.ColumnWithAlias[]}
@@ -279,7 +280,7 @@ function makeHelper(data) {
                         return
                     }
 
-                    const cn = ddd.tree.getClassFullName(file, entity, '')
+                    const cn = ddd.tree.getClassFullName(file, entity, ma.name)
                     let text = `    Route::${pm.method}('${path.name}', \\${cn}::class)`
                     if (pm.middlewarezz.length) {
                         text += `->middleware(['${pm.middlewarezz.join("', '")}'])`
