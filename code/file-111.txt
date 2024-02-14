@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
+use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         $createOne->create($user, $item);
         DB::commit();
 
-        return {{ action + entity.name }}Response::sendItem($item);
+        return AbstractResponse::sendItem($item);
     }
 }

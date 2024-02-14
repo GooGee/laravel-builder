@@ -6,6 +6,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
 use App\Base\ReadManyRequest;
+use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -23,6 +24,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $itemzz = $readMany->run($request->input('idzz'))->all();
 
-        return {{ helper.getClassName(helper.findFile('AdminResponse'), entity, 'CreateOne', DirectoryIdEnum.AdminCreateOne) }}::sendItemzz($itemzz);
+        return AbstractResponse::sendItemzz($itemzz);
     }
 }

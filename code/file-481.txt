@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
+use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
@@ -18,6 +19,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $page = $readPage->run($user?->id, $request->validated());
 
-        return {{ helper.getClassName(helper.findFile('Response'), entity, 'CreateOne', DirectoryIdEnum.CreateOne) }}::sendPage($page);
+        return AbstractResponse::sendPage($page);
     }
 }

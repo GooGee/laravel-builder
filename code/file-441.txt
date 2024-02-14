@@ -6,6 +6,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
 use App\Base\ReadManyRequest;
+use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
@@ -19,6 +20,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $itemzz = $readMany->run($user->id, $request->input('idzz'))->all();
 
-        return {{ helper.getClassName(helper.findFile('Response'), entity, 'CreateOne', DirectoryIdEnum.CreateOne) }}::sendItemzz($itemzz);
+        return AbstractResponse::sendItemzz($itemzz);
     }
 }

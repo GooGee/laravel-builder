@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
+use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -22,6 +23,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
 
-        return {{ helper.getClassName(helper.findFile('AdminResponse'), entity, 'CreateOne', DirectoryIdEnum.AdminCreateOne) }}::sendItem($item);
+        return AbstractResponse::sendItem($item);
     }
 }
