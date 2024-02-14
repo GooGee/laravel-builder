@@ -9,14 +9,17 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class AbstractResponse
+class AbstractResponse
 {
     const MessageOk = 'OK';
 
     /**
      * @return array<string, mixed>
      */
-    abstract public static function getData(Model $item): array;
+    public static function getData(Model $item): array
+    {
+        return $item->toArray();
+    }
 
     /**
      * @param  Model[]  $itemzz
