@@ -52,7 +52,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
     /**
      * @return string[]
      */
-    public static function keyzz(): array
+    public static function getKeyzz(): array
     {
         return [
 {% for key in columnzz | rejectattr('wo') %}

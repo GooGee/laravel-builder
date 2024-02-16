@@ -10,26 +10,26 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function create(Admin $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function create(Admin $User, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item->save();
-        $item->refresh();
+        $Item->save();
+        $Item->refresh();
 
-        event(new {{ action + entity.name }}Event($userId, $item));
+        event(new {{ action + entity.name }}Event($UserId, $Item));
 
-        return $item;
+        return $Item;
     }
 
-    function make(Admin $user,
+    function make(Admin $User,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
 {% for column in columnzz %}
-        $item->{{ column.name }} = ${{ column.name }};{% endfor %}
+        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
-        return $item;
+        return $Item;
     }
 
 }

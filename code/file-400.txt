@@ -10,35 +10,35 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }} $createOne)
+    public function __construct(private {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }} $CreateOne)
     {
     }
 
     /**
-     * @param int $userId
-     * @param  array<int, array<string, mixed>>  $datazz
+     * @param int $UserId
+     * @param  array<int, array<string, mixed>>  $Datazz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(int $userId, array $datazz): array
+    function run(int $UserId, array $Datazz): array
     {
-        /** @var array<int, int> $idzz */
-        $idzz = [];
-        /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
-        $itemzz = [];
-        foreach ($datazz as $data) {
-            $item = $this->createOne->make(
-                $userId,
+        /** @var array<int, int> $Idzz */
+        $Idzz = [];
+        /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
+        $Itemzz = [];
+        foreach ($Datazz as $Data) {
+            $Item = $this->CreateOne->make(
+                $UserId,
 {% for column in columnzz %}
-                $data['{{ column.name }}'],{% endfor %}
+                $Data['{{ column.name }}'],{% endfor %}
             );
-            $this->createOne->create($userId, $item);
-            $idzz[] = $item->id;
-            $itemzz[] = $item;
+            $this->CreateOne->create($UserId, $Item);
+            $Idzz[] = $Item->Id;
+            $Itemzz[] = $Item;
         }
 
-        event(new {{ action + entity.name }}Event($userId, $idzz));
+        event(new {{ action + entity.name }}Event($UserId, $Idzz));
 
-        return $itemzz;
+        return $Itemzz;
     }
 
 }

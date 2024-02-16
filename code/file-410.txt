@@ -10,29 +10,29 @@ use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function create(int $userId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function create(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item->save();
-        $item->refresh();
+        $Item->save();
+        $Item->refresh();
 
-        event(new {{ action + entity.name }}Event($userId, $item));
+        event(new {{ action + entity.name }}Event($UserId, $Item));
 
-        return $item;
+        return $Item;
     }
 
     function make(
-        int $userId,
+        int $UserId,
 {% for column in columnzz %}
         {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
-        $item->userId = $userId;
+        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+        $Item->UserId = $UserId;
 
 {% for column in columnzz %}
-        $item->{{ column.name }} = ${{ column.name }};{% endfor %}
+        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
-        return $item;
+        return $Item;
     }
 
 }

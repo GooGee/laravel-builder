@@ -11,14 +11,14 @@ use {{ dependency }};{% endfor %}
 class {{ helper.getClassName(file, entity, action) }} extends AbstractResponse
 {
     /**
-     * @param {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item
+     * @param {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item
      * @return array<string, mixed>
      */
-    public static function getData($item): array
+    public static function getData($Item): array
     {
         return [
 {% for column in columnzz %}
-            '{{ column.alias }}' => $item->{{ column.name }},
+            '{{ column.alias }}' => $Item->{{ column.name }},
 {% endfor %}
         ];
     }

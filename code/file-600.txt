@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(public int $userId, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item)
+    public function __construct(public int $UserId, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item)
     {
-        Log::channel('user')->info(self::class, ['userId' => $userId, 'id' => $item->id]);
+        Log::channel('user')->info(self::class, ['UserId' => $UserId, 'Id' => $Item->Id]);
     }
 }

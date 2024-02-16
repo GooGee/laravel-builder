@@ -10,12 +10,12 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function run(Admin $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function run(Admin $User, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item->delete();
+        $Item->delete();
 
-        event(new {{ action + entity.name }}Event($userId, $item));
+        event(new {{ action + entity.name }}Event($UserId, $Item));
 
-        return $item;
+        return $Item;
     }
 }

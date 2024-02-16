@@ -12,8 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 class {{ helper.getClassName(file, entity, action) }} extends AbstractWarmup
 {
 
-    public function __construct(private {{ helper.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache,
-    )
+    public function __construct(private {{ helper.getClassName(helper.findFile('ItemCache'), entity, action) }} $cache)
     {
     }
 

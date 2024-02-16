@@ -12,16 +12,14 @@ use Illuminate\Http\JsonResponse;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + entity.name }}Request $request,
-                             {{ action + entity.name }} $createMany,
-    ): JsonResponse
+    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $CreateMany): JsonResponse
     {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
+        /** @var \App\Models\User $User */
+        $User = auth()->user();
 
-        $itemzz = $createMany->run($user->id, $request->validated('itemzz'));
+        $Itemzz = $CreateMany->run($User->Id, $Request->validated('Itemzz'));
 
-        return AbstractResponse::sendItemzz($itemzz);
+        return AbstractResponse::sendItemzz($Itemzz);
     }
 
 }

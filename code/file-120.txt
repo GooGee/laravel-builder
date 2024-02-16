@@ -12,18 +12,18 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class {{ helper.getClassName(file, entity, action) }}
 {
     /**
-     * @param Admin $user
-     * @param array<int> $idzz
+     * @param Admin $User
+     * @param array<int> $Idzz
      * @return array<int>
      */
-    function run(Admin $user, array $idzz)
+    function run(Admin $User, array $Idzz)
     {
-        $result = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->whereIn('id', $idzz)
+        $Result = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->whereIn('Id', $Idzz)
             ->delete();
 
-        event(new {{ action + entity.name }}Event($userId, $idzz));
+        event(new {{ action + entity.name }}Event($UserId, $Idzz));
 
-        return $idzz;
+        return $Idzz;
     }
 }

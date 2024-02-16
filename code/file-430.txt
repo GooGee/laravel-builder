@@ -7,21 +7,15 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function run(int $userId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function run(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        if ($userId !== $item->userId) {
-            throw new AccessDeniedHttpException();
-        }
+        $Item->delete();
 
-        $item->delete();
+        event(new {{ action + entity.name }}Event($UserId, $Item));
 
-        event(new {{ action + entity.name }}Event($userId, $item));
-
-        return $item;
+        return $Item;
     }
 }

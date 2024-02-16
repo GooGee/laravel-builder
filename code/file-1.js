@@ -116,7 +116,7 @@ function run(data) {
         if (relation.entity1Id === ddd.entity.id) {
             const entity1 = entitymap.get(relation.entity0Id)
             textzz.push(`    #[ORM\\OneToOne(targetEntity: ${entity1.name}::class)]`)
-            textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "id", nullable: ${nullable})]`)
+            textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "Id", nullable: ${nullable})]`)
             textzz.push(`    private \$${relation.name1};`)
         } else {
             const entity1 = entitymap.get(relation.entity1Id)
@@ -139,7 +139,7 @@ function run(data) {
         if (relation.entity1Id === ddd.entity.id) {
             const entity1 = entitymap.get(relation.entity0Id)
             textzz.push(`    #[ORM\\ManyToOne(targetEntity: ${entity1.name}::class)]`)
-            textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "id", nullable: ${nullable})]`)
+            textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "Id", nullable: ${nullable})]`)
             textzz.push(`    private \$${relation.name1};`)
         } else {
             const entity1 = entitymap.get(relation.entity1Id)

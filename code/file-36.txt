@@ -16,65 +16,112 @@ class AbstractResponse
     /**
      * @return array<string, mixed>
      */
-    public static function getData(Model $item): array
+    public static function getData(Model $Item): array
     {
-        return $item->toArray();
+        return $Item->toArray();
     }
 
     /**
-     * @param  Model[]  $itemzz
+     * @param  Model[]  $Itemzz
      * @return array<int, array<string, mixed>>
      */
-    public static function getDatazz(array $itemzz): array
+    public static function getDatazz(array $Itemzz): array
     {
-        return array_map(function ($item) {
-            return static::getData($item);
-        }, $itemzz);
-    }
-
-    public static function sendData(string $message, mixed $data, int $code): JsonResponse
-    {
-        return new JsonResponse(compact('code', 'message', 'data'), $code);
-    }
-
-    public static function sendItem(Model $item, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
-    {
-        $item = static::getData($item);
-
-        return new JsonResponse(compact('code', 'message', 'item'), $code);
-    }
-
-    /**
-     * @param  Model[]  $itemzz
-     */
-    public static function sendItemzz(array $itemzz, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
-    {
-        $itemzz = static::getDatazz($itemzz);
-
-        return new JsonResponse(compact('code', 'message', 'itemzz'), $code);
-    }
-
-    public static function sendOK(mixed $data = null): JsonResponse
-    {
-        return static::sendData(self::MessageOk, $data, Response::HTTP_OK);
+        return array_map(function ($Item) {
+            return static::getData($Item);
+        }, $Itemzz);
     }
 
     /**
      * @template T of Model
      *
-     * @param  Paginator<T>  $paginator
+     * @param  array<string, mixed>|null  $Item
+     * @param  array<int, array<string, mixed>>  $Itemzz
+     * @param  ?Paginator<T>  $Page
+     * @return array<string, mixed>
      */
-    public static function sendPage(Paginator $paginator, string $message = self::MessageOk, int $code = Response::HTTP_OK): JsonResponse
-    {
-        /** @phpstan-ignore-next-line */
-        $paginator->transform(function (Model $item) {
-            return static::getData($item);
-        });
+    public static function makeData(
+        int $Code = 200,
+        mixed $Data = null,
+        ?array $Item = null,
+        array $Itemzz = [],
+        string $Message = '',
+        ?Paginator $Page = null,
+    ): array {
+        return compact('Code', 'Data', 'Item', 'Itemzz', 'Message', 'Page');
+    }
 
-        return new JsonResponse([
-            'code' => $code,
-            'message' => $message,
-            'page' => $paginator,
-        ]);
+    public static function sendData(string $Message, mixed $Data, int $Code): JsonResponse
+    {
+        return new JsonResponse(
+            self::makeData(
+                $Code,
+                $Data,
+                null,
+                [],
+                $Message,
+            ),
+            $Code,
+        );
+    }
+
+    public static function sendItem(Model $Item, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
+    {
+        $Item = static::getData($Item);
+
+        return new JsonResponse(
+            self::makeData(
+                $Code,
+                null,
+                $Item,
+                [],
+                $Message,
+            ),
+            $Code,
+        );
+    }
+
+    /**
+     * @param  Model[]  $Itemzz
+     */
+    public static function sendItemzz(array $Itemzz, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
+    {
+        $Itemzz = static::getDatazz($Itemzz);
+
+        return new JsonResponse(
+            self::makeData(
+                $Code,
+                null,
+                null,
+                $Itemzz,
+                $Message,
+            ),
+            $Code,
+        );
+    }
+
+    public static function sendOK(mixed $Data = null): JsonResponse
+    {
+        return static::sendData(self::MessageOk, $Data, Response::HTTP_OK);
+    }
+
+    /**
+     * @template T of Model
+     *
+     * @param  Paginator<T>  $Paginator
+     */
+    public static function sendPage(Paginator $Paginator, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
+    {
+        return new JsonResponse(
+            self::makeData(
+                $Code,
+                null,
+                null,
+                [],
+                $Message,
+                $Paginator,
+            ),
+            $Code,
+        );
     }
 }

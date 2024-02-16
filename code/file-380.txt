@@ -6,37 +6,37 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
-    protected function path(): string
+    protected function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
     {
-        $user = $this->createUser();
-        $item = $this->makeItem($user);
+        $User = $this->createUser();
+        $Item = $this->makeItem($User);
 
-        $data = $item->toArray();
-        $itemzz = [$data];
-        $response = $this->postJson($this->makeURI(), compact('itemzz'))
+        $Data = $Item->toArray();
+        $Itemzz = [$Data];
+        $Response = $this->postJson($this->makeURI(), compact('Itemzz'))
             ->assertStatus(401);
 
-        $this->actingAs($user);
+        $this->actingAs($User);
 {% for column in columnzz %}
-        $data = $item->toArray();
-        unset($data['{{ column.alias }}']);
-        $itemzz = [$data];
-        $response = $this->postJson($this->makeURI(), compact('itemzz'))
+        $Data = $Item->toArray();
+        unset($Data['{{ column.alias }}']);
+        $Itemzz = [$Data];
+        $Response = $this->postJson($this->makeURI(), compact('Itemzz'))
             ->assertStatus(422);
-        $response->assertJsonValidationErrorFor('itemzz.0.{{ column.alias }}');
+        $Response->assertJsonValidationErrorFor('Itemzz.0.{{ column.alias }}');
 {% endfor %}
-        $data = $item->toArray();
-        $itemzz = [$data];
-        $response = $this->postJson($this->makeURI(), compact('itemzz'))
+        $Data = $Item->toArray();
+        $Itemzz = [$Data];
+        $Response = $this->postJson($this->makeURI(), compact('Itemzz'))
             ->assertStatus(200);
-        $this->seeItemzz($response);
-        $response->assertJsonCount(1, 'itemzz');
+        $this->seeItemzz($Response);
+        $Response->assertJsonCount(1, 'Itemzz');
 {% for column in columnzz %}
-        $response->assertJsonPath('itemzz.0.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
+        $Response->assertJsonPath('Itemzz.0.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
     }
 }

@@ -9,14 +9,14 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function find(int $id)
+    function find(int $Id)
     {
-        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::find($id);
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::find($Id);
     }
 
-    function findOrFail(int $id)
+    function findOrFail(int $Id)
     {
-        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
     }
 
 }

@@ -6,41 +6,41 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
 {
-    protected function path(): string
+    protected function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
     {
-        $permission = $this->createPermission('{{ action + entity.name }}');
+        $Permission = $this->createPermission('{{ action + entity.name }}');
         $admin = $this->createAdmin();
-        $item = $this->makeItem($admin);
-        $item->save();
+        $Item = $this->makeItem($admin);
+        $Item->save();
 
-        $user = $this->createUser();
-        $this->actingAs($user);
+        $User = $this->createUser();
+        $this->actingAs($User);
 
-        $idzz = [$item->id];
-        $response = $this->deleteJson($this->makeURI(), compact('idzz'))
+        $Idzz = [$Item->Id];
+        $Response = $this->deleteJson($this->makeURI(), compact('Idzz'))
             ->assertStatus(401);
 
         $this->actingAs($admin, 'admin');
 
-        $response = $this->deleteJson($this->makeURI(), [])
+        $Response = $this->deleteJson($this->makeURI(), [])
             ->assertStatus(422);
-        $response->assertJsonValidationErrorFor('idzz');
+        $Response->assertJsonValidationErrorFor('Idzz');
 
-        $idzz = [$item->id];
-        $response = $this->deleteJson($this->makeURI(), compact('idzz'))
+        $Idzz = [$Item->Id];
+        $Response = $this->deleteJson($this->makeURI(), compact('Idzz'))
             ->assertStatus(403);
-        $response->assertSeeText($permission->name);
+        $Response->assertSeeText($Permission->name);
 
-        $admin->givePermissionTo($permission);
-        $idzz = [$item->id];
-        $response = $this->deleteJson($this->makeURI(), compact('idzz'))
+        $admin->givePermissionTo($Permission);
+        $Idzz = [$Item->Id];
+        $Response = $this->deleteJson($this->makeURI(), compact('Idzz'))
             ->assertStatus(200);
-        $response->assertJsonCount(1, 'data');
+        $Response->assertJsonCount(1, 'Data');
 
     }
 }

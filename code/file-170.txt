@@ -10,18 +10,18 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function run(Admin $user, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item,
+    function run(Admin $User, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item,
 {% for column in columnzz %}
                       {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %})
     {
 {% for column in columnzz %}
-        $item->{{ column.name }} = ${{ column.name }};{% endfor %}
+        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
-        $item->save();
+        $Item->save();
 
-        event(new {{ action + entity.name }}Event($userId, $item));
+        event(new {{ action + entity.name }}Event($UserId, $Item));
 
-        return $item;
+        return $Item;
     }
 
 }

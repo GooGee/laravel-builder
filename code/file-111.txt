@@ -9,30 +9,29 @@ use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + entity.name }}Request $request,
-                             {{ action + entity.name }} $createOne,
-    )
+    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $CreateOne): JsonResponse
     {
-        /** @var \App\Models\Admin $user */
-        $user = auth()->guard('admin')->user();
+        /** @var \App\Models\Admin $User */
+        $User = auth()->guard('admin')->user();
 
-        if ($user->cannot('{{ action + entity.name }}')) {
+        if ($User->cannot('{{ action + entity.name }}')) {
             throw new AccessDeniedHttpException('Permission {{ action + entity.name }} required');
         }
 
-        $item = $createOne->make($user,
+        $Item = $CreateOne->make($User,
 {% for column in columnzz %}
-            $request->validated('{{ column.name }}'),{% endfor %}
+            $Request->validated('{{ column.name }}'),{% endfor %}
         );
 
         DB::beginTransaction();
-        $createOne->create($user, $item);
+        $CreateOne->create($User, $Item);
         DB::commit();
 
-        return AbstractResponse::sendItem($item);
+        return AbstractResponse::sendItem($Item);
     }
 }

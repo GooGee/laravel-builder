@@ -9,8 +9,8 @@ use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method {{ entity.name }}|null find(int $id)
- * @method {{ entity.name }} findOrFail(int $id)
+ * @method {{ entity.name }}|null find(int $Id)
+ * @method {{ entity.name }} findOrFail(int $Id)
  */
 class {{ helper.getClassName(file, entity, action) }} extends AbstractRepository
 {

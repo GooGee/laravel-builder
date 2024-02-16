@@ -9,27 +9,28 @@ use Illuminate\Database\Eloquent\Builder;
 abstract class AbstractReadPage
 {
     /**
-     * @param array<string, mixed> $filter
+     * @param array<string, mixed> $Filter
      * @return array<string, mixed>
      */
-    public static function makeParameter(array  $filter = [],
-                                         int    $page = 1,
-                                         int    $perPage = 10,
-                                         string $sortField = 'id',
-                                         string $sortOrder = 'desc',
+    public static function makeParameter(
+        array  $Filter = [],
+        int    $Page = 1,
+        int    $PerPage = 10,
+        string $SortField = 'Id',
+        string $SortOrder = 'desc',
     ): array
     {
-        return compact('filter', 'page', 'perPage', 'sortField', 'sortOrder');
+        return compact('Filter', 'Page', 'PerPage', 'SortField', 'SortOrder');
     }
 
     /**
      * @template T of \Illuminate\Database\Eloquent\Model
      *
-     * @param Builder<T> $qb
-     * @param array<string, mixed> $data
+     * @param Builder<T> $Qb
+     * @param array<string, mixed> $Data
      */
-    public static function makeReadPageQueryBuilder(Builder $qb, array $data): ReadPageQueryBuilder
+    public static function makeReadPageQueryBuilder(Builder $Qb, array $Data): ReadPageQueryBuilder
     {
-        return new ReadPageQueryBuilder($qb, $data);
+        return new ReadPageQueryBuilder($Qb, $Data);
     }
 }

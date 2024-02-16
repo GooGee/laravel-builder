@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('AdminCreateOneItem'), helper.findEntity('Operation'), action) }} $createOneOperation)
+    public function __construct(private {{ helper.getClassName(helper.findFile('AdminCreateOneItem'), helper.findEntity('Operation'), action) }} $CreateOneOperation)
     {
     }
 
-    function handle({{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }} $event)
+    function handle({{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }} $Event)
     {
-        $this->createOneOperation->run($event->user, {{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }}::class, strval($event->item->id));
+        $this->CreateOneOperation->run($Event->user, {{ helper.getClassName(helper.findFile('AdminEvent'), entity, action) }}::class, strval($Event->Item->Id));
     }
 }

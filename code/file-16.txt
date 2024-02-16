@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function run(int $userId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    public function run(int $UserId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        Log::channel('user')->info(self::class, compact('userId'));
+        Log::channel('user')->info(self::class, compact('UserId'));
 
         try {
 
-        } catch (\Exception $exception) {
-            Log::channel('user')->error($exception->getMessage());
+        } catch (\Exception $Exception) {
+            Log::channel('user')->error($Exception->getMessage());
 
-            throw $exception;
+            throw $Exception;
         }
     }
 }

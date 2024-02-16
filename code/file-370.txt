@@ -19,12 +19,12 @@ abstract class AbstractApiTest extends TestCase
 
     protected $seed = true;
 
-    abstract protected function path(): string;
+    abstract protected function getPath(): string;
 
     /**
      * @return array<int, string>
      */
-    abstract public static function structure(): array;
+    abstract public static function getStructure(): array;
 
     protected function setUp(): void
     {
@@ -34,59 +34,59 @@ abstract class AbstractApiTest extends TestCase
     }
 
     /**
-     * @param  array<string, mixed>  $attributes
+     * @param array<string, mixed> $Map
      */
-    protected function createUser(array $attributes = []): User
+    protected function createUser(array $Map = []): User
     {
-        $user = UserFactory::new()->createOne($attributes);
+        $User = UserFactory::new()->createOne($Map);
 
-        return $user->refresh();
+        return $User->refresh();
     }
 
     /**
-     * @param  array<string, mixed>  $parameter
+     * @param array<string, mixed> $Parameter
      */
-    protected function makeURI(string|int $path = '', array $parameter = []): string
+    protected function makeURI(string|int $Path = '', array $Parameter = []): string
     {
         $query = '';
-        if (count($parameter)) {
-            $query = '?'.http_build_query($parameter);
+        if (count($Parameter)) {
+            $query = '?' . http_build_query($Parameter);
         }
 
-        return static::URI.$this->path().'/'.$path.$query;
+        return static::URI . $this->getPath() . '/' . $Path . $query;
     }
 
-    protected function seeData(TestResponse $response): self
+    protected function seeData(TestResponse $Response): self
     {
-        $response->assertJsonStructure(
+        $Response->assertJsonStructure(
             [
-                'message',
-                'data' => static::structure(),
+                'Message',
+                'Data',
             ]
         );
 
         return $this;
     }
 
-    protected function seeItem(TestResponse $response): self
+    protected function seeItem(TestResponse $Response): self
     {
-        $response->assertJsonStructure(
+        $Response->assertJsonStructure(
             [
-                'message',
-                'item' => static::structure(),
+                'Message',
+                'Item' => static::getStructure(),
             ]
         );
 
         return $this;
     }
 
-    protected function seeItemzz(TestResponse $response): self
+    protected function seeItemzz(TestResponse $Response): self
     {
-        $response->assertJsonStructure(
+        $Response->assertJsonStructure(
             [
-                'message',
-                'itemzz' => [
-                    '*' => static::structure(),
+                'Message',
+                'Itemzz' => [
+                    '*' => static::getStructure(),
                 ],
             ]
         );
@@ -94,26 +94,26 @@ abstract class AbstractApiTest extends TestCase
         return $this;
     }
 
-    protected function seePage(TestResponse $response, bool $simple = true, bool $empty = false): self
+    protected function seePage(TestResponse $Response, bool $Simple = true, bool $Empty = false): self
     {
-        $page = [
+        $Page = [
             'from',
             'path',
             'per_page',
             'to',
             'data' => [],
         ];
-        if ($simple === false) {
-            $page[] = 'total';
+        if ($Simple === false) {
+            $Page[] = 'total';
         }
-        if ($empty) {
-            $response->assertJsonPath('data.data', []);
+        if ($Empty) {
+            $Response->assertJsonPath('data.data', []);
         } else {
-            $page['data'] = ['*' => static::structure()];
+            $Page['data'] = ['*' => static::getStructure()];
         }
-        $response->assertJsonStructure([
-            'message',
-            'page' => $page,
+        $Response->assertJsonStructure([
+            'Message',
+            'Page' => $Page,
         ]);
 
         return $this;

@@ -13,15 +13,15 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $Id): JsonResponse
     {
-        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+        $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
+        /** @var \App\Models\User $User */
+        $User = auth()->user();
 
-        if ($item->userId === $user->id) {
-            return AbstractResponse::sendItem($item);
+        if ($Item->UserId === $User->Id) {
+            return AbstractResponse::sendItem($Item);
         }
         throw new AccessDeniedHttpException();
     }

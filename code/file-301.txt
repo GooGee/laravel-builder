@@ -11,10 +11,10 @@ use App\Models\User;
 class {{ helper.getClassName(file, entity, action) }}
 {
     /**
-     * @param User $user
-     * @param array<int> $idzz
+     * @param User $User
+     * @param array<int> $Idzz
      */
-    public function __construct(public int $userId, public array $idzz)
+    public function __construct(public int $UserId, public array $Idzz)
     {
     }
 }

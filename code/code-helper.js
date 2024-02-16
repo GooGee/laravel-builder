@@ -156,7 +156,7 @@ function makeHelper(data) {
             return []
         }
 
-        return ddd.getResponseContentColumnzz(response.id, ddd.db).filter(item => !(item.name === 'id' && excludeId))
+        return ddd.getResponseContentColumnzz(response.id, ddd.db).filter(item => !(item.name === 'Id' && excludeId))
     }
 
     /**

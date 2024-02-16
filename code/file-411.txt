@@ -13,23 +13,21 @@ use Illuminate\Support\Facades\DB;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + entity.name }}Request $request,
-                             {{ action + entity.name }} $createOne,
-    ): JsonResponse
+    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $CreateOne): JsonResponse
     {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
+        /** @var \App\Models\User $User */
+        $User = auth()->user();
 
-        $item = $createOne->make(
-            $user->id,
+        $Item = $CreateOne->make(
+            $User->Id,
 {% for column in columnzz %}
-            $request->validated('{{ column.name }}'),{% endfor %}
+            $Request->validated('{{ column.name }}'),{% endfor %}
         );
 
         DB::beginTransaction();
-        $createOne->create($user->id, $item);
+        $CreateOne->create($User->Id, $Item);
         DB::commit();
 
-        return AbstractResponse::sendItem($item);
+        return AbstractResponse::sendItem($Item);
     }
 }

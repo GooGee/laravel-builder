@@ -11,39 +11,39 @@ use Illuminate\Database\Eloquent\Collection;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, 'UpdateOne') }} $updateOne)
+    public function __construct(private {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, 'UpdateOne') }} $UpdateOne)
     {
     }
 
     /**
-     * @param int $userId
-     * @param  array<int, array<string, mixed>>  $datazz
+     * @param int $UserId
+     * @param  array<int, array<string, mixed>>  $Datazz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(int $userId, array $datazz): array
+    function run(int $UserId, array $Datazz): array
     {
-        /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
-        $itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->whereIn('id', array_column($datazz, 'id'))
+        /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
+        $Itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->whereIn('Id', array_column($Datazz, 'Id'))
             ->get();
-        /** @var array<int, array<string, mixed>> $map */
-        $map = [];
-        foreach ($datazz as $data) {
-            $map[$data['id']] = $data;
+        /** @var array<int, array<string, mixed>> $Map */
+        $Map = [];
+        foreach ($Datazz as $Data) {
+            $Map[$Data['Id']] = $Data;
         }
-        foreach ($itemzz as $item) {
-            $data = $map[$item->id];
-            $this->updateOne->run(
-                $userId,
-                $item,
+        foreach ($Itemzz as $Item) {
+            $Data = $Map[$Item->Id];
+            $this->UpdateOne->run(
+                $UserId,
+                $Item,
 {% for column in columnzz %}
-                $data['{{ column.name }}'],{% endfor %}
+                $Data['{{ column.name }}'],{% endfor %}
             );
         }
 
-        event(new {{ action + entity.name }}Event($userId, $itemzz->pluck('id')->toArray()));
+        event(new {{ action + entity.name }}Event($UserId, $Itemzz->pluck('Id')->toArray()));
 
-        return $itemzz->all();
+        return $Itemzz->all();
     }
 
 }

@@ -10,30 +10,30 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('AdminCreateOneItem'), entity, action) }} $createOne)
+    public function __construct(private {{ helper.getClassName(helper.findFile('AdminCreateOneItem'), entity, action) }} $CreateOne)
     {
     }
 
     /**
-     * @param Admin $user
-     * @param array<int, array> $datazz
+     * @param Admin $User
+     * @param array<int, array> $Datazz
      * @return array<int>
      */
-    function run(Admin $user, array $datazz)
+    function run(Admin $User, array $Datazz)
     {
-        $idzz = [];
-        $itemzz = [];
-        foreach ($datazz as $data) {
-            $item = $this->createOne->run($user,
+        $Idzz = [];
+        $Itemzz = [];
+        foreach ($Datazz as $Data) {
+            $Item = $this->CreateOne->run($User,
 {% for column in columnzz %}
-                      $data['{{ column.name }}'],{% endfor %});
-            $idzz[] = $item->id;
-            $itemzz[] = $item;
+                      $Data['{{ column.name }}'],{% endfor %});
+            $Idzz[] = $Item->Id;
+            $Itemzz[] = $Item;
         }
 
-        event(new {{ action + entity.name }}Event($userId, $idzz));
+        event(new {{ action + entity.name }}Event($UserId, $Idzz));
 
-        return $itemzz;
+        return $Itemzz;
     }
 
 }

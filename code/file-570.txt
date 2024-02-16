@@ -16,13 +16,13 @@ abstract class AbstractFeatureTest extends TestCase
     protected $seed = true;
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string, mixed> $Map
      */
-    protected function createUser(array $attributes = []): User
+    protected function createUser(array $Map = []): User
     {
         $user = UserFactory::new()->createOne($attributes);
 
-        return $user->refresh();
+        return $User->refresh();
     }
 
 }

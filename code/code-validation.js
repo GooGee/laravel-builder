@@ -53,7 +53,7 @@ function run(data) {
 
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
             ColumnConstraintzz.push(makeConstraint('integer', column.id))
-            const parameter = column.name === 'id' || column.name.includes('Id') ? '1' : '0'
+            const parameter = column.name === 'Id' || column.name.includes('Id') ? '1' : '0'
             ColumnConstraintzz.push(makeConstraint('min', column.id, parameter))
             return
         }

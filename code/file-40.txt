@@ -13,9 +13,17 @@ class ReadManyRequest extends AbstractRequest
     {
         return [
 
-            'idzz' => ['array', 'max:100', 'required'],
-            'idzz.*' => ['integer'],
+            'Idzz' => ['array', 'max:100', 'required'],
+            'Idzz.*' => ['integer'],
 
         ];
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public function getValidatedIdzz(): array
+    {
+        return $this->validated('Idzz');
     }
 }

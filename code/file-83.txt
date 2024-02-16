@@ -6,35 +6,35 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AdminAbstractItemTest'), entity, action) }}
 {
-    protected function path(): string
+    protected function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
     {
-        $permission = $this->createPermission('{{ action + entity.name }}');
+        $Permission = $this->createPermission('{{ action + entity.name }}');
         $admin = $this->createAdmin();
-        $item = $this->makeItem($admin);
-        $item->save();
+        $Item = $this->makeItem($admin);
+        $Item->save();
 
-        $user = $this->createUser();
-        $this->actingAs($user);
+        $User = $this->createUser();
+        $this->actingAs($User);
 
-        $response = $this->deleteJson($this->makeURI($item->id))
+        $Response = $this->deleteJson($this->makeURI($Item->Id))
             ->assertStatus(401);
 
         $this->actingAs($admin, 'admin');
 
-        $response = $this->deleteJson($this->makeURI($item->id))
+        $Response = $this->deleteJson($this->makeURI($Item->Id))
             ->assertStatus(403);
-        $response->assertSeeText($permission->name);
+        $Response->assertSeeText($Permission->name);
 
-        $admin->givePermissionTo($permission);
-        $response = $this->deleteJson($this->makeURI($item->id))
+        $admin->givePermissionTo($Permission);
+        $Response = $this->deleteJson($this->makeURI($Item->Id))
             ->assertStatus(200);
 
-        $response = $this->deleteJson($this->makeURI($item->id))
+        $Response = $this->deleteJson($this->makeURI($Item->Id))
             ->assertStatus(404);
     }
 }

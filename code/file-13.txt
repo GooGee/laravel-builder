@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
  *
- * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} createOne($attributes = [])
- * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} makeOne($attributes = [])
+ * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} CreateOne($Map = [])
+ * @method {{ helper.getClassName(helper.findFile('Model'), entity, action) }} makeOne($Map = [])
  */
 class {{ helper.getClassName(file, entity, action) }} extends Factory
 {
@@ -30,8 +30,8 @@ class {{ helper.getClassName(file, entity, action) }} extends Factory
      */
     public function definition()
     {
-        static $index = 0;
-        $index += 1;
+        static $Index = 0;
+        $Index += 1;
 
         return [
 {% for item in itemzz %}

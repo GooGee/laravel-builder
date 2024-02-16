@@ -9,21 +9,22 @@ use App\Base\ReadManyRequest;
 use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(ReadManyRequest $request, {{ action + entity.name }} $readMany)
+    public function __invoke(ReadManyRequest $Request, {{ action + entity.name }} $ReadMany): JsonResponse
     {
-        /** @var \App\Models\Admin $user */
-        $user = auth()->guard('admin')->user();
+        /** @var \App\Models\Admin $User */
+        $User = auth()->guard('admin')->user();
 
-        if ($user->cannot('{{ action + entity.name }}')) {
+        if ($User->cannot('{{ action + entity.name }}')) {
             throw new AccessDeniedHttpException('Permission {{ action + entity.name }} required');
         }
 
-        $itemzz = $readMany->run($request->input('idzz'))->all();
+        $Itemzz = $ReadMany->run($Request->getValidatedIdzz())->all();
 
-        return AbstractResponse::sendItemzz($itemzz);
+        return AbstractResponse::sendItemzz($Itemzz);
     }
 }

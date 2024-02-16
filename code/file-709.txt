@@ -15,7 +15,7 @@ export default function makeDataProvider<T extends CC.IdItem>(): DataProvider {
         },
         getMany(path, params) {
             return client
-                .get<CC.ApiItemzzResponse<T>>(path, { params: { idzz: params.ids } })
+                .get<CC.ApiItemzzResponse<T>>(path, { params: { Idzz: params.ids } })
                 .then((response) => ({ data: response.data.itemzz }))
                 .catch(returnError)
         },
@@ -49,7 +49,7 @@ export default function makeDataProvider<T extends CC.IdItem>(): DataProvider {
         },
         deleteMany(path, params) {
             return client
-                .delete<CC.ApiDataResponse<T>>(path, { params: { idzz: params.ids } })
+                .delete<CC.ApiDataResponse<T>>(path, { params: { Idzz: params.ids } })
                 .then((response) => ({ data: response.data.data }))
                 .catch(returnError)
         },

@@ -6,33 +6,33 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
-    protected function path(): string
+    protected function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
     {
-        $user = $this->createUser();
-        $item = $this->makeItem($user);
-        $item->save();
-        $response = $this->getJson($this->makeURI($item->id))
+        $User = $this->createUser();
+        $Item = $this->makeItem($User);
+        $Item->save();
+        $Response = $this->getJson($this->makeURI($Item->Id))
             ->assertStatus(401);
 
-        $other = $this->createUser();
-        $this->actingAs($other);
-        $response = $this->getJson($this->makeURI($item->id))
+        $Other = $this->createUser();
+        $this->actingAs($Other);
+        $Response = $this->getJson($this->makeURI($Item->Id))
             ->assertStatus(403);
 
-        $this->actingAs($user);
+        $this->actingAs($User);
 
-        $response = $this->getJson($this->makeURI($item->id))
+        $Response = $this->getJson($this->makeURI($Item->Id))
             ->assertStatus(200);
-        $this->seeItem($response);
-        $response->assertJsonPath('item.id', $item->id);
+        $this->seeItem($Response);
+        $Response->assertJsonPath('Item.Id', $Item->Id);
 
-        $item->delete();
-        $response = $this->getJson($this->makeURI($item->id))
+        $Item->delete();
+        $Response = $this->getJson($this->makeURI($Item->Id))
             ->assertStatus(404);
     }
 }

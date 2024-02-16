@@ -15,9 +15,9 @@ abstract class AbstractAdminTest extends AbstractApiTest
     const URI = '/v1/Admin/';
 
     /**
-     * @param array<string, mixed> $attributes
+     * @param array<string, mixed> $Map
      */
-    protected function createAdmin(array $attributes = []): Admin
+    protected function createAdmin(array $Map = []): Admin
     {
         $admin = AdminFactory::new()->createOne($attributes);
         return $admin->refresh();

@@ -8,42 +8,47 @@ use App\Base\AbstractReadPage;
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
-    protected function path(): string
+    protected function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
     {
-        $user = $this->createUser();
-        $item = $this->makeItem($user);
-        $item->save();
+        $User = $this->createUser();
+        $Item = $this->makeItem($User);
+        $Item->save();
 
-        $data = AbstractReadPage::makeParameter();
-        $response = $this->json('GET', $this->makeURI(), $data)
+        $Data = AbstractReadPage::makeParameter();
+        $Response = $this->json('GET', $this->makeURI(), $Data)
             ->assertStatus(401);
 
-        $this->actingAs($user);
+        $this->actingAs($User);
 
-        $response = $this->json('GET', $this->makeURI(), $data)
+        $Response = $this->json('GET', $this->makeURI(), $Data)
             ->assertStatus(422);
-        $response->assertJsonValidationErrorFor('filter.name');
+        $Response->assertJsonValidationErrorFor('Filter.Status');
 
 {% for column in columnzz %}
-        $data['filter'] = [
-            '{{ column.alias }}' => $item->{{ column.alias }},
+        $Data['Filter'] = [
+            '{{ column.alias }}' => $Item->{{ column.alias }},
         ];
-        $response = $this->json('GET', $this->makeURI(), $data)
+        $Response = $this->json('GET', $this->makeURI(), $Data)
             ->assertStatus(200);
-        $this->seePage($response);
-        $response->assertJsonPath('page.data.0.{{ column.alias }}', $item->{{ column.alias }});
+        $this->seePage($Response);
+        $Response->assertJsonPath('Page.data.0.{{ column.alias }}', $Item->{{ column.alias }});
 {% endfor %}
 
-        $other = $this->createUser();
-        $this->actingAs($other);
-
-        $response = $this->json('GET', $this->makeURI(), $data)
+        $Response = $this->json('GET', $this->makeURI(), $Data)
             ->assertStatus(200);
-        $response->assertJsonCount(0, 'page.data');
+        $Response->assertJsonCount(1, 'Page.data');
+        $Response->assertJsonPath('Page.data.0.Id', $Item->Id);
+
+        $Other = $this->createUser();
+        $this->actingAs($Other);
+
+        $Response = $this->json('GET', $this->makeURI(), $Data)
+            ->assertStatus(200);
+        $Response->assertJsonCount(0, 'Page.data');
     }
 }

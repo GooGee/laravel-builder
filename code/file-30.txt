@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @method static static|null find(int $id)
- * @method static static findOrFail(int $id)
+ * @method static static|null find(int $Id)
+ * @method static static findOrFail(int $Id)
  */
 abstract class AbstractModel extends Model
 {
@@ -19,11 +19,41 @@ abstract class AbstractModel extends Model
 
     const PageSize = 20;
 
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const CREATED_AT = 'DtCreate';
+
+    /**
+     * The name of the "deleted at" column.
+     *
+     * @var string
+     */
+    const DELETED_AT = 'DtDelete';
+
+    /**
+     * The name of the "updated at" column.
+     *
+     * @var string
+     */
+    const UPDATED_AT = 'DtUpdate';
+
+    /**
+     * Indicates whether lazy loading will be prevented on this model.
+     *
+     * @var bool
+     */
+    public $preventsLazyLoading = true;
+
     public static $snakeAttributes = false;
 
-    const CREATED_AT = 'dtCreate';
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'Id';
 
-    const DELETED_AT = 'dtDelete';
-
-    const UPDATED_AT = 'dtUpdate';
 }

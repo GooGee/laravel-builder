@@ -13,16 +13,16 @@ use Illuminate\Pagination\Paginator;
 class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, mixed> $Data
      * @return Paginator<Model>
      */
-    public function run(int $userId, array $data): Paginator
+    public function run(int $UserId, array $Data): Paginator
     {
-        $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
+        $Qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
 
-        $qb->where('userId', $userId);
+        $Qb->where('UserId', $UserId);
 
-        $builder = self::makeReadPageQueryBuilder($qb, $data);
+        $builder = self::makeReadPageQueryBuilder($Qb, $Data);
 
         $builder->addFilterzz([
 {% for column in columnzz %}
@@ -32,7 +32,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
         $builder->addSort();
 
         /* @phpstan-ignore-next-line */
-        return $qb->simplePaginate();
+        return $Qb->simplePaginate();
     }
 
 }

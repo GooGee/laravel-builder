@@ -10,41 +10,41 @@ use Illuminate\Database\Eloquent\Model;
 class ReadPageQueryBuilder
 {
     /**
-     * @param  Builder<Model>  $qb
-     * @param  array<string, mixed>  $data
+     * @param Builder<Model> $Qb
+     * @param array<string, mixed> $Data
      */
-    public function __construct(public Builder $qb, private array $data)
+    public function __construct(public Builder $Qb, private array $Data)
     {
     }
 
-    public function addFilter(string $key): self
+    public function addFilter(string $Key): self
     {
-        $value = $this->getFilterValue($key);
+        $value = $this->getFilterValue($Key);
         if (isset($value)) {
-            $this->qb->where($key, $value);
+            $this->Qb->where($Key, $value);
         }
 
         return $this;
     }
 
     /**
-     * @param  string[]  $keyzz
+     * @param string[] $Keyzz
      * @return $this
      */
-    public function addFilterzz(array $keyzz): self
+    public function addFilterzz(array $Keyzz): self
     {
-        foreach ($keyzz as $key) {
-            $this->addFilter($key);
+        foreach ($Keyzz as $Key) {
+            $this->addFilter($Key);
         }
 
         return $this;
     }
 
-    public function addFilterSearch(string $key): self
+    public function addFilterSearch(string $Key): self
     {
-        $value = $this->getFilterValue($key);
+        $value = $this->getFilterValue($Key);
         if (isset($value)) {
-            $this->qb->where($key, 'LIKE', "%{$value}%");
+            $this->Qb->where($Key, 'LIKE', "%{$value}%");
         }
 
         return $this;
@@ -52,33 +52,20 @@ class ReadPageQueryBuilder
 
     public function addSort(): self
     {
-        $sortField = $this->data['sortField'] ?? null;
-        $sortOrder = $this->data['sortOrder'] ?? 'asc';
+        $sortField = $this->Data['SortField'] ?? null;
+        $sortOrder = $this->Data['SortOrder'] ?? 'asc';
 
         if (is_null($sortField)) {
             return $this;
         }
 
-        $this->qb->orderBy($sortField, $sortOrder);
+        $this->Qb->orderBy($sortField, $sortOrder);
 
         return $this;
     }
 
-    public function getFilterValue(string $key): int|string|null
+    public function getFilterValue(string $Key): int|string|null
     {
-        return $this->data['filter'][$key] ?? null;
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    public function getFilterValueArray(string $key): array
-    {
-        $value = $this->data['filter'][$key] ?? null;
-        if (is_array($value)) {
-            return $value;
-        }
-
-        return [];
+        return $this->Data['Filter'][$Key] ?? null;
     }
 }

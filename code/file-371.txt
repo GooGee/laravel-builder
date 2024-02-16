@@ -13,23 +13,23 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractA
 {
 
     /**
-     * @param User $user
-     * @param array<string, mixed> $attributes
+     * @param User $User
+     * @param array<string, mixed> $Map
      */
-    public static function makeItem(User $user, array $attributes = []): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    public static function makeItem(User $User, array $Map = []): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item = {{ helper.getClassName(helper.findFile('Factory'), entity, action) }}::new()
-            ->for($user)
-            ->makeOne($attributes);
-        return $item;
+        $Item = {{ helper.getClassName(helper.findFile('Factory'), entity, action) }}::new()
+            ->for($User, 'User')
+            ->makeOne($Map);
+        return $Item;
     }
 
     /**
      * @return string[]
      */
-    public static function structure(): array
+    public static function getStructure(): array
     {
-        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::keyzz();
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::getKeyzz();
     }
 
 }

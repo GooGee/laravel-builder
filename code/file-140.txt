@@ -10,13 +10,13 @@ use {{ dependency }};{% endfor %}
 class {{ helper.getClassName(file, entity, action) }}
 {
     /**
-     * @param array<int> $idzz
+     * @param array<int> $Idzz
      * @return \Illuminate\Database\Eloquent\Collection<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(array $idzz)
+    function run(array $Idzz)
     {
         return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->whereIn('id', $idzz)
+            ->whereIn('Id', $Idzz)
             ->get();
     }
 

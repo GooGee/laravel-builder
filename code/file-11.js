@@ -119,7 +119,7 @@ function run(data) {
     /** @phpstan-ignore-next-line */
     public function ${relation.name0}(): HasMany
     {
-        return $this->${method}(${entity1.name}::class, '${fk.name}');
+        return $this->${method}(${entity1.name}::class, '${fk.name}', 'Id');
     }`
     }
 
@@ -140,7 +140,7 @@ function run(data) {
     /** @phpstan-ignore-next-line */
     public function ${relation.name1}(): BelongsTo
     {
-        return $this->belongsTo(${entity1.name}::class, '${fk.name}');
+        return $this->belongsTo(${entity1.name}::class, '${fk.name}', 'Id');
     }`
     }
 

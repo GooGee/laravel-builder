@@ -9,18 +9,23 @@ use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $id, {{ action + entity.name }} $deleteOne): JsonResponse
+    public function __invoke(int $Id, {{ action + entity.name }} $DeleteOne): JsonResponse
     {
-        /** @var \App\Models\User $user */
-        $user = auth()->user();
+        /** @var \App\Models\User $User */
+        $User = auth()->user();
 
-        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($id);
+        $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
-        $result = $deleteOne->run($user->id, $item);
+        if ($User->Id !== $Item->UserId) {
+            throw new AccessDeniedHttpException();
+        }
 
-        return AbstractResponse::sendOK($result);
+        $Result = $DeleteOne->run($User->Id, $Item);
+
+        return AbstractResponse::sendOK($Result);
     }
 }

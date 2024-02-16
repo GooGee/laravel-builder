@@ -6,26 +6,26 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
 {
-    protected function path(): string
+    protected function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
     {
-        $user = $this->createUser();
+        $User = $this->createUser();
 
-        $item = $this->makeItem($user);
-        $item->save();
-        $idzz = [$item->id];
-        $response = $this->json('GET', $this->makeURI(), compact('idzz'))
+        $Item = $this->makeItem($User);
+        $Item->save();
+        $Idzz = [$Item->Id];
+        $Response = $this->json('GET', $this->makeURI(), compact('Idzz'))
             ->assertStatus(401);
 
-        $this->actingAs($user);
+        $this->actingAs($User);
 
-        $response = $this->json('GET', $this->makeURI(), compact('idzz'))
+        $Response = $this->json('GET', $this->makeURI(), compact('Idzz'))
             ->assertStatus(200);
-        $this->seeItemzz($response);
-        $response->assertJsonCount(1, 'itemzz');
+        $this->seeItemzz($Response);
+        $Response->assertJsonCount(1, 'Itemzz');
     }
 }

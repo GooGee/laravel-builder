@@ -12,14 +12,14 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 {
     /**
-     * @param array<string, mixed> $data
+     * @param array<string, mixed> $Data
      * @return LengthAwarePaginator<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(array $data): LengthAwarePaginator
+    function run(array $Data): LengthAwarePaginator
     {
-        $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
+        $Qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
 
-        $builder = self::makeReadPageQueryBuilder($qb, $data);
+        $builder = self::makeReadPageQueryBuilder($Qb, $Data);
 
         $builder->addFilterzz([
 {% for column in columnzz %}
@@ -29,7 +29,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
         $builder->addSort();
 
         /* @phpstan-ignore-next-line */
-        return $qb->paginate();
+        return $Qb->paginate();
     }
 
 }

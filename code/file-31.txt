@@ -12,13 +12,13 @@ abstract class AbstractRepository
 
     abstract function query(): Builder;
 
-    function find(int $id)
+    function find(int $Id)
     {
-        return $this->query()->find($id);
+        return $this->query()->find($Id);
     }
 
-    function findOrFail(int $id)
+    function findOrFail(int $Id)
     {
-        return $this->query()->findOrFail($id);
+        return $this->query()->findOrFail($Id);
     }
 }

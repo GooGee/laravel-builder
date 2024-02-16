@@ -12,7 +12,7 @@ class {{ helper.getClassName(file, entity, action) }}
     /**
      * @return array<string, mixed>
      */
-    public function run(int $userId): array
+    public function run(int $UserId): array
     {
 
     }
