@@ -19,7 +19,7 @@ abstract class AbstractAdminTest extends AbstractApiTest
      */
     protected function createAdmin(array $Map = []): Admin
     {
-        $admin = AdminFactory::new()->createOne($attributes);
+        $admin = AdminFactory::new()->createOne($Map);
         return $admin->refresh();
     }
 

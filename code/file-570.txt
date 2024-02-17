@@ -20,7 +20,7 @@ abstract class AbstractFeatureTest extends TestCase
      */
     protected function createUser(array $Map = []): User
     {
-        $user = UserFactory::new()->createOne($attributes);
+        $User = UserFactory::new()->createOne($Map);
 
         return $User->refresh();
     }

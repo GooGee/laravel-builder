@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User;
+
+/**
+ * @method static static|null find(int $id)
+ * @method static static findOrFail(int $id)
+ */
+abstract class AbstractUser extends User
+{
+    use HasFactory;
+    use SoftDeletes;
+
+    const PageSize = 20;
+
+    /**
+     * The name of the "created at" column.
+     *
+     * @var string
+     */
+    const CREATED_AT = 'DtCreate';
+
+    /**
+     * The name of the "deleted at" column.
+     *
+     * @var string
+     */
+    const DELETED_AT = 'DtDelete';
+
+    /**
+     * The name of the "updated at" column.
+     *
+     * @var string
+     */
+    const UPDATED_AT = 'DtUpdate';
+
+    public static $snakeAttributes = false;
+
+    /**
+     * Indicates whether lazy loading will be prevented on this model.
+     *
+     * @var bool
+     */
+    public $preventsLazyLoading = true;
+
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'Id';
+
+    protected $rememberTokenName = 'RememberToken';
+}
