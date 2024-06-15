@@ -12,12 +12,12 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     public function run(int $UserId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        Log::channel('user')->info(self::class, compact('UserId'));
+        Log::info(self::class, compact('UserId'));
 
         try {
 
         } catch (\Exception $Exception) {
-            Log::channel('user')->error($Exception->getMessage());
+            Log::error($Exception->getMessage());
 
             throw $Exception;
         }

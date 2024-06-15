@@ -21,7 +21,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         $User = auth()->user();
 
         if ($Item->UserId === $User->Id) {
-            return AbstractResponse::sendItem($Item);
+            return AbstractResponse::sendModel($Item);
         }
         throw new AccessDeniedHttpException();
     }

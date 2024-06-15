@@ -7,9 +7,9 @@ namespace Tests\Admin;
 use App\Models\Admin;
 use App\Models\Permission;
 use Database\Factories\AdminFactory;
-use Tests\Api\AbstractApiTest;
+use Tests\Api\AbstractApiTestBase;
 
-abstract class AbstractAdminTest extends AbstractApiTest
+abstract class AbstractAdminTestBase extends AbstractApiTestBase
 {
 
     const URI = '/v1/Admin/';

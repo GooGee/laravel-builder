@@ -25,6 +25,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $Itemzz = $ReadMany->run($Request->getValidatedIdzz())->all();
 
-        return AbstractResponse::sendItemzz($Itemzz);
+        return AbstractResponse::sendModelzz($Itemzz);
     }
 }

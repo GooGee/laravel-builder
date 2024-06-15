@@ -6,7 +6,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractReadPage;
 
-class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTest'), entity, action) }}
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
 {
     protected function getPath(): string
     {

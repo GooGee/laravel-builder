@@ -7,9 +7,9 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use App\Models\User;
-use Tests\API\AbstractApiTest;
+use Tests\API\AbstractApiTestBase;
 
-abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractApiTest
+abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractApiTestBase
 {
 
     /**

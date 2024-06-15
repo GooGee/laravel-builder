@@ -15,6 +15,6 @@ class {{ helper.getClassName(file, entity, action) }}
      */
     public function __construct(public int $UserId, public array $Idzz)
     {
-        Log::channel('user')->info(self::class, ['UserId' => $UserId, 'Idzz' => $Idzz]);
+        Log::info(self::class, ['UserId' => $UserId, 'Idzz' => $Idzz]);
     }
 }

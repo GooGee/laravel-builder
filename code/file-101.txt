@@ -24,6 +24,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $Itemzz = $CreateMany->run($User, $Request->validated('Itemzz'));
 
-        return AbstractResponse::sendItemzz($Itemzz);
+        return AbstractResponse::sendModelzz($Itemzz);
     }
 }

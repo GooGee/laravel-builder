@@ -11,7 +11,7 @@ use Illuminate\Routing\Middleware\ThrottleRequestsWithRedis;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
-abstract class AbstractApiTest extends TestCase
+abstract class AbstractApiTestBase extends TestCase
 {
     use RefreshDatabase;
 

@@ -30,6 +30,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             $Request->validated('{{ column.name }}'),{% endfor %}
         );
 
-        return AbstractResponse::sendItem($Item);
+        return AbstractResponse::sendModel($Item);
     }
 }

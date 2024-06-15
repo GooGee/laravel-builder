@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
-abstract class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractAdminTest.php'), entity, action) }}
+abstract class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractAdminTestBase.php'), entity, action) }}
 {
 
     protected function getPath(): string

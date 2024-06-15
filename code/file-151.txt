@@ -24,6 +24,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
-        return AbstractResponse::sendItem($Item);
+        return AbstractResponse::sendModel($Item);
     }
 }

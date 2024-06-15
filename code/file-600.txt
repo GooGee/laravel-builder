@@ -12,6 +12,6 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     public function __construct(public int $UserId, public {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item)
     {
-        Log::channel('user')->info(self::class, ['UserId' => $UserId, 'Id' => $Item->Id]);
+        Log::info(self::class, ['UserId' => $UserId, 'Id' => $Item->Id]);
     }
 }
