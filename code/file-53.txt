@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/v1{{ module.prefix }}')->group(function () {
+Route::prefix('/V1{{ module.prefix }}')->group(function () {
 
 {{ text }}
 

@@ -15,7 +15,7 @@ abstract class AbstractApiTestBase extends TestCase
 {
     use RefreshDatabase;
 
-    const URI = '/v1/Api/';
+    const URI = '/V1/Api/';
 
     protected $seed = true;
 

@@ -12,7 +12,7 @@ use Tests\Api\AbstractApiTestBase;
 abstract class AbstractAdminTestBase extends AbstractApiTestBase
 {
 
-    const URI = '/v1/Admin/';
+    const URI = '/V1/Admin/';
 
     /**
      * @param array<string, mixed> $Map
