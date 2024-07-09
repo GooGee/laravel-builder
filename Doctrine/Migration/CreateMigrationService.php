@@ -48,7 +48,7 @@ class CreateMigrationService
     private function replaceStatement(string $text)
     {
         $text = str_replace('$this->addSql(\'', '', $text);
-        return str_replace('\');', ';', $text);
+        return str_replace('\');', ";\n", $text);
     }
 
     /**
