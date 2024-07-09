@@ -12,11 +12,15 @@ return new class extends Migration
 {
     public function up()
     {
+        DB::unprepared('
 <up>
+        ');
     }
 
     public function down()
     {
+        DB::unprepared('
 <down>
+        ');
     }
 };
