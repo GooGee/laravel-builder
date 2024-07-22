@@ -45,10 +45,9 @@ class CreateMigrationService
         return $schemazz;
     }
 
-    private function replaceStatement(string $text)
+    private function replaceStatement(string $sql)
     {
-        $text = str_replace('$this->addSql(\'', '', $text);
-        return str_replace('\');', ";\n", $text);
+        return str_replace('$this->addSql', 'DB::statement', $sql);
     }
 
     /**
