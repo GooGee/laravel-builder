@@ -69,11 +69,15 @@ class CreateMigrationService
         $toSchema = $this->createToSchema();
         $platform = $this->dependencyFactory->getConnection()->getDatabasePlatform();
         $comparator = $this->schemaManager->createComparator();
-        $upzz = $comparator->compareSchemas($fromSchema, $toSchema)->toSql($platform);
+        $upzz = $platform->getAlterSchemaSQL(
+            $comparator->compareSchemas($fromSchema, $toSchema)
+        );
         if (empty($upzz)) {
             throw NoChangesDetected::new();
         }
-        $downzz = $comparator->compareSchemas($toSchema, $fromSchema)->toSql($platform);
+        $downzz = $platform->getAlterSchemaSQL(
+            $comparator->compareSchemas($toSchema, $fromSchema)
+        );
         $kv = $this->dependencyFactory->getConfiguration()->getMigrationDirectories();
         $fqcn = $this->dependencyFactory->getClassNameGenerator()->generateClassName(array_keys($kv)[0]);
         $uptext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($upzz, true);
