@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GooGee\LaravelBuilder;
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Schema\AbstractAsset;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
@@ -27,12 +28,14 @@ class DoctrineMigrationProvider extends ServiceProvider
         $this->app->bind(DependencyFactory::class, function ($app) {
             $cc = config('laravelbuilder');
             $ac = ORMSetup::createAttributeMetadataConfiguration([base_path('database/Entity')], true);
-            $ac->setSchemaAssetsFilter(function ($name) use ($cc) {
-                if (is_string($name)) {
-                    foreach ($cc['ignore_schemas'] as $text) {
-                        if (str_starts_with($name, $text)) {
-                            return false;
-                        }
+            $ac->setSchemaAssetsFilter(function (string|AbstractAsset $an) use ($cc) {
+                $name = $an;
+                if ($an instanceof AbstractAsset) {
+                    $name = $an->getName();
+                }
+                foreach ($cc['ignore_schemas'] as $text) {
+                    if (str_starts_with($name, $text)) {
+                        return false;
                     }
                 }
                 return true;
