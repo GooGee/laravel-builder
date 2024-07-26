@@ -21,7 +21,7 @@ class CreateMigrationService
 
     private function createFromSchema(): Schema
     {
-        return $this->schemaManager->createSchema();
+        return $this->schemaManager->introspectSchema();
     }
 
     private function createToSchema(): Schema
@@ -45,7 +45,7 @@ class CreateMigrationService
         return $schemazz;
     }
 
-    private function replaceStatement(string $sql)
+    private function replaceStatement(string $sql): string
     {
         return str_replace('$this->addSql', 'DB::statement', $sql);
     }
@@ -63,7 +63,7 @@ class CreateMigrationService
         return $pos === false ? $name : substr($name, $pos + 1);
     }
 
-    function run()
+    function run(): string
     {
         $fromSchema = $this->createFromSchema();
         $toSchema = $this->createToSchema();

@@ -16,17 +16,17 @@ class ReadDBSchema
 {
     private AbstractSchemaManager $schemaManager;
 
-    public function __construct(private DependencyFactory $dependencyFactory)
+    public function __construct(DependencyFactory $dependencyFactory)
     {
         $this->schemaManager = $dependencyFactory->getConnection()->createSchemaManager();
     }
 
-    function run()
+    function run(): Schema
     {
-        return $this->schemaManager->createSchema();
+        return $this->schemaManager->introspectSchema();
     }
 
-    static function makeColumn(Column $column)
+    static function makeColumn(Column $column): array
     {
         $data = [
             'name' => $column->getName(),
@@ -44,7 +44,7 @@ class ReadDBSchema
         return $data;
     }
 
-    static function makeIndex(Index $index)
+    static function makeIndex(Index $index): ?array
     {
         $name = $index->getName();
         if (strtolower($name) === 'primary') {
@@ -58,7 +58,7 @@ class ReadDBSchema
         ];
     }
 
-    static function makeRelation(ForeignKeyConstraint $constraint)
+    static function makeRelation(ForeignKeyConstraint $constraint): array
     {
         $data = [
             'columnzz' => $constraint->getLocalColumns(),
@@ -67,7 +67,7 @@ class ReadDBSchema
         return $data;
     }
 
-    static function makeTable(Table $table)
+    static function makeTable(Table $table): array
     {
         $data = [
             'name' => $table->getName(),
@@ -91,7 +91,7 @@ class ReadDBSchema
         return $data;
     }
 
-    static function toArray(Schema $schema)
+    static function toArray(Schema $schema): array
     {
         $data = [
             'name' => $schema->getName(),
