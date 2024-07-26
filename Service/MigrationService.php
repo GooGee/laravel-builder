@@ -12,29 +12,27 @@ class MigrationService
     const Folder = 'database/migrations';
     const Table = 'migrations';
 
-    private EntityManagerInterface $em;
-
     public function __construct(private FileManager $fileManager, private DependencyFactory $dependencyFactory)
     {
-        $this->em = $dependencyFactory->getEntityManager();
     }
 
-    function delete(string $file)
+    function delete(string $file): void
     {
         $path = $this->fileManager->concat(self::Folder, $file);
         $this->fileManager->delete($path);
     }
 
-    function getAllFile()
+    function getAllFile(): array
     {
         return $this->fileManager->listFilezz(self::Folder);
     }
 
-    function getAllInDB()
+    function getAllInDB(): array
     {
         try {
             $table = self::Table;
-            $all = $this->em->getConnection()
+            $all = $this->dependencyFactory
+                ->getConnection()
                 ->prepare("SELECT * FROM `$table`")
                 ->executeQuery()
                 ->fetchAllAssociative();
