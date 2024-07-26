@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GooGee\LaravelBuilder;
 
+use Doctrine\DBAL\DriverManager;
 use Doctrine\Migrations\Configuration\Configuration;
 use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
 use Doctrine\Migrations\Configuration\Migration\ExistingConfiguration;
@@ -36,8 +37,8 @@ class DoctrineMigrationProvider extends ServiceProvider
                 }
                 return true;
             });
-
-            $em = EntityManager::create($cc['db'], $ac);
+            $connection = DriverManager::getConnection($cc['db'], $ac);
+            $em = new EntityManager($connection, $ac);
             $em->getEventManager()->addEventListener('postGenerateSchema', new FixPostgreSQLDefaultSchemaListener());
 
             $configuration = new Configuration();
