@@ -2,7 +2,6 @@
 
 namespace GooGee\LaravelBuilder\Doctrine\Migration;
 
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\DependencyFactory;
 use Doctrine\Migrations\Generator\Exception\NoChangesDetected;
@@ -10,39 +9,28 @@ use Doctrine\Migrations\Provider\OrmSchemaProvider;
 
 class CreateMigrationService
 {
-    private AbstractSchemaManager $schemaManager;
-    private OrmSchemaProvider $schemaProvider;
-
     public function __construct(private DependencyFactory $dependencyFactory)
     {
-        $this->schemaManager = $dependencyFactory->getConnection()->createSchemaManager();
-        $this->schemaProvider = new OrmSchemaProvider($dependencyFactory->getEntityManager());
-    }
-
-    private function createFromSchema(): Schema
-    {
-        return $this->schemaManager->introspectSchema();
     }
 
     private function createToSchema(): Schema
     {
-        $schemazz = $this->schemaProvider->createSchema();
+        $schemaProvider = new OrmSchemaProvider($this->dependencyFactory->getEntityManager());
+        $toSchema = $schemaProvider->createSchema();
 
         $schemaAssetsFilter = $this->dependencyFactory->getConnection()->getConfiguration()->getSchemaAssetsFilter();
 
-        if ($schemaAssetsFilter !== null) {
-            foreach ($schemazz->getTables() as $table) {
-                $tableName = $table->getName();
+        foreach ($toSchema->getTables() as $table) {
+            $tableName = $table->getName();
 
-                if ($schemaAssetsFilter($this->resolveTableName($tableName))) {
-                    continue;
-                }
-
-                $schemazz->dropTable($tableName);
+            if ($schemaAssetsFilter($this->resolveTableName($tableName))) {
+                continue;
             }
+
+            $toSchema->dropTable($tableName);
         }
 
-        return $schemazz;
+        return $toSchema;
     }
 
     private function replaceStatement(string $sql): string
@@ -65,10 +53,12 @@ class CreateMigrationService
 
     function run(): string
     {
-        $fromSchema = $this->createFromSchema();
+        $schemaManager = $this->dependencyFactory->getConnection()->createSchemaManager();
+        $fromSchema = $schemaManager->introspectSchema();
         $toSchema = $this->createToSchema();
+
         $platform = $this->dependencyFactory->getConnection()->getDatabasePlatform();
-        $comparator = $this->schemaManager->createComparator();
+        $comparator = $schemaManager->createComparator();
         $upzz = $platform->getAlterSchemaSQL(
             $comparator->compareSchemas($fromSchema, $toSchema)
         );
