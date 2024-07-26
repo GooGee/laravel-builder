@@ -33,7 +33,9 @@ class MigrationService
             $table = self::Table;
             $all = $this->dependencyFactory
                 ->getConnection()
-                ->prepare("SELECT * FROM `$table`")
+                ->createQueryBuilder()
+                ->from($table)
+                ->select('*')
                 ->executeQuery()
                 ->fetchAllAssociative();
             return $all;
