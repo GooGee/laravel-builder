@@ -33,8 +33,11 @@ class CreateMigrationService
         return $toSchema;
     }
 
-    private function replaceStatement(string $sql): string
+    private function replaceStatement(string $sql, bool $isUp): string
     {
+        if (function_exists('replaceDoctrineSql')) {
+            return replaceDoctrineSql($sql, $isUp);
+        }
         return str_replace('$this->addSql', 'DB::statement', $sql);
     }
 
@@ -59,8 +62,9 @@ class CreateMigrationService
 
         $platform = $this->dependencyFactory->getConnection()->getDatabasePlatform();
         $comparator = $schemaManager->createComparator();
-        $sd = $comparator->compareSchemas($fromSchema, $toSchema);
-        $upSchemazz = $platform->getAlterSchemaSQL($sd);
+        $upSchemazz = $platform->getAlterSchemaSQL(
+            $comparator->compareSchemas($fromSchema, $toSchema)
+        );
         if (empty($upSchemazz)) {
             throw NoChangesDetected::new();
         }
@@ -74,7 +78,7 @@ class CreateMigrationService
         $fqcn = $this->dependencyFactory->getClassNameGenerator()->generateClassName(array_keys($kv)[0]);
         $file = $this->dependencyFactory
             ->getMigrationGenerator()
-            ->generateMigration($fqcn, $this->replaceStatement($uptext), $this->replaceStatement($downtext));
+            ->generateMigration($fqcn, $this->replaceStatement($uptext, true), $this->replaceStatement($downtext, false));
 
         $name = dirname($file) . '/' . date('Y_m_d_His') . '_doctrine_migration.php';
         rename($file, $name);

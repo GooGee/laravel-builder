@@ -13,8 +13,8 @@ class CreateMigrationFileController extends AbstractController
     public function __invoke(CreateMigrationService $service)
     {
         try {
-            $content = $service->run();
-            return $this->ok($content);
+            $file = $service->run();
+            return $this->ok($file);
         } catch (NoChangesDetected $exception) {
             return $this->ok($exception->getMessage());
         } catch (\Exception $exception) {
