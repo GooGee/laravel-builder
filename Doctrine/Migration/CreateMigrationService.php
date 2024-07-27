@@ -61,24 +61,15 @@ class CreateMigrationService
         $comparator = $schemaManager->createComparator();
         $sd = $comparator->compareSchemas($fromSchema, $toSchema);
         $upSchemazz = $platform->getAlterSchemaSQL($sd);
-        $upSequencezz = [];
-        foreach ($sd->getAlteredSequences() as $item) {
-            $upSequencezz[] = $platform->getAlterSequenceSQL($item);
-        }
-        if (empty($upSchemazz) && empty($upSequencezz)) {
+        if (empty($upSchemazz)) {
             throw NoChangesDetected::new();
         }
 
         $downSchemazz = $platform->getAlterSchemaSQL(
             $comparator->compareSchemas($toSchema, $fromSchema)
         );
-        $downSequencezz = [];
-        foreach ($sd->getAlteredSequences() as $item) {
-            $downSequencezz[] = $platform->getAlterSequenceSQL($item);
-        }
-
-        $uptext = $this->dependencyFactory->getMigrationSqlGenerator()->generate([...$upSchemazz, ...$upSequencezz], true);
-        $downtext = $this->dependencyFactory->getMigrationSqlGenerator()->generate([...$downSchemazz, ...$downSequencezz], true);
+        $uptext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($upSchemazz, true);
+        $downtext = $this->dependencyFactory->getMigrationSqlGenerator()->generate($downSchemazz, true);
         $kv = $this->dependencyFactory->getConfiguration()->getMigrationDirectories();
         $fqcn = $this->dependencyFactory->getClassNameGenerator()->generateClassName(array_keys($kv)[0]);
         $file = $this->dependencyFactory
