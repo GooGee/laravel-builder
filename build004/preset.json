@@ -95,15 +95,6 @@
                 },
                 {
                     "color": "#fff",
-                    "description": "React-Admin Component https://marmelab.com/react-admin/documentation.html",
-                    "name": "RAC",
-                    "reserved": true,
-                    "valueDescription": "",
-                    "tagDescription": "",
-                    "id": 17
-                },
-                {
-                    "color": "#fff",
                     "description": "https://spec.openapis.org/oas/v3.0.3#data-types",
                     "name": "TypeFormat",
                     "reserved": true,
@@ -1358,342 +1349,6 @@
                     "value": "",
                     "tag": "",
                     "id": 429
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ArrayField",
-                    "value": "",
-                    "tag": "",
-                    "id": 431
-                },
-                {
-                    "collectionId": 17,
-                    "name": "BooleanField",
-                    "value": "",
-                    "tag": "",
-                    "id": 432
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ChipField",
-                    "value": "",
-                    "tag": "",
-                    "id": 433
-                },
-                {
-                    "collectionId": 17,
-                    "name": "DateField",
-                    "value": "",
-                    "tag": "",
-                    "id": 434
-                },
-                {
-                    "collectionId": 17,
-                    "name": "EmailField",
-                    "value": "",
-                    "tag": "",
-                    "id": 435
-                },
-                {
-                    "collectionId": 17,
-                    "name": "FileField",
-                    "value": "",
-                    "tag": "",
-                    "id": 436
-                },
-                {
-                    "collectionId": 17,
-                    "name": "FunctionField",
-                    "value": "",
-                    "tag": "",
-                    "id": 437
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ImageField",
-                    "value": "",
-                    "tag": "",
-                    "id": 438
-                },
-                {
-                    "collectionId": 17,
-                    "name": "MarkdownField",
-                    "value": "",
-                    "tag": "",
-                    "id": 439
-                },
-                {
-                    "collectionId": 17,
-                    "name": "NumberField",
-                    "value": "",
-                    "tag": "",
-                    "id": 440
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceField",
-                    "value": "",
-                    "tag": "",
-                    "id": 441
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceArrayField",
-                    "value": "",
-                    "tag": "",
-                    "id": 442
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceManyField",
-                    "value": "",
-                    "tag": "",
-                    "id": 443
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceManyCount",
-                    "value": "",
-                    "tag": "",
-                    "id": 444
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceManyToManyField",
-                    "value": "",
-                    "tag": "",
-                    "id": 445
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceOneField",
-                    "value": "",
-                    "tag": "",
-                    "id": 446
-                },
-                {
-                    "collectionId": 17,
-                    "name": "RichTextField",
-                    "value": "",
-                    "tag": "",
-                    "id": 447
-                },
-                {
-                    "collectionId": 17,
-                    "name": "SelectField",
-                    "value": "",
-                    "tag": "",
-                    "id": 448
-                },
-                {
-                    "collectionId": 17,
-                    "name": "TextField",
-                    "value": "",
-                    "tag": "",
-                    "id": 449
-                },
-                {
-                    "collectionId": 17,
-                    "name": "TranslatableFields",
-                    "value": "",
-                    "tag": "",
-                    "id": 450
-                },
-                {
-                    "collectionId": 17,
-                    "name": "UrlField",
-                    "value": "",
-                    "tag": "",
-                    "id": 451
-                },
-                {
-                    "collectionId": 17,
-                    "name": "WrapperField",
-                    "value": "",
-                    "tag": "",
-                    "id": 452
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ArrayInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 453
-                },
-                {
-                    "collectionId": 17,
-                    "name": "AutocompleteInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 454
-                },
-                {
-                    "collectionId": 17,
-                    "name": "AutocompleteArrayInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 455
-                },
-                {
-                    "collectionId": 17,
-                    "name": "BooleanInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 456
-                },
-                {
-                    "collectionId": 17,
-                    "name": "CheckboxGroupInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 457
-                },
-                {
-                    "collectionId": 17,
-                    "name": "DateInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 458
-                },
-                {
-                    "collectionId": 17,
-                    "name": "DateTimeInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 459
-                },
-                {
-                    "collectionId": 17,
-                    "name": "DualListInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 460
-                },
-                {
-                    "collectionId": 17,
-                    "name": "FileInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 461
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ImageInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 462
-                },
-                {
-                    "collectionId": 17,
-                    "name": "MarkdownInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 463
-                },
-                {
-                    "collectionId": 17,
-                    "name": "NullableBooleanInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 464
-                },
-                {
-                    "collectionId": 17,
-                    "name": "NumberInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 465
-                },
-                {
-                    "collectionId": 17,
-                    "name": "PasswordInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 466
-                },
-                {
-                    "collectionId": 17,
-                    "name": "RadioButtonGroupInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 467
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 468
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceArrayInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 469
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceManyInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 470
-                },
-                {
-                    "collectionId": 17,
-                    "name": "ReferenceManyToManyInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 471
-                },
-                {
-                    "collectionId": 17,
-                    "name": "RichTextInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 472
-                },
-                {
-                    "collectionId": 17,
-                    "name": "SelectInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 473
-                },
-                {
-                    "collectionId": 17,
-                    "name": "SelectArrayInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 474
-                },
-                {
-                    "collectionId": 17,
-                    "name": "SimpleFormIterator",
-                    "value": "",
-                    "tag": "",
-                    "id": 475
-                },
-                {
-                    "collectionId": 17,
-                    "name": "TextInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 476
-                },
-                {
-                    "collectionId": 17,
-                    "name": "TimeInput",
-                    "value": "",
-                    "tag": "",
-                    "id": 477
-                },
-                {
-                    "collectionId": 17,
-                    "name": "TranslatableInputs",
-                    "value": "",
-                    "tag": "",
-                    "id": 478
                 },
                 {
                     "collectionId": 3,
@@ -3078,6 +2733,13 @@
                 },
                 {
                     "parentId": 41,
+                    "name": "ReadAll",
+                    "opened": true,
+                    "description": "",
+                    "id": 445
+                },
+                {
+                    "parentId": 41,
                     "description": "",
                     "opened": true,
                     "name": "ReadMany",
@@ -3175,39 +2837,109 @@
                     "id": 88
                 },
                 {
-                    "parentId": 1,
-                    "name": "react-admin",
+                    "parentId": 2,
+                    "name": "ApiGuest",
                     "opened": true,
                     "description": "",
-                    "id": 600
+                    "id": 491
                 },
                 {
-                    "parentId": 600,
-                    "name": "src",
-                    "opened": true,
-                    "description": "",
-                    "id": 610
-                },
-                {
-                    "parentId": 610,
-                    "name": "View",
-                    "opened": true,
-                    "description": "",
-                    "id": 620
-                },
-                {
-                    "parentId": 620,
+                    "parentId": 491,
                     "name": "${entity.name}",
                     "opened": true,
                     "description": "",
-                    "id": 630
+                    "id": 492
                 },
                 {
-                    "parentId": 610,
-                    "name": "Service",
+                    "parentId": 492,
+                    "name": "Cache",
                     "opened": true,
                     "description": "",
-                    "id": 640
+                    "id": 493
+                },
+                {
+                    "parentId": 492,
+                    "name": "CreateMany",
+                    "opened": true,
+                    "description": "",
+                    "id": 494
+                },
+                {
+                    "parentId": 492,
+                    "name": "CreateOne",
+                    "opened": true,
+                    "description": "",
+                    "id": 495
+                },
+                {
+                    "parentId": 492,
+                    "name": "DeleteMany",
+                    "opened": true,
+                    "description": "",
+                    "id": 496
+                },
+                {
+                    "parentId": 492,
+                    "name": "DeleteOne",
+                    "opened": true,
+                    "description": "",
+                    "id": 497
+                },
+                {
+                    "parentId": 492,
+                    "name": "ReadMany",
+                    "opened": true,
+                    "description": "",
+                    "id": 498
+                },
+                {
+                    "parentId": 492,
+                    "name": "ReadOne",
+                    "opened": true,
+                    "description": "",
+                    "id": 499
+                },
+                {
+                    "parentId": 492,
+                    "name": "UpdateMany",
+                    "opened": true,
+                    "description": "",
+                    "id": 500
+                },
+                {
+                    "parentId": 492,
+                    "name": "UpdateOne",
+                    "opened": true,
+                    "description": "",
+                    "id": 501
+                },
+                {
+                    "parentId": 492,
+                    "name": "ReadPage",
+                    "opened": true,
+                    "description": "",
+                    "id": 502
+                },
+                {
+                    "parentId": 492,
+                    "name": "ReadAll",
+                    "opened": true,
+                    "description": "",
+                    "id": 503
+                },
+                {
+                    "parentId": 492,
+                    "name": "ReadHome",
+                    "opened": true,
+                    "description": "",
+                    "id": 504
+                },
+                {
+                    "parentId": 80,
+                    "name": "ApiGuest",
+                    "opened": true,
+                    "description": "",
+                    "id": 505
                 }
             ],
             "DoctrineColumnType": [
@@ -3218,8 +2950,8 @@
                     "name": "smallint",
                     "reserved": false,
                     "default": "",
-                    "fakeMethod": "randomNumber",
-                    "fakeText": "111, 333",
+                    "fakeMethod": "numberBetween",
+                    "fakeText": "",
                     "nullable": false,
                     "oapiFormat": "int16",
                     "oapiType": "integer",
@@ -3237,7 +2969,7 @@
                     "reserved": false,
                     "default": "",
                     "fakeMethod": "numberBetween",
-                    "fakeText": "111, 333",
+                    "fakeText": "",
                     "nullable": false,
                     "oapiFormat": "int32",
                     "oapiType": "integer",
@@ -3255,7 +2987,7 @@
                     "reserved": false,
                     "default": "",
                     "fakeMethod": "numberBetween",
-                    "fakeText": "111, 333",
+                    "fakeText": "",
                     "nullable": false,
                     "oapiFormat": "int64",
                     "oapiType": "integer",
@@ -3545,7 +3277,8 @@
                     "nameSpacePattern": "Entity",
                     "id": 1,
                     "description": "",
-                    "directoryId": 60
+                    "directoryId": 60,
+                    "isSingle": false
                 },
                 {
                     "name": "ModelBase",
@@ -3555,7 +3288,8 @@
                     "fileNamePattern": "${entity.name}Base.php",
                     "id": 11,
                     "description": "",
-                    "directoryId": 2
+                    "directoryId": 2,
+                    "isSingle": false
                 },
                 {
                     "name": "Model",
@@ -3565,7 +3299,8 @@
                     "fileNamePattern": "${entity.name}.php",
                     "id": 12,
                     "description": "",
-                    "directoryId": 2
+                    "directoryId": 2,
+                    "isSingle": false
                 },
                 {
                     "name": "Factory",
@@ -3575,7 +3310,8 @@
                     "fileNamePattern": "${entity.name}Factory.php",
                     "id": 13,
                     "description": "",
-                    "directoryId": 60
+                    "directoryId": 60,
+                    "isSingle": false
                 },
                 {
                     "name": "Repository",
@@ -3585,7 +3321,8 @@
                     "fileNamePattern": "${entity.name}Repository.php",
                     "id": 14,
                     "description": "",
-                    "directoryId": 2
+                    "directoryId": 2,
+                    "isSingle": false
                 },
                 {
                     "name": "Command",
@@ -3595,7 +3332,8 @@
                     "fileNamePattern": "${entity.name}Command.php",
                     "id": 15,
                     "description": "",
-                    "directoryId": 2
+                    "directoryId": 2,
+                    "isSingle": false
                 },
                 {
                     "name": "Service",
@@ -3605,7 +3343,30 @@
                     "fileNamePattern": "${entity.name}Service.php",
                     "id": 16,
                     "description": "",
-                    "directoryId": 2
+                    "directoryId": 2,
+                    "isSingle": false
+                },
+                {
+                    "directoryId": 2,
+                    "name": "Enum",
+                    "color": "#f00",
+                    "isSingle": false,
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "Enum",
+                    "fileNamePattern": "${entity.name}.php",
+                    "id": 17
+                },
+                {
+                    "directoryId": 2,
+                    "name": "EntityNameEnum",
+                    "color": "#f00",
+                    "isSingle": true,
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "Enum",
+                    "fileNamePattern": "EntityNameEnum.php",
+                    "id": 18
                 },
                 {
                     "directoryId": 2,
@@ -3615,7 +3376,19 @@
                     "description": "",
                     "nameSpacePattern": "Providers",
                     "fileNamePattern": "ApiEvent.php",
-                    "id": 20
+                    "id": 20,
+                    "isSingle": true
+                },
+                {
+                    "directoryId": 2,
+                    "name": "EventServiceProvider.php",
+                    "color": "#fff",
+                    "isSingle": true,
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "Providers",
+                    "fileNamePattern": "EventServiceProvider.php",
+                    "id": 21
                 },
                 {
                     "directoryId": 2,
@@ -3625,7 +3398,8 @@
                     "description": "",
                     "nameSpacePattern": "Models",
                     "fileNamePattern": "AbstractModel.php",
-                    "id": 30
+                    "id": 30,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 2,
@@ -3635,7 +3409,8 @@
                     "description": "",
                     "nameSpacePattern": "Models",
                     "fileNamePattern": "AbstractUser.php",
-                    "id": 39
+                    "id": 39,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 2,
@@ -3645,7 +3420,8 @@
                     "description": "",
                     "nameSpacePattern": "Repository",
                     "fileNamePattern": "AbstractRepository.php",
-                    "id": 31
+                    "id": 31,
+                    "isSingle": true
                 },
                 {
                     "name": "AbstractItemCache.php",
@@ -3655,7 +3431,8 @@
                     "fileNamePattern": "AbstractItemCache.php",
                     "id": 34,
                     "description": "",
-                    "directoryId": 30
+                    "directoryId": 30,
+                    "isSingle": true
                 },
                 {
                     "name": "AbstractController.php",
@@ -3665,7 +3442,8 @@
                     "fileNamePattern": "AbstractController.php",
                     "id": 35,
                     "description": "",
-                    "directoryId": 30
+                    "directoryId": 30,
+                    "isSingle": true
                 },
                 {
                     "name": "AbstractResponse.php",
@@ -3675,7 +3453,8 @@
                     "fileNamePattern": "AbstractResponse.php",
                     "id": 36,
                     "description": "",
-                    "directoryId": 30
+                    "directoryId": 30,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 30,
@@ -3685,7 +3464,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "AbstractRequest.php",
-                    "id": 37
+                    "id": 37,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 30,
@@ -3695,7 +3475,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "AbstractReadPage.php",
-                    "id": 38
+                    "id": 38,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 30,
@@ -3705,7 +3486,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "ReadManyRequest.php",
-                    "id": 40
+                    "id": 40,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 30,
@@ -3715,7 +3497,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "ReadPageQueryBuilder.php",
-                    "id": 41
+                    "id": 41,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 30,
@@ -3725,7 +3508,19 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "ReadPageRequest.php",
-                    "id": 42
+                    "id": 42,
+                    "isSingle": true
+                },
+                {
+                    "directoryId": 30,
+                    "name": "ReadPageParameter.php",
+                    "color": "#fff",
+                    "isSingle": true,
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ReadPageParameter.php",
+                    "id": 43
                 },
                 {
                     "name": "api.php",
@@ -3735,7 +3530,8 @@
                     "fileNamePattern": "api.php",
                     "id": 50,
                     "description": "",
-                    "directoryId": 65
+                    "directoryId": 65,
+                    "isSingle": true
                 },
                 {
                     "name": "channels.php",
@@ -3745,7 +3541,8 @@
                     "fileNamePattern": "channels.php",
                     "id": 51,
                     "description": "",
-                    "directoryId": 65
+                    "directoryId": 65,
+                    "isSingle": true
                 },
                 {
                     "name": "console.php",
@@ -3755,7 +3552,8 @@
                     "fileNamePattern": "console.php",
                     "id": 52,
                     "description": "",
-                    "directoryId": 65
+                    "directoryId": 65,
+                    "isSingle": true
                 },
                 {
                     "name": "web.php",
@@ -3765,7 +3563,30 @@
                     "fileNamePattern": "web.php",
                     "id": 53,
                     "description": "",
-                    "directoryId": 65
+                    "directoryId": 65,
+                    "isSingle": true
+                },
+                {
+                    "directoryId": 65,
+                    "name": "ApiGuest.php",
+                    "color": "#fff",
+                    "isSingle": true,
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ApiGuest.php",
+                    "id": 54
+                },
+                {
+                    "directoryId": 65,
+                    "name": "ApiUser.php",
+                    "color": "#fff",
+                    "isSingle": true,
+                    "layer": "",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "ApiUser.php",
+                    "id": 55
                 },
                 {
                     "directoryId": 70,
@@ -3775,7 +3596,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "index.d.ts",
-                    "id": 60
+                    "id": 60,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 70,
@@ -3785,7 +3607,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "TypeScriptEnum.ts",
-                    "id": 61
+                    "id": 61,
+                    "isSingle": true
                 },
                 {
                     "directoryId": 70,
@@ -3795,387 +3618,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "RolePermission.json",
-                    "id": 65
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AbstractAdminTest.php",
-                    "color": "#fff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "AbstractAdminTest.php",
-                    "id": 70
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminAbstractItemTest",
-                    "color": "#fff",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "Abstract${entity.name}Test.php",
-                    "id": 71
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminCreateManyItemTest",
-                    "color": "#f0f",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 80
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminDeleteManyItemTest",
-                    "color": "#ff0",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 82
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminReadManyItemTest",
-                    "color": "#0ff",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 84
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminUpdateManyItemTest",
-                    "color": "#08f",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 86
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminCreateOneItemTest",
-                    "color": "#f80",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 81
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminDeleteOneItemTest",
-                    "color": "#0f0",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 83
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminReadOneItemTest",
-                    "color": "#00f",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 85
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminUpdateOneItemTest",
-                    "color": "#80f",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 87
-                },
-                {
-                    "directoryId": 81,
-                    "name": "AdminReadPageItemTest",
-                    "color": "#0ff",
-                    "layer": "Test",
-                    "description": "",
-                    "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 88
-                },
-                {
-                    "directoryId": 100,
-                    "name": "AdminCreateManyItem",
-                    "color": "#f0f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 100
-                },
-                {
-                    "directoryId": 100,
-                    "name": "AdminCreateManyItemController",
-                    "color": "#f0f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 101
-                },
-                {
-                    "directoryId": 100,
-                    "name": "AdminCreateManyItemRequest",
-                    "color": "#f0f",
-                    "layer": "Request",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 105
-                },
-                {
-                    "directoryId": 110,
-                    "name": "AdminCreateOneItem",
-                    "color": "#f80",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 110
-                },
-                {
-                    "directoryId": 110,
-                    "name": "AdminCreateOneItemController",
-                    "color": "#f80",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 111
-                },
-                {
-                    "directoryId": 120,
-                    "name": "AdminDeleteManyItem",
-                    "color": "#ff0",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 120
-                },
-                {
-                    "directoryId": 120,
-                    "name": "AdminDeleteManyItemController",
-                    "color": "#ff0",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 121
-                },
-                {
-                    "directoryId": 130,
-                    "name": "AdminDeleteOneItem",
-                    "color": "#0f0",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 130
-                },
-                {
-                    "directoryId": 130,
-                    "name": "AdminDeleteOneItemController",
-                    "color": "#0f0",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 131
-                },
-                {
-                    "directoryId": 140,
-                    "name": "AdminReadManyItem",
-                    "color": "#0ff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 140
-                },
-                {
-                    "directoryId": 140,
-                    "name": "AdminReadManyItemController",
-                    "color": "#0ff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 141
-                },
-                {
-                    "directoryId": 150,
-                    "name": "AdminReadOneItem",
-                    "color": "#00f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 150
-                },
-                {
-                    "directoryId": 150,
-                    "name": "AdminReadOneItemController",
-                    "color": "#00f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 151
-                },
-                {
-                    "directoryId": 160,
-                    "name": "AdminUpdateManyItem",
-                    "color": "#08f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 160
-                },
-                {
-                    "directoryId": 160,
-                    "name": "AdminUpdateManyItemController",
-                    "color": "#08f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 161
-                },
-                {
-                    "directoryId": 160,
-                    "name": "AdminUpdateManyItemRequest",
-                    "color": "#08f",
-                    "layer": "Request",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 165
-                },
-                {
-                    "directoryId": 170,
-                    "name": "AdminUpdateOneItem",
-                    "color": "#80f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 170
-                },
-                {
-                    "directoryId": 170,
-                    "name": "AdminUpdateOneItemController",
-                    "color": "#80f",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 171
-                },
-                {
-                    "directoryId": 180,
-                    "name": "AdminReadPageItem",
-                    "color": "#0ff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}.php",
-                    "id": 180
-                },
-                {
-                    "directoryId": 180,
-                    "name": "AdminReadPageItemController",
-                    "color": "#0ff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 181
-                },
-                {
-                    "directoryId": 180,
-                    "name": "AdminReadPageItemRequest",
-                    "color": "#0ff",
-                    "layer": "Request",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 185
-                },
-                {
-                    "directoryId": 11,
-                    "name": "AdminEvent",
-                    "color": "#fff",
-                    "layer": "Event",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Event.php",
-                    "id": 300
-                },
-                {
-                    "directoryId": 11,
-                    "name": "AdminEventOfMany",
-                    "color": "#fff",
-                    "layer": "Event",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Event.php",
-                    "id": 301
-                },
-                {
-                    "directoryId": 11,
-                    "name": "AdminListener",
-                    "color": "#fff",
-                    "layer": "Event",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Listener.php",
-                    "id": 310
-                },
-                {
-                    "directoryId": 11,
-                    "name": "AdminListenerOfMany",
-                    "color": "#fff",
-                    "layer": "Event",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Listener.php",
-                    "id": 311
-                },
-                {
-                    "directoryId": 11,
-                    "name": "AdminRequest",
-                    "color": "#fff",
-                    "layer": "Request",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 320
-                },
-                {
-                    "directoryId": 11,
-                    "name": "AdminResponse",
-                    "color": "#fff",
-                    "layer": "Response",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${action + entity.name}Response.php",
-                    "id": 330
+                    "id": 65,
+                    "isSingle": true
                 },
                 {
                     "name": "ItemCache",
@@ -4185,7 +3629,8 @@
                     "fileNamePattern": "${entity.name}Cache.php",
                     "id": 340,
                     "description": "",
-                    "directoryId": 340
+                    "directoryId": 340,
+                    "isSingle": false
                 },
                 {
                     "name": "ItemInGroupCache",
@@ -4195,7 +3640,8 @@
                     "fileNamePattern": "${entity.name}InGroupCache.php",
                     "id": 341,
                     "description": "",
-                    "directoryId": 340
+                    "directoryId": 340,
+                    "isSingle": false
                 },
                 {
                     "name": "ItemOfUserCache",
@@ -4205,27 +3651,30 @@
                     "fileNamePattern": "${entity.name}OfUserCache.php",
                     "id": 342,
                     "description": "",
-                    "directoryId": 340
+                    "directoryId": 340,
+                    "isSingle": false
                 },
                 {
-                    "name": "AbstractApiTest.php",
+                    "directoryId": 84,
+                    "name": "AbstractApiTestBase.php",
                     "color": "#fff",
                     "layer": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "AbstractApiTest.php",
+                    "fileNamePattern": "AbstractApiTestBase.php",
                     "id": 370,
                     "description": "",
-                    "directoryId": 84
+                    "isSingle": true
                 },
                 {
-                    "name": "AbstractItemTest",
+                    "directoryId": 84,
+                    "name": "AbstractItemTestBase",
                     "color": "#fff",
                     "layer": "Test",
                     "nameSpacePattern": "${entity.name}",
-                    "fileNamePattern": "Abstract${entity.name}Test.php",
+                    "fileNamePattern": "Abstract${entity.name}TestBase.php",
                     "id": 371,
                     "description": "",
-                    "directoryId": 84
+                    "isSingle": false
                 },
                 {
                     "directoryId": 84,
@@ -4235,7 +3684,8 @@
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
                     "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 380
+                    "id": 380,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 84,
@@ -4245,7 +3695,8 @@
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
                     "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 382
+                    "id": 382,
+                    "isSingle": false
                 },
                 {
                     "name": "ReadManyItemTest",
@@ -4255,7 +3706,8 @@
                     "fileNamePattern": "${action + entity.name}Test.php",
                     "id": 384,
                     "description": "",
-                    "directoryId": 84
+                    "directoryId": 84,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 84,
@@ -4265,7 +3717,8 @@
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
                     "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 386
+                    "id": 386,
+                    "isSingle": false
                 },
                 {
                     "name": "CreateOneItemTest",
@@ -4275,7 +3728,8 @@
                     "fileNamePattern": "${action + entity.name}Test.php",
                     "id": 381,
                     "description": "",
-                    "directoryId": 84
+                    "directoryId": 84,
+                    "isSingle": false
                 },
                 {
                     "name": "DeleteOneItemTest",
@@ -4285,7 +3739,8 @@
                     "fileNamePattern": "${action + entity.name}Test.php",
                     "id": 383,
                     "description": "",
-                    "directoryId": 84
+                    "directoryId": 84,
+                    "isSingle": false
                 },
                 {
                     "name": "ReadOneItemTest",
@@ -4295,7 +3750,8 @@
                     "fileNamePattern": "${action + entity.name}Test.php",
                     "id": 385,
                     "description": "",
-                    "directoryId": 84
+                    "directoryId": 84,
+                    "isSingle": false
                 },
                 {
                     "name": "UpdateOneItemTest",
@@ -4305,7 +3761,8 @@
                     "fileNamePattern": "${action + entity.name}Test.php",
                     "id": 387,
                     "description": "",
-                    "directoryId": 84
+                    "directoryId": 84,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 84,
@@ -4315,17 +3772,30 @@
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
                     "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 388
+                    "id": 388,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 84,
                     "name": "ReadHomeItemTest",
-                    "color": "#fff",
+                    "color": "#0ff",
                     "layer": "Test",
                     "description": "",
                     "nameSpacePattern": "${entity.name}",
                     "fileNamePattern": "${action + entity.name}Test.php",
-                    "id": 389
+                    "id": 389,
+                    "isSingle": false
+                },
+                {
+                    "directoryId": 84,
+                    "name": "ReadAllItemTest",
+                    "color": "#0ff",
+                    "isSingle": false,
+                    "layer": "Test",
+                    "description": "",
+                    "nameSpacePattern": "${entity.name}",
+                    "fileNamePattern": "${action + entity.name}Test.php",
+                    "id": 375
                 },
                 {
                     "directoryId": 400,
@@ -4335,7 +3805,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}.php",
-                    "id": 400
+                    "id": 400,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 400,
@@ -4345,7 +3816,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 401
+                    "id": 401,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 400,
@@ -4355,7 +3827,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 405
+                    "id": 405,
+                    "isSingle": false
                 },
                 {
                     "name": "CreateOneItem",
@@ -4365,7 +3838,8 @@
                     "fileNamePattern": "${action + entity.name}.php",
                     "id": 410,
                     "description": "",
-                    "directoryId": 410
+                    "directoryId": 410,
+                    "isSingle": false
                 },
                 {
                     "name": "CreateOneItemController",
@@ -4375,7 +3849,8 @@
                     "fileNamePattern": "${action + entity.name}Controller.php",
                     "id": 411,
                     "description": "",
-                    "directoryId": 410
+                    "directoryId": 410,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 420,
@@ -4385,7 +3860,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}.php",
-                    "id": 420
+                    "id": 420,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 420,
@@ -4395,7 +3871,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 421
+                    "id": 421,
+                    "isSingle": false
                 },
                 {
                     "name": "DeleteOneItem",
@@ -4405,7 +3882,8 @@
                     "fileNamePattern": "${action + entity.name}.php",
                     "id": 430,
                     "description": "",
-                    "directoryId": 430
+                    "directoryId": 430,
+                    "isSingle": false
                 },
                 {
                     "name": "DeleteOneItemController",
@@ -4415,7 +3893,30 @@
                     "fileNamePattern": "${action + entity.name}Controller.php",
                     "id": 431,
                     "description": "",
-                    "directoryId": 430
+                    "directoryId": 430,
+                    "isSingle": false
+                },
+                {
+                    "directoryId": 445,
+                    "name": "ReadAllItem",
+                    "color": "#0ff",
+                    "layer": "Action",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "${action + entity.name}.php",
+                    "id": 445,
+                    "isSingle": false
+                },
+                {
+                    "directoryId": 445,
+                    "name": "ReadAllItemController",
+                    "color": "#0ff",
+                    "layer": "Controller",
+                    "description": "",
+                    "nameSpacePattern": "",
+                    "fileNamePattern": "${action + entity.name}Controller.php",
+                    "id": 446,
+                    "isSingle": false
                 },
                 {
                     "name": "ReadManyItem",
@@ -4425,7 +3926,8 @@
                     "fileNamePattern": "${action + entity.name}.php",
                     "id": 440,
                     "description": "",
-                    "directoryId": 440
+                    "directoryId": 440,
+                    "isSingle": false
                 },
                 {
                     "name": "ReadManyItemController",
@@ -4435,7 +3937,8 @@
                     "fileNamePattern": "${action + entity.name}Controller.php",
                     "id": 441,
                     "description": "",
-                    "directoryId": 440
+                    "directoryId": 440,
+                    "isSingle": false
                 },
                 {
                     "name": "ReadOneItem",
@@ -4445,7 +3948,8 @@
                     "fileNamePattern": "${action + entity.name}.php",
                     "id": 450,
                     "description": "",
-                    "directoryId": 450
+                    "directoryId": 450,
+                    "isSingle": false
                 },
                 {
                     "name": "ReadOneItemController",
@@ -4455,7 +3959,8 @@
                     "fileNamePattern": "${action + entity.name}Controller.php",
                     "id": 451,
                     "description": "",
-                    "directoryId": 450
+                    "directoryId": 450,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 460,
@@ -4465,7 +3970,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}.php",
-                    "id": 460
+                    "id": 460,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 460,
@@ -4475,7 +3981,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 461
+                    "id": 461,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 460,
@@ -4485,7 +3992,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 465
+                    "id": 465,
+                    "isSingle": false
                 },
                 {
                     "name": "UpdateOneItem",
@@ -4495,7 +4003,8 @@
                     "fileNamePattern": "${action + entity.name}.php",
                     "id": 470,
                     "description": "",
-                    "directoryId": 470
+                    "directoryId": 470,
+                    "isSingle": false
                 },
                 {
                     "name": "UpdateOneItemController",
@@ -4505,7 +4014,8 @@
                     "fileNamePattern": "${action + entity.name}Controller.php",
                     "id": 471,
                     "description": "",
-                    "directoryId": 470
+                    "directoryId": 470,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 480,
@@ -4515,7 +4025,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}.php",
-                    "id": 480
+                    "id": 480,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 480,
@@ -4525,7 +4036,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 481
+                    "id": 481,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 480,
@@ -4535,37 +4047,41 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Request.php",
-                    "id": 485
+                    "id": 485,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 490,
                     "name": "ReadHomeItem",
-                    "color": "#fff",
+                    "color": "#00f",
                     "layer": "Action",
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}.php",
-                    "id": 490
+                    "id": 490,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 490,
                     "name": "ReadHomeItemController",
-                    "color": "#fff",
+                    "color": "#00f",
                     "layer": "Controller",
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Controller.php",
-                    "id": 491
+                    "id": 491,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 88,
-                    "name": "AbstractFeatureTest.php",
+                    "name": "AbstractFeatureTestBase.php",
                     "color": "#fff",
                     "layer": "",
                     "description": "",
                     "nameSpacePattern": "",
-                    "fileNamePattern": "AbstractFeatureTest.php",
-                    "id": 570
+                    "fileNamePattern": "AbstractFeatureTestBase.php",
+                    "id": 570,
+                    "isSingle": true
                 },
                 {
                     "name": "Event",
@@ -4575,7 +4091,8 @@
                     "fileNamePattern": "${action + entity.name}Event.php",
                     "id": 600,
                     "description": "",
-                    "directoryId": 41
+                    "directoryId": 41,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 41,
@@ -4585,7 +4102,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Event.php",
-                    "id": 601
+                    "id": 601,
+                    "isSingle": false
                 },
                 {
                     "name": "Listener",
@@ -4595,7 +4113,8 @@
                     "fileNamePattern": "${action + entity.name}Listener.php",
                     "id": 610,
                     "description": "",
-                    "directoryId": 41
+                    "directoryId": 41,
+                    "isSingle": false
                 },
                 {
                     "directoryId": 41,
@@ -4605,7 +4124,8 @@
                     "description": "",
                     "nameSpacePattern": "",
                     "fileNamePattern": "${action + entity.name}Listener.php",
-                    "id": 611
+                    "id": 611,
+                    "isSingle": false
                 },
                 {
                     "name": "Request",
@@ -4615,7 +4135,8 @@
                     "fileNamePattern": "${action + entity.name}Request.php",
                     "id": 620,
                     "description": "",
-                    "directoryId": 41
+                    "directoryId": 41,
+                    "isSingle": false
                 },
                 {
                     "name": "Response",
@@ -4625,7 +4146,8 @@
                     "fileNamePattern": "${action + entity.name}Response.php",
                     "id": 630,
                     "description": "",
-                    "directoryId": 41
+                    "directoryId": 41,
+                    "isSingle": false
                 },
                 {
                     "name": "ServiceCrud",
@@ -4635,127 +4157,8 @@
                     "fileNamePattern": "${action + entity.name}Service.php",
                     "id": 700,
                     "description": "",
-                    "directoryId": 41
-                },
-                {
-                    "directoryId": 630,
-                    "name": "ItemCreate",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${entity.name}Create.tsx",
-                    "id": 701
-                },
-                {
-                    "directoryId": 630,
-                    "name": "ItemEdit",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${entity.name}Edit.tsx",
-                    "id": 702
-                },
-                {
-                    "directoryId": 630,
-                    "name": "ItemForm",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${entity.name}Form.tsx",
-                    "id": 703
-                },
-                {
-                    "directoryId": 630,
-                    "name": "ItemList",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${entity.name}List.tsx",
-                    "id": 704
-                },
-                {
-                    "directoryId": 630,
-                    "name": "makeItemResource",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "make${entity.name}Resource.tsx",
-                    "id": 705
-                },
-                {
-                    "directoryId": 630,
-                    "name": "ItemShow",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "${entity.name}Show.tsx",
-                    "id": 706
-                },
-                {
-                    "directoryId": 610,
-                    "name": "App.tsx",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "App.tsx",
-                    "id": 707
-                },
-                {
-                    "directoryId": 620,
-                    "name": "Dashboard.tsx",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "Dashboard.tsx",
-                    "id": 708
-                },
-                {
-                    "directoryId": 640,
-                    "name": "makeDataProvider.ts",
-                    "color": "#fff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "makeDataProvider.ts",
-                    "id": 709
-                },
-                {
-                    "directoryId": 640,
-                    "name": "makeAuthProvider.ts",
-                    "color": "#fff",
-                    "layer": "",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "makeAuthProvider.ts",
-                    "id": 710
-                },
-                {
-                    "directoryId": 620,
-                    "name": "AppMenu.tsx",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "AppMenu.tsx",
-                    "id": 711
-                },
-                {
-                    "directoryId": 620,
-                    "name": "CanAccess.tsx",
-                    "color": "#fff",
-                    "layer": "View",
-                    "description": "",
-                    "nameSpacePattern": "",
-                    "fileNamePattern": "CanAccess.tsx",
-                    "id": 712
+                    "directoryId": 41,
+                    "isSingle": false
                 }
             ],
             "Entity": [
@@ -5717,6 +5120,40 @@
                     "ownerWuId": null,
                     "ownerWuChildId": null,
                     "id": 56
+                },
+                {
+                    "isArray": false,
+                    "nullable": false,
+                    "type": "string",
+                    "format": "",
+                    "forWuParameterId": null,
+                    "ownerId": null,
+                    "variableId": null,
+                    "wuId": 1,
+                    "wuParameterId": null,
+                    "ownerColumnId": null,
+                    "ownerRequestId": null,
+                    "ownerResponseId": null,
+                    "ownerWuId": 9,
+                    "ownerWuChildId": null,
+                    "id": 57
+                },
+                {
+                    "isArray": false,
+                    "nullable": true,
+                    "type": "WuParameter",
+                    "format": "",
+                    "forWuParameterId": null,
+                    "ownerId": null,
+                    "variableId": null,
+                    "wuId": 1,
+                    "wuParameterId": 6,
+                    "ownerColumnId": 42,
+                    "ownerRequestId": null,
+                    "ownerResponseId": null,
+                    "ownerWuId": null,
+                    "ownerWuChildId": null,
+                    "id": 58
                 }
             ],
             "Column": [
@@ -6827,7 +6264,7 @@
                     "deprecated": false,
                     "example": "1",
                     "explode": false,
-                    "required": false,
+                    "required": true,
                     "style": "form",
                     "id": 34,
                     "raField": "TextField",
@@ -6991,10 +6428,10 @@
                     "inTable": false,
                     "allowReserved": false,
                     "deprecated": false,
-                    "example": "",
+                    "example": "10",
                     "explode": false,
                     "required": true,
-                    "style": "",
+                    "style": "form",
                     "raField": "NumberField",
                     "raInput": "NumberInput",
                     "id": 39
@@ -7027,7 +6464,7 @@
                     "example": "",
                     "explode": false,
                     "required": true,
-                    "style": "",
+                    "style": "form",
                     "raField": "TextField",
                     "raInput": "TextInput",
                     "id": 40
@@ -7060,10 +6497,43 @@
                     "example": "",
                     "explode": false,
                     "required": true,
-                    "style": "",
+                    "style": "form",
                     "raField": "TextField",
                     "raInput": "TextInput",
                     "id": 41
+                },
+                {
+                    "color": "#fff",
+                    "description": "",
+                    "name": "Filter",
+                    "reserved": false,
+                    "entityId": 8,
+                    "type": "object",
+                    "length": 0,
+                    "scale": 0,
+                    "default": "",
+                    "comment": "",
+                    "unsigned": false,
+                    "nullable": false,
+                    "cast": "",
+                    "fillable": false,
+                    "hidden": false,
+                    "ro": false,
+                    "wo": false,
+                    "fakeRaw": true,
+                    "fakeUnique": false,
+                    "fakeMethod": "",
+                    "fakeText": "",
+                    "inTable": false,
+                    "allowReserved": false,
+                    "deprecated": false,
+                    "example": "",
+                    "explode": false,
+                    "required": true,
+                    "style": "deepObject",
+                    "raField": "TextField",
+                    "raInput": "TextField",
+                    "id": 42
                 }
             ],
             "ColumnConstraint": [
@@ -7180,6 +6650,18 @@
                     "name": "in",
                     "parameter": "Rule::in(['asc', 'desc'])",
                     "id": 20
+                },
+                {
+                    "columnId": 34,
+                    "name": "min",
+                    "parameter": "1",
+                    "id": 21
+                },
+                {
+                    "columnId": 39,
+                    "name": "min",
+                    "parameter": "1",
+                    "id": 22
                 }
             ],
             "Relation": [],
@@ -7294,6 +6776,18 @@
                     "example": "",
                     "isMap": false,
                     "id": 8
+                },
+                {
+                    "color": "#fff",
+                    "description": "",
+                    "name": "ReadPage",
+                    "reserved": false,
+                    "entityId": 8,
+                    "type": "allOf",
+                    "isRequest": true,
+                    "example": "",
+                    "isMap": false,
+                    "id": 9
                 }
             ],
             "WuColumn": [
@@ -7464,9 +6958,75 @@
                     "columnId": 7,
                     "alias": "",
                     "id": 28
+                },
+                {
+                    "wuId": 9,
+                    "columnId": 34,
+                    "alias": "",
+                    "id": 29
+                },
+                {
+                    "wuId": 9,
+                    "columnId": 39,
+                    "alias": "",
+                    "id": 30
+                },
+                {
+                    "wuId": 9,
+                    "columnId": 40,
+                    "alias": "",
+                    "id": 31
+                },
+                {
+                    "wuId": 9,
+                    "columnId": 41,
+                    "alias": "",
+                    "id": 32
+                },
+                {
+                    "wuId": 9,
+                    "columnId": 42,
+                    "alias": "",
+                    "id": 33
                 }
             ],
-            "WuColumnConstraint": [],
+            "WuColumnConstraint": [
+                {
+                    "wuColumnId": 29,
+                    "columnConstraintId": 15,
+                    "id": 1
+                },
+                {
+                    "wuColumnId": 30,
+                    "columnConstraintId": 17,
+                    "id": 2
+                },
+                {
+                    "wuColumnId": 31,
+                    "columnConstraintId": 18,
+                    "id": 3
+                },
+                {
+                    "wuColumnId": 32,
+                    "columnConstraintId": 19,
+                    "id": 4
+                },
+                {
+                    "wuColumnId": 32,
+                    "columnConstraintId": 20,
+                    "id": 5
+                },
+                {
+                    "wuColumnId": 30,
+                    "columnConstraintId": 22,
+                    "id": 6
+                },
+                {
+                    "wuColumnId": 29,
+                    "columnConstraintId": 21,
+                    "id": 7
+                }
+            ],
             "WuParameter": [
                 {
                     "wuId": 2,
@@ -7502,6 +7062,13 @@
                     "description": "",
                     "isWu": true,
                     "id": 5
+                },
+                {
+                    "wuId": 9,
+                    "name": "FilterObject",
+                    "description": "",
+                    "isWu": true,
+                    "id": 6
                 }
             ],
             "Module": [
@@ -7526,6 +7093,17 @@
                     "prefix": "/Api",
                     "id": 2,
                     "fileId": 53
+                },
+                {
+                    "color": "#80f",
+                    "description": "",
+                    "name": "ApiGuest",
+                    "reserved": false,
+                    "directoryId": 492,
+                    "fileId": 53,
+                    "testDirectoryId": 505,
+                    "prefix": "/ApiGuest",
+                    "id": 3
                 }
             ],
             "Path": [
@@ -7596,6 +7174,15 @@
                     "summary": "",
                     "value": "{\n    \"code\": 200,\n    \"message\": \"OK\"\n}",
                     "id": 1
+                },
+                {
+                    "color": "#fff",
+                    "description": "",
+                    "name": "ReadPageRequest",
+                    "reserved": false,
+                    "summary": "",
+                    "value": "{\n    \"Page\": 1,\n    \"PerPage\": 10,\n    \"SortField\": \"Id\",\n    \"SortOrder\": \"desc\",\n    \"Filter\": {\n        \"Status\": 3,\n        \"UserId\": 3\n    },\n    \"Extra1\": {\n        \"Key1\": \"value1\",\n        \"Key2\": \"value2\"\n    },\n    \"Extra2\": {\n        \"Key1\": \"value1\",\n        \"Key2\": \"value2\"\n    }\n}",
+                    "id": 2
                 }
             ],
             "ExampleMap": [],
@@ -7616,12 +7203,39 @@
                     "description": "",
                     "name": "ApiVersion",
                     "reserved": true,
-                    "default": "v1",
+                    "default": "V1",
                     "enum": [
-                        "v1"
+                        "V1"
                     ],
                     "id": 1,
                     "type": "string"
+                },
+                {
+                    "color": "#fff",
+                    "description": "",
+                    "name": "Visibility",
+                    "reserved": false,
+                    "default": "Private",
+                    "enum": [
+                        "Private",
+                        "Public"
+                    ],
+                    "type": "string",
+                    "id": 2
+                },
+                {
+                    "color": "#fff",
+                    "description": "",
+                    "name": "ContentStatus",
+                    "reserved": false,
+                    "default": "Draft",
+                    "enum": [
+                        "Archived",
+                        "Draft",
+                        "Published"
+                    ],
+                    "type": "string",
+                    "id": 3
                 }
             ],
             "ServerVariable": [
@@ -7633,7 +7247,7 @@
             ],
             "PathMethod": []
         },
-        "version": 43
+        "version": 44
     },
     "oapi": {
         "openapi": "3.0.3",
