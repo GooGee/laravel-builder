@@ -26,7 +26,7 @@ class LaravelBuilderServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/laravelbuilder.php' => config_path('laravelbuilder.php'),
-            __DIR__ . '/code' => base_path(Constant::NAME2 . '/code/' . Constant::getVersion()),
+            __DIR__ . '/code' => base_path(Constant::NAME2 . '/code' . Constant::getVersion()),
         ]);
 
         if ($this->app->runningInConsole()) {
