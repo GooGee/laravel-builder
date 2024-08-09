@@ -19,7 +19,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $Data = $Item->toArray();
         $Itemzz = [$Data];
-        $Response = $this->patchJson($this->makeURI(), compact('Itemzz'))
+        $Response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
@@ -27,14 +27,14 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Data = $Item->toArray();
         unset($Data['{{ column.alias }}']);
         $Itemzz = [$Data];
-        $Response = $this->patchJson($this->makeURI(), compact('Itemzz'))
+        $Response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(422);
         $Response->assertJsonValidationErrorFor('Itemzz.0.{{ column.alias }}');
 {% endfor %}
 
         $Data = $Item->toArray();
         $Itemzz = [$Data];
-        $Response = $this->patchJson($this->makeURI(), compact('Itemzz'))
+        $Response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(200);
         $this->seeItemzz($Response);
         $Response->assertJsonCount(1, 'Itemzz');

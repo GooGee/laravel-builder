@@ -13,8 +13,8 @@ class {{ helper.getClassName(file, entity, action) }}
     /**
      * @param array<int, int> $Idzz
      */
-    public function __construct(public int $UserId, public array $Idzz)
+    public function __construct(public array $Idzz)
     {
-        Log::info(self::class, ['UserId' => $UserId, 'Idzz' => $Idzz]);
+        Log::info(self::class, ['UserId' => auth()->id(), 'Idzz' => $Idzz]);
     }
 }

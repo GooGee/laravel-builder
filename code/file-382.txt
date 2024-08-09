@@ -1,5 +1,7 @@
 <?php
 
+// DeleteMany
+
 declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
@@ -18,18 +20,18 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Item->save();
 
         $Idzz = [$Item->Id];
-        $Response = $this->deleteJson($this->makeURI(), compact('Idzz'))
+        $Response = $this->deleteJson($this->makeUri(), compact('Idzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->deleteJson($this->makeURI(), [])
+        $Response = $this->deleteJson($this->makeUri(), [])
             ->assertStatus(422);
         $Response->assertJsonValidationErrorFor('Idzz');
 
-        $Response = $this->deleteJson($this->makeURI(), compact('Idzz'))
+        $Response = $this->deleteJson($this->makeUri(), compact('Idzz'))
             ->assertStatus(200);
         $Response->assertJsonCount(1, 'Data');
-
+        self::assertNull($Item->DtDelete);
     }
 }

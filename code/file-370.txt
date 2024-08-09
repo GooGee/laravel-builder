@@ -8,6 +8,9 @@ use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\Middleware\ThrottleRequestsWithRedis;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 
@@ -31,10 +34,13 @@ abstract class AbstractApiTestBase extends TestCase
         parent::setUp();
 
         $this->withoutMiddleware([ThrottleRequestsWithRedis::class]);
+        Notification::fake();
+        Queue::fake();
+        Storage::fake();
     }
 
     /**
-     * @param array<string, mixed> $Map
+     * @param  array<string, mixed>  $Map
      */
     protected function createUser(array $Map = []): User
     {
@@ -44,16 +50,41 @@ abstract class AbstractApiTestBase extends TestCase
     }
 
     /**
-     * @param array<string, mixed> $Parameter
+     * @param  array<string, mixed>  $Map
      */
-    protected function makeURI(string|int $Path = '', array $Parameter = []): string
+    protected function getJsonWithData(string $Uri, array $Map): TestResponse
+    {
+        return $this->json('GET', $Uri, $Map);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function getMissingKeyzz(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $Parameter
+     */
+    protected function makeUri(string|int $Path = '', array $Parameter = []): string
     {
         $query = '';
         if (count($Parameter)) {
-            $query = '?' . http_build_query($Parameter);
+            $query = '?'.http_build_query($Parameter);
         }
 
-        return static::URI . $this->getPath() . '/' . $Path . $query;
+        return static::URI.$this->getPath().'/'.$Path.$query;
+    }
+
+    protected function assertMissingKeyzz(TestResponse $Response, string $path): self
+    {
+        foreach ($this->getMissingKeyzz() as $key) {
+            $Response->assertJsonMissingPath("{$path}.{$key}");
+        }
+
+        return $this;
     }
 
     protected function seeData(TestResponse $Response): self

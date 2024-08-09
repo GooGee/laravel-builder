@@ -6,16 +6,22 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
-use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function create(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    function create({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
+        $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('UserId', $Item->UserId)
+            ->exists();
+        if ($exist) {
+            throw new DuplicatedException();
+        }
+
         $Item->save();
         $Item->refresh();
 
-        event(new {{ action + entity.name }}Event($UserId, $Item));
+        event(new {{ action + entity.name }}Event($Item));
 
         return $Item;
     }

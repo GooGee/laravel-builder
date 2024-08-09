@@ -16,7 +16,7 @@ class {{ helper.getClassName(file, entity, action) }}
 
 {% for column in columnzz %}{% if column.name === 'Id' %}
     #[ORM\Id]
-    #[ORM\GeneratedValue]{% endif %}
+    #[ORM\GeneratedValue(strategy: 'IDENTITY')]{% endif %}
     #[ORM\Column({{ makeParameter(column) }})]
     private ${{ column.name }};
 {% endfor %}

@@ -1,6 +1,6 @@
 <?php
 
-// CreateMany
+// ReadAll
 
 declare(strict_types=1);
 
@@ -17,28 +17,26 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     {
         $User = $this->createUser();
         $Item = $this->makeItem($User);
-
+        $Item->save();
         $Data = $Item->toArray();
-        $Itemzz = [$Data];
-        $Response = $this->postJson($this->makeUri(), compact('Itemzz'))
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(401);
 
         $this->actingAs($User);
+
 {% for column in columnzz %}
         $Data = $Item->toArray();
         unset($Data['{{ column.alias }}']);
-        $Itemzz = [$Data];
-        $Response = $this->postJson($this->makeUri(), compact('Itemzz'))
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(422);
-        $Response->assertJsonValidationErrorFor('Itemzz.0.{{ column.alias }}');
+        $Response->assertJsonValidationErrorFor('{{ column.alias }}');
 {% endfor %}
         $Data = $Item->toArray();
-        $Itemzz = [$Data];
-        $Response = $this->postJson($this->makeUri(), compact('Itemzz'))
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(200);
         $this->seeItemzz($Response);
         $Response->assertJsonCount(1, 'Itemzz');
-
+        $Response->assertJsonIsObject('Itemzz.0.User');
 {% for column in columnzz %}
         $Response->assertJsonPath('Itemzz.0.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
     }

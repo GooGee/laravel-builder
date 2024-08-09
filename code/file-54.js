@@ -1,10 +1,11 @@
 function run(data) {
+    // routs/ApiGuest.php
+
     /** @type {LB.DataForScript} */
     const ddd = data
 
     /**
-     * write code below
-     * it will be executed before generating files
+     * this code is used for generating routes
      */
 
     ddd.text = ddd.helper.makeRouteText(ddd.module.name)

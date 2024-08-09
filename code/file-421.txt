@@ -10,6 +10,7 @@ use App\Base\ReadManyRequest;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
@@ -18,8 +19,23 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $Result = $DeleteMany->run($User->Id, $Request->getValidatedIdzz());
+        $this->acquireLock($User->Id);
 
-        return AbstractResponse::sendOK($Result);
+        try {
+
+            $Result = $DeleteMany->run($User->Id, $Request->getValidatedIdzz());
+
+            return AbstractResponse::sendOK($Result);
+
+        } catch (\Throwable $Throwable) {
+
+            DB::rollBack();
+
+            throw new $Throwable;
+
+        } finally {
+            $this->releaseLock();
+        }
+
     }
 }

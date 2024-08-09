@@ -1,10 +1,12 @@
 <?php
 
+// ReadPage
+
 declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\Base\AbstractReadPage;
+use App\Base\ReadPageParameter;
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
 {
@@ -19,13 +21,13 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Item = $this->makeItem($User);
         $Item->save();
 
-        $Data = AbstractReadPage::makeParameter();
-        $Response = $this->json('GET', $this->makeURI(), $Data)
+        $Data = (new ReadPageParameter())->toArray();
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->json('GET', $this->makeURI(), $Data)
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(422);
         $Response->assertJsonValidationErrorFor('Filter.Status');
 
@@ -33,21 +35,22 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Data['Filter'] = [
             '{{ column.alias }}' => $Item->{{ column.alias }},
         ];
-        $Response = $this->json('GET', $this->makeURI(), $Data)
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(200);
         $this->seePage($Response);
         $Response->assertJsonPath('Page.data.0.{{ column.alias }}', $Item->{{ column.alias }});
 {% endfor %}
 
-        $Response = $this->json('GET', $this->makeURI(), $Data)
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(200);
         $Response->assertJsonCount(1, 'Page.data');
+        $Response->assertJsonIsObject('Page.data.0.User');
         $Response->assertJsonPath('Page.data.0.Id', $Item->Id);
 
-        $Other = $this->createUser();
-        $this->actingAs($Other);
+        $OtherUser = $this->createUser();
+        $this->actingAs($OtherUser);
 
-        $Response = $this->json('GET', $this->makeURI(), $Data)
+        $Response = $this->getJsonWithData($this->makeUri(), $Data)
             ->assertStatus(200);
         $Response->assertJsonCount(0, 'Page.data');
     }

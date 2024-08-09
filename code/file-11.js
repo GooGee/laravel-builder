@@ -21,12 +21,16 @@ function run(data) {
     const castMap = new Map()
     columnzz.forEach(function (item) {
         if (item.cast) {
-            castMap.set(item.name, item.cast)
+            let text = `'${item.cast}'`
+            if (item.cast.indexOf('::')) {
+                text = item.cast
+            }
+            castMap.set(item.name, text)
             return
         }
 
         if (item.type.includes('date')) {
-            castMap.set(item.name, 'datetime')
+            castMap.set(item.name, "'datetime'")
         }
     })
     ddd.castzz = Array.from(castMap)
@@ -45,6 +49,11 @@ function run(data) {
             const found = castzz.find(item => item.name === column.cast)
             if (found) {
                 return found.value
+            }
+
+            const index = column.cast.indexOf('::')
+            if (index > 0) {
+                return column.cast.substring(0, index)
             }
         }
 

@@ -15,7 +15,6 @@ class {{ helper.getClassName(file, entity, action) }}
     }
 
     /**
-     * @param int $UserId
      * @param  array<int, array<string, mixed>>  $Datazz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
@@ -31,12 +30,12 @@ class {{ helper.getClassName(file, entity, action) }}
 {% for column in columnzz %}
                 $Data['{{ column.name }}'],{% endfor %}
             );
-            $this->CreateOne->create($UserId, $Item);
+            $this->CreateOne->create($Item);
             $Idzz[] = $Item->Id;
             $Itemzz[] = $Item;
         }
 
-        event(new {{ action + entity.name }}Event($UserId, $Idzz));
+        event(new {{ action + entity.name }}Event($Idzz));
 
         return $Itemzz;
     }

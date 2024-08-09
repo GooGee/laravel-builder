@@ -1,5 +1,7 @@
 <?php
 
+// ReadHome
+
 declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
@@ -17,12 +19,12 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Item = $this->makeItem($User);
         $Item->save();
 
-        $Response = $this->json('GET', $this->makeURI())
+        $Response = $this->getJson($this->makeUri())
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->json('GET', $this->makeURI())
+        $Response = $this->getJson($this->makeUri())
             ->assertStatus(200);
         $this->seeData($Response);
     }

@@ -11,7 +11,6 @@ use {{ dependency }};{% endfor %}
 class {{ helper.getClassName(file, entity, action) }}
 {
     function run(
-        int $UserId,
         {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item,
 {% for column in columnzz %}
         {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
@@ -22,7 +21,7 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $Item->save();
 
-        event(new {{ action + entity.name }}Event($UserId, $Item));
+        event(new {{ action + entity.name }}Event($Item));
 
         return $Item;
     }

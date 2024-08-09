@@ -8,6 +8,7 @@ function run(data) {
      */
     const linezz = ddd.db.tables.Entity
         .filter(item => item.isTable)
+        .sort((a, b) => a.name.localeCompare(b.name))
         .map(item => `    case ${item.name} = \\App\\Models\\${item.name}::class;`)
     ddd.text = linezz.join('\n')
 }

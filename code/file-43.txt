@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Base;
+
+use App\Models\AbstractModel;
+
+class ReadPageParameter
+{
+    const PageSize = 10;
+
+    const SortAsc = 'Asc';
+
+    const SortDesc = 'Desc';
+
+    /**
+     * @param  array<string, mixed>  $Filter
+     */
+    public function __construct(
+        public array $Filter = [],
+        public int $Page = 1,
+        public int $PerPage = self::PageSize,
+        public string $SortField = AbstractModel::PrivateKey,
+        public string $SortOrder = self::SortDesc,
+    ) {
+    }
+
+    public function getFilterValue(string $Key): int|string|null
+    {
+        return $this->Filter[$Key] ?? null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $Data
+     */
+    public static function from(array $Data): self
+    {
+        return new ReadPageParameter(
+            $Data['Filter'] ?? [],
+            $Data['Page'] ?? 1,
+            $Data['PerPage'] ?? self::PageSize,
+            $Data['SortField'] ?? AbstractModel::PrivateKey,
+            $Data['SortOrder'] ?? self::SortDesc,
+        );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'Filter' => $this->Filter,
+            'Page' => $this->Page,
+            'PerPage' => $this->PerPage,
+            'SortField' => $this->SortField,
+            'SortOrder' => $this->SortOrder,
+        ];
+    }
+}

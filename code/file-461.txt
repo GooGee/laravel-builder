@@ -9,6 +9,7 @@ use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
@@ -17,8 +18,23 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $Itemzz = $UpdateMany->run($User->Id, $Request->validated('Itemzz'));
+        $this->acquireLock($User->Id);
 
-        return AbstractResponse::sendModelzz($Itemzz);
+        try {
+
+            $Itemzz = $UpdateMany->run($User->Id, $Request->validated('Itemzz'));
+
+            return AbstractResponse::sendModelItemzz($Itemzz->all());
+
+        } catch (\Throwable $Throwable) {
+
+            DB::rollBack();
+
+            throw new $Throwable;
+
+        } finally {
+            $this->releaseLock();
+        }
+
     }
 }

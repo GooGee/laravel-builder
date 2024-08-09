@@ -17,7 +17,7 @@ abstract class AbstractModel extends Model
     use HasFactory;
     use SoftDeletes;
 
-    const PageSize = 20;
+    const PrivateKey = 'Id';
 
     /**
      * The name of the "created at" column.
@@ -54,6 +54,5 @@ abstract class AbstractModel extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'Id';
-
+    protected $primaryKey = self::PrivateKey;
 }

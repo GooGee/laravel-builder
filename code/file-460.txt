@@ -16,14 +16,14 @@ class {{ helper.getClassName(file, entity, action) }}
     }
 
     /**
-     * @param int $UserId
      * @param  array<int, array<string, mixed>>  $Datazz
-     * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
+     * @return Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(int $UserId, array $Datazz): array
+    function run(int $UserId, array $Datazz): Collection
     {
         /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('UserId', $UserId)
             ->whereIn('Id', array_column($Datazz, 'Id'))
             ->get();
         /** @var array<int, array<string, mixed>> $Map */
@@ -34,16 +34,15 @@ class {{ helper.getClassName(file, entity, action) }}
         foreach ($Itemzz as $Item) {
             $Data = $Map[$Item->Id];
             $this->UpdateOne->run(
-                $UserId,
                 $Item,
 {% for column in columnzz %}
                 $Data['{{ column.name }}'],{% endfor %}
             );
         }
 
-        event(new {{ action + entity.name }}Event($UserId, $Itemzz->pluck('Id')->toArray()));
+        event(new {{ action + entity.name }}Event($Itemzz->pluck('Id')->toArray()));
 
-        return $Itemzz->all();
+        return $Itemzz;
     }
 
 }

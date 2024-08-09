@@ -6,20 +6,21 @@ namespace App\Base;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ReadPageQueryBuilder
 {
     /**
-     * @param Builder<Model> $Qb
-     * @param array<string, mixed> $Data
+     * @param  Builder<Model>  $Qb
      */
-    public function __construct(public Builder $Qb, private array $Data)
+    public function __construct(public Builder $Qb, public ReadPageParameter $ReadPageParameter)
     {
     }
 
     public function addFilter(string $Key): self
     {
-        $value = $this->getFilterValue($Key);
+        $value = $this->ReadPageParameter->getFilterValue($Key);
         if (isset($value)) {
             $this->Qb->where($Key, $value);
         }
@@ -28,7 +29,7 @@ class ReadPageQueryBuilder
     }
 
     /**
-     * @param string[] $Keyzz
+     * @param  string[]  $Keyzz
      * @return $this
      */
     public function addFilterzz(array $Keyzz): self
@@ -40,32 +41,36 @@ class ReadPageQueryBuilder
         return $this;
     }
 
-    public function addFilterSearch(string $Key): self
-    {
-        $value = $this->getFilterValue($Key);
-        if (isset($value)) {
-            $this->Qb->where($Key, 'LIKE', "%{$value}%");
-        }
-
-        return $this;
-    }
-
     public function addSort(): self
     {
-        $sortField = $this->Data['SortField'] ?? null;
-        $sortOrder = $this->Data['SortOrder'] ?? 'asc';
-
-        if (is_null($sortField)) {
-            return $this;
-        }
-
-        $this->Qb->orderBy($sortField, $sortOrder);
+        $this->Qb->orderBy($this->ReadPageParameter->SortField, $this->ReadPageParameter->SortOrder);
 
         return $this;
     }
 
-    public function getFilterValue(string $Key): int|string|null
+    /**
+     * @return LengthAwarePaginator<Model>
+     */
+    public function paginate(): LengthAwarePaginator
     {
-        return $this->Data['Filter'][$Key] ?? null;
+        return $this->Qb->paginate(
+            $this->ReadPageParameter->PerPage,
+            ['*'],
+            'page',
+            $this->ReadPageParameter->Page,
+        );
+    }
+
+    /**
+     * @return Paginator<Model>
+     */
+    public function paginateSimple(): Paginator
+    {
+        return $this->Qb->simplePaginate(
+            $this->ReadPageParameter->PerPage,
+            ['*'],
+            'page',
+            $this->ReadPageParameter->Page,
+        );
     }
 }

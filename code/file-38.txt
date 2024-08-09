@@ -4,33 +4,6 @@ declare(strict_types=1);
 
 namespace App\Base;
 
-use Illuminate\Database\Eloquent\Builder;
-
 abstract class AbstractReadPage
 {
-    /**
-     * @param array<string, mixed> $Filter
-     * @return array<string, mixed>
-     */
-    public static function makeParameter(
-        array  $Filter = [],
-        int    $Page = 1,
-        int    $PerPage = 10,
-        string $SortField = 'Id',
-        string $SortOrder = 'desc',
-    ): array
-    {
-        return compact('Filter', 'Page', 'PerPage', 'SortField', 'SortOrder');
-    }
-
-    /**
-     * @template T of \Illuminate\Database\Eloquent\Model
-     *
-     * @param Builder<T> $Qb
-     * @param array<string, mixed> $Data
-     */
-    public static function makeReadPageQueryBuilder(Builder $Qb, array $Data): ReadPageQueryBuilder
-    {
-        return new ReadPageQueryBuilder($Qb, $Data);
-    }
 }

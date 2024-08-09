@@ -9,7 +9,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-abstract class AbstractFeatureTest extends TestCase
+abstract class AbstractFeatureTestBase extends TestCase
 {
     use RefreshDatabase;
 
@@ -24,5 +24,4 @@ abstract class AbstractFeatureTest extends TestCase
 
         return $User->refresh();
     }
-
 }

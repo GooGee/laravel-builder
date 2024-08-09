@@ -7,4 +7,9 @@ namespace App\Enum;
 enum EntityNameEnum: string
 {
 {{ text }}
+
+    public function getShortName(): string
+    {
+        return class_basename($this->value);
+    }
 }

@@ -27,7 +27,7 @@ function run(data) {
     const cienm = new Map(relationzz.map(item => [item.column1Id, entityMap.get(item.entity0Id)]))
 
     ddd.db.tables.Column
-        .filter(item => item.entityId === ddd.entity.id && !item.ro)
+        .filter(item => item.entityId === ddd.entity.id && (item.inTable && item.type !== 'object') && item.ro === false)
         .forEach(item => setConstraint(item))
 
     /**
@@ -41,14 +41,17 @@ function run(data) {
 
         if (column.nullable) {
             ColumnConstraintzz.push(makeConstraint('nullable', column.id))
-            ColumnConstraintzz.push(makeConstraint('present', column.id))
-        } else {
-            ColumnConstraintzz.push(makeConstraint('required', column.id))
         }
+        ColumnConstraintzz.push(makeConstraint('present', column.id))
 
         const entity = cienm.get(column.id)
         if (entity) {
             ColumnConstraintzz.push(makeConstraint('exists', column.id, (entity.table ? entity.table : entity.name) + ',id'))
+        }
+
+        if (column.cast.includes('::')) {
+            ColumnConstraintzz.push(makeConstraint('Rule::', column.id, `enum(${column.cast})`))
+            return
         }
 
         if (['smallint', 'integer', 'bigint'].includes(column.type)) {
@@ -70,9 +73,14 @@ function run(data) {
 
         if (['string', 'text'].includes(column.type)) {
             ColumnConstraintzz.push(makeConstraint('string', column.id))
-            if (column.length) {
-                ColumnConstraintzz.push(makeConstraint('max', column.id, column.length.toString()))
+            if (column.length === 0) {
+                column.length = 222
+                if (column.type === 'text') {
+                    column.length = 11222
+                }
             }
+            ColumnConstraintzz.push(makeConstraint('min', column.id, '3'))
+            ColumnConstraintzz.push(makeConstraint('max', column.id, column.length.toString()))
         }
     }
 

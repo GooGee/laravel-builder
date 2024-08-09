@@ -7,25 +7,33 @@ function run(data) {
     /**
      * make ORM parameter
      * @param {LB.Column} column
+     @param {boolean} isFk
      * @returns {string}
      */
-    function makeParameter(column) {
-        const list = [`name: '\`${column.name}\`'`, `, type: '${column.type}'`]
+    function makeParameter(column, isFk = false) {
+        const list = [`name: '\`${column.name}\`'`]
+        if (isFk) {
+            list.push('referencedColumnName: "Id"')
+        } else {
+            list.push(`type: '${column.type}'`)
+        }
         if (column.length) {
             let name = 'length'
             if (['decimal', 'float'].includes(column.type)) {
                 name = 'precision'
             }
-            list.push(`, ${name}: ${column.length}`)
+            list.push(`${name}: ${column.length}`)
             if (column.scale) {
-                list.push(", scale: " + column.scale)
+                list.push("scale: " + column.scale)
             }
         }
         if (column.unique) {
-            list.push(", unique: true")
+            list.push("unique: true")
         }
         if (column.nullable) {
-            list.push(", nullable: true")
+            list.push("nullable: true")
+        } else {
+            list.push("nullable: false")
         }
 
         const optionzz = []
@@ -39,9 +47,9 @@ function run(data) {
             optionzz.push('"unsigned" => true')
         }
         if (optionzz.length) {
-            list.push(`, options: [${optionzz.join(', ')}]`)
+            list.push(`options: [${optionzz.join(', ')}]`)
         }
-        return list.join("")
+        return list.join(", ")
     }
 
     ddd.makeParameter = makeParameter
@@ -100,7 +108,7 @@ function run(data) {
             return ''
         }
         const namezz = [ddd.entity.name, index.type].concat(cnzz)
-        return `#[ORM\\${type}(name: "${namezz.join('_')}", columns: ["${cnzz.join('", "')}"])]`
+        return `#[ORM\\${type}(name: "${namezz.join('_')}", columns: ["\`${cnzz.join('`", "`')}\`"])]`
     }
 
     /**
@@ -116,7 +124,7 @@ function run(data) {
         if (relation.entity1Id === ddd.entity.id) {
             const entity1 = entitymap.get(relation.entity0Id)
             textzz.push(`    #[ORM\\OneToOne(targetEntity: ${entity1.name}::class)]`)
-            textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "Id", nullable: ${nullable})]`)
+            textzz.push(`    #[ORM\\JoinColumn(${makeParameter(fk, true)})]`)
             textzz.push(`    private \$${relation.name1};`)
         } else {
             const entity1 = entitymap.get(relation.entity1Id)
@@ -139,12 +147,13 @@ function run(data) {
         if (relation.entity1Id === ddd.entity.id) {
             const entity1 = entitymap.get(relation.entity0Id)
             textzz.push(`    #[ORM\\ManyToOne(targetEntity: ${entity1.name}::class)]`)
-            textzz.push(`    #[ORM\\JoinColumn(name: "\`${fk.name}\`", referencedColumnName: "Id", nullable: ${nullable})]`)
+            textzz.push(`    #[ORM\\JoinColumn(${makeParameter(fk, true)})]`)
             textzz.push(`    private \$${relation.name1};`)
         } else {
-            const entity1 = entitymap.get(relation.entity1Id)
-            textzz.push(`    #[ORM\\OneToMany(mappedBy: '${relation.name1}', targetEntity: ${entity1.name}::class)]`)
-            textzz.push(`    private \$${relation.name0};`)
+            // ignore OneToMany
+            // const entity1 = entitymap.get(relation.entity1Id)
+            // textzz.push(`    #[ORM\\OneToMany(mappedBy: '${relation.name1}', targetEntity: ${entity1.name}::class)]`)
+            // textzz.push(`    private \$${relation.name0};`)
         }
         return textzz.join('\n')
     }

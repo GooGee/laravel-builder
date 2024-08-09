@@ -14,6 +14,6 @@ class {{ helper.getClassName(file, entity, action) }}
      */
     public function run(int $UserId): array
     {
-
+        return [];
     }
 }

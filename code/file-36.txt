@@ -54,7 +54,7 @@ class AbstractResponse
     public static function sendData(string $Message, mixed $Data, int $Code): JsonResponse
     {
         return new JsonResponse(
-            self::makeData(
+            static::makeData(
                 $Code,
                 $Data,
                 null,
@@ -65,12 +65,18 @@ class AbstractResponse
         );
     }
 
-    public static function sendItem(Model $Item, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
+    public static function sendModelItem(Model $Item, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
-        $Item = static::getData($Item);
+        return static::sendItem(static::getData($Item), $Message, $Code);
+    }
 
+    /**
+     * @param  array<string, mixed>  $Item
+     */
+    public static function sendItem(array $Item, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
+    {
         return new JsonResponse(
-            self::makeData(
+            static::makeData(
                 $Code,
                 null,
                 $Item,
@@ -84,12 +90,18 @@ class AbstractResponse
     /**
      * @param  Model[]  $Itemzz
      */
+    public static function sendModelItemzz(array $Itemzz, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
+    {
+        return static::sendItemzz(static::getDatazz($Itemzz), $Message, $Code);
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $Itemzz
+     */
     public static function sendItemzz(array $Itemzz, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
-        $Itemzz = static::getDatazz($Itemzz);
-
         return new JsonResponse(
-            self::makeData(
+            static::makeData(
                 $Code,
                 null,
                 null,
@@ -113,7 +125,7 @@ class AbstractResponse
     public static function sendPage(Paginator $Paginator, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
         return new JsonResponse(
-            self::makeData(
+            static::makeData(
                 $Code,
                 null,
                 null,

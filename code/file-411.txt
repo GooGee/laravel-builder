@@ -18,16 +18,31 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $Item = $CreateOne->make(
-            $User->Id,
-{% for column in columnzz %}
-            $Request->validated('{{ column.name }}'),{% endfor %}
-        );
+        $this->acquireLock($User->Id);
 
-        DB::beginTransaction();
-        $CreateOne->create($User->Id, $Item);
-        DB::commit();
+        try {
 
-        return AbstractResponse::sendModel($Item);
+            $Item = $CreateOne->make(
+                $User->Id,
+    {% for column in columnzz %}
+                $Request->validated('{{ column.name }}'),{% endfor %}
+            );
+
+            DB::beginTransaction();
+            $CreateOne->create($Item);
+            DB::commit();
+
+            return AbstractResponse::sendModelItem($Item);
+
+        } catch (\Throwable $Throwable) {
+
+            DB::rollBack();
+
+            throw new $Throwable;
+
+        } finally {
+            $this->releaseLock();
+        }
+
     }
 }

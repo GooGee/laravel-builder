@@ -168,6 +168,9 @@ function makeHelper(data) {
         if (['array', 'object'].includes(column.cast)) {
             return 'array'
         }
+        if (column.cast.includes('::')) {
+            return column.cast.split('::')[0]
+        }
         const found = ddd.db.tables.DoctrineColumnType.find((item) => item.name === column.type)
         if (found) {
             if (column.nullable) {
@@ -184,8 +187,8 @@ function makeHelper(data) {
      * @returns {string}
      */
     function makeConstraintText(item) {
-        if (item.parameter.startsWith("Rule::")) {
-            return item.parameter
+        if (item.name === "Rule::") {
+            return item.name + item.parameter
         }
 
         if (item.parameter) {

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractReadPage;
+use App\Base\ReadPageParameter;
+use App\Base\ReadPageQueryBuilder;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Model;
@@ -18,11 +20,10 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
      */
     public function run(int $UserId, array $Data): Paginator
     {
-        $Qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
+        $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
+        $qb->where('UserId', $UserId);
 
-        $Qb->where('UserId', $UserId);
-
-        $builder = self::makeReadPageQueryBuilder($Qb, $Data);
+        $builder = new ReadPageQueryBuilder($Qb, ReadPageParameter::from($Data));
 
         $builder->addFilterzz([
 {% for column in columnzz %}
@@ -31,8 +32,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
 
         $builder->addSort();
 
-        /* @phpstan-ignore-next-line */
-        return $Qb->simplePaginate();
+        return $builder->paginateSimple();
     }
 
 }

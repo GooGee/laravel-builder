@@ -9,6 +9,7 @@ use App\Base\AbstractResponse;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
@@ -18,14 +19,29 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
+        $this->acquireLock($User->Id);
 
-        if ($User->Id !== $Item->UserId) {
-            throw new AccessDeniedHttpException();
+        try {
+
+            $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
+
+            if ($User->Id !== $Item->UserId) {
+                throw new AccessDeniedHttpException();
+            }
+
+            $Result = $DeleteOne->run($Item);
+
+            return AbstractResponse::sendOK($Result);
+
+        } catch (\Throwable $Throwable) {
+
+            DB::rollBack();
+
+            throw new $Throwable;
+
+        } finally {
+            $this->releaseLock();
         }
 
-        $Result = $DeleteOne->run($User->Id, $Item);
-
-        return AbstractResponse::sendOK($Result);
     }
 }

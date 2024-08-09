@@ -50,9 +50,7 @@ function run(data) {
         const linezz = [`    interface ${item.name} {`]
         const columnzz = eiczzm.get(item.id)
         if (columnzz) {
-            columnzz.forEach((item) =>
-                linezz.push(`        ${item.name}: ${makeType(item)}`)
-            )
+            columnzz.forEach((item) => linezz.push(`        ${item.name}: ${makeType(item)}`))
         }
         linezz.push("    }")
         return linezz.join("\n")
@@ -64,6 +62,9 @@ function run(data) {
      * @returns {string}
      */
     function makeType(item) {
+        if (item.type === 'boolean') {
+            return item.type
+        }
         const tf = citfm.get(item.id)
         if (tf === undefined) {
             return 'any'
@@ -73,7 +74,7 @@ function run(data) {
         if (tf.isArray) {
             zz += '[]'
         }
-        if (tf.nullable) {
+        if (tf.nullable || item.nullable) {
             zz += ' | null'
         }
         return zz

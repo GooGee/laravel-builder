@@ -25,6 +25,16 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractA
     }
 
     /**
+     * @return array<int, string>
+     */
+    protected function getMissingKeyzz(): array
+    {
+        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+
+        return $Item->getHidden();
+    }
+
+    /**
      * @return string[]
      */
     public static function getStructure(): array
