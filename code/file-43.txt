@@ -24,6 +24,12 @@ class ReadPageParameter
         public string $SortField = AbstractModel::PrivateKey,
         public string $SortOrder = self::SortDesc,
     ) {
+        if ($this->Page < 1) {
+            $this->Page = 1;
+        }
+        if ($this->PerPage < 5) {
+            $this->PerPage = self::PageSize;
+        }
     }
 
     public function getFilterValue(string $Key): int|string|null
@@ -38,8 +44,8 @@ class ReadPageParameter
     {
         return new ReadPageParameter(
             $Data['Filter'] ?? [],
-            $Data['Page'] ?? 1,
-            $Data['PerPage'] ?? self::PageSize,
+            isset($Data['Page']) ? intval($Data['Page']) : 1,
+            isset($Data['PerPage']) ? intval($Data['PerPage']) : self::PageSize,
             $Data['SortField'] ?? AbstractModel::PrivateKey,
             $Data['SortOrder'] ?? self::SortDesc,
         );

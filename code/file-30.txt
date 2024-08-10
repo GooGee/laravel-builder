@@ -40,14 +40,14 @@ abstract class AbstractModel extends Model
      */
     const UPDATED_AT = 'DtUpdate';
 
+    public static $snakeAttributes = false;
+
     /**
      * Indicates whether lazy loading will be prevented on this model.
      *
      * @var bool
      */
     public $preventsLazyLoading = true;
-
-    public static $snakeAttributes = false;
 
     /**
      * The primary key for the model.

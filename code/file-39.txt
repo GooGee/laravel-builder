@@ -17,8 +17,6 @@ abstract class AbstractUser extends User
     use HasFactory;
     use SoftDeletes;
 
-    const PageSize = 20;
-
     /**
      * The name of the "created at" column.
      *
@@ -54,7 +52,7 @@ abstract class AbstractUser extends User
      *
      * @var string
      */
-    protected $primaryKey = 'Id';
+    protected $primaryKey = AbstractModel::PrivateKey;
 
     protected $rememberTokenName = 'RememberToken';
 }
