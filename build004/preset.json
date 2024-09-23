@@ -106,35 +106,35 @@
             "CollectionItem": [
                 {
                     "collectionId": 5,
-                    "name": "DtCreate",
+                    "name": "CreatedAt",
                     "value": "",
                     "tag": "datetime",
                     "id": 379
                 },
                 {
                     "collectionId": 5,
-                    "name": "DtUpdate",
+                    "name": "UpdatedAt",
                     "value": "",
                     "tag": "datetime",
                     "id": 380
                 },
                 {
                     "collectionId": 5,
-                    "name": "DtDelete",
+                    "name": "DeletedAt",
                     "value": "",
                     "tag": "datetime",
                     "id": 381
                 },
                 {
                     "collectionId": 5,
-                    "name": "DtPublish",
+                    "name": "PublishedAt",
                     "value": "",
                     "tag": "datetime",
                     "id": 522
                 },
                 {
                     "collectionId": 5,
-                    "name": "DtArchive",
+                    "name": "ArchivedAt",
                     "value": "",
                     "tag": "datetime",
                     "id": 523
@@ -1191,14 +1191,14 @@
                 },
                 {
                     "collectionId": 11,
-                    "name": "DtCreate",
+                    "name": "CreatedAt",
                     "value": "",
                     "tag": "dateTime",
                     "id": 395
                 },
                 {
                     "collectionId": 11,
-                    "name": "DtUpdate",
+                    "name": "UpdatedAt",
                     "value": "",
                     "tag": "dateTime",
                     "id": 396
@@ -1219,21 +1219,21 @@
                 },
                 {
                     "collectionId": 14,
-                    "name": "DtCreate",
+                    "name": "CreatedAt",
                     "value": "",
                     "tag": "",
                     "id": 411
                 },
                 {
                     "collectionId": 14,
-                    "name": "DtUpdate",
+                    "name": "UpdatedAt",
                     "value": "",
                     "tag": "",
                     "id": 412
                 },
                 {
                     "collectionId": 14,
-                    "name": "DtDelete",
+                    "name": "DeletedAt",
                     "value": "",
                     "tag": "",
                     "id": 413
@@ -2616,7 +2616,7 @@
                     "parentId": 2,
                     "description": "",
                     "opened": true,
-                    "name": "Admin",
+                    "name": "ApiAdmin",
                     "id": 10
                 },
                 {
@@ -2826,7 +2826,7 @@
                     "parentId": 80,
                     "description": "",
                     "opened": true,
-                    "name": "Admin",
+                    "name": "ApiAdmin",
                     "id": 81
                 },
                 {
@@ -5894,7 +5894,7 @@
                 },
                 {
                     "entityId": 4,
-                    "name": "DtCreate",
+                    "name": "CreatedAt",
                     "type": "datetime",
                     "length": 0,
                     "scale": 0,
@@ -5929,7 +5929,7 @@
                 },
                 {
                     "entityId": 4,
-                    "name": "DtUpdate",
+                    "name": "UpdatedAt",
                     "type": "datetime",
                     "length": 0,
                     "scale": 0,
@@ -5964,7 +5964,7 @@
                 },
                 {
                     "entityId": 4,
-                    "name": "DtDelete",
+                    "name": "DeletedAt",
                     "type": "datetime",
                     "length": 0,
                     "scale": 0,
@@ -7075,11 +7075,11 @@
                 {
                     "color": "#f00",
                     "description": "",
-                    "name": "Admin",
+                    "name": "ApiAdmin",
                     "reserved": false,
                     "directoryId": 11,
                     "testDirectoryId": 81,
-                    "prefix": "/Admin",
+                    "prefix": "/ApiAdmin",
                     "id": 1,
                     "fileId": 53
                 },
@@ -7100,7 +7100,7 @@
                     "name": "ApiGuest",
                     "reserved": false,
                     "directoryId": 492,
-                    "fileId": 53,
+                    "fileId": 54,
                     "testDirectoryId": 505,
                     "prefix": "/ApiGuest",
                     "id": 3
