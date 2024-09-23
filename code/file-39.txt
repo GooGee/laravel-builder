@@ -22,21 +22,21 @@ abstract class AbstractUser extends User
      *
      * @var string
      */
-    const CREATED_AT = 'DtCreate';
+    const CREATED_AT = 'CreatedAt';
 
     /**
      * The name of the "deleted at" column.
      *
      * @var string
      */
-    const DELETED_AT = 'DtDelete';
+    const DELETED_AT = 'DeletedAt';
 
     /**
      * The name of the "updated at" column.
      *
      * @var string
      */
-    const UPDATED_AT = 'DtUpdate';
+    const UPDATED_AT = 'UpdatedAt';
 
     public static $snakeAttributes = false;
 

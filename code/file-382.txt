@@ -32,6 +32,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Response = $this->deleteJson($this->makeUri(), compact('Idzz'))
             ->assertStatus(200);
         $Response->assertJsonCount(1, 'Data');
-        self::assertNull($Item->DtDelete);
+        self::assertNull($Item->DeletedAt);
     }
 }
