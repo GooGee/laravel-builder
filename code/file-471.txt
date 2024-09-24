@@ -41,7 +41,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::rollBack();
 
-            throw new $Throwable;
+            throw $Throwable;
 
         } finally {
             $this->releaseLock();
