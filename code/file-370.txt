@@ -7,7 +7,7 @@ namespace Tests\Api;
 use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Routing\Middleware\ThrottleRequestsWithRedis;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +22,7 @@ abstract class AbstractApiTestBase extends TestCase
 
     protected $seed = true;
 
-    abstract protected function getPath(): string;
+    abstract protected static function getPath(): string;
 
     /**
      * @return array<int, string>
@@ -33,7 +33,7 @@ abstract class AbstractApiTestBase extends TestCase
     {
         parent::setUp();
 
-        $this->withoutMiddleware([ThrottleRequestsWithRedis::class]);
+        $this->withoutMiddleware([ThrottleRequests::class]);
         Notification::fake();
         Queue::fake();
         Storage::fake();
@@ -68,14 +68,14 @@ abstract class AbstractApiTestBase extends TestCase
     /**
      * @param  array<string, mixed>  $Parameter
      */
-    protected function makeUri(string|int $Path = '', array $Parameter = []): string
+    public static function makeUri(string|int $Path = '', array $Parameter = []): string
     {
         $query = '';
         if (count($Parameter)) {
             $query = '?'.http_build_query($Parameter);
         }
 
-        return static::URI.$this->getPath().'/'.$Path.$query;
+        return static::URI.static::getPath().'/'.$Path.$query;
     }
 
     protected function assertMissingKeyzz(TestResponse $Response, string $path): self

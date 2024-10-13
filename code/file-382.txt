@@ -8,7 +8,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
 {
-    protected function getPath(): string
+    protected static function getPath(): string
     {
         return "{{ entity.name }}/{{ action }}";
     }
