@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\Base\AbstractReadPage;
 use App\Base\ReadPageParameter;
 use App\Base\ReadPageQueryBuilder;
 {% for dependency in dependencyzz %}
@@ -12,7 +11,7 @@ use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
 
-class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
+class {{ helper.getClassName(file, entity, action) }}
 {
     /**
      * @param array<string, mixed> $Data
@@ -23,7 +22,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractReadPage
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
         $qb->where('UserId', $UserId);
 
-        $builder = new ReadPageQueryBuilder($Qb, ReadPageParameter::from($Data));
+        $builder = new ReadPageQueryBuilder($qb, ReadPageParameter::from($Data));
 
         $builder->addFilterzz([
 {% for column in columnzz %}

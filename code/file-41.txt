@@ -11,12 +11,8 @@ use Illuminate\Pagination\Paginator;
 
 class ReadPageQueryBuilder
 {
-    /**
-     * @param  Builder<Model>  $Qb
-     */
-    public function __construct(public Builder $Qb, public ReadPageParameter $ReadPageParameter)
-    {
-    }
+    /** @phpstan-ignore-next-line */
+    public function __construct(public Builder $Qb, public ReadPageParameter $ReadPageParameter) {}
 
     public function addFilter(string $Key): self
     {
@@ -56,7 +52,7 @@ class ReadPageQueryBuilder
         return $this->Qb->paginate(
             $this->ReadPageParameter->PerPage,
             ['*'],
-            'page',
+            'Page',
             $this->ReadPageParameter->Page,
         );
     }
@@ -69,7 +65,7 @@ class ReadPageQueryBuilder
         return $this->Qb->simplePaginate(
             $this->ReadPageParameter->PerPage,
             ['*'],
-            'page',
+            'Page',
             $this->ReadPageParameter->Page,
         );
     }

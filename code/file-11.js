@@ -22,7 +22,7 @@ function run(data) {
     columnzz.forEach(function (item) {
         if (item.cast) {
             let text = `'${item.cast}'`
-            if (item.cast.indexOf('::')) {
+            if (item.cast.includes('::')) {
                 text = item.cast
             }
             castMap.set(item.name, text)
