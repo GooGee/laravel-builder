@@ -51,7 +51,7 @@ class AbstractResponse
         return compact('Code', 'Data', 'Item', 'Itemzz', 'Message', 'Page');
     }
 
-    public static function sendData(string $Message, mixed $Data, int $Code): JsonResponse
+    public static function sendData(mixed $Data, string $Message, int $Code = Response::HTTP_OK): JsonResponse
     {
         return new JsonResponse(
             static::makeData(
@@ -114,7 +114,7 @@ class AbstractResponse
 
     public static function sendOK(mixed $Data = null): JsonResponse
     {
-        return static::sendData(self::MessageOk, $Data, Response::HTTP_OK);
+        return static::sendData($Data, self::MessageOk);
     }
 
     /**

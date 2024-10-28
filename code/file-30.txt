@@ -6,7 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static static|null find(int $Id)
@@ -15,9 +14,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 abstract class AbstractModel extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
-    const PrivateKey = 'Id';
+    const PrimaryKey = 'Id';
 
     /**
      * The name of the "created at" column.
@@ -54,5 +52,5 @@ abstract class AbstractModel extends Model
      *
      * @var string
      */
-    protected $primaryKey = self::PrivateKey;
+    protected $primaryKey = self::PrimaryKey;
 }

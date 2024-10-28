@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('ModelBase'), entity, action) }}
 {
+    use SoftDeletes;
 }

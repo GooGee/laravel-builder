@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    function __construct(private readonly {{ action + entity.name }} $CreateOne)
+    {
+    }
+
+    function run(int $UserId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+    }
+}

@@ -26,9 +26,9 @@ class {{ helper.getClassName(file, entity, action) }} extends Factory
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         static $Index = 0;
         $Index += 1;

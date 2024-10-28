@@ -52,7 +52,7 @@ abstract class AbstractUser extends User
      *
      * @var string
      */
-    protected $primaryKey = AbstractModel::PrivateKey;
+    protected $primaryKey = AbstractModel::PrimaryKey;
 
     protected $rememberTokenName = 'RememberToken';
 }
