@@ -14,7 +14,7 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param array<int, int> $Idzz
      * @return array<int, int>
      */
-    function run(int $UserId, array $Idzz): array
+    static function run(int $UserId, array $Idzz): array
     {
         $Result = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->where('UserId', $UserId)

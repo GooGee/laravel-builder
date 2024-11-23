@@ -29,7 +29,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             );
 
             DB::beginTransaction();
-            $CreateOne->create($Item);
+            $CreateOne->run($Item);
             DB::commit();
 
             return AbstractResponse::sendModelItem($Item);

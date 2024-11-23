@@ -15,16 +15,16 @@ class {{ helper.getClassName(file, entity, action) }}
     }
 
     /**
-     * @param  array<int, array<string, mixed>>  $Datazz
+     * @param  array<int, array<string, mixed>>  $Mapzz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(int $UserId, array $Datazz): array
+    function run(int $UserId, array $Mapzz): array
     {
         /** @var array<int, int> $Idzz */
         $Idzz = [];
         /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = [];
-        foreach ($Datazz as $Data) {
+        foreach ($Mapzz as $Data) {
             $Item = $this->CreateOne->make(
                 $UserId,
 {% for column in columnzz %}

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', \App\Api\Home\ReadHome\ReadHomeHomeController::class);
 
-Route::prefix('/V1/Api')->middleware(['throttle:m33'])->group(function () {
+Route::prefix('/V1/Api')->middleware(['auth', 'throttle:m33'])->group(function () {
 
 {{ text }}
 

@@ -9,24 +9,7 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    function create({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
-    {
-        $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-            ->where('UserId', $Item->UserId)
-            ->exists();
-        if ($exist) {
-            throw new DuplicatedException();
-        }
-
-        $Item->save();
-        $Item->refresh();
-
-        event(new {{ action + entity.name }}Event($Item));
-
-        return $Item;
-    }
-
-    function make(
+    static function make(
         int $UserId,
 {% for column in columnzz %}
         {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
@@ -37,6 +20,25 @@ class {{ helper.getClassName(file, entity, action) }}
 
 {% for column in columnzz %}
         $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
+
+        return $Item;
+    }
+
+    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist = true): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        if ($ThrowIfExist) {
+            $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+                ->where('UserId', $Item->UserId)
+                ->exists();
+            if ($exist) {
+                throw new DuplicatedException();
+            }
+        }
+
+        $Item->save();
+        $Item->refresh();
+
+        event(new {{ action + entity.name }}Event($Item));
 
         return $Item;
     }

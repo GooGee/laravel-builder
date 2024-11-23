@@ -14,15 +14,15 @@ use Illuminate\Pagination\Paginator;
 class {{ helper.getClassName(file, entity, action) }}
 {
     /**
-     * @param array<string, mixed> $Data
+     * @param array<string, mixed> $Map
      * @return Paginator<Model>
      */
-    public function run(int $UserId, array $Data): Paginator
+    public function run(int $UserId, array $Map): Paginator
     {
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
         $qb->where('UserId', $UserId);
 
-        $builder = new ReadPageQueryBuilder($qb, ReadPageParameter::from($Data));
+        $builder = new ReadPageQueryBuilder($qb, ReadPageParameter::from($Map));
 
         $builder->addFilterzz([
 {% for column in columnzz %}

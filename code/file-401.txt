@@ -22,7 +22,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         try {
 
+            DB::beginTransaction();
+
             $Itemzz = $CreateMany->run($User->Id, $Request->validated('Itemzz'));
+
+            DB::commit();
 
             return AbstractResponse::sendModelItemzz($Itemzz);
 
