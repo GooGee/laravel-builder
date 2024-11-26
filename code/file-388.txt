@@ -18,40 +18,40 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $Item = $this->makeItem($User);
-        $Item->save();
+        $item = $this->makeItem($User);
+        $item->save();
 
-        $Data = (new ReadPageParameter())->toArray();
-        $Response = $this->getJsonWithData($this->makeUri(), $Data)
+        $data = (new ReadPageParameter())->toArray();
+        $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->getJsonWithData($this->makeUri(), $Data)
+        $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(422);
-        $Response->assertJsonValidationErrorFor('Filter.Status');
+        $response->assertJsonValidationErrorFor('Filter.Status');
 
 {% for column in columnzz %}
-        $Data['Filter'] = [
-            '{{ column.alias }}' => $Item->{{ column.alias }},
+        $data['Filter'] = [
+            '{{ column.alias }}' => $item->{{ column.alias }},
         ];
-        $Response = $this->getJsonWithData($this->makeUri(), $Data)
+        $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(200);
-        $this->seePage($Response);
-        $Response->assertJsonPath('Page.data.0.{{ column.alias }}', $Item->{{ column.alias }});
+        $this->seePage($response);
+        $response->assertJsonPath('Page.data.0.{{ column.alias }}', $item->{{ column.alias }});
 {% endfor %}
 
-        $Response = $this->getJsonWithData($this->makeUri(), $Data)
+        $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(200);
-        $Response->assertJsonCount(1, 'Page.data');
-        $Response->assertJsonIsObject('Page.data.0.User');
-        $Response->assertJsonPath('Page.data.0.Id', $Item->Id);
+        $response->assertJsonCount(1, 'Page.data');
+        $response->assertJsonIsObject('Page.data.0.User');
+        $response->assertJsonPath('Page.data.0.Id', $item->Id);
 
         $OtherUser = $this->createUser();
         $this->actingAs($OtherUser);
 
-        $Response = $this->getJsonWithData($this->makeUri(), $Data)
+        $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(200);
-        $Response->assertJsonCount(0, 'Page.data');
+        $response->assertJsonCount(0, 'Page.data');
     }
 }

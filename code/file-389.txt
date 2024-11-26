@@ -16,16 +16,16 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $Item = $this->makeItem($User);
-        $Item->save();
+        $item = $this->makeItem($User);
+        $item->save();
 
-        $Response = $this->getJson($this->makeUri())
+        $response = $this->getJson($this->makeUri())
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->getJson($this->makeUri())
+        $response = $this->getJson($this->makeUri())
             ->assertStatus(200);
-        $this->seeData($Response);
+        $this->seeData($response);
     }
 }

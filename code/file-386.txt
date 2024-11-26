@@ -14,31 +14,31 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $Item = $this->makeItem($User);
-        $Item->save();
+        $item = $this->makeItem($User);
+        $item->save();
 
-        $Data = $Item->toArray();
-        $Itemzz = [$Data];
-        $Response = $this->patchJson($this->makeUri(), compact('Itemzz'))
+        $data = $item->toArray();
+        $Itemzz = [$data];
+        $response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
 {% for column in columnzz %}
-        $Data = $Item->toArray();
-        unset($Data['{{ column.alias }}']);
-        $Itemzz = [$Data];
-        $Response = $this->patchJson($this->makeUri(), compact('Itemzz'))
+        $data = $item->toArray();
+        unset($data['{{ column.alias }}']);
+        $Itemzz = [$data];
+        $response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(422);
-        $Response->assertJsonValidationErrorFor('Itemzz.0.{{ column.alias }}');
+        $response->assertJsonValidationErrorFor('Itemzz.0.{{ column.alias }}');
 {% endfor %}
 
-        $Data = $Item->toArray();
-        $Itemzz = [$Data];
-        $Response = $this->patchJson($this->makeUri(), compact('Itemzz'))
+        $data = $item->toArray();
+        $Itemzz = [$data];
+        $response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(200);
-        $this->seeItemzz($Response);
-        $Response->assertJsonCount(1, 'Itemzz');
+        $this->seeItemzz($response);
+        $response->assertJsonCount(1, 'Itemzz');
 {% for column in columnzz %}
-        $Response->assertJsonPath('Item.0.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
+        $response->assertJsonPath('Item.0.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
     }
 }

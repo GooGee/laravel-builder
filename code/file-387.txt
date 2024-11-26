@@ -16,35 +16,35 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $User = $this->createUser();
         $Old = $this->makeItem($User);
         $Old->save();
-        $Item = $this->makeItem($User);
-        $Data = $Item->toArray();
-        $Response = $this->patchJson($this->makeUri($Old->Id), $Data)
+        $item = $this->makeItem($User);
+        $data = $item->toArray();
+        $response = $this->patchJson($this->makeUri($Old->Id), $data)
             ->assertStatus(401);
 
         $OtherUser = $this->createUser();
         $this->actingAs($OtherUser);
-        $Response = $this->patchJson($this->makeUri($Old->Id), $Data)
+        $response = $this->patchJson($this->makeUri($Old->Id), $data)
             ->assertStatus(403);
 
         $this->actingAs($User);
 
 {% for column in columnzz %}
-        $Data = $Item->toArray();
-        unset($Data['{{ column.alias }}']);
-        $Response = $this->patchJson($this->makeUri($Old->Id), $Data)
+        $data = $item->toArray();
+        unset($data['{{ column.alias }}']);
+        $response = $this->patchJson($this->makeUri($Old->Id), $data)
             ->assertStatus(422);
-        $Response->assertJsonValidationErrorFor('{{ column.alias }}');
+        $response->assertJsonValidationErrorFor('{{ column.alias }}');
 {% endfor %}
 
-        $Data = $Item->toArray();
-        $Response = $this->patchJson($this->makeUri($Old->Id), $Data)
+        $data = $item->toArray();
+        $response = $this->patchJson($this->makeUri($Old->Id), $data)
             ->assertStatus(200);
-        $this->seeItem($Response);
+        $this->seeItem($response);
 {% for column in columnzz %}
-        $Response->assertJsonPath('Item.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
+        $response->assertJsonPath('Item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
 
         $Old->delete();
-        $Response = $this->patchJson($this->makeUri($Old->Id), $Data)
+        $response = $this->patchJson($this->makeUri($Old->Id), $data)
             ->assertStatus(404);
     }
 }

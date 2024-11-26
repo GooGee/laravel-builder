@@ -16,22 +16,22 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $Item = $this->makeItem($User);
-        $Item->save();
+        $item = $this->makeItem($User);
+        $item->save();
 
-        $Idzz = [$Item->Id];
-        $Response = $this->deleteJson($this->makeUri(), compact('Idzz'))
+        $Idzz = [$item->Id];
+        $response = $this->deleteJson($this->makeUri(), compact('Idzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->deleteJson($this->makeUri(), [])
+        $response = $this->deleteJson($this->makeUri(), [])
             ->assertStatus(422);
-        $Response->assertJsonValidationErrorFor('Idzz');
+        $response->assertJsonValidationErrorFor('Idzz');
 
-        $Response = $this->deleteJson($this->makeUri(), compact('Idzz'))
+        $response = $this->deleteJson($this->makeUri(), compact('Idzz'))
             ->assertStatus(200);
-        $Response->assertJsonCount(1, 'Data');
-        self::assertNull($Item->DeletedAt);
+        $response->assertJsonCount(1, 'Data');
+        self::assertNull($item->DeletedAt);
     }
 }

@@ -15,18 +15,18 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     {
         $User = $this->createUser();
 
-        $Item = $this->makeItem($User);
-        $Item->save();
-        $Idzz = [$Item->Id];
-        $Response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
+        $item = $this->makeItem($User);
+        $item->save();
+        $Idzz = [$item->Id];
+        $response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
 
-        $Response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
+        $response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
             ->assertStatus(200);
-        $this->seeItemzz($Response);
-        $Response->assertJsonCount(1, 'Itemzz');
-        $Response->assertJsonPath('Itemzz.0.Id', $Item->Id);
+        $this->seeItemzz($response);
+        $response->assertJsonCount(1, 'Itemzz');
+        $response->assertJsonPath('Itemzz.0.Id', $item->Id);
     }
 }

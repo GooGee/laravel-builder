@@ -14,25 +14,25 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $Item = $this->makeItem($User);
-        $Item->save();
-        $Response = $this->getJson($this->makeUri($Item->Id))
+        $item = $this->makeItem($User);
+        $item->save();
+        $response = $this->getJson($this->makeUri($item->Id))
             ->assertStatus(401);
 
         $OtherUser = $this->createUser();
         $this->actingAs($OtherUser);
-        $Response = $this->getJson($this->makeUri($Item->Id))
+        $response = $this->getJson($this->makeUri($item->Id))
             ->assertStatus(403);
 
         $this->actingAs($User);
 
-        $Response = $this->getJson($this->makeUri($Item->Id))
+        $response = $this->getJson($this->makeUri($item->Id))
             ->assertStatus(200);
-        $this->seeItem($Response);
-        $Response->assertJsonPath('Item.Id', $Item->Id);
+        $this->seeItem($response);
+        $response->assertJsonPath('Item.Id', $item->Id);
 
-        $Item->delete();
-        $Response = $this->getJson($this->makeUri($Item->Id))
+        $item->delete();
+        $response = $this->getJson($this->makeUri($item->Id))
             ->assertStatus(404);
     }
 }
