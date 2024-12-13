@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('/V1/ApiUser')->middleware(['throttle:m33'])->group(function () {
+Route::prefix('/V1/ApiUser')->middleware(['auth', 'throttle:m33'])->group(function () {
 
 {{ text }}
 

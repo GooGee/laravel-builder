@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', \App\Api\Home\ReadHome\ReadHomeHomeController::class);
+Route::prefix('/V1/ApiAdmin')->middleware(['admin', 'throttle:m111'])->group(function () {
+
+{{ text }}
+
+});
