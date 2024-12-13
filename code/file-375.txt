@@ -24,11 +24,10 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $this->actingAs($User);
 
-{% for column in columnzz %}
-        $data = $item->toArray();
-        unset($data['{{ column.alias }}']);
+        $data = [];
         $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(422);
+{% for column in columnzz %}
         $response->assertJsonValidationErrorFor('{{ column.alias }}');
 {% endfor %}
         $data = $item->toArray();
