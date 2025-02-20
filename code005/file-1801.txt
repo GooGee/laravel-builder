@@ -13,15 +13,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, 'UpdateOne') }} $UpdateOne)
-    {
-    }
-
     /**
      * @param  array<int, array<string, mixed>>  $Mapzz
      * @return Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(int $UserId, array $Mapzz): Collection
+    static function run(int $UserId, array $Mapzz): Collection
     {
         /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
@@ -35,7 +31,7 @@ class {{ helper.getClassName(file, entity, action) }}
         }
         foreach ($Itemzz as $Item) {
             $mm = $Map[$Item->Id];
-            $this->UpdateOne->run(
+            {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, 'UpdateOne') }}::run(
                 $Item,
 {% for column in columnzz %}
                 $mm['{{ column.name }}'],{% endfor %}

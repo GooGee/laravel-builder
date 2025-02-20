@@ -12,10 +12,6 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function __construct(private {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }} $CreateOne)
-    {
-    }
-
     /**
      * @param  array<int, array<string, mixed>>  $Mapzz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
@@ -27,12 +23,12 @@ class {{ helper.getClassName(file, entity, action) }}
         /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = [];
         foreach ($Mapzz as $Data) {
-            $Item = $this->CreateOne->make(
+            $Item = {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::make(
                 $UserId,
 {% for column in columnzz %}
                 $Data['{{ column.name }}'],{% endfor %}
             );
-            $this->CreateOne->create($Item);
+            {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::create($Item);
             $Idzz[] = $Item->Id;
             $Itemzz[] = $Item;
         }

@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $UpdateOne): JsonResponse
+    public function __invoke({{ action + entity.name }}Request $Request): JsonResponse
     {
         /** @var \App\Models\User $User */
         $User = auth()->user();
@@ -33,7 +33,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
                 throw new AccessDeniedHttpException();
             }
 
-            $Item = $UpdateOne->run(
+            $Item = {{ action + entity.name }}::run(
                 $Item,
     {% for column in columnzz %}
                 $Request->validated('{{ column.name }}'),{% endfor %}

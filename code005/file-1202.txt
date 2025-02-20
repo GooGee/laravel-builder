@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $CreateOne): JsonResponse
+    public function __invoke({{ action + entity.name }}Request $Request): JsonResponse
     {
         /** @var \App\Models\User $User */
         $User = auth()->user();
@@ -24,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         try {
 
-            $Item = $CreateOne->make(
+            $Item = {{ action + entity.name }}::make(
                 $User->Id,
     {% for column in columnzz %}
                 $Request->validated('{{ column.name }}'),{% endfor %}
@@ -32,7 +32,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $CreateOne->run($Item);
+            {{ action + entity.name }}::run($Item);
 
             DB::commit();
 
