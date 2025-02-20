@@ -78,7 +78,11 @@ class CreateMigrationService
         $fqcn = $this->dependencyFactory->getClassNameGenerator()->generateClassName(array_keys($kv)[0]);
         $file = $this->dependencyFactory
             ->getMigrationGenerator()
-            ->generateMigration($fqcn, $this->replaceStatement($uptext, true), $this->replaceStatement($downtext, false));
+            ->generateMigration(
+                $fqcn,
+                $this->replaceStatement($uptext, true),
+                $this->replaceStatement($downtext, false),
+            );
 
         $name = dirname($file) . '/' . date('Y_m_d_His') . '_doctrine_migration.php';
         rename($file, $name);
