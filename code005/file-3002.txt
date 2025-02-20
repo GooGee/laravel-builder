@@ -1,0 +1,12 @@
+<?php
+
+// AbstractGuestItemTestBase
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+abstract class {{ helper.getClassName(file, entity, action) }} extends \Tests\Api\{{ entity.name }}\{{ helper.getClassName(file, entity, action) }}
+{
+    const Uri = '/V1/{{ module.name }}/';
+}

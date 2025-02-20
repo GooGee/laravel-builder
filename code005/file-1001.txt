@@ -18,7 +18,9 @@ abstract class AbstractApiTestBase extends TestCase
 {
     use RefreshDatabase;
 
-    const URI = '/V1/Api/';
+    const ErrorFieldName = 'Error';
+
+    const Uri = '/V1/Api/';
 
     protected $seed = true;
 
@@ -75,7 +77,7 @@ abstract class AbstractApiTestBase extends TestCase
             $query = '?'.http_build_query($Parameter);
         }
 
-        return static::URI.static::getPath().'/'.$Path.$query;
+        return static::Uri.static::getPath().'/'.$Path.$query;
     }
 
     protected function assertMissingKeyzz(TestResponse $Response, string $path): self
