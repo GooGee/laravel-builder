@@ -91,7 +91,7 @@ function makeHelper(data) {
      */
     function getItemzzInCollection(name) {
         const parent = ddd.db.tables.Collection.find((item) => item.name === name)
-        if (parent === undefined) {
+        if (parent == null) {
             return []
         }
         return ddd.db.tables.CollectionItem.filter((item) => item.collectionId === parent.id,)
@@ -124,12 +124,12 @@ function makeHelper(data) {
      */
     function getRequestColumnzz(requestId = ddd.ma.requestId) {
         const request = ddd.db.tables.Request.find(item => item.id === requestId)
-        if (request === undefined) {
+        if (request == null) {
             return []
         }
 
         const tf = ddd.db.tables.TypeFormat.find(item => item.ownerRequestId === request.id)
-        if (tf === undefined) {
+        if (tf == null) {
             return []
         }
         const zz = ddd.getTypeFormatColumnzz(tf, [], ddd.db)
@@ -152,7 +152,7 @@ function makeHelper(data) {
         }
         const set = new Set(marzz.map(item => item.responseId))
         const response = ddd.db.tables.Response.find(item => set.has(item.id))
-        if (response === undefined) {
+        if (response == null) {
             return []
         }
 
@@ -219,7 +219,7 @@ function makeHelper(data) {
      */
     function makeRouteText(moduleName) {
         const module = ddd.db.tables.Module.find(item => item.name === moduleName)
-        if (module === undefined) {
+        if (module == null) {
             throw new Error(moduleName + ' not found')
         }
 
@@ -250,7 +250,7 @@ function makeHelper(data) {
 
                 const linezz = []
                 const ma = mam.get(path.moduleActionId)
-                if (ma === undefined) {
+                if (ma == null) {
                     return
                 }
                 if (ma.inRoute === false) {
@@ -258,12 +258,12 @@ function makeHelper(data) {
                 }
 
                 const file = ma.filezz.find(item => item.name.includes('Controller'))
-                if (file === undefined) {
+                if (file == null) {
                     return
                 }
 
                 const entity = sm.get(ma.entityId)
-                if (entity === undefined) {
+                if (entity == null) {
                     return
                 }
 

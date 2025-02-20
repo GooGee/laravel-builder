@@ -19,7 +19,7 @@ function run(data) {
             }
 
             let found = eiczzm.get(item.entityId)
-            if (found === undefined) {
+            if (found == null) {
                 found = []
                 eiczzm.set(item.entityId, found)
             }
@@ -30,7 +30,7 @@ function run(data) {
     const eiwzzm = new Map()
     ddd.db.tables.Wu.forEach((item) => {
         let found = eiwzzm.get(item.entityId)
-        if (found === undefined) {
+        if (found == null) {
             found = []
             eiwzzm.set(item.entityId, found)
         }
@@ -41,7 +41,7 @@ function run(data) {
     const wiwpzzm = new Map()
     ddd.db.tables.WuParameter.forEach((item) => {
         let found = wiwpzzm.get(item.wuId)
-        if (found === undefined) {
+        if (found == null) {
             found = []
             wiwpzzm.set(item.wuId, found)
         }
@@ -71,7 +71,7 @@ function run(data) {
             return item.type
         }
         const tf = citfm.get(item.id)
-        if (tf === undefined) {
+        if (tf == null) {
             return 'any'
         }
 

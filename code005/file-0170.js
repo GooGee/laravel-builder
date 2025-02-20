@@ -16,12 +16,12 @@ function run(data) {
         }
 
         const entity1 = em.get(aa.entityId)
-        if (entity1 === undefined) {
+        if (entity1 == null) {
             throw new Error(aa.entityId + ' does not exist')
         }
 
         const entity2 = em.get(bb.entityId)
-        if (entity2 === undefined) {
+        if (entity2 == null) {
             throw new Error(bb.entityId + ' does not exist')
         }
 
@@ -29,7 +29,7 @@ function run(data) {
     })
         .forEach(function (ma) {
             const entity = em.get(ma.entityId)
-            if (entity === undefined) {
+            if (entity == null) {
                 throw new Error(ma.entityId + ' does not exist')
             }
 

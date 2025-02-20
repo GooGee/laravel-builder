@@ -32,26 +32,6 @@ class AbstractResponse
         }, $Itemzz);
     }
 
-    /**
-     * @template T of Model
-     *
-     * @param  array<string, mixed>|null  $Item
-     * @param  array<int, array<string, mixed>>  $Itemzz
-     * @param  ?Paginator<T>  $Page
-     * @return array<string, mixed>
-     */
-    public static function makeData(
-        int $Code = 200,
-        bool|float|int|null|string $Value = null,
-        ?array $Item = null,
-        array $Itemzz = [],
-        string $Message = '',
-        ?Paginator $Page = null,
-        mixed $Error = null
-    ): array {
-        return compact('Code', 'Value', 'Error', 'Item', 'Itemzz', 'Message', 'Page');
-    }
-
     public static function sendValue(bool|float|int|null|string $Value, string $Message, int $Code = Response::HTTP_OK): JsonResponse
     {
         return new JsonResponse(
@@ -152,5 +132,25 @@ class AbstractResponse
             ),
             $Code,
         );
+    }
+
+    /**
+     * @template T of Model
+     *
+     * @param  array<string, mixed>|null  $Item
+     * @param  array<int, array<string, mixed>>  $Itemzz
+     * @param  ?Paginator<T>  $Page
+     * @return array<string, mixed>
+     */
+    public static function makeData(
+        int $Code = 200,
+        bool|float|int|null|string $Value = null,
+        ?array $Item = null,
+        array $Itemzz = [],
+        string $Message = '',
+        ?Paginator $Page = null,
+        mixed $Error = null
+    ): array {
+        return compact('Code', 'Value', 'Error', 'Item', 'Itemzz', 'Message', 'Page');
     }
 }
