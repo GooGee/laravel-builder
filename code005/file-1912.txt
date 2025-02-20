@@ -1,0 +1,57 @@
+<?php
+
+// UpdateCurrentItemController
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Base\AbstractController;
+use App\Base\AbstractResponse;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $UpdateOne): JsonResponse
+    {
+        /** @var \App\Models\User $User */
+        $User = auth()->user();
+
+        $this->acquireLock($User->Id);
+
+        try {
+
+            DB::beginTransaction();
+
+            $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($User->Id);
+
+            if ($User->Id !== $Item->UserId) {
+                throw new AccessDeniedHttpException();
+            }
+
+            $Item = $UpdateOne->run(
+                $Item,
+    {% for column in columnzz %}
+                $Request->validated('{{ column.name }}'),{% endfor %}
+            );
+
+            DB::commit();
+
+            return AbstractResponse::sendModelItem($Item);
+
+        } catch (\Throwable $Throwable) {
+
+            DB::rollBack();
+
+            throw $Throwable;
+
+        } finally {
+            $this->releaseLock();
+        }
+
+    }
+}

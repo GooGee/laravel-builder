@@ -1,0 +1,50 @@
+<?php
+
+// UpdateManyItem
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\User;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Database\Eloquent\Collection;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function __construct(private {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, 'UpdateOne') }} $UpdateOne)
+    {
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $Mapzz
+     * @return Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
+     */
+    function run(int $UserId, array $Mapzz): Collection
+    {
+        /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
+        $Itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('UserId', $UserId)
+            ->whereIn('Id', array_column($Mapzz, 'Id'))
+            ->get();
+        /** @var array<int, array<string, mixed>> $Map */
+        $Map = [];
+        foreach ($Mapzz as $mm) {
+            $Map[$mm['Id']] = $mm;
+        }
+        foreach ($Itemzz as $Item) {
+            $mm = $Map[$Item->Id];
+            $this->UpdateOne->run(
+                $Item,
+{% for column in columnzz %}
+                $mm['{{ column.name }}'],{% endfor %}
+            );
+        }
+
+        event(new {{ action + entity.name }}Event($Itemzz->pluck('Id')->toArray()));
+
+        return $Itemzz;
+    }
+
+}

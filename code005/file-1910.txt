@@ -1,0 +1,50 @@
+<?php
+
+// UpdateCurrent
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
+{
+    protected static function getPath(): string
+    {
+        return "{{ entity.name }}/{{ action }}";
+    }
+
+    public function test{{ action + entity.name }}()
+    {
+        $User = $this->createUser();
+        $Old = $this->makeItem($User);
+        $Old->save();
+        $item = $this->makeItem($User);
+        $data = $item->toArray();
+        $response = $this->patchJson($this->makeUri(), $data)
+            ->assertStatus(401);
+
+        $OtherUser = $this->createUser();
+        $this->actingAs($OtherUser);
+        $response = $this->patchJson($this->makeUri(), $data)
+            ->assertStatus(403);
+
+        $this->actingAs($User);
+
+        $data = [];
+        $response = $this->patchJson($this->makeUri(), $data)
+            ->assertStatus(422);
+{% for column in columnzz %}
+        $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);
+{% endfor %}
+        $data = $item->toArray();
+        $response = $this->patchJson($this->makeUri(), $data)
+            ->assertStatus(200);
+        $this->seeItem($response);
+{% for column in columnzz %}
+        $response->assertJsonPath('Item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
+
+        $Old->delete();
+        $response = $this->patchJson($this->makeUri(), $data)
+            ->assertStatus(404);
+    }
+}

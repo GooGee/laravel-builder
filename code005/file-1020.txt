@@ -1,0 +1,22 @@
+<?php
+
+// EventOfMany
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Support\Facades\Log;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    /**
+     * @param array<int, int> $Idzz
+     */
+    public function __construct(public array $Idzz)
+    {
+        Log::info(self::class, ['UserId' => auth()->id(), 'Idzz' => $Idzz]);
+    }
+}

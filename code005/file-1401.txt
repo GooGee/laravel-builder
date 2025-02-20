@@ -1,0 +1,23 @@
+<?php
+
+// DeleteOneItem
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\User;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        $Item->delete();
+
+        event(new {{ action + entity.name }}Event($Item));
+
+        return $Item;
+    }
+}

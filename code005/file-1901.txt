@@ -1,0 +1,31 @@
+<?php
+
+// UpdateOneItem
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Models\User;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    static function run(
+        {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item,
+{% for column in columnzz %}
+        {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
+    ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+{% for column in columnzz %}
+        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
+
+        $Item->save();
+
+        event(new {{ action + entity.name }}Event($Item));
+
+        return $Item;
+    }
+
+}

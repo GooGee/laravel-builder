@@ -1,0 +1,20 @@
+<?php
+
+// UpdateCurrentItem
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    public function run(
+        {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item,
+    ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        return $Item;
+    }
+}

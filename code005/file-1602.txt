@@ -1,0 +1,30 @@
+<?php
+
+// ReadOneItemController
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Base\AbstractController;
+use App\Base\AbstractResponse;
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+class {{ helper.getClassName(file, entity, action) }} extends AbstractController
+{
+    public function __invoke(int $Id): JsonResponse
+    {
+        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
+
+        /** @var \App\Models\User $User */
+        $User = auth()->user();
+
+        if ($item->UserId === $User->Id) {
+            return AbstractResponse::sendModelItem($item);
+        }
+        throw new AccessDeniedHttpException();
+    }
+}

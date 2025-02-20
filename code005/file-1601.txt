@@ -1,0 +1,28 @@
+<?php
+
+// ReadOneItem
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    function find(int $Id, int $UserId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}|null
+    {
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('UserId', $UserId)
+            ->find($Id);
+    }
+
+    function findOrFail(int $Id, int $UserId): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        return {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            ->where('UserId', $UserId)
+            ->findOrFail($Id);
+    }
+
+}

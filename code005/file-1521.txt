@@ -1,0 +1,21 @@
+<?php
+
+// ReadHome
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    /**
+     * @return array<string, mixed>
+     */
+    public function run(int $UserId): array
+    {
+        return [];
+    }
+}

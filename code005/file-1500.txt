@@ -1,0 +1,34 @@
+<?php
+
+// ReadMany
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
+{
+    protected static function getPath(): string
+    {
+        return "{{ entity.name }}/{{ action }}";
+    }
+
+    public function test{{ action + entity.name }}()
+    {
+        $User = $this->createUser();
+
+        $item = $this->makeItem($User);
+        $item->save();
+        $Idzz = [$item->Id];
+        $response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
+            ->assertStatus(401);
+
+        $this->actingAs($User);
+
+        $response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
+            ->assertStatus(200);
+        $this->seeItemzz($response);
+        $response->assertJsonCount(1, 'Itemzz');
+        $response->assertJsonPath('Itemzz.0.Id', $item->Id);
+    }
+}
