@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Route;
+
+/*
+ * Apis for admins
+ */
+
+Route::prefix('/V1/ApiAdmin')->middleware(['admin', 'throttle:m111'])->group(function () {
+
+{{ text }}
+
+});

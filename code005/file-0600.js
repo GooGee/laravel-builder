@@ -12,14 +12,19 @@ function run(data) {
 
     /** @type {Map<number, LB.Column[]>} */
     const eiczzm = new Map()
-    ddd.db.tables.Column.filter(item => item.inTable).forEach((item) => {
-        let found = eiczzm.get(item.entityId)
-        if (found === undefined) {
-            found = []
-            eiczzm.set(item.entityId, found)
-        }
-        found.push(item)
-    })
+    ddd.db.tables.Column.filter(item => item.inTable)
+        .forEach((item) => {
+            if (item.hidden || item.wo) {
+                return
+            }
+
+            let found = eiczzm.get(item.entityId)
+            if (found === undefined) {
+                found = []
+                eiczzm.set(item.entityId, found)
+            }
+            found.push(item)
+        })
 
     /** @type {Map<number, LB.Wu[]>} */
     const eiwzzm = new Map()

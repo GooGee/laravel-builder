@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Route;
+
+/*
+ * Apis for accessing users own data
+ */
+
+Route::prefix('/V1/ApiUser')->middleware(['auth', 'throttle:m33'])->group(function () {
+
+{{ text }}
+
+});
