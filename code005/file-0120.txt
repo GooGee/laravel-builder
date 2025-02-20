@@ -9,7 +9,7 @@ class ReadManyRequest extends AbstractRequest
     /**
      * @return array<string, string[]>
      */
-    public static function getRuleMap(): array
+    public static function makeRuleMap(): array
     {
         return [
 

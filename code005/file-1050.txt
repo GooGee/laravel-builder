@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractRequest
 {
-    public static function getRuleMap(): array
+    public static function makeRuleMap(): array
     {
         /** @phpstan-ignore-next-line */
         return [

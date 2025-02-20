@@ -13,13 +13,13 @@ class ReadPageRequest extends AbstractRequest
      */
     public function rules(): array
     {
-        return static::getRuleMapForPage();
+        return static::makeRuleMapForPage();
     }
 
     /**
      * @return array<string, mixed[]>
      */
-    public static function getRuleMapForPage(): array
+    public static function makeRuleMapForPage(): array
     {
         $RuleMap = [
             'Page' => ['integer', 'min:1', 'max:1000'],
@@ -27,7 +27,7 @@ class ReadPageRequest extends AbstractRequest
             'SortField' => ['string'],
             'SortOrder' => ['string', Rule::in([ReadPageParameter::SortAsc, ReadPageParameter::SortDesc])],
         ];
-        foreach (static::getRuleMap() as $Key => $Item) {
+        foreach (static::makeRuleMap() as $Key => $Item) {
             $RuleMap['Filter.'.$Key] = $Item;
         }
 
@@ -37,7 +37,7 @@ class ReadPageRequest extends AbstractRequest
     /**
      * @return array<string, string[]>
      */
-    public static function getRuleMap(): array
+    public static function makeRuleMap(): array
     {
         return [
         ];

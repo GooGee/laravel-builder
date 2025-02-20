@@ -23,13 +23,13 @@ abstract class AbstractRequest extends FormRequest
      */
     public function rules(): array
     {
-        return static::getRuleMap();
+        return static::makeRuleMap();
     }
 
     /**
      * @return array<string, string[]>
      */
-    public static function getRuleMapForItemzz(bool $HasId = false): array
+    public static function makeRuleMapForItemzz(bool $HasId = false): array
     {
         $RuleMap = [
             'Itemzz' => ['array', 'max:100', 'required'],
@@ -37,7 +37,7 @@ abstract class AbstractRequest extends FormRequest
         if ($HasId) {
             $RuleMap['Itemzz.*.Id'] = ['integer', 'min:1', 'required'];
         }
-        foreach (static::getRuleMap() as $Key => $Item) {
+        foreach (static::makeRuleMap() as $Key => $Item) {
             $RuleMap["Itemzz.*.$Key"] = $Item;
         }
 
@@ -47,5 +47,5 @@ abstract class AbstractRequest extends FormRequest
     /**
      * @return array<string, string[]>
      */
-    abstract public static function getRuleMap(): array;
+    abstract public static function makeRuleMap(): array;
 }

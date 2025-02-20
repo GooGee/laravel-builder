@@ -13,6 +13,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {
     public function rules(): array
     {
-        return static::getRuleMapForItemzz();
+        return static::makeRuleMapForItemzz();
     }
 }
