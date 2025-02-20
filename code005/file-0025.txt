@@ -1,5 +1,7 @@
 <?php
 
+// Factory
+
 declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
