@@ -225,17 +225,6 @@ function makeHelper(data) {
 
         ddd.module = module
 
-        /** @type {Map<number, LB.PathMethod[]>} */
-        const pmzzm = new Map()
-        ddd.db.tables.PathMethod.forEach(item => {
-            let found = pmzzm.get(item.pathId)
-            if (found === undefined) {
-                found = []
-                pmzzm.set(item.pathId, found)
-            }
-            found.push(item)
-        })
-
         /** @type {Map<number, LB.ModuleAction>} */
         const mam = new Map()
         ddd.db.tables.ModuleAction.forEach(item => mam.set(item.id, item))
@@ -258,41 +247,35 @@ function makeHelper(data) {
                 } else {
                     return
                 }
-                const pmzz = pmzzm.get(path.id)
-                if (pmzz === undefined) {
+
+                const linezz = []
+                const ma = mam.get(path.moduleActionId)
+                if (ma === undefined) {
+                    return
+                }
+                if (ma.inRoute === false) {
                     return
                 }
 
-                const linezz = []
-                pmzz.forEach(function (pm) {
-                    const ma = mam.get(pm.moduleActionId)
-                    if (ma === undefined) {
-                        return
-                    }
-                    if (ma.inRoute === false) {
-                        return
-                    }
+                const file = ma.filezz.find(item => item.name.includes('Controller'))
+                if (file === undefined) {
+                    return
+                }
 
-                    const file = ma.filezz.find(item => item.name.includes('Controller'))
-                    if (file === undefined) {
-                        return
-                    }
+                const entity = sm.get(ma.entityId)
+                if (entity === undefined) {
+                    return
+                }
 
-                    const entity = sm.get(ma.entityId)
-                    if (entity === undefined) {
-                        return
-                    }
-
-                    const cn = ddd.tree.getClassFullName(file, entity, ma.name)
-                    let text = `    Route::${pm.method}('${path.name}', \\${cn}::class)`
-                    if (pm.middlewarezz.length) {
-                        text += `->middleware(['${pm.middlewarezz.join("', '")}'])`
-                    }
-                    if (ma.routeName) {
-                        text += `->name('${ma.routeName}')`
-                    }
-                    linezz.push(text + ';')
-                })
+                const cn = ddd.tree.getClassFullName(file, entity, ma.name)
+                let text = `    Route::${path.method}('${path.name}', \\${cn}::class)`
+                if (path.middlewarezz.length) {
+                    text += `->middleware(['${path.middlewarezz.join("', '")}'])`
+                }
+                if (ma.routeName) {
+                    text += `->name('${ma.routeName}')`
+                }
+                linezz.push(text + ';')
 
                 if (linezz.length) {
                     if (entityId !== path.entityId) {
@@ -317,25 +300,18 @@ function makeHelper(data) {
     }
 
     ddd.DirectoryIdEnum = {
-        AdminCreateMany: 100,
-        AdminCreateOne: 110,
-        AdminDeleteMany: 120,
-        AdminDeleteOne: 130,
-        AdminReadMany: 140,
-        AdminReadOne: 150,
-        AdminReadPage: 180,
-        AdminUpdateMany: 160,
-        AdminUpdateOne: 170,
-
-        CreateMany: 400,
-        CreateOne: 410,
-        DeleteMany: 420,
-        DeleteOne: 430,
-        ReadMany: 440,
-        ReadOne: 450,
-        ReadPage: 480,
-        UpdateMany: 460,
-        UpdateOne: 470,
+        CreateMany: 110,
+        CreateOne: 120,
+        DeleteMany: 130,
+        DeleteOne: 140,
+        ReadAll: 151,
+        ReadCurrent: 161,
+        ReadHome: 152,
+        ReadMany: 150,
+        ReadOne: 160,
+        ReadPage: 170,
+        UpdateMany: 180,
+        UpdateOne: 190,
     }
 
     /**
