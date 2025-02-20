@@ -42,24 +42,41 @@ class AbstractResponse
      */
     public static function makeData(
         int $Code = 200,
-        mixed $Data = null,
+        bool|float|int|null|string $Value = null,
         ?array $Item = null,
         array $Itemzz = [],
         string $Message = '',
         ?Paginator $Page = null,
+        mixed $Error = null
     ): array {
-        return compact('Code', 'Data', 'Item', 'Itemzz', 'Message', 'Page');
+        return compact('Code', 'Value', 'Error', 'Item', 'Itemzz', 'Message', 'Page');
     }
 
-    public static function sendData(mixed $Data, string $Message, int $Code = Response::HTTP_OK): JsonResponse
+    public static function sendValue(bool|float|int|null|string $Value, string $Message, int $Code = Response::HTTP_OK): JsonResponse
     {
         return new JsonResponse(
             static::makeData(
                 $Code,
-                $Data,
+                $Value,
                 null,
                 [],
                 $Message,
+            ),
+            $Code,
+        );
+    }
+
+    public static function sendError(mixed $Error, string $Message, int $Code = Response::HTTP_BAD_REQUEST): JsonResponse
+    {
+        return new JsonResponse(
+            static::makeData(
+                $Code,
+                null,
+                null,
+                [],
+                $Message,
+                null,
+                $Error,
             ),
             $Code,
         );
@@ -112,9 +129,9 @@ class AbstractResponse
         );
     }
 
-    public static function sendOK(mixed $Data = null): JsonResponse
+    public static function sendOK(bool|float|int|null|string $Value = null): JsonResponse
     {
-        return static::sendData($Data, self::MessageOk);
+        return static::sendValue($Value, self::MessageOk);
     }
 
     /**

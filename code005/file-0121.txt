@@ -22,7 +22,7 @@ class ReadPageRequest extends AbstractRequest
     public static function getRuleMapForPage(): array
     {
         $RuleMap = [
-            'Page' => ['integer', 'min:1'],
+            'Page' => ['integer', 'min:1', 'max:1000'],
             'PerPage' => ['integer', 'min:5', 'max:100'],
             'SortField' => ['string'],
             'SortOrder' => ['string', Rule::in([ReadPageParameter::SortAsc, ReadPageParameter::SortDesc])],
