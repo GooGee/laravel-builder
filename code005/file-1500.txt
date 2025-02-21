@@ -1,6 +1,6 @@
 <?php
 
-// ReadMany
+// ReadManyTest
 
 declare(strict_types=1);
 

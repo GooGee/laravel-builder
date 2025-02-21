@@ -1,6 +1,6 @@
 <?php
 
-// CreateMany
+// CreateManyTest
 
 declare(strict_types=1);
 

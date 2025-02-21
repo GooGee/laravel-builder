@@ -1,6 +1,6 @@
 <?php
 
-// DeleteOne
+// DeleteOneTest
 
 declare(strict_types=1);
 

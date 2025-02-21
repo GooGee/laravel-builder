@@ -1,6 +1,6 @@
 <?php
 
-// UpdateMany
+// UpdateManyTest
 
 declare(strict_types=1);
 
