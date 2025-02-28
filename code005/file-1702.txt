@@ -20,7 +20,14 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $page = {{ action + entity.name }}::run($User->Id, ReadPageParameter::from($Request->validated()));
+        $parameter = new ReadPageParameter(
+            $Request->validated('Filter'),
+            $Request->validated('Page'),
+            $Request->validated('PerPage'),
+            $Request->validated('SortField'),
+            $Request->validated('SortOrder'),
+        );
+        $page = $ReadPage->run($User->Id, $parameter);
         /* @phpstan-ignore-next-line */
         $page->load(['User']);
 
