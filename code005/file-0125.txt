@@ -27,8 +27,8 @@ class ReadPageParameter
         if ($this->Page < 1) {
             $this->Page = 1;
         }
-        if ($this->PerPage < 5) {
-            $this->PerPage = self::PageSize;
+        if ($this->PerPage < 1) {
+            $this->PerPage = 1;
         }
     }
 

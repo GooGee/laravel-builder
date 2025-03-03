@@ -85,13 +85,17 @@ function run(data) {
         if (item.type === "OneToOne") {
             return makeHasMany(item, fk, 'hasOne')
         }
-        return makeHasMany(item, fk)
+        if (item.addToModel) {
+            return makeHasMany(item, fk)
+        }
+        return ''
     })
 
     const pivotzz = relationzz.filter(item => item.type === 'OneToMany' && item.entity1Id !== ddd.entity.id)
     const siSet = new Set(pivotzz.map(item => item.entity1Id))
     // belongsToMany relation
-    const m2mzz = ddd.db.tables.Relation.filter((item) => siSet.has(item.entity1Id) && item.entity0Id !== ddd.entity.id)
+    const m2mzz = ddd.db.tables.Relation
+        .filter((item) => siSet.has(item.entity1Id) && item.entity0Id !== ddd.entity.id)
         .map(item => {
             const pivot = entitymap.get(item.entity1Id)
             const fk1 = columnmap.get(item.column1Id)
