@@ -17,32 +17,32 @@ class {{ helper.getClassName(file, entity, action) }}
         {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
-        $Item->UserId = $UserId;
+        $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+        $item->UserId = $UserId;
 
 {% for column in columnzz %}
-        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
+        $item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
-        return $Item;
+        return $item;
     }
 
-    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist = true): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $item, bool $ThrowIfExist = true): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         if ($ThrowIfExist) {
             $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
-                ->where('UserId', $Item->UserId)
+                ->where('UserId', $item->UserId)
                 ->exists();
             if ($exist) {
                 throw new DuplicatedException();
             }
         }
 
-        $Item->save();
-        $Item->refresh();
+        $item->save();
+        $item->refresh();
 
-        event(new {{ action + entity.name }}Event($Item));
+        event(new {{ action + entity.name }}Event($item));
 
-        return $Item;
+        return $item;
     }
 
 }

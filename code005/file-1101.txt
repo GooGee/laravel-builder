@@ -20,22 +20,22 @@ class {{ helper.getClassName(file, entity, action) }}
     {
         /** @var array<int, int> $Idzz */
         $Idzz = [];
-        /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
-        $Itemzz = [];
+        /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
+        $itemzz = [];
         foreach ($Mapzz as $Data) {
-            $Item = {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::make(
+            $item = {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::make(
                 $UserId,
 {% for column in columnzz %}
                 $Data['{{ column.name }}'],{% endfor %}
             );
-            {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::create($Item);
-            $Idzz[] = $Item->Id;
-            $Itemzz[] = $Item;
+            {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::create($item);
+            $Idzz[] = $item->Id;
+            $itemzz[] = $item;
         }
 
         event(new {{ action + entity.name }}Event($Idzz));
 
-        return $Itemzz;
+        return $itemzz;
     }
 
 }

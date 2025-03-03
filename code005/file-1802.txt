@@ -26,11 +26,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $Itemzz = {{ action + entity.name }}::run($User->Id, $Request->validated('Itemzz'));
+            $itemzz = {{ action + entity.name }}::run($User->Id, $Request->validated('Itemzz'));
 
             DB::commit();
 
-            return AbstractResponse::sendModelItemzz($Itemzz->all());
+            return AbstractResponse::sendModelItemzz($itemzz->all());
 
         } catch (\Throwable $Throwable) {
 

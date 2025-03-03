@@ -27,13 +27,13 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
+            $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
-            if ($User->Id !== $Item->UserId) {
+            if ($User->Id !== $item->UserId) {
                 throw new AccessDeniedHttpException();
             }
 
-            $Result = {{ action + entity.name }}::run($Item);
+            $Result = {{ action + entity.name }}::run($item);
 
             DB::commit();
 

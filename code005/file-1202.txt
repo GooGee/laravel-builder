@@ -24,7 +24,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         try {
 
-            $Item = {{ action + entity.name }}::make(
+            $item = {{ action + entity.name }}::make(
                 $User->Id,
     {% for column in columnzz %}
                 $Request->validated('{{ column.name }}'),{% endfor %}
@@ -32,11 +32,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            {{ action + entity.name }}::run($Item);
+            {{ action + entity.name }}::run($item);
 
             DB::commit();
 
-            return AbstractResponse::sendModelItem($Item);
+            return AbstractResponse::sendModelItem($item);
 
         } catch (\Throwable $Throwable) {
 

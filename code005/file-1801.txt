@@ -19,8 +19,8 @@ class {{ helper.getClassName(file, entity, action) }}
      */
     static function run(int $UserId, array $Mapzz): Collection
     {
-        /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
-        $Itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+        /** @var Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $itemzz */
+        $itemzz = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
             ->where('UserId', $UserId)
             ->whereIn('Id', array_column($Mapzz, 'Id'))
             ->get();
@@ -29,18 +29,18 @@ class {{ helper.getClassName(file, entity, action) }}
         foreach ($Mapzz as $mm) {
             $Map[$mm['Id']] = $mm;
         }
-        foreach ($Itemzz as $Item) {
-            $mm = $Map[$Item->Id];
+        foreach ($itemzz as $item) {
+            $mm = $Map[$item->Id];
             {{ helper.getClassName(helper.findFile('UpdateOneItem'), entity, 'UpdateOne') }}::run(
-                $Item,
+                $item,
 {% for column in columnzz %}
                 $mm['{{ column.name }}'],{% endfor %}
             );
         }
 
-        event(new {{ action + entity.name }}Event($Itemzz->pluck('Id')->toArray()));
+        event(new {{ action + entity.name }}Event($itemzz->pluck('Id')->toArray()));
 
-        return $Itemzz;
+        return $itemzz;
     }
 
 }
