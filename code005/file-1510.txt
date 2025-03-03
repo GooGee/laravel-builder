@@ -10,7 +10,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {
     protected static function getPath(): string
     {
-        return "{{ entity.name }}/{{ action }}";
+        return "{{ entity.name }}-{{ action }}";
     }
 
     public function test{{ action + entity.name }}()
