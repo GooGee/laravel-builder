@@ -26,6 +26,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $response = $this->getJson($this->makeUri())
             ->assertStatus(200);
-        $this->seeData($response);
+        $this->seeItemzz($response);
     }
 }

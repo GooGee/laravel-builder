@@ -16,35 +16,35 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $Old = $this->makeItem($User);
-        $Old->save();
+        $old = $this->makeItem($User);
+        $old->save();
         $item = $this->makeItem($User);
         $data = $item->toArray();
-        $response = $this->patchJson($this->makeUri($Old->Id), $data)
+        $response = $this->patchJson($this->makeUri($old->Id), $data)
             ->assertStatus(401);
 
         $OtherUser = $this->createUser();
         $this->actingAs($OtherUser);
-        $response = $this->patchJson($this->makeUri($Old->Id), $data)
+        $response = $this->patchJson($this->makeUri($old->Id), $data)
             ->assertStatus(403);
 
         $this->actingAs($User);
 
         $data = [];
-        $response = $this->patchJson($this->makeUri($Old->Id), $data)
+        $response = $this->patchJson($this->makeUri($old->Id), $data)
             ->assertStatus(422);
 {% for column in columnzz %}
-        $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);
-{% endfor %}
+        $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);{% endfor %}
+
         $data = $item->toArray();
-        $response = $this->patchJson($this->makeUri($Old->Id), $data)
+        $response = $this->patchJson($this->makeUri($old->Id), $data)
             ->assertStatus(200);
         $this->seeItem($response);
 {% for column in columnzz %}
         $response->assertJsonPath('Item.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
 
-        $Old->delete();
-        $response = $this->patchJson($this->makeUri($Old->Id), $data)
+        $old->delete();
+        $response = $this->patchJson($this->makeUri($old->Id), $data)
             ->assertStatus(404);
     }
 }

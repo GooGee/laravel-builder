@@ -135,6 +135,7 @@ function makeHelper(data) {
         const zz = ddd.getTypeFormatColumnzz(tf, [], ddd.db)
         zz.forEach(function (column) {
             column.constraintzz = getColumnConstraintzz(column)
+            column.phpType = makeColumnType(column)
         })
         return zz
     }

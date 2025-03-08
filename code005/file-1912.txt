@@ -27,7 +27,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query
+            $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
                 ->where("UserId", $User->Id)
                 ->first();
 
@@ -38,7 +38,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             $item = {{ action + entity.name }}::run(
                 $item,
     {% for column in columnzz %}
-                $Request->validated('{{ column.name }}'),{% endfor %}
+                $Request->{{ column.alias }},{% endfor %}
             );
 
             DB::commit();

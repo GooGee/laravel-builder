@@ -89,18 +89,6 @@ abstract class AbstractApiTestBase extends TestCase
         return $this;
     }
 
-    protected function seeData(TestResponse $Response): self
-    {
-        $Response->assertJsonStructure(
-            [
-                'Message',
-                'Data',
-            ]
-        );
-
-        return $this;
-    }
-
     protected function seeItem(TestResponse $Response): self
     {
         $Response->assertJsonStructure(
@@ -148,6 +136,18 @@ abstract class AbstractApiTestBase extends TestCase
             'Message',
             'Page' => $Page,
         ]);
+
+        return $this;
+    }
+
+    protected function seeValue(TestResponse $Response): self
+    {
+        $Response->assertJsonStructure(
+            [
+                'Message',
+                'Value',
+            ]
+        );
 
         return $this;
     }

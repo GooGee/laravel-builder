@@ -9,6 +9,11 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 use App\Base\AbstractRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ *{% for column in columnzz %}
+ * @property {{ column.phpType }} ${{ column.alias }}{% endfor %}
+ *
+ */
 class {{ helper.getClassName(file, entity, action) }} extends AbstractRequest
 {
     public static function makeRuleMap(): array
