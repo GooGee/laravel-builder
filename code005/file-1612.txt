@@ -19,10 +19,10 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query
+        $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query
             ->where("UserId", $User->Id)
             ->first();
 
-        return AbstractResponse::sendModelItem($item);
+        return AbstractResponse::sendModelItem($Item);
     }
 }

@@ -20,10 +20,10 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractA
      */
     public static function makeItem(User $User, array $Map = []): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        $item = {{ helper.getClassName(helper.findFile('Factory'), entity, action) }}::new()
+        $Item = {{ helper.getClassName(helper.findFile('Factory'), entity, action) }}::new()
             ->for($User, 'User')
             ->makeOne($Map);
-        return $item;
+        return $Item;
     }
 
     /**
@@ -31,9 +31,9 @@ abstract class {{ helper.getClassName(file, entity, action) }} extends AbstractA
      */
     protected function getMissingKeyzz(): array
     {
-        $item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
 
-        return $item->getHidden();
+        return $Item->getHidden();
     }
 
     /**

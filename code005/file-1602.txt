@@ -17,13 +17,13 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
     public function __invoke(int $Id): JsonResponse
     {
-        $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
+        $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        if ($item->UserId === $User->Id) {
-            return AbstractResponse::sendModelItem($item);
+        if ($Item->UserId === $User->Id) {
+            return AbstractResponse::sendModelItem($Item);
         }
         throw new AccessDeniedHttpException();
     }

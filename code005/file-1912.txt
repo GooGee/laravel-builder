@@ -27,23 +27,23 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
+            $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
                 ->where("UserId", $User->Id)
                 ->first();
 
-            if ($User->Id !== $item->UserId) {
+            if ($User->Id !== $Item->UserId) {
                 throw new AccessDeniedHttpException();
             }
 
-            $item = {{ action + entity.name }}::run(
-                $item,
+            $Item = {{ action + entity.name }}::run(
+                $Item,
     {% for column in columnzz %}
                 $Request->{{ column.alias }},{% endfor %}
             );
 
             DB::commit();
 
-            return AbstractResponse::sendModelItem($item);
+            return AbstractResponse::sendModelItem($Item);
 
         } catch (\Throwable $Throwable) {
 

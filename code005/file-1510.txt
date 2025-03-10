@@ -16,9 +16,9 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $item = $this->makeItem($User);
-        $item->save();
-        $data = $item->toArray();
+        $Item = $this->makeItem($User);
+        $Item->save();
+        $data = $Item->toArray();
         $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(401);
 
@@ -30,13 +30,13 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {% for column in columnzz %}
         $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);{% endfor %}
 
-        $data = $item->toArray();
+        $data = $Item->toArray();
         $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(200);
         $this->seeItemzz($response);
         $response->assertJsonCount(1, 'Itemzz');
         $response->assertJsonIsObject('Itemzz.0.User');
 {% for column in columnzz %}
-        $response->assertJsonPath('Itemzz.0.{{ column.alias }}', $item->{{ column.alias }});{% endfor %}
+        $response->assertJsonPath('Itemzz.0.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
     }
 }

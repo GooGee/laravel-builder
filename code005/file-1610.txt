@@ -16,8 +16,8 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $item = $this->makeItem($User);
-        $item->save();
+        $Item = $this->makeItem($User);
+        $Item->save();
 
         $response = $this->getJson($this->makeUri())
             ->assertStatus(401);

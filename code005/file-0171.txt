@@ -26,8 +26,8 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::register();
 
-        foreach (ApiEvent::EventMap as $key => $itemzz) {
-            $this->listen[$key] = $itemzz;
+        foreach (ApiEvent::EventMap as $key => $Itemzz) {
+            $this->listen[$key] = $Itemzz;
         }
     }
 

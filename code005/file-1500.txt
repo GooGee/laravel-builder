@@ -17,9 +17,9 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     {
         $User = $this->createUser();
 
-        $item = $this->makeItem($User);
-        $item->save();
-        $Idzz = [$item->Id];
+        $Item = $this->makeItem($User);
+        $Item->save();
+        $Idzz = [$Item->Id];
         $response = $this->getJsonWithData($this->makeUri(), compact('Idzz'))
             ->assertStatus(401);
 
@@ -29,6 +29,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(200);
         $this->seeItemzz($response);
         $response->assertJsonCount(1, 'Itemzz');
-        $response->assertJsonPath('Itemzz.0.Id', $item->Id);
+        $response->assertJsonPath('Itemzz.0.Id', $Item->Id);
     }
 }

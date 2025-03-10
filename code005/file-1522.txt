@@ -19,8 +19,8 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $itemzz = {{ action + entity.name }}::run($User->Id);
+        $Itemzz = {{ action + entity.name }}::run($User->Id);
 
-        return AbstractResponse::sendModelItemzz($itemzz);
+        return AbstractResponse::sendModelItemzz($Itemzz);
     }
 }

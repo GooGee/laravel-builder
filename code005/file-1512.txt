@@ -19,13 +19,13 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $itemzz = {{ action + entity.name }}::run(
+        $Itemzz = {{ action + entity.name }}::run(
             $User->Id,
 {% for column in columnzz %}
             $Request->{{ column.alias }},{% endfor %}
         );
-        $itemzz->load(['User']);
+        $Itemzz->load(['User']);
 
-        return AbstractResponse::sendModelItemzz($itemzz->all());
+        return AbstractResponse::sendModelItemzz($Itemzz->all());
     }
 }

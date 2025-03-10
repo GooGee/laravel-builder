@@ -16,23 +16,23 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}()
     {
         $User = $this->createUser();
-        $item = $this->makeItem($User);
-        $item->save();
-        $response = $this->deleteJson($this->makeUri($item->Id))
+        $Item = $this->makeItem($User);
+        $Item->save();
+        $response = $this->deleteJson($this->makeUri($Item->Id))
             ->assertStatus(401);
 
         $OtherUser = $this->createUser();
         $this->actingAs($OtherUser);
 
-        $response = $this->deleteJson($this->makeUri($item->Id))
+        $response = $this->deleteJson($this->makeUri($Item->Id))
             ->assertStatus(403);
 
         $this->actingAs($User);
 
-        $response = $this->deleteJson($this->makeUri($item->Id))
+        $response = $this->deleteJson($this->makeUri($Item->Id))
             ->assertStatus(200);
 
-        $response = $this->deleteJson($this->makeUri($item->Id))
+        $response = $this->deleteJson($this->makeUri($Item->Id))
             ->assertStatus(404);
     }
 }
