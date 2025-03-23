@@ -44,6 +44,76 @@ class ReadPageQueryBuilder
         return $this;
     }
 
+    public function addWhereIn(string $Key): self
+    {
+        $Valuezz = $this->ReadPageParameter->getWhereInValuezz($Key);
+        if (count($Valuezz) === 0) {
+            return $this;
+        }
+
+        $this->Qb->whereIn($Key, $Valuezz);
+
+        return $this;
+    }
+
+    /**
+     * @param  string[]  $Keyzz
+     */
+    public function addWhereInzz(array $Keyzz): self
+    {
+        foreach ($Keyzz as $Key) {
+            $this->addWhereIn($Key);
+        }
+
+        return $this;
+    }
+
+    public function addWhereNot(string $Key): self
+    {
+        $value = $this->ReadPageParameter->getWhereNotValue($Key);
+        if (isset($value)) {
+            $this->Qb->whereNot($Key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param  string[]  $Keyzz
+     */
+    public function addWhereNotzz(array $Keyzz): self
+    {
+        foreach ($Keyzz as $Key) {
+            $this->addWhereNot($Key);
+        }
+
+        return $this;
+    }
+
+    public function addWhereNotIn(string $Key): self
+    {
+        $Valuezz = $this->ReadPageParameter->getWhereNotInValuezz($Key);
+        if (count($Valuezz) === 0) {
+            return $this;
+        }
+
+        $this->Qb->whereNotIn($Key, $Valuezz);
+
+        return $this;
+    }
+
+    /**
+     * @param  string[]  $Keyzz
+     */
+    public function addWhereNotInzz(array $Keyzz): self
+    {
+        foreach ($Keyzz as $Key) {
+            $this->addWhereNotIn($Key);
+        }
+
+        return $this;
+    }
+
     /**
      * @return LengthAwarePaginator<Model>
      */

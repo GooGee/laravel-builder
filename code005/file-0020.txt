@@ -53,4 +53,9 @@ abstract class AbstractModel extends Model
      * @var string
      */
     protected $primaryKey = self::PrimaryKey;
+
+    static function getShortName(): string
+    {
+        return class_basename(static::class);
+    }
 }

@@ -32,7 +32,7 @@ class {{ helper.getClassName(file, entity, action) }}
                 ->where('UserId', $Item->UserId)
                 ->exists();
             if ($exist) {
-                throw new DuplicatedException();
+                throw new DuplicatedException({{ helper.getClassName(helper.findFile('Model'), entity, action) }}::getShortName());
             }
         }
 

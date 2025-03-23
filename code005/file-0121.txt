@@ -30,6 +30,15 @@ class ReadPageRequest extends AbstractRequest
         foreach (static::makeRuleMap() as $Key => $Item) {
             $RuleMap['Filter.'.$Key] = $Item;
         }
+        foreach (static::makeWhereInRuleMap() as $Key => $Item) {
+            $RuleMap['WhereIn.'.$Key] = $Item;
+        }
+        foreach (static::makeWhereNotRuleMap() as $Key => $Item) {
+            $RuleMap['WhereNot.'.$Key] = $Item;
+        }
+        foreach (static::makeWhereNotInRuleMap() as $Key => $Item) {
+            $RuleMap['WhereNotIn.'.$Key] = $Item;
+        }
 
         return $RuleMap;
     }
@@ -39,7 +48,30 @@ class ReadPageRequest extends AbstractRequest
      */
     public static function makeRuleMap(): array
     {
-        return [
-        ];
+        return [];
+    }
+
+    /**
+     * @return array<string, string[]>
+     */
+    public static function makeWhereInRuleMap(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<string, string[]>
+     */
+    public static function makeWhereNotRuleMap(): array
+    {
+        return [];
+    }
+
+    /**
+     * @return array<string, string[]>
+     */
+    public static function makeWhereNotInRuleMap(): array
+    {
+        return [];
     }
 }

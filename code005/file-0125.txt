@@ -16,6 +16,9 @@ class ReadPageParameter
 
     /**
      * @param  array<string, mixed>  $Filter
+     * @param  array<string, mixed>  $WhereNot
+     * @param  array<string, mixed>  $WhereIn
+     * @param  array<string, mixed>  $WhereNotIn
      */
     public function __construct(
         public array $Filter = [],
@@ -23,6 +26,9 @@ class ReadPageParameter
         public int $PerPage = self::PageSize,
         public string $SortField = AbstractModel::PrimaryKey,
         public string $SortOrder = self::SortDesc,
+        public array $WhereNot = [],
+        public array $WhereIn = [],
+        public array $WhereNotIn = [],
     ) {
         if ($this->Page < 1) {
             $this->Page = 1;
@@ -37,17 +43,41 @@ class ReadPageParameter
         return $this->Filter[$Key] ?? null;
     }
 
+    public function getWhereNotValue(string $Key): int|string|null
+    {
+        return $this->WhereNot[$Key] ?? null;
+    }
+
     /**
-     * @param  array<string, mixed>  $Data
+     * @return array<int, int|string>
      */
-    public static function from(array $Data): self
+    public function getWhereInValuezz(string $Key): array
+    {
+        return $this->WhereIn[$Key] ?? [];
+    }
+
+    /**
+     * @return array<int, int|string>
+     */
+    public function getWhereNotInValuezz(string $Key): array
+    {
+        return $this->WhereNotIn[$Key] ?? [];
+    }
+
+    /**
+     * @param  array<string, mixed>  $Map
+     */
+    public static function from(array $Map): self
     {
         return new ReadPageParameter(
-            $Data['Filter'] ?? [],
-            isset($Data['Page']) ? intval($Data['Page']) : 1,
-            isset($Data['PerPage']) ? intval($Data['PerPage']) : self::PageSize,
-            $Data['SortField'] ?? AbstractModel::PrimaryKey,
-            $Data['SortOrder'] ?? self::SortDesc,
+            $Map['Filter'] ?? [],
+            isset($Map['Page']) ? intval($Map['Page']) : 1,
+            isset($Map['PerPage']) ? intval($Map['PerPage']) : self::PageSize,
+            $Map['SortField'] ?? AbstractModel::PrimaryKey,
+            $Map['SortOrder'] ?? self::SortDesc,
+            $Map['WhereNot'] ?? [],
+            $Map['WhereIn'] ?? [],
+            $Map['WhereNotIn'] ?? [],
         );
     }
 
@@ -58,6 +88,9 @@ class ReadPageParameter
     {
         return [
             'Filter' => $this->Filter,
+            'WhereNot' => $this->WhereNot,
+            'WhereIn' => $this->WhereIn,
+            'WhereNotIn' => $this->WhereNotIn,
             'Page' => $this->Page,
             'PerPage' => $this->PerPage,
             'SortField' => $this->SortField,
