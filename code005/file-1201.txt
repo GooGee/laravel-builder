@@ -25,7 +25,7 @@ class {{ helper.getClassName(file, entity, action) }}
         return $Item;
     }
 
-    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist = true): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist = false): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         if ($ThrowIfExist) {
             $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()

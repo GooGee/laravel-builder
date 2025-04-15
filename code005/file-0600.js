@@ -72,6 +72,12 @@ function run(data) {
         }
         const tf = citfm.get(item.id)
         if (tf == null) {
+            if (item.type === 'array') {
+                return 'any[]'
+            }
+            if (item.type === 'json' || item.type === 'object') {
+                return 'Record<string, any>'
+            }
             return 'any'
         }
 

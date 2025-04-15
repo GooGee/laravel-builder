@@ -27,7 +27,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             $Item = {{ action + entity.name }}::make(
                 $User->Id,
     {% for column in columnzz %}
-                $Request->{{ column.alias }},{% endfor %}
+                {{ column.alias }}: $Request->{{ column.alias }},{% endfor %}
             );
 
             DB::beginTransaction();

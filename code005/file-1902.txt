@@ -36,7 +36,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             $Item = {{ action + entity.name }}::run(
                 $Item,
     {% for column in columnzz %}
-                $Request->{{ column.alias }},{% endfor %}
+                {{ column.alias }}: $Request->{{ column.alias }},{% endfor %}
             );
 
             DB::commit();
