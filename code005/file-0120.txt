@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Base;
 
+/**
+ * @property array<int, int> $Idzz
+ */
 class ReadManyRequest extends AbstractRequest
 {
     /**
@@ -17,13 +20,5 @@ class ReadManyRequest extends AbstractRequest
             'Idzz.*' => ['integer', 'min:1'],
 
         ];
-    }
-
-    /**
-     * @return array<int, int>
-     */
-    public function getValidatedIdzz(): array
-    {
-        return $this->validated('Idzz');
     }
 }

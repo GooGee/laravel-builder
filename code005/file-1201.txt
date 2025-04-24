@@ -11,6 +11,15 @@ use {{ dependency }};{% endfor %}
 
 class {{ helper.getClassName(file, entity, action) }}
 {
+    public static function copy(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Source): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        return self::make(
+            $UserId,
+{% for column in columnzz %}
+            {{ column.name }}: $Source->{{ column.name }},{% endfor %}
+        );
+    }
+
     static function make(
         int $UserId,
 {% for column in columnzz %}
@@ -25,7 +34,7 @@ class {{ helper.getClassName(file, entity, action) }}
         return $Item;
     }
 
-    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist = false): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         if ($ThrowIfExist) {
             $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()

@@ -6,6 +6,16 @@ namespace App\Base;
 
 use Illuminate\Validation\Rule;
 
+/**
+ * @property int $Page
+ * @property int $PerPage
+ * @property string $SortField
+ * @property string $SortOrder
+ * @property array<string, mixed> $Filter
+ * @property array<string, mixed> $WhereIn
+ * @property array<string, mixed> $WhereNot
+ * @property array<string, mixed> $WhereNotIn
+ */
 class ReadPageRequest extends AbstractRequest
 {
     /**
