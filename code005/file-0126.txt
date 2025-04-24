@@ -12,11 +12,11 @@ use Illuminate\Pagination\Paginator;
 class ReadPageQueryBuilder
 {
     /** @phpstan-ignore-next-line */
-    public function __construct(public Builder $Qb, public ReadPageParameter $ReadPageParameter) {}
+    public function __construct(public Builder $Qb, public PageParameter $PageParameter) {}
 
     public function addFilter(string $Key): self
     {
-        $value = $this->ReadPageParameter->getFilterValue($Key);
+        $value = $this->PageParameter->getFilterValue($Key);
         if (isset($value)) {
             $this->Qb->where($Key, $value);
         }
@@ -39,14 +39,14 @@ class ReadPageQueryBuilder
 
     public function addSort(): self
     {
-        $this->Qb->orderBy($this->ReadPageParameter->SortField, $this->ReadPageParameter->SortOrder);
+        $this->Qb->orderBy($this->PageParameter->SortField, $this->PageParameter->SortOrder);
 
         return $this;
     }
 
     public function addWhereIn(string $Key): self
     {
-        $Valuezz = $this->ReadPageParameter->getWhereInValuezz($Key);
+        $Valuezz = $this->PageParameter->getWhereInValuezz($Key);
         if (count($Valuezz) === 0) {
             return $this;
         }
@@ -70,7 +70,7 @@ class ReadPageQueryBuilder
 
     public function addWhereNot(string $Key): self
     {
-        $value = $this->ReadPageParameter->getWhereNotValue($Key);
+        $value = $this->PageParameter->getWhereNotValue($Key);
         if (isset($value)) {
             $this->Qb->whereNot($Key, $value);
         }
@@ -92,7 +92,7 @@ class ReadPageQueryBuilder
 
     public function addWhereNotIn(string $Key): self
     {
-        $Valuezz = $this->ReadPageParameter->getWhereNotInValuezz($Key);
+        $Valuezz = $this->PageParameter->getWhereNotInValuezz($Key);
         if (count($Valuezz) === 0) {
             return $this;
         }
@@ -120,10 +120,10 @@ class ReadPageQueryBuilder
     public function paginate(): LengthAwarePaginator
     {
         return $this->Qb->paginate(
-            $this->ReadPageParameter->PerPage,
+            $this->PageParameter->PerPage,
             ['*'],
             'Page',
-            $this->ReadPageParameter->Page,
+            $this->PageParameter->Page,
         );
     }
 
@@ -133,10 +133,10 @@ class ReadPageQueryBuilder
     public function paginateSimple(): Paginator
     {
         return $this->Qb->simplePaginate(
-            $this->ReadPageParameter->PerPage,
+            $this->PageParameter->PerPage,
             ['*'],
             'Page',
-            $this->ReadPageParameter->Page,
+            $this->PageParameter->Page,
         );
     }
 }

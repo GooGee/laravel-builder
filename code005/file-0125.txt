@@ -6,7 +6,7 @@ namespace App\Base;
 
 use App\Models\AbstractModel;
 
-class ReadPageParameter
+class PageParameter
 {
     const PageSize = 10;
 
@@ -69,7 +69,7 @@ class ReadPageParameter
      */
     public static function from(array $Map): self
     {
-        return new ReadPageParameter(
+        return new PageParameter(
             $Map['Filter'] ?? [],
             isset($Map['Page']) ? intval($Map['Page']) : 1,
             isset($Map['PerPage']) ? intval($Map['PerPage']) : self::PageSize,

@@ -8,7 +8,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
 use App\Base\AbstractResponse;
-use App\Base\ReadPageParameter;
+use App\Base\PageParameter;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
@@ -20,7 +20,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var \App\Models\User $User */
         $User = auth()->user();
 
-        $page = {{ action + entity.name }}::run($User->Id, ReadPageParameter::from($Request->validated()));
+        $page = {{ action + entity.name }}::run($User->Id, PageParameter::from($Request->validated()));
 
         return AbstractResponse::sendPage($page);
     }

@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
-use App\Base\ReadPageParameter;
+use App\Base\PageParameter;
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
 {
@@ -21,7 +21,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Item = $this->makeItem($User);
         $Item->save();
 
-        $data = (new ReadPageParameter())->toArray();
+        $data = (new PageParameter())->toArray();
         $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(401);
 
