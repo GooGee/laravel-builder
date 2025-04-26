@@ -6,6 +6,7 @@ namespace App\Exceptions;
 
 use App\Base\AbstractResponse;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Cache\LockTimeoutException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
@@ -69,12 +70,13 @@ class Handler extends ExceptionHandler
 
         $code = Response::HTTP_BAD_REQUEST;
         $error = null;
-        if ($e instanceof ValidationException) {
-            $code = $e->status;
-            $error = $e->errors();
-        }
+        $message = $e->getMessage();
         if ($e instanceof AuthenticationException) {
             $code = Response::HTTP_UNAUTHORIZED;
+        }
+        if ($e instanceof LockTimeoutException) {
+            $code = Response::HTTP_LOCKED;
+            $message = 'Just a second';
         }
         if ($e instanceof HttpException) {
             $code = $e->getStatusCode();
@@ -82,7 +84,11 @@ class Handler extends ExceptionHandler
         if ($e instanceof ModelNotFoundException) {
             $code = Response::HTTP_NOT_FOUND;
         }
+        if ($e instanceof ValidationException) {
+            $code = $e->status;
+            $error = $e->errors();
+        }
 
-        return AbstractResponse::sendError($error, $e->getMessage(), $code);
+        return AbstractResponse::sendError($error, $message, $code);
     }
 }

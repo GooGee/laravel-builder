@@ -12,40 +12,35 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 abstract class AbstractController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected bool $AutoReleaseLock = true;
+
     protected ?Lock $Lock = null;
+
+    protected int $SecondsForBlocking = 2;
+
+    protected int $SecondsForLocking = 5;
 
     public function __construct()
     {
         Log::info(static::class);
     }
 
-    public function acquireLock(int|string $UserId): Lock
+    public function acquireLock(int|string $UserId): ?Lock
     {
         $this->Lock = $this->makeLock($UserId);
-        if ($this->Lock->block(1)) {
-            return $this->Lock;
-        }
+        $this->Lock->block($this->SecondsForBlocking);
 
-        throw new BadRequestHttpException(
-            'Failed to acquire the lock: '.$this->makeLockKey($UserId),
-            null,
-            Response::HTTP_LOCKED,
-        );
+        return $this->Lock;
     }
 
     public function makeLock(int|string $UserId): Lock
     {
-        $Method = 'makeLock';
-        Log::info(static::class, compact('UserId', 'Method'));
-
-        return Cache::lock($this->makeLockKey($UserId), 33);
+        return Cache::lock($this->makeLockKey($UserId), $this->SecondsForLocking);
     }
 
     public function makeLockKey(int|string $UserId): string
@@ -56,18 +51,9 @@ abstract class AbstractController extends Controller
     public function releaseLock(): void
     {
         if ($this->Lock) {
-            if (App::runningUnitTests()) {
+            if (App::runningUnitTests() || $this->AutoReleaseLock) {
                 $this->Lock->release();
-
-                return;
             }
-
-            App::terminating(function () {
-                if ($this->Lock) {
-                    sleep(1);
-                    $this->Lock->release();
-                }
-            });
         }
     }
 }
