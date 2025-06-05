@@ -27,8 +27,8 @@ function run(data) {
     const cienm = new Map(relationzz.map(item => [item.column1Id, entityMap.get(item.entity0Id)]))
 
     ddd.db.tables.Column
-        .filter(item => item.entityId === ddd.entity.id && (item.inTable && item.type !== 'object') && item.ro === false)
-        .forEach(item => setConstraint(item))
+        .filter(item => item.entityId === ddd.entity.id && (item.inTable && item.type !== 'object'))
+        .forEach(setConstraint)
 
     /**
      *
@@ -36,6 +36,7 @@ function run(data) {
      */
     function setConstraint(column) {
         if (ddd.db.tables.ColumnConstraint.find(item => item.columnId === column.id)) {
+            // already exists
             return
         }
 
@@ -51,6 +52,11 @@ function run(data) {
 
         if (column.cast.includes('::')) {
             ColumnConstraintzz.push(makeConstraint('Rule::', column.id, `enum(${column.cast})`))
+            return
+        }
+
+        if (column.type === 'boolean') {
+            ColumnConstraintzz.push(makeConstraint('boolean', column.id))
             return
         }
 

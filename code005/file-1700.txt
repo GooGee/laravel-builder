@@ -31,16 +31,16 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
             ->assertStatus(422);
         $response->assertJsonValidationErrorFor('Filter.Status', self::ErrorFieldName);
 
-{% for column in columnzz %}
         $data['Filter'] = [
-            '{{ column.alias }}' => $Item->{{ column.alias }},
+{% for column in columnzz %}
+            '{{ column.alias }}' => $Item->{{ column.alias }},{% endfor %}
         ];
         $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(200);
         $this->seePage($response);
         $response->assertJsonCount(1, 'Page.data');
-        $response->assertJsonPath('Page.data.0.{{ column.alias }}', $Item->{{ column.alias }});
-{% endfor %}
+{% for column in columnzz %}
+        $response->assertJsonPath('Page.data.0.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
 
         $response = $this->getJsonWithData($this->makeUri(), $data)
             ->assertStatus(200);

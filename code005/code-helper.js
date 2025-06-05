@@ -122,7 +122,7 @@ function makeHelper(data) {
      *
      * @returns {LB.ColumnWithAlias[]}
      */
-    function getRequestColumnzz(requestId = ddd.ma.requestId) {
+    function getRequestColumnzz(requestId = ddd.ma.requestId, forRequestFile = false) {
         const request = ddd.db.tables.Request.find(item => item.id === requestId)
         if (request == null) {
             return []
@@ -135,7 +135,7 @@ function makeHelper(data) {
         const zz = ddd.getTypeFormatColumnzz(tf, [], ddd.db)
         zz.forEach(function (column) {
             column.constraintzz = getColumnConstraintzz(column)
-            column.phpType = makeColumnType(column)
+            column.phpType = makeColumnType(column, forRequestFile)
         })
         return zz
     }
@@ -163,15 +163,21 @@ function makeHelper(data) {
     /**
      * get PHP type of field in request
      * @param {LB.Column} column
+     * @param {boolean} forRequestFile
      * @returns {string}
      */
-    function makeColumnType(column) {
+    function makeColumnType(column, forRequestFile = false) {
         if (['array', 'object'].includes(column.cast)) {
             return 'array'
         }
+
         if (column.cast.includes('::')) {
+            if (forRequestFile) {
+                return 'string'
+            }
             return column.cast.split('::')[0]
         }
+
         const found = ddd.db.tables.DoctrineColumnType.find((item) => item.name === column.type)
         if (found) {
             if (column.nullable) {
