@@ -76,6 +76,8 @@ function run(data) {
     const przz = []
     const relationzz = ddd.db.tables.Relation
         .filter((item) => item.entity0Id === ddd.entity.id || item.entity1Id === ddd.entity.id)
+        .sort((aa, bb) => aa.name1.localeCompare(bb.name1))
+    ddd.relationzz = relationzz.filter(item => item.entity1Id === ddd.entity.id || item.type === "OneToOne" || item.addToModel)
 
     const textzz = relationzz.map((item) => {
         const fk = columnmap.get(item.column1Id)
@@ -110,8 +112,8 @@ function run(data) {
         return $this->belongsToMany(${entity2.name}::class, '${pivot.name}', '${fk0.name}', '${fk1.name}');
     }`
         })
-    // ddd.relationzz = textzz.concat(m2mzz)
-    ddd.relationzz = textzz
+    // ddd.textzz = textzz.concat(m2mzz)
+    ddd.textzz = textzz
     ddd.przz = przz
 
     /**
