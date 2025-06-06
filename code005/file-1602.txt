@@ -8,6 +8,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 use App\Base\AbstractController;
 use App\Base\AbstractResponse;
+use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
@@ -19,7 +20,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
     {
         $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
-        /** @var \App\Models\User $User */
+        /** @var User $User */
         $User = auth()->user();
 
         if ($Item->UserId === $User->Id) {
