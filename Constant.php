@@ -6,7 +6,7 @@ namespace GooGee\LaravelBuilder;
 
 class Constant
 {
-    const VERSION = '0.5.0';
+    const VERSION = '0.6.0';
 
     const NAME = 'LaravelBuilder';
     const NAME2 = 'laravel-builder';
