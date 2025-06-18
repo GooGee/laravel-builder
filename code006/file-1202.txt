@@ -32,7 +32,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            {{ action + entity.name }}::run($User->Id, $Item, true);
+            {{ helper.getClassName(helper.findFile('CreateOne'), entity, action) }}::run($User->Id, $Item, true);
 
             DB::commit();
 

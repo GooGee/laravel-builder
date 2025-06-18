@@ -23,12 +23,12 @@ class {{ helper.getClassName(file, entity, action) }}
         /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = [];
         foreach ($Mapzz as $Data) {
-            $Item = {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::make(
+            $Item = {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::make(
                 $UserId,
 {% for column in columnzz %}
                 $Data['{{ column.name }}'],{% endfor %}
             );
-            {{ helper.getClassName(helper.findFile('CreateOneItem'), entity, 'CreateOne') }}::create($Item);
+            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::create($Item);
             $Idzz[] = $Item->Id;
             $Itemzz[] = $Item;
         }
