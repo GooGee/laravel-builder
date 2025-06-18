@@ -12,14 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public static function copy({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Source): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
-    {
-        return self::make(
-{% for column in columnzz %}
-            {{ column.name }}: $Source->{{ column.name }},{% endfor %}
-        );
-    }
-
     static function make(
 {% for column in columnzz %}
         {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
