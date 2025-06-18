@@ -8,25 +8,23 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public static function copy(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Source): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    public static function copy({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Source): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         return self::make(
-            $UserId,
 {% for column in columnzz %}
             {{ column.name }}: $Source->{{ column.name }},{% endfor %}
         );
     }
 
     static function make(
-        int $UserId,
 {% for column in columnzz %}
         {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }} {
         $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
-        $Item->UserId = $UserId;
 
 {% for column in columnzz %}
         $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
@@ -34,8 +32,10 @@ class {{ helper.getClassName(file, entity, action) }}
         return $Item;
     }
 
-    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    static function run(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
+        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
+
         if ($ThrowIfExist) {
             $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
                 ->where('UserId', $Item->UserId)

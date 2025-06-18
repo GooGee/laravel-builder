@@ -38,18 +38,18 @@ class PageParameter
         }
     }
 
-    public function getFilterValue(string $Key): int|string|null
+    public function getFilterValue(string $Key): bool|int|string|null
     {
         return $this->Filter[$Key] ?? null;
     }
 
-    public function getWhereNotValue(string $Key): int|string|null
+    public function getWhereNotValue(string $Key): bool|int|string|null
     {
         return $this->WhereNot[$Key] ?? null;
     }
 
     /**
-     * @return array<int, int|string>
+     * @return array<int, bool|int|string>
      */
     public function getWhereInValuezz(string $Key): array
     {
@@ -57,7 +57,7 @@ class PageParameter
     }
 
     /**
-     * @return array<int, int|string>
+     * @return array<int, bool|int|string>
      */
     public function getWhereNotInValuezz(string $Key): array
     {

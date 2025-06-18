@@ -41,6 +41,14 @@ abstract class AbstractApiTestBase extends TestCase
         Storage::fake();
     }
 
+    protected function actingAsAdmin(): User
+    {
+        $User = User::findOrFail(User::AdminUserId);
+        $this->actingAs($User);
+
+        return $User;
+    }
+
     /**
      * @param  array<string, mixed>  $Map
      */
