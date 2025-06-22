@@ -1,0 +1,49 @@
+<?php
+
+// CloneOneTest
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
+{
+    protected static function getPath(): string
+    {
+        return "{{ entity.name }}-{{ action }}";
+    }
+
+    public function test{{ action + entity.name }}()
+    {
+        $User = $this->createUser();
+        $Item = $this->makeItem($User);
+        $Item->save();
+        $data = [];
+        $response = $this->postJson($this->makeUri($Item->Id), $data)
+            ->assertStatus(401);
+
+        $OtherUser = $this->createUser();
+        $this->actingAs($OtherUser);
+        $response = $this->postJson($this->makeUri($Item->Id), $data)
+            ->assertStatus(403);
+
+        $this->actingAs($User);
+
+        $response = $this->postJson($this->makeUri($Item->Id), $data)
+            ->assertStatus(422);
+{% for column in columnzz %}
+        $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);{% endfor %}
+
+        $data = $Item->toArray();
+        $response = $this->postJson($this->makeUri($Item->Id), $data)
+            ->assertStatus(200);
+        $this->seeItem($response);
+        self::assertNotSame($Item->Id, $response->json('Item.Id'));
+{% for column in columnzz %}
+        $response->assertJsonPath('Item.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
+
+        $Item->delete();
+        $response = $this->postJson($this->makeUri($Item->Id), $data)
+            ->assertStatus(404);
+    }
+}

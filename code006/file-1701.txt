@@ -18,11 +18,13 @@ class {{ helper.getClassName(file, entity, action) }}
     /**
      * @return Paginator<Model>
      */
-    static function run(int $UserId, PageParameter $PageParameter): Paginator
+    static function run(?int $UserId, PageParameter $PageParameter): Paginator
     {
         $qb = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query();
+        if ($UserId) {
+            $qb->where('UserId', $UserId);
+        }
         $qb->with(['User']);
-        $qb->where('UserId', $UserId);
 
         $builder = new ReadPageQueryBuilder($qb, $PageParameter);
 

@@ -34,11 +34,11 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
                 throw new AccessDeniedHttpException();
             }
 
-            $Result = {{ action + entity.name }}::run($Item);
+            $Result = {{ action + entity.name }}::run($User->Id, $Item);
 
             DB::commit();
 
-            return AbstractResponse::sendOK($Result);
+            return AbstractResponse::sendOK();
 
         } catch (\Throwable $Throwable) {
 

@@ -1,6 +1,6 @@
 <?php
 
-// UpdateOneItem
+// CloneOneItem
 
 declare(strict_types=1);
 
@@ -15,17 +15,16 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     static function run(
         int $UserId,
-        {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item,
+        {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Source,
 {% for column in columnzz %}
-        {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
+        {{ helper.makeColumnType(column) }} ${{ column.name }} = null,{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }} {
-        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
+        Log::info(self::class, ['UserId' => $UserId, 'Source' => $Source]);
+
+        $Item = $Source->replicate();
+
 {% for column in columnzz %}
-        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
-
-        $Item->save();
-
-        event(new {{ action + entity.name }}Event($Item));
+        isset(${{ column.name }}) && $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
         return $Item;
     }

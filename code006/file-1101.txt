@@ -28,7 +28,7 @@ class {{ helper.getClassName(file, entity, action) }}
 {% for column in columnzz %}
                 $Data['{{ column.name }}'],{% endfor %}
             );
-            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::create($Item);
+            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::create($UserId, $Item);
             $Idzz[] = $Item->Id;
             $Itemzz[] = $Item;
         }

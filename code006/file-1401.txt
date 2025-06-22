@@ -9,11 +9,14 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    static function run({{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    static function run(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
+        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
+
         $Item->delete();
 
         event(new {{ action + entity.name }}Event($Item));

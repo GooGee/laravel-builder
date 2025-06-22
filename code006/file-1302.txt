@@ -32,7 +32,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::commit();
 
-            return AbstractResponse::sendOK($result);
+            return AbstractResponse::sendOK();
 
         } catch (\Throwable $Throwable) {
 
