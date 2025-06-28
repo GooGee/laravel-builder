@@ -34,12 +34,12 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
                 throw new AccessDeniedHttpException();
             }
 
-            $Item = {{ action + entity.name }}::run(
-                $User->Id,
-                $Item,
+            $Item->setAll(
 {% for column in columnzz %}
-                {{ column.name }}: $Request->{{ column.alias }},{% endfor %}
+                {{ column.name }}: {{ helper.makeColumnEnumValueFromRequest(column) }},{% endfor %}
             );
+
+            {{ helper.getClassName(helper.findFile('UpdateOne'), entity, action) }}::run($User->Id, $Item);
 
             DB::commit();
 

@@ -132,9 +132,12 @@ function makeHelper(data) {
         if (tf == null) {
             return []
         }
+
         const zz = ddd.getTypeFormatColumnzz(tf, [], ddd.db)
         zz.forEach(function (column) {
-            column.constraintzz = getColumnConstraintzz(column)
+            if (forRequestFile) {
+                column.constraintzz = getColumnConstraintzz(column)
+            }
             column.phpType = makeColumnType(column, forRequestFile)
         })
         return zz
@@ -151,6 +154,7 @@ function makeHelper(data) {
         if (marzz.length === 0) {
             return []
         }
+
         const set = new Set(marzz.map(item => item.responseId))
         const response = ddd.db.tables.Response.find(item => set.has(item.id))
         if (response == null) {
@@ -161,21 +165,46 @@ function makeHelper(data) {
     }
 
     /**
+     * @param {LB.ColumnWithAlias} column
+     */
+    function makeColumnEnumValueFromRequest(column) {
+        const index = column.cast.indexOf('::')
+        if (index > 0) {
+            return column.cast.substring(0, index) + `from($Request->${column.alias})`
+        }
+        return '$Request->' + column.alias
+    }
+
+    /**
      * get PHP type of field in request
      * @param {LB.Column} column
      * @param {boolean} forRequestFile
      * @returns {string}
      */
     function makeColumnType(column, forRequestFile = false) {
-        if (['array', 'object'].includes(column.cast)) {
-            return 'array'
-        }
 
-        if (column.cast.includes('::')) {
-            if (forRequestFile) {
+        if (forRequestFile) {
+            if (column.type === 'array') {
+                return 'array<int, mixed>'
+            }
+            if (column.type === 'datetime') {
                 return 'string'
             }
-            return column.cast.split('::')[0]
+        }
+
+        if (column.cast) {
+            const found = getItemzzInCollection('ModelFieldTypeCast').find(item => item.name === column.cast)
+            if (found) {
+                return found.value
+            }
+
+            const index = column.cast.indexOf('::')
+            if (index > 0) {
+                if (forRequestFile) {
+                    return 'string'
+                }
+                return column.cast.substring(0, index)
+            }
         }
 
         const found = ddd.db.tables.DoctrineColumnType.find((item) => item.name === column.type)
@@ -330,6 +359,7 @@ function makeHelper(data) {
         findEntity,
         getClassName,
         getColumnzzAndReferencezz,
+        makeColumnEnumValueFromRequest,
         getItemzzInCollection,
         getParameterzz,
         getRequestColumnzz,

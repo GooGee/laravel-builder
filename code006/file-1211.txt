@@ -16,15 +16,10 @@ class {{ helper.getClassName(file, entity, action) }}
     static function run(
         int $UserId,
         {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Source,
-{% for column in columnzz %}
-        {{ helper.makeColumnType(column) }} ${{ column.name }} = null,{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }} {
         Log::info(self::class, ['UserId' => $UserId, 'Source' => $Source]);
 
         $Item = $Source->replicate();
-
-{% for column in columnzz %}
-        isset(${{ column.name }}) && $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
         return $Item;
     }

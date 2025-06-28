@@ -8,10 +8,16 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use App\Models\User;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    public function run(): void
+    public function run(User $User): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
+        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+
+        {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::run($User->Id, $Item, true);
+
+        return $Item;
     }
 }

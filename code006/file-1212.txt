@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke(int $Id, {{ action + entity.name }}Request $Request): JsonResponse
+    public function __invoke(int $Id): JsonResponse
     {
         /** @var User $User */
         $User = auth()->user();
@@ -28,20 +28,10 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $Item = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
+            $source = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::findOrFail($Id);
 
-            if ($User->Id !== $Item->UserId) {
-                throw new AccessDeniedHttpException();
-            }
-
-            $Item = {{ action + entity.name }}::run(
-                $User->Id,
-                $Item,
-{% for column in columnzz %}
-                {{ column.name }}: $Request->{{ column.alias }},{% endfor %}
-            );
-
-            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::run($UserId, $Item, true);
+            $Item = $source->replicate();
+            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::run($User->Id, $Item, false);
 
             DB::commit();
 

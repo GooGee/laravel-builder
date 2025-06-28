@@ -31,11 +31,9 @@ class {{ helper.getClassName(file, entity, action) }}
         }
         foreach ($Itemzz as $Item) {
             $mm = $Map[$Item->Id];
-            {{ helper.getClassName(helper.findFile('UpdateOne'), entity, 'UpdateOne') }}::run(
-                $Item,
 {% for column in columnzz %}
-                $mm['{{ column.name }}'],{% endfor %}
-            );
+            $Item->{{ column.name }} = $mm['{{ column.name }}'];{% endfor %}
+            {{ helper.getClassName(helper.findFile('UpdateOne'), entity, 'UpdateOne') }}::run($UserId, $Item);
         }
 
         event(new {{ action + entity.name }}Event($Itemzz->pluck('Id')->toArray()));

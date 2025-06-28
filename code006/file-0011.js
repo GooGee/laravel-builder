@@ -4,17 +4,13 @@ function run(data) {
     /** @type {LB.DataForScript} */
     const ddd = data
 
+    const nameset = new Set(['Id', 'CreatedAt', 'UpdatedAt', 'DeletedAt']);
+
     const columnzz = ddd.db.tables.Column.filter((item) => item.entityId === ddd.entity.id && item.inTable)
     ddd.columnzz = columnzz
 
-    const castzz = ddd.helper.getItemzzInCollection('ModelFieldTypeCast')
-
-    ddd.propertyzz = columnzz.map(function (item) {
-        let type = getFieldType(item)
-        if (item.nullable) {
-            type += '|null'
-        }
-        return type + ' $' + item.name
+    ddd.setableColumnzz = columnzz.filter(function (item) {
+        return nameset.has(item.name) === false
     })
 
     /** @type {Map<string, string>} */
@@ -34,36 +30,6 @@ function run(data) {
         }
     })
     ddd.castzz = Array.from(castMap)
-
-    /**
-     * get PHP type of field
-     * @param {LB.Column} column
-     * @returns {string}
-     */
-    function getFieldType(column) {
-        if (column.type === 'datetime') {
-            return '\\Illuminate\\Support\\Carbon'
-        }
-
-        if (column.cast) {
-            const found = castzz.find(item => item.name === column.cast)
-            if (found) {
-                return found.value
-            }
-
-            const index = column.cast.indexOf('::')
-            if (index > 0) {
-                return column.cast.substring(0, index)
-            }
-        }
-
-        const found = ddd.db.tables.DoctrineColumnType.find(item => item.name === column.type)
-        if (found) {
-            return found.phpType
-        }
-
-        return 'mixed'
-    }
 
     /** @type {Map<number, LB.Entity>} */
     const entitymap = new Map()

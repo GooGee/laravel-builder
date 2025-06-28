@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * should not be modified manually.
  * please make modifications in child class.
  *
- *{% for property in propertyzz %}
- * @property {{ property }}{% endfor %}
+ *{% for column in columnzz %}
+ * @property {{ helper.makeColumnType(column) }} ${{column.name}}{% endfor %}
  *{% for property in przz %}
  * @property {{ property }}{% endfor %}
  */
@@ -64,6 +64,15 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
 {% for key in columnzz | rejectattr('hidden') | rejectattr('wo') %}
             '{{ key.name }}',{% endfor %}
         ];
+    }
+
+    public function setAll(
+{% for column in setableColumnzz %}
+        {{ helper.makeColumnType(column) }} ${{column.name}},{% endfor %}
+    ): void
+    {
+{% for column in setableColumnzz %}
+        $this->{{ column.name }} = ${{ column.name }};{% endfor %}
     }
 
 {% for text in textzz %}

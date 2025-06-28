@@ -12,18 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class {{ helper.getClassName(file, entity, action) }}
 {
-    static function make(
-{% for column in columnzz %}
-        {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
-    ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }} {
-        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
-
-{% for column in columnzz %}
-        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
-
-        return $Item;
-    }
-
     static function run(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
         Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);

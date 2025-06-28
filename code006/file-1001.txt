@@ -36,17 +36,10 @@ abstract class AbstractApiTestBase extends TestCase
         parent::setUp();
 
         $this->withoutMiddleware([ThrottleRequests::class]);
+
         Notification::fake();
         Queue::fake();
         Storage::fake();
-    }
-
-    protected function actingAsAdmin(): User
-    {
-        $User = User::findOrFail(User::AdminUserId);
-        $this->actingAs($User);
-
-        return $User;
     }
 
     /**
@@ -136,7 +129,7 @@ abstract class AbstractApiTestBase extends TestCase
             $Page[] = 'total';
         }
         if ($Empty) {
-            $Response->assertJsonPath('data.data', []);
+            $Response->assertJsonPath('data', []);
         } else {
             $Page['data'] = ['*' => static::getStructure()];
         }

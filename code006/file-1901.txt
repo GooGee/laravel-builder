@@ -16,12 +16,8 @@ class {{ helper.getClassName(file, entity, action) }}
     static function run(
         int $UserId,
         {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item,
-{% for column in columnzz %}
-        {{ helper.makeColumnType(column) }} ${{ column.name }},{% endfor %}
     ): {{ helper.getClassName(helper.findFile('Model'), entity, action) }} {
         Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
-{% for column in columnzz %}
-        $Item->{{ column.name }} = ${{ column.name }};{% endfor %}
 
         $Item->save();
 

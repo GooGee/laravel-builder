@@ -20,8 +20,8 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         /** @var User $User */
         $User = auth()->user();
 
-        $Itemzz = {{ action + entity.name }}::run($User->Id);
+        $item = ReadHomeQuest::run($User->Id);
 
-        return AbstractResponse::sendModelItemzz($Itemzz);
+        return AbstractResponse::sendItem($item);
     }
 }

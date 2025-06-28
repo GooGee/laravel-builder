@@ -30,7 +30,7 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $builder->addFilterzz([
 {% for column in columnzz %}
-            '{{ column.alias }}',{% endfor %}
+            '{{ column.name }}',{% endfor %}
         ]);
 
         $builder->addSort();
