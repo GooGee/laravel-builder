@@ -12,6 +12,7 @@ use App\Models\User;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -36,7 +37,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             $Item->setAll(
 {% for column in columnzz %}
-                {{ column.name }}: {{ helper.makeColumnEnumValueFromRequest(column) }},{% endfor %}
+                {{ column.name }}: {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
             );
 
             {{ helper.getClassName(helper.findFile('UpdateOne'), entity, action) }}::run($User->Id, $Item);

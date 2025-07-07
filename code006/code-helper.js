@@ -167,11 +167,16 @@ function makeHelper(data) {
     /**
      * @param {LB.ColumnWithAlias} column
      */
-    function makeColumnEnumValueFromRequest(column) {
+    function makeColumnValueFromRequest(column) {
         const index = column.cast.indexOf('::')
         if (index > 0) {
-            return column.cast.substring(0, index) + `from($Request->${column.alias})`
+            return column.cast.substring(0, index) + `::from($Request->${column.alias})`
         }
+
+        if (column.type === 'datetime' || column.type === 'date') {
+            return `Carbon::parse($Request->${column.alias})`
+        }
+
         return '$Request->' + column.alias
     }
 
@@ -201,7 +206,7 @@ function makeHelper(data) {
             const index = column.cast.indexOf('::')
             if (index > 0) {
                 if (forRequestFile) {
-                    return 'string'
+                    return 'int|string'
                 }
                 return column.cast.substring(0, index)
             }
@@ -359,7 +364,7 @@ function makeHelper(data) {
         findEntity,
         getClassName,
         getColumnzzAndReferencezz,
-        makeColumnEnumValueFromRequest,
+        makeColumnValueFromRequest,
         getItemzzInCollection,
         getParameterzz,
         getRequestColumnzz,

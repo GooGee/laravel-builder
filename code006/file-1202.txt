@@ -28,7 +28,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
             $Item->setAll(
 {% for column in columnzz %}
-                {{ column.name }}: {{ helper.makeColumnEnumValueFromRequest(column) }},{% endfor %}
+                {{ column.name }}: {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
             );
 
             DB::beginTransaction();
