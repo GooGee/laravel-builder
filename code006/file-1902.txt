@@ -36,7 +36,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             }
 
             $Item->setAll(
-{% for column in columnzz %}
+{% for column in columnzz | selectattr('fillable') %}
                 {{ column.name }}: {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
             );
 
