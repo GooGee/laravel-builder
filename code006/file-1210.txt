@@ -13,13 +13,12 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         return "{{ entity.name }}-{{ action }}";
     }
 
-    public function test{{ action + entity.name }}()
+    public function test{{ action + entity.name }}(): void
     {
         $User = $this->createUser();
         $Item = $this->makeItem($User);
         $Item->save();
-        $data = [];
-        $response = $this->postJson($this->makeUri($Item->Id), $data)
+        $response = $this->postJson($this->makeUri($Item->Id), [])
             ->assertStatus(401);
 
         $OtherUser = $this->createUser();

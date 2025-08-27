@@ -71,7 +71,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
         {{ helper.makeColumnType(column) }} ${{column.name}},{% endfor %}
     ): void
     {
-{% for column in setableColumnzz %}
+{% for column in setableColumnzz | selectattr('fillable') %}
         $this->{{ column.name }} = ${{ column.name }};{% endfor %}
     }
 

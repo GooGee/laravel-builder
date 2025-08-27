@@ -13,7 +13,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         return "{{ entity.name }}-{{ action }}";
     }
 
-    public function test{{ action + entity.name }}()
+    public function test{{ action + entity.name }}(): void
     {
         $User = $this->createUser();
         $old = $this->makeItem($User);
@@ -30,8 +30,7 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $this->actingAs($User);
 
-        $data = [];
-        $response = $this->patchJson($this->makeUri($old->Id), $data)
+        $response = $this->patchJson($this->makeUri($old->Id), [])
             ->assertStatus(422);
 {% for column in columnzz %}
         $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);{% endfor %}

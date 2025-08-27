@@ -200,6 +200,9 @@ function makeHelper(data) {
         if (column.cast) {
             const found = getItemzzInCollection('ModelFieldTypeCast').find(item => item.name === column.cast)
             if (found) {
+                if (column.nullable) {
+                    return '?' + found.value
+                }
                 return found.value
             }
 
@@ -294,9 +297,6 @@ function makeHelper(data) {
                 if (ma == null) {
                     return
                 }
-                if (ma.inRoute === false) {
-                    return
-                }
 
                 const file = ma.filezz.find(item => item.name.includes('Controller'))
                 if (file == null) {
@@ -305,6 +305,9 @@ function makeHelper(data) {
 
                 const entity = sm.get(ma.entityId)
                 if (entity == null) {
+                    return
+                }
+                if (entity.id === 1) {
                     return
                 }
 

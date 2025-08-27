@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\DB;
  */
 return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
 <up>
     }
 
-    public function down()
+    public function down(): void
     {
 <down>
     }

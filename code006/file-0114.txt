@@ -22,7 +22,7 @@ class AbstractResponse
     }
 
     /**
-     * @param  Model[]  $Itemzz
+     * @param Model[] $Itemzz
      * @return array<int, array<string, mixed>>
      */
     public static function getDatazz(array $Itemzz): array
@@ -32,18 +32,26 @@ class AbstractResponse
         }, $Itemzz);
     }
 
-    public static function sendValue(bool|float|int|null|string $Value, string $Message, int $Code = Response::HTTP_OK): JsonResponse
+    /**
+     * @template T of Model
+     *
+     * @param array<string, mixed>|null $Item
+     * @param array<int, array<string, mixed>> $Itemzz
+     * @param  ?Paginator<T> $Page
+     * @return array<string, mixed>
+     */
+    public static function makeData(
+        int                 $Code = 200,
+        bool|float|int|null $Value = null,
+        ?array              $Item = null,
+        array               $Itemzz = [],
+        string              $Message = '',
+        ?Paginator          $Page = null,
+        mixed               $Error = null,
+        string              $Text = '',
+    ): array
     {
-        return new JsonResponse(
-            static::makeData(
-                $Code,
-                $Value,
-                null,
-                [],
-                $Message,
-            ),
-            $Code,
-        );
+        return compact('Code', 'Value', 'Error', 'Item', 'Itemzz', 'Message', 'Page', 'Text');
     }
 
     public static function sendError(mixed $Error, string $Message, int $Code = Response::HTTP_BAD_REQUEST): JsonResponse
@@ -68,7 +76,7 @@ class AbstractResponse
     }
 
     /**
-     * @param  array<string, mixed>  $Item
+     * @param array<string, mixed> $Item
      */
     public static function sendItem(array $Item, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
@@ -85,7 +93,7 @@ class AbstractResponse
     }
 
     /**
-     * @param  Model[]  $Itemzz
+     * @param Model[] $Itemzz
      */
     public static function sendModelItemzz(array $Itemzz, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
@@ -93,7 +101,7 @@ class AbstractResponse
     }
 
     /**
-     * @param  array<int, array<string, mixed>>  $Itemzz
+     * @param array<int, array<string, mixed>> $Itemzz
      */
     public static function sendItemzz(array $Itemzz, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
@@ -109,7 +117,7 @@ class AbstractResponse
         );
     }
 
-    public static function sendOK(bool|float|int|null|string $Value = null): JsonResponse
+    public static function sendOK(bool|float|int|null $Value = null): JsonResponse
     {
         return static::sendValue($Value, self::MessageOk);
     }
@@ -117,7 +125,7 @@ class AbstractResponse
     /**
      * @template T of Model
      *
-     * @param  Paginator<T>  $Paginator
+     * @param Paginator<T> $Paginator
      */
     public static function sendPage(Paginator $Paginator, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
@@ -134,23 +142,34 @@ class AbstractResponse
         );
     }
 
-    /**
-     * @template T of Model
-     *
-     * @param  array<string, mixed>|null  $Item
-     * @param  array<int, array<string, mixed>>  $Itemzz
-     * @param  ?Paginator<T>  $Page
-     * @return array<string, mixed>
-     */
-    public static function makeData(
-        int $Code = 200,
-        bool|float|int|null|string $Value = null,
-        ?array $Item = null,
-        array $Itemzz = [],
-        string $Message = '',
-        ?Paginator $Page = null,
-        mixed $Error = null
-    ): array {
-        return compact('Code', 'Value', 'Error', 'Item', 'Itemzz', 'Message', 'Page');
+    static function sendText(string $Text, string $Message, int $Code = Response::HTTP_OK): JsonResponse
+    {
+        return new JsonResponse(
+            static::makeData(
+                $Code,
+                null,
+                null,
+                [],
+                $Message,
+                null,
+                null,
+                $Text,
+            ),
+            $Code,
+        );
+    }
+
+    public static function sendValue(bool|float|int|null $Value, string $Message, int $Code = Response::HTTP_OK): JsonResponse
+    {
+        return new JsonResponse(
+            static::makeData(
+                $Code,
+                $Value,
+                null,
+                [],
+                $Message,
+            ),
+            $Code,
+        );
     }
 }

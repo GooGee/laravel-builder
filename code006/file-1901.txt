@@ -21,8 +21,6 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $Item->save();
 
-        event(new {{ action + entity.name }}Event($Item));
-
         return $Item;
     }
 

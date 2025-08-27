@@ -24,7 +24,9 @@ class {{ helper.getClassName(file, entity, action) }}
         if ($UserId) {
             $qb->where('UserId', $UserId);
         }
-        $qb->with(['User']);
+        $qb->with([
+            {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::Relation_User,
+        ]);
 
         $builder = new ReadPageQueryBuilder($qb, $PageParameter);
 

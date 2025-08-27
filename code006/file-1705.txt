@@ -10,10 +10,6 @@ use App\Base\ReadPageRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * @property int $Page
- * @property int $PerPage
- * @property string $SortField
- * @property string $SortOrder
  *
  * @property array<string, mixed> $Filter {
  *{% for column in columnzz %}

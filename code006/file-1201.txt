@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
+use App\Exceptions\DuplicatedException;
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Support\Facades\Log;
@@ -27,8 +28,6 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $Item->save();
         $Item->refresh();
-
-        event(new {{ action + entity.name }}Event($Item));
 
         return $Item;
     }

@@ -15,7 +15,7 @@ class {{ helper.getClassName(file, entity, action) }}
     /**
      * @return Collection<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    public function run(
+    static function run(
         int $UserId,
 {% for column in columnzz %}
         {{ column.phpType }} ${{ column.name }},{% endfor %}

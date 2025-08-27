@@ -1,10 +1,12 @@
 <?php
 
-// CreateOneTest
+// UploadOneTest
 
 declare(strict_types=1);
 
 namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use Illuminate\Http\UploadedFile;
 
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('AbstractItemTestBase'), entity, action) }}
 {
@@ -16,8 +18,9 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
     public function test{{ action + entity.name }}(): void
     {
         $User = $this->createUser();
-        $Item = $this->makeItem($User);
-        $data = $Item->toArray();
+        $data = [
+            'FilePhoto' => UploadedFile::fake()->image('photo.webp', 640, 360),
+        ];
         $response = $this->postJson($this->makeUri(0), $data)
             ->assertStatus(401);
 
@@ -25,18 +28,15 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 
         $response = $this->postJson($this->makeUri(0), [])
             ->assertStatus(422);
-{% for column in columnzz %}
-        $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);{% endfor %}
+        $response->assertJsonValidationErrorFor('File', self::ErrorFieldName);
 
-        $data = $Item->toArray();
         $response = $this->postJson($this->makeUri(0), $data)
             ->assertStatus(200);
         $this->seeItem($response);
-{% for column in columnzz %}
-        $response->assertJsonPath('Item.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}
+        $response->assertJsonPath('Item.Width', 640);
+        $response->assertJsonPath('Item.Height', 360);
 
         $response = $this->postJson($this->makeUri(0), $data)
             ->assertStatus(400);
-        $response->assertSeeText('duplicated');
     }
 }

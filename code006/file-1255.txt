@@ -1,0 +1,30 @@
+<?php
+
+// UploadOneRequest
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+use App\Base\AbstractRequest;
+use Illuminate\Http\UploadedFile;
+
+/**
+ * @property UploadedFile $File
+ */
+class {{ helper.getClassName(file, entity, action) }} extends AbstractRequest
+{
+    public static function makeRuleMap(): array
+    {
+        return [
+
+            'File' => [
+                'required',
+                'file',
+                'min:1',
+                'max:1222',
+            ],
+
+        ];
+    }
+}

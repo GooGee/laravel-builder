@@ -1,6 +1,6 @@
 <?php
 
-// CreateOneItemController
+// UploadOneItemController
 
 declare(strict_types=1);
 
@@ -25,16 +25,9 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
         try {
 
-            $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
-            $Item->UserId = $User->Id;
-            $Item->setAll(
-{% for column in columnzz | selectattr('fillable') %}
-                {{ column.name }}: {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
-            );
-
             DB::beginTransaction();
 
-            {{ helper.getClassName(helper.findFile('CreateOne'), entity, action) }}::run($User->Id, $Item, true);
+            $Item = {{ helper.getClassName(helper.findFile('UploadOne'), entity, action) }}::run($User->Id, $Request->File);
 
             DB::commit();
 
@@ -45,7 +38,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
             DB::rollBack();
 
             throw $Throwable;
-
         } finally {
             $this->releaseLock();
         }

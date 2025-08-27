@@ -1,0 +1,29 @@
+<?php
+
+// UploadOneItem
+
+declare(strict_types=1);
+
+namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
+
+{% for dependency in dependencyzz %}
+use {{ dependency }};{% endfor %}
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
+class {{ helper.getClassName(file, entity, action) }}
+{
+    static function run(int $UserId, UploadedFile $File): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
+    {
+        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
+
+        $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
+        $Item->UserId = $User->Id;
+
+        {{ helper.getClassName(helper.findFile('CreateOne'), entity, action) }}::run($User->Id, $Item, true);
+
+        return $Item;
+    }
+
+}
