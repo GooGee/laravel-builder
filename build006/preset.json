@@ -176,6 +176,27 @@
 				},
 				{
 					"collectionId": 5,
+					"name": "EntityType",
+					"value": "",
+					"tag": "string",
+					"id": 524
+				},
+				{
+					"collectionId": 5,
+					"name": "EntityId",
+					"value": "",
+					"tag": "integer",
+					"id": 525
+				},
+				{
+					"collectionId": 5,
+					"name": "Entity",
+					"value": "",
+					"tag": "object",
+					"id": 527
+				},
+				{
+					"collectionId": 5,
 					"name": "Image",
 					"value": "",
 					"tag": "string",
@@ -1251,6 +1272,13 @@
 					"value": "",
 					"tag": "",
 					"id": 414
+				},
+				{
+					"collectionId": 15,
+					"name": "application/octet-stream",
+					"value": "",
+					"tag": "",
+					"id": 528
 				},
 				{
 					"collectionId": 15,
@@ -2595,20 +2623,6 @@
 					"value": "",
 					"tag": "Content",
 					"id": 521
-				},
-				{
-					"collectionId": 5,
-					"name": "EntityType",
-					"value": "",
-					"tag": "string",
-					"id": 524
-				},
-				{
-					"collectionId": 5,
-					"name": "EntityId",
-					"value": "",
-					"tag": "integer",
-					"id": 525
 				}
 			],
 			"Directory": [
@@ -4117,6 +4131,83 @@
 					"nameSpacePattern": "",
 					"fileNamePattern": "${action + entity.name}Test.php",
 					"id": 1920
+				},
+				{
+					"name": "UploadOneItemTest",
+					"color": "#f80",
+					"layer": "Test",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}Test.php",
+					"id": 1250,
+					"description": "",
+					"directoryId": 1001,
+					"isSingle": false
+				},
+				{
+					"directoryId": 802,
+					"name": "UploadOne",
+					"color": "#f80",
+					"isSingle": false,
+					"layer": "Action",
+					"description": "",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}.php",
+					"id": 1251
+				},
+				{
+					"directoryId": 102,
+					"name": "UploadOneItemRequest",
+					"color": "#f80",
+					"layer": "Request",
+					"description": "",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}Request.php",
+					"id": 1255,
+					"isSingle": false
+				},
+				{
+					"directoryId": 102,
+					"name": "UploadOneItemController",
+					"color": "#f80",
+					"isSingle": false,
+					"layer": "Controller",
+					"description": "",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}Controller.php",
+					"id": 1252
+				},
+				{
+					"name": "DownloadOneItemTest",
+					"color": "#00f",
+					"layer": "Test",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}Test.php",
+					"id": 1650,
+					"description": "",
+					"directoryId": 1001,
+					"isSingle": false
+				},
+				{
+					"directoryId": 802,
+					"name": "DownloadOne",
+					"color": "#00f",
+					"isSingle": false,
+					"layer": "Action",
+					"description": "",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}.php",
+					"id": 1651
+				},
+				{
+					"directoryId": 102,
+					"name": "DownloadOneItemController",
+					"color": "#00f",
+					"isSingle": false,
+					"layer": "Controller",
+					"description": "",
+					"nameSpacePattern": "",
+					"fileNamePattern": "${action + entity.name}Controller.php",
+					"id": 1652
 				}
 			],
 			"Entity": [
@@ -4234,7 +4325,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 1,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4250,7 +4341,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 2,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4261,7 +4352,7 @@
 				{
 					"isArray": false,
 					"nullable": true,
-					"type": "any",
+					"type": "number",
 					"format": "",
 					"ownerId": null,
 					"variableId": 1,
@@ -4282,7 +4373,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 3,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 4,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4330,7 +4421,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 7,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 7,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4363,7 +4454,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 8,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4395,7 +4486,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 10,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4411,7 +4502,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 11,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4427,7 +4518,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 12,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4443,7 +4534,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 13,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4459,7 +4550,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 14,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4475,7 +4566,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 15,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4491,7 +4582,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 16,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4507,7 +4598,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 17,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4523,7 +4614,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 18,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4539,7 +4630,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 19,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4555,7 +4646,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 20,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4571,7 +4662,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 21,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4587,7 +4678,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 22,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4603,7 +4694,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 23,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4619,7 +4710,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 24,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4635,7 +4726,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 25,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4651,7 +4742,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 26,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4667,7 +4758,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 27,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4683,7 +4774,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 28,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4699,7 +4790,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 29,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4715,7 +4806,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 32,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4731,7 +4822,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 34,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4747,7 +4838,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 35,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4763,7 +4854,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 36,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4779,7 +4870,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 37,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4795,7 +4886,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": 38,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4811,7 +4902,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": 1,
 					"ownerResponseId": null,
@@ -4827,7 +4918,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": 1,
@@ -4843,7 +4934,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 2,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": 2,
@@ -4854,29 +4945,12 @@
 				{
 					"isArray": false,
 					"nullable": false,
-					"type": "string",
-					"format": "",
-					"ownerId": 43,
-					"variableId": 1,
-					"wuId": 1,
-					"wuParameterId": 1,
-					"ownerColumnId": null,
-					"ownerRequestId": null,
-					"ownerResponseId": null,
-					"ownerWuId": null,
-					"ownerWuChildId": null,
-					"id": 44,
-					"forWuParameterId": 1
-				},
-				{
-					"isArray": false,
-					"nullable": false,
 					"type": "Wu",
 					"format": "",
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 4,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": 3,
@@ -4892,7 +4966,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4908,7 +4982,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4924,7 +4998,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4940,7 +5014,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4956,7 +5030,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4972,7 +5046,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -4988,7 +5062,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -5004,7 +5078,7 @@
 					"ownerId": null,
 					"variableId": 1,
 					"wuId": 1,
-					"wuParameterId": 1,
+					"wuParameterId": null,
 					"ownerColumnId": null,
 					"ownerRequestId": null,
 					"ownerResponseId": null,
@@ -5113,6 +5187,158 @@
 					"ownerWuId": null,
 					"ownerWuChildId": null,
 					"id": 59
+				},
+				{
+					"isArray": false,
+					"nullable": false,
+					"type": "string",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": null,
+					"ownerColumnId": 44,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": null,
+					"ownerWuChildId": null,
+					"id": 60
+				},
+				{
+					"isArray": false,
+					"nullable": false,
+					"type": "string",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": null,
+					"ownerColumnId": null,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": 10,
+					"ownerWuChildId": null,
+					"id": 61
+				},
+				{
+					"isArray": false,
+					"nullable": false,
+					"type": "Wu",
+					"format": "",
+					"ownerId": null,
+					"variableId": 1,
+					"wuId": 10,
+					"wuParameterId": null,
+					"ownerColumnId": null,
+					"ownerRequestId": null,
+					"ownerResponseId": 4,
+					"ownerWuId": null,
+					"ownerWuChildId": null,
+					"id": 62
+				},
+				{
+					"isArray": false,
+					"nullable": true,
+					"type": "WuParameter",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": 7,
+					"ownerColumnId": 45,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": null,
+					"ownerWuChildId": null,
+					"id": 63
+				},
+				{
+					"isArray": false,
+					"nullable": true,
+					"type": "WuParameter",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": 8,
+					"ownerColumnId": 46,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": null,
+					"ownerWuChildId": null,
+					"id": 64
+				},
+				{
+					"isArray": false,
+					"nullable": true,
+					"type": "WuParameter",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": 9,
+					"ownerColumnId": 47,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": null,
+					"ownerWuChildId": null,
+					"id": 65
+				},
+				{
+					"isArray": true,
+					"nullable": false,
+					"type": "Wu",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 11,
+					"wuParameterId": null,
+					"ownerColumnId": 48,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": null,
+					"ownerWuChildId": null,
+					"id": 66
+				},
+				{
+					"isArray": false,
+					"nullable": false,
+					"type": "string",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": null,
+					"ownerColumnId": null,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": 11,
+					"ownerWuChildId": null,
+					"id": 67
+				},
+				{
+					"isArray": false,
+					"nullable": false,
+					"type": "string",
+					"format": "",
+					"forWuParameterId": null,
+					"ownerId": null,
+					"variableId": null,
+					"wuId": 1,
+					"wuParameterId": null,
+					"ownerColumnId": null,
+					"ownerRequestId": null,
+					"ownerResponseId": null,
+					"ownerWuId": 12,
+					"ownerWuChildId": null,
+					"id": 68
 				}
 			],
 			"Column": [
@@ -5185,7 +5411,7 @@
 				{
 					"entityId": 2,
 					"name": "Value",
-					"type": "string",
+					"type": "integer",
 					"length": 0,
 					"scale": 0,
 					"default": "",
@@ -5912,7 +6138,7 @@
 					"entityId": 4,
 					"name": "Name",
 					"type": "string",
-					"length": 33,
+					"length": 111,
 					"scale": 0,
 					"default": "",
 					"comment": "",
@@ -6130,7 +6356,7 @@
 					"deprecated": false,
 					"example": "",
 					"explode": false,
-					"required": true,
+					"required": false,
 					"style": "form",
 					"id": 34,
 					"hidden": false
@@ -6286,7 +6512,7 @@
 					"deprecated": false,
 					"example": "",
 					"explode": false,
-					"required": true,
+					"required": false,
 					"style": "form",
 					"id": 39
 				},
@@ -6317,7 +6543,7 @@
 					"deprecated": false,
 					"example": "",
 					"explode": false,
-					"required": true,
+					"required": false,
 					"style": "form",
 					"id": 40
 				},
@@ -6348,7 +6574,7 @@
 					"deprecated": false,
 					"example": "",
 					"explode": false,
-					"required": true,
+					"required": false,
 					"style": "form",
 					"id": 41
 				},
@@ -6379,7 +6605,7 @@
 					"deprecated": false,
 					"example": "",
 					"explode": false,
-					"required": true,
+					"required": false,
 					"style": "deepObject",
 					"id": 42
 				},
@@ -6413,6 +6639,156 @@
 					"required": true,
 					"style": "simple",
 					"id": 43
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "Text",
+					"reserved": false,
+					"entityId": 2,
+					"type": "string",
+					"length": 0,
+					"scale": 0,
+					"default": "",
+					"comment": "",
+					"unsigned": false,
+					"nullable": false,
+					"cast": "",
+					"fillable": false,
+					"hidden": false,
+					"ro": false,
+					"wo": false,
+					"fakeRaw": true,
+					"fakeUnique": false,
+					"fakeMethod": "sentence",
+					"fakeText": "",
+					"inTable": false,
+					"deprecated": false,
+					"example": "",
+					"explode": false,
+					"required": true,
+					"style": "",
+					"id": 44
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "WhereNot",
+					"reserved": false,
+					"entityId": 8,
+					"type": "object",
+					"length": 0,
+					"scale": 0,
+					"default": "",
+					"comment": "",
+					"unsigned": false,
+					"nullable": false,
+					"cast": "",
+					"fillable": false,
+					"hidden": false,
+					"ro": false,
+					"wo": false,
+					"fakeRaw": true,
+					"fakeUnique": false,
+					"fakeMethod": "",
+					"fakeText": "",
+					"inTable": false,
+					"deprecated": false,
+					"example": "",
+					"explode": false,
+					"required": false,
+					"style": "deepObject",
+					"id": 45
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "WhereIn",
+					"reserved": false,
+					"entityId": 8,
+					"type": "object",
+					"length": 0,
+					"scale": 0,
+					"default": "",
+					"comment": "",
+					"unsigned": false,
+					"nullable": false,
+					"cast": "",
+					"fillable": false,
+					"hidden": false,
+					"ro": false,
+					"wo": false,
+					"fakeRaw": true,
+					"fakeUnique": false,
+					"fakeMethod": "",
+					"fakeText": "",
+					"inTable": false,
+					"deprecated": false,
+					"example": "",
+					"explode": false,
+					"required": false,
+					"style": "deepObject",
+					"id": 46
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "WhereNotIn",
+					"reserved": false,
+					"entityId": 8,
+					"type": "object",
+					"length": 0,
+					"scale": 0,
+					"default": "",
+					"comment": "",
+					"unsigned": false,
+					"nullable": false,
+					"cast": "",
+					"fillable": false,
+					"hidden": false,
+					"ro": false,
+					"wo": false,
+					"fakeRaw": true,
+					"fakeUnique": false,
+					"fakeMethod": "",
+					"fakeText": "",
+					"inTable": false,
+					"deprecated": false,
+					"example": "",
+					"explode": false,
+					"required": false,
+					"style": "deepObject",
+					"id": 47
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "Sortzz",
+					"reserved": false,
+					"entityId": 8,
+					"type": "array",
+					"length": 0,
+					"scale": 0,
+					"default": "",
+					"comment": "",
+					"unsigned": false,
+					"nullable": false,
+					"cast": "",
+					"fillable": false,
+					"hidden": false,
+					"ro": false,
+					"wo": false,
+					"fakeRaw": true,
+					"fakeUnique": false,
+					"fakeMethod": "",
+					"fakeText": "[]",
+					"inTable": false,
+					"deprecated": false,
+					"example": "",
+					"explode": false,
+					"required": false,
+					"style": "",
+					"id": 48
 				}
 			],
 			"ColumnConstraint": [
@@ -6426,7 +6802,7 @@
 					"id": 2,
 					"columnId": 25,
 					"name": "max",
-					"parameter": "33"
+					"parameter": "111"
 				},
 				{
 					"id": 3,
@@ -6553,6 +6929,12 @@
 					"name": "required",
 					"parameter": "",
 					"id": 25
+				},
+				{
+					"columnId": 48,
+					"name": "array",
+					"parameter": "",
+					"id": 26
 				}
 			],
 			"Relation": [],
@@ -6561,6 +6943,11 @@
 					"entityId": 4,
 					"type": "unique",
 					"id": 1
+				},
+				{
+					"entityId": 4,
+					"type": "unique",
+					"id": 2
 				}
 			],
 			"IndexColumn": [
@@ -6569,6 +6956,12 @@
 					"columnId": 26,
 					"sort": 0,
 					"id": 1
+				},
+				{
+					"indexId": 2,
+					"columnId": 25,
+					"sort": 0,
+					"id": 2
 				}
 			],
 			"Wu": [
@@ -6582,7 +6975,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 1
+					"id": 1,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6594,7 +6988,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 2
+					"id": 2,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6606,7 +7001,8 @@
 					"isRequest": false,
 					"example": "{\n    \"property1\": [\"property1 is required\"],\n    \"property2\": [\"property2 is required\", \"property2 must be an integer\"]\n}",
 					"isMap": true,
-					"id": 3
+					"id": 3,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6618,7 +7014,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 4
+					"id": 4,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6630,7 +7027,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 5
+					"id": 5,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6642,7 +7040,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 6
+					"id": 6,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6654,7 +7053,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 7
+					"id": 7,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6666,7 +7066,8 @@
 					"isRequest": false,
 					"example": "",
 					"isMap": false,
-					"id": 8
+					"id": 8,
+					"includeAll": false
 				},
 				{
 					"color": "#fff",
@@ -6678,7 +7079,47 @@
 					"isRequest": true,
 					"example": "",
 					"isMap": false,
-					"id": 9
+					"id": 9,
+					"includeAll": false
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "ApiText",
+					"reserved": false,
+					"entityId": 2,
+					"type": "allOf",
+					"isRequest": false,
+					"example": "",
+					"isMap": false,
+					"id": 10,
+					"includeAll": false
+				},
+				{
+					"color": "#fff",
+					"description": "",
+					"name": "SortObject",
+					"reserved": false,
+					"entityId": 8,
+					"type": "allOf",
+					"isRequest": false,
+					"example": "",
+					"isMap": false,
+					"id": 11,
+					"includeAll": false
+				},
+				{
+					"color": "#fff",
+					"description": "https://spec.openapis.org/oas/v3.0.3#discriminator-object",
+					"name": "OneOfEntity",
+					"reserved": true,
+					"entityId": 1,
+					"type": "oneOf",
+					"isRequest": false,
+					"example": "",
+					"isMap": false,
+					"includeAll": false,
+					"id": 12
 				}
 			],
 			"WuColumn": [
@@ -6879,6 +7320,60 @@
 					"columnId": 42,
 					"alias": "",
 					"id": 33
+				},
+				{
+					"wuId": 10,
+					"columnId": 44,
+					"alias": "",
+					"id": 34
+				},
+				{
+					"wuId": 10,
+					"columnId": 1,
+					"alias": "",
+					"id": 35
+				},
+				{
+					"wuId": 10,
+					"columnId": 2,
+					"alias": "",
+					"id": 36
+				},
+				{
+					"wuId": 9,
+					"columnId": 45,
+					"alias": "",
+					"id": 37
+				},
+				{
+					"wuId": 9,
+					"columnId": 46,
+					"alias": "",
+					"id": 38
+				},
+				{
+					"wuId": 9,
+					"columnId": 47,
+					"alias": "",
+					"id": 39
+				},
+				{
+					"wuId": 9,
+					"columnId": 48,
+					"alias": "",
+					"id": 40
+				},
+				{
+					"wuId": 11,
+					"columnId": 40,
+					"alias": "",
+					"id": 41
+				},
+				{
+					"wuId": 11,
+					"columnId": 41,
+					"alias": "",
+					"id": 42
 				}
 			],
 			"WuColumnConstraint": [
@@ -6921,11 +7416,16 @@
 					"wuColumnId": 30,
 					"columnConstraintId": 23,
 					"id": 8
+				},
+				{
+					"wuColumnId": 40,
+					"columnConstraintId": 26,
+					"id": 9
 				}
 			],
 			"WuParameter": [
 				{
-					"wuId": 2,
+					"wuId": 1,
 					"name": "ItemType",
 					"description": "",
 					"isWu": false,
@@ -6965,6 +7465,27 @@
 					"description": "",
 					"isWu": true,
 					"id": 6
+				},
+				{
+					"wuId": 9,
+					"name": "WhereNotObject",
+					"description": "",
+					"isWu": true,
+					"id": 7
+				},
+				{
+					"wuId": 9,
+					"name": "WhereInObject",
+					"description": "",
+					"isWu": true,
+					"id": 8
+				},
+				{
+					"wuId": 9,
+					"name": "WhereNotInObject",
+					"description": "",
+					"isWu": true,
+					"id": 9
 				}
 			],
 			"Module": [
@@ -7033,7 +7554,7 @@
 				{
 					"deprecated": false,
 					"inOapi": true,
-					"inRoute": true,
+					"inRoute": false,
 					"name": "root",
 					"description": "",
 					"routeName": "",
@@ -7043,7 +7564,8 @@
 					"entityId": 1,
 					"moduleId": 1,
 					"requestId": 1,
-					"id": 1
+					"id": 1,
+					"responseWuId": 2
 				}
 			],
 			"Path": [
@@ -7090,9 +7612,18 @@
 				{
 					"color": "#fff",
 					"description": "",
+					"name": "ApiTextResponse",
+					"reserved": false,
+					"example": "{\n    \"Code\": 200,\n    \"Message\": \"OK\",\n    \"Text\": \"\"\n}",
+					"mediaType": "application/json",
+					"id": 4
+				},
+				{
+					"color": "#fff",
+					"description": "content data is type `boolean` or `number` or `null`",
 					"name": "ApiValueResponse",
 					"reserved": false,
-					"example": "",
+					"example": "{\n    \"Code\": 200,\n    \"Message\": \"OK\",\n    \"Value\": null\n}",
 					"mediaType": "application/json",
 					"id": 2
 				},
@@ -7101,7 +7632,7 @@
 					"description": "Status 422 Validation Error",
 					"name": "ApiErrorResponse",
 					"reserved": false,
-					"example": "",
+					"example": "{\n    \"Code\": 200,\n    \"Message\": \"OK\",\n    \"Error\": {\n        \"property1\": [\n            \"property1 is required\"\n        ],\n        \"property2\": [\n            \"property2 is required\",\n            \"property2 must be an integer\"\n        ]\n    }\n}",
 					"mediaType": "application/json",
 					"id": 3
 				}
@@ -7154,14 +7685,11 @@
 				},
 				{
 					"color": "#fff",
-					"description": "",
-					"name": "Visibility",
-					"reserved": false,
-					"default": "Private",
-					"enum": [
-						"Private",
-						"Public"
-					],
+					"description": "All `Entity` with `isTable` will be added to this Enum automatically in OpenApi doc",
+					"name": "EntityTypeEnum",
+					"reserved": true,
+					"default": "",
+					"enum": [],
 					"type": "string",
 					"id": 2
 				},
@@ -7189,7 +7717,7 @@
 			],
 			"PathMethod": []
 		},
-		"version": 55
+		"version": 57
 	},
 	"oapi": {
 		"openapi": "3.0.3",
