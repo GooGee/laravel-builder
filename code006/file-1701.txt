@@ -16,7 +16,7 @@ use Illuminate\Pagination\Paginator;
 class {{ helper.getClassName(file, entity, action) }}
 {
     /**
-     * @return Paginator<Model>
+     * @return Paginator<int, Model>
      */
     static function run(?int $UserId, PageParameter $PageParameter): Paginator
     {

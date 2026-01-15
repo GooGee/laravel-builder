@@ -25,7 +25,9 @@ function makeFaker(data) {
         }
     })
 
-    ddd.result = ddd.db.tables.Column.filter(item => item.entityId === ddd.entity.id && item.inTable).map(item => setFaker(item))
+    ddd.result = ddd.db.tables.Column
+        .filter(item => item.entityId === ddd.entity.id && item.inTable)
+        .map(item => setFaker(item))
 
     /**
      *

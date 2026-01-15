@@ -26,9 +26,13 @@ function run(data) {
     const entityMap = new Map(ddd.db.tables.Entity.map(item => [item.id, item]))
     const cienm = new Map(relationzz.map(item => [item.column1Id, entityMap.get(item.entity0Id)]))
 
-    ddd.db.tables.Column
-        .filter(item => item.entityId === ddd.entity.id && (item.inTable && item.type !== 'object'))
-        .forEach(setConstraint)
+    if (ddd.DataMap.Column && ddd.DataMap.OnlyOne) {
+        setConstraint(ddd.DataMap.Column)
+    } else {
+        ddd.db.tables.Column
+            .filter(item => item.entityId === ddd.entity.id && (item.inTable && item.type !== 'object'))
+            .forEach(setConstraint)
+    }
 
     /**
      *

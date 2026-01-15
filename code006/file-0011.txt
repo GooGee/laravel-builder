@@ -48,7 +48,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
      */
     protected $hidden = [
 {% for column in columnzz | selectattr('hidden') %}
