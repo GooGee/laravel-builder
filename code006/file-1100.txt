@@ -18,24 +18,25 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $User = $this->createUser();
         $Item = $this->makeItem($User);
 
-        $data = $Item->toArray();
-        $Itemzz = [$data];
+        $Itemzz = [];
         $response = $this->postJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
-        $Itemzz = [[]];
+
         $response = $this->postJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(422);
 {% for column in columnzz %}
         $response->assertJsonValidationErrorFor('Itemzz.0.{{ column.alias }}', self::ErrorFieldName);{% endfor %}
 
-        $data = $Item->toArray();
-        $Itemzz = [$data];
+        $Itemzz = [
+            $Item->toArray(),
+            $this->makeItem($User)->toArray(),
+        ];
         $response = $this->postJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(200);
         $this->seeItemzz($response);
-        $response->assertJsonCount(1, 'Itemzz');
+        $response->assertJsonCount(2, 'Itemzz');
 
 {% for column in columnzz %}
         $response->assertJsonPath('Itemzz.0.{{ column.alias }}', $Item->{{ column.alias }});{% endfor %}

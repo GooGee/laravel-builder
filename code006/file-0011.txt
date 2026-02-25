@@ -46,8 +46,15 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
     ];
 
     /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+{% for column in setableColumnzz | selectattr('fillable') %}
+        '{{ column.name }}',{% endfor %}
+    ];
+
+    /**
      * The attributes that should be hidden for serialization.
-     *
      */
     protected $hidden = [
 {% for column in columnzz | selectattr('hidden') %}
@@ -63,15 +70,6 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
 {% for key in columnzz | rejectattr('hidden') | rejectattr('wo') %}
             '{{ key.name }}',{% endfor %}
         ];
-    }
-
-    public function setAll(
-{% for column in setableColumnzz | selectattr('fillable') %}
-        {{ helper.makeColumnType(column) }} ${{column.name}},{% endfor %}
-    ): void
-    {
-{% for column in setableColumnzz | selectattr('fillable') %}
-        $this->{{ column.name }} = ${{ column.name }};{% endfor %}
     }
 
 {% for text in textzz %}

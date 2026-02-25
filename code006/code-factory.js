@@ -39,9 +39,6 @@ function makeFaker(data) {
         if (column.name === 'Id') {
             return column
         }
-        if (column.fakeText) {
-            return column
-        }
         if (column.fakeRaw === false && column.fakeMethod) {
             return column
         }
@@ -59,6 +56,10 @@ function makeFaker(data) {
             column.fakeRaw = true
             column.fakeMethod = ''
             column.fakeText = entity + 'Factory::new()'
+            return column
+        }
+
+        if (column.fakeText) {
             return column
         }
 

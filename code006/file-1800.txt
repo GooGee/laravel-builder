@@ -19,13 +19,11 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $Item = $this->makeItem($User);
         $Item->save();
 
-        $data = $Item->toArray();
-        $Itemzz = [$data];
+        $Itemzz = [[]];
         $response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(401);
 
         $this->actingAs($User);
-        $Itemzz = [[]];
         $response = $this->patchJson($this->makeUri(), compact('Itemzz'))
             ->assertStatus(422);
 {% for column in columnzz %}

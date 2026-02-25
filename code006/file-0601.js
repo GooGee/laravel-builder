@@ -14,18 +14,19 @@ function run(data) {
     ddd.text = linezz.join("\n")
 
     function makeEntityEnum() {
-        const name = 'EntityEnum'
-        linezz.push(`export enum ${name} {`)
+        const name = 'EntityEnumO'
+        linezz.push(`export const ${name} = {`)
         ddd.db.tables.Entity.filter(item => !ignore.has(item.name))
             .sort((aa, bb) => aa.name.localeCompare(bb.name))
             .forEach(item => makeLine(item.name))
-        linezz.push('}')
+
+        linezz.push('} as const')
         linezz.push('')
     }
 
     function makePermissionEnum() {
-        const name = 'PermissionEnum'
-        linezz.push(`export enum ${name} {`)
+        const name = 'PermissionEnumO'
+        linezz.push(`export const ${name} = {`)
 
         const permissionzz = ddd.helper.makePermissionzz().filter(item => item.module === ddd.module.name)
         permissionzz.forEach(item => {
@@ -33,21 +34,21 @@ function run(data) {
             makeLine(item.permission)
         })
 
-        linezz.push('}')
+        linezz.push('} as const')
         linezz.push('')
     }
 
     function makeRoleEnum() {
-        const name = 'RoleEnum'
-        linezz.push(`export enum ${name} {`)
+        const name = 'RoleEnumO'
+        linezz.push(`export const ${name} = {`)
 
         Array.from(entitySet).forEach(item => makeLine(item + 'Moderator'))
 
-        linezz.push('}')
+        linezz.push('} as const')
         linezz.push('')
     }
 
     function makeLine(name) {
-        linezz.push(`    ${name} = "${name}",`)
+        linezz.push(`    ${name} : "${name}",`)
     }
 }

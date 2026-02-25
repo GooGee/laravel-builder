@@ -16,24 +16,16 @@ class {{ helper.getClassName(file, entity, action) }}
      * @param  array<int, array<string, mixed>>  $Mapzz
      * @return array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}>
      */
-    function run(int $UserId, array $Mapzz): array
+    static function run(int $UserId, array $Mapzz): array
     {
-        /** @var array<int, int> $Idzz */
-        $Idzz = [];
         /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = [];
         foreach ($Mapzz as $Data) {
-            $Item = {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::make(
-                $UserId,
-{% for column in columnzz %}
-                $Data['{{ column.name }}'],{% endfor %}
-            );
-            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::create($UserId, $Item);
-            $Idzz[] = $Item->Id;
+            $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, 'CreateOne') }};
+            $Item->fill($Data);
+            {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::run($UserId, $Item, true);
             $Itemzz[] = $Item;
         }
-
-        event(new {{ action + entity.name }}Event($Idzz));
 
         return $Itemzz;
     }

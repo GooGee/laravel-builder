@@ -27,7 +27,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $Itemzz = {{ action + entity.name }}::run($User->Id, $Request->validated('Itemzz'));
+            $Itemzz = {{ action + entity.name }}::run($User->Id, $Request->Itemzz);
 
             DB::commit();
 

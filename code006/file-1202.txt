@@ -27,10 +27,8 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, action) }}();
             $Item->UserId = $User->Id;
-            $Item->setAll(
-{% for column in columnzz | selectattr('fillable') %}
-                {{ column.name }}: {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
-            );
+
+            $Item->fill($Request->validated());
 
             DB::beginTransaction();
 

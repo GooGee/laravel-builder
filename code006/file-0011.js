@@ -4,14 +4,12 @@ function run(data) {
     /** @type {LB.DataForScript} */
     const ddd = data
 
-    const nameset = new Set(['Id', 'CreatedAt', 'UpdatedAt', 'DeletedAt']);
+    const nameset = new Set(['Id', 'CreatedAt', 'UpdatedAt',]);
 
     const columnzz = ddd.db.tables.Column.filter((item) => item.entityId === ddd.entity.id && item.inTable)
     ddd.columnzz = columnzz
 
-    ddd.setableColumnzz = columnzz.filter(function (item) {
-        return nameset.has(item.name) === false
-    })
+    ddd.setableColumnzz = columnzz.filter((item) => nameset.has(item.name) === false)
 
     /** @type {Map<string, string>} */
     const castMap = new Map()

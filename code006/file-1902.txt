@@ -35,10 +35,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
                 throw new AccessDeniedHttpException();
             }
 
-            $Item->setAll(
-{% for column in columnzz | selectattr('fillable') %}
-                {{ column.name }}: {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
-            );
+            $Item->fill($Request->validated());
 
             {{ helper.getClassName(helper.findFile('UpdateOne'), entity, action) }}::run($User->Id, $Item);
 

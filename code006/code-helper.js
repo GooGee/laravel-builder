@@ -243,15 +243,13 @@ function makeHelper(data) {
     }
 
     function makePermissionzz() {
-        const directoryMap = new Map(ddd.db.tables.Directory.map(item => [item.id, item]))
         const entityMap = new Map(ddd.db.tables.Entity.map(item => [item.id, item]))
         const moduleMap = new Map(ddd.db.tables.Module.map(item => [item.id, item]))
         return ddd.db.tables.ModuleAction.map(function (ma) {
-            const directory = directoryMap.get(ma.directoryId)
             const entity = entityMap.get(ma.entityId)
             const module = moduleMap.get(ma.moduleId)
             return {
-                permission: directory?.name + entity?.name, entity: entity?.name, module: module?.name,
+                permission: ma.name + entity?.name, entity: entity?.name, module: module?.name,
             }
         })
     }

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 {
-    public function __invoke({{ action + entity.name }}Request $Request, {{ action + entity.name }} $CreateMany): JsonResponse
+    public function __invoke({{ action + entity.name }}Request $Request): JsonResponse
     {
         /** @var User $User */
         $User = auth()->user();
@@ -27,7 +27,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
 
             DB::beginTransaction();
 
-            $Itemzz = $CreateMany->run($User->Id, $Request->validated('Itemzz'));
+            $Itemzz = {{ helper.getClassName(helper.findFile('CreateMany'), entity, action) }}::run($User->Id, $Request->Itemzz);
 
             DB::commit();
 

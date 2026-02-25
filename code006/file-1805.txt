@@ -9,6 +9,9 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 
+/**
+ * @property array<int, array<string, mixed>> $Itemzz
+ */
 class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClassName(helper.findFile('Request'), entity, 'UpdateOne', DirectoryIdEnum.UpdateOne) }}
 {
     public function rules(): array

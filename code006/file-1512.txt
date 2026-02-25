@@ -23,7 +23,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractController
         $Itemzz = {{ action + entity.name }}::run(
             $User->Id,
 {% for column in columnzz %}
-            $Request->{{ column.alias }},{% endfor %}
+            {{ helper.makeColumnValueFromRequest(column) }},{% endfor %}
         );
         $Itemzz->load(['User']);
 
