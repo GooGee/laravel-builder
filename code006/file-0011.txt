@@ -17,6 +17,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * should not be modified manually.
  * please make modifications in child class.
  *
+ * @method static {{ helper.getClassName(file, entity, action) }}|null find(int $Id)
+ * @method static {{ helper.getClassName(file, entity, action) }} findOrFail(int $Id)
+ *
  *{% for column in columnzz %}
  * @property {{ helper.makeColumnType(column) }} ${{column.name}}{% endfor %}
  *{% for property in przz %}
@@ -49,7 +52,7 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-{% for column in setableColumnzz | selectattr('fillable') %}
+{% for column in columnzz | selectattr('fillable') %}
         '{{ column.name }}',{% endfor %}
     ];
 

@@ -24,15 +24,16 @@ class {{ helper.getClassName(file, entity, action) }}
             ->where('UserId', $UserId)
             ->whereIn('Id', array_column($Mapzz, 'Id'))
             ->get();
-        /** @var array<int, array<string, mixed>> $Map */
-        $Map = [];
-        foreach ($Mapzz as $mm) {
-            $Map[$mm['Id']] = $mm;
+        /** @var array<int, array<string, mixed>> $Id_Data_Map */
+        $Id_Data_Map = [];
+        foreach ($Mapzz as $map) {
+            $Id_Data_Map[$map['Id']] = $map;
         }
         foreach ($Itemzz as $Item) {
-            $mm = $Map[$Item->Id];
+            $map = $Id_Data_Map[$Item->Id];
+            $Item->fill($map);
 {% for column in columnzz %}
-            $Item->{{ column.name }} = $mm['{{ column.name }}'];{% endfor %}
+            $Item->{{ column.name }} = $map['{{ column.name }}'];{% endfor %}
             {{ helper.getClassName(helper.findFile('UpdateOne'), entity, 'UpdateOne') }}::run($UserId, $Item);
         }
 

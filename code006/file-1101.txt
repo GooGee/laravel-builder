@@ -20,9 +20,11 @@ class {{ helper.getClassName(file, entity, action) }}
     {
         /** @var array<int, {{ helper.getClassName(helper.findFile('Model'), entity, action) }}> $Itemzz */
         $Itemzz = [];
-        foreach ($Mapzz as $Data) {
+        foreach ($Mapzz as $map) {
             $Item = new {{ helper.getClassName(helper.findFile('Model'), entity, 'CreateOne') }};
-            $Item->fill($Data);
+            $Item->fill($map);
+{% for column in columnzz %}
+            $Item->{{ column.name }} = $map['{{ column.name }}'];{% endfor %}
             {{ helper.getClassName(helper.findFile('CreateOne'), entity, 'CreateOne') }}::run($UserId, $Item, true);
             $Itemzz[] = $Item;
         }
