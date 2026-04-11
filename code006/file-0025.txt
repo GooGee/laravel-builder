@@ -9,6 +9,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<{{ helper.getClassName(helper.findFile('Model'), entity, action) }}>

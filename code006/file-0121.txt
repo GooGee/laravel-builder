@@ -9,12 +9,9 @@ use Illuminate\Validation\Rule;
 /**
  * @property int $Page
  * @property int $PerPage
- * @property string $SortField
- * @property string $SortOrder
  * @property array<string, mixed> $Filter
- * @property array<string, mixed> $WhereIn
- * @property array<string, mixed> $WhereNot
- * @property array<string, mixed> $WhereNotIn
+ * @property array<int, array{'Column': string, 'Operator': string, 'Value': mixed}> $Filterzz
+ * @property array<int, array{'Column': string, 'Order': string}> $Sortzz
  */
 class ReadPageRequest extends AbstractRequest
 {
@@ -34,20 +31,24 @@ class ReadPageRequest extends AbstractRequest
         $RuleMap = [
             'Page' => ['integer', 'min:1', 'max:1000'],
             'PerPage' => ['integer', 'min:5', 'max:100'],
-            'SortField' => ['string'],
-            'SortOrder' => ['string', Rule::in([PageParameter::SortAsc, PageParameter::SortDesc])],
+            'Filter' => ['array'],
+            'Filterzz' => [
+                '*' => [
+                    'Column' => ['present', 'string'],
+                    'Operator' => ['present', 'string'],
+                    'Value' => ['present'],
+                ],
+            ],
+            'Sortzz' => [
+                '*' => [
+                    'Column' => ['present', 'string'],
+                    'Order' => ['present', 'string', Rule::in([PageParameter::SortAsc, PageParameter::SortDesc])],
+                ],
+            ],
         ];
+
         foreach (static::makeRuleMap() as $Key => $Item) {
             $RuleMap['Filter.'.$Key] = $Item;
-        }
-        foreach (static::makeWhereInRuleMap() as $Key => $Item) {
-            $RuleMap['WhereIn.'.$Key] = $Item;
-        }
-        foreach (static::makeWhereNotRuleMap() as $Key => $Item) {
-            $RuleMap['WhereNot.'.$Key] = $Item;
-        }
-        foreach (static::makeWhereNotInRuleMap() as $Key => $Item) {
-            $RuleMap['WhereNotIn.'.$Key] = $Item;
         }
 
         return $RuleMap;
@@ -57,30 +58,6 @@ class ReadPageRequest extends AbstractRequest
      * @return array<string, string[]>
      */
     public static function makeRuleMap(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, string[]>
-     */
-    public static function makeWhereInRuleMap(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, string[]>
-     */
-    public static function makeWhereNotRuleMap(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return array<string, string[]>
-     */
-    public static function makeWhereNotInRuleMap(): array
     {
         return [];
     }

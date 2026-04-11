@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Base;
 
-use App\Models\AbstractModel;
-
 class PageParameter
 {
     const PageSize = 10;
@@ -16,52 +14,27 @@ class PageParameter
 
     /**
      * @param  array<string, mixed>  $Filter
-     * @param  array<string, mixed>  $WhereNot
-     * @param  array<string, mixed>  $WhereIn
-     * @param  array<string, mixed>  $WhereNotIn
+     * @param  array<int, array<string, mixed>>  $Filterzz
+     * @param  array<int, array{'Column': string, 'Order': string}> $Sortzz
      */
     public function __construct(
         public array $Filter = [],
+        public array $Filterzz = [],
         public int $Page = 1,
         public int $PerPage = self::PageSize,
-        public string $SortField = AbstractModel::PrimaryKey,
-        public string $SortOrder = self::SortDesc,
-        public array $WhereNot = [],
-        public array $WhereIn = [],
-        public array $WhereNotIn = [],
+        public array $Sortzz = [],
     ) {
         if ($this->Page < 1) {
             $this->Page = 1;
         }
-        if ($this->PerPage < 1) {
-            $this->PerPage = 1;
+        if ($this->PerPage < 5) {
+            $this->PerPage = 5;
         }
     }
 
     public function getFilterValue(string $Key): bool|int|string|null
     {
         return $this->Filter[$Key] ?? null;
-    }
-
-    public function getWhereNotValue(string $Key): bool|int|string|null
-    {
-        return $this->WhereNot[$Key] ?? null;
-    }
-
-    /**
-     * @return array<int, bool|int|string>
-     */
-    public function getWhereInValuezz(string $Key): array
-    {
-        return $this->WhereIn[$Key] ?? [];
-    }
-
-    /**
-     * @return array<int, bool|int|string>
-     */
-    public function getWhereNotInValuezz(string $Key): array
-    {
-        return $this->WhereNotIn[$Key] ?? [];
     }
 
     /**
@@ -71,13 +44,10 @@ class PageParameter
     {
         return new PageParameter(
             $Map['Filter'] ?? [],
+            $Map['Filterzz'] ?? [],
             isset($Map['Page']) ? intval($Map['Page']) : 1,
             isset($Map['PerPage']) ? intval($Map['PerPage']) : self::PageSize,
-            $Map['SortField'] ?? AbstractModel::PrimaryKey,
-            $Map['SortOrder'] ?? self::SortDesc,
-            $Map['WhereNot'] ?? [],
-            $Map['WhereIn'] ?? [],
-            $Map['WhereNotIn'] ?? [],
+            $Map['Sortzz'] ?? [],
         );
     }
 
@@ -88,13 +58,10 @@ class PageParameter
     {
         return [
             'Filter' => $this->Filter,
-            'WhereNot' => $this->WhereNot,
-            'WhereIn' => $this->WhereIn,
-            'WhereNotIn' => $this->WhereNotIn,
+            'Filterzz' => $this->Filterzz,
             'Page' => $this->Page,
             'PerPage' => $this->PerPage,
-            'SortField' => $this->SortField,
-            'SortOrder' => $this->SortOrder,
+            'Sortzz' => $this->Sortzz,
         ];
     }
 }

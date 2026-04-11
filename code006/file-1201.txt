@@ -15,8 +15,6 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     static function run(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item, bool $ThrowIfExist): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
-
         if ($ThrowIfExist) {
             $exist = {{ helper.getClassName(helper.findFile('Model'), entity, action) }}::query()
                 ->where('UserId', $Item->UserId)
@@ -28,6 +26,8 @@ class {{ helper.getClassName(file, entity, action) }}
 
         $Item->save();
         $Item->refresh();
+
+        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
 
         return $Item;
     }

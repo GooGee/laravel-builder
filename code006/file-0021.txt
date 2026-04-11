@@ -54,5 +54,12 @@ abstract class AbstractUser extends User
      */
     protected $primaryKey = AbstractModel::PrimaryKey;
 
+    protected $authPasswordName = 'Password';
+
     protected $rememberTokenName = 'RememberToken';
+
+    public static function getShortName(): string
+    {
+        return class_basename(static::class);
+    }
 }

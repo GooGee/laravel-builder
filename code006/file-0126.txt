@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Base;
 
+use App\Models\AbstractModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -12,13 +13,13 @@ use Illuminate\Pagination\Paginator;
 class ReadPageQueryBuilder
 {
     /** @phpstan-ignore-next-line */
-    public function __construct(public Builder $Qb, public PageParameter $PageParameter) {}
+    public function __construct(public Builder $Builder, public PageParameter $PageParameter) {}
 
     public function addFilter(string $Key): self
     {
         $value = $this->PageParameter->getFilterValue($Key);
         if (isset($value)) {
-            $this->Qb->where($Key, $value);
+            $this->Builder->where($Key, $value);
         }
 
         return $this;
@@ -39,87 +40,26 @@ class ReadPageQueryBuilder
 
     public function addSort(): self
     {
-        $this->Qb->orderBy($this->PageParameter->SortField, $this->PageParameter->SortOrder);
-
-        return $this;
-    }
-
-    public function addWhereIn(string $Key): self
-    {
-        $Valuezz = $this->PageParameter->getWhereInValuezz($Key);
-        if (count($Valuezz) === 0) {
-            return $this;
+        foreach ($this->PageParameter->Sortzz as $item) {
+            $SortField = $item['Column'];
+            if ($SortField) {
+                $this->Builder->orderBy($SortField, $item['Order'] ?? PageParameter::SortAsc);
+            }
         }
 
-        $this->Qb->whereIn($Key, $Valuezz);
-
-        return $this;
-    }
-
-    /**
-     * @param  string[]  $Keyzz
-     */
-    public function addWhereInzz(array $Keyzz): self
-    {
-        foreach ($Keyzz as $Key) {
-            $this->addWhereIn($Key);
-        }
-
-        return $this;
-    }
-
-    public function addWhereNot(string $Key): self
-    {
-        $value = $this->PageParameter->getWhereNotValue($Key);
-        if (isset($value)) {
-            $this->Qb->whereNot($Key, $value);
+        if (count($this->PageParameter->Sortzz) === 0) {
+            $this->Builder->orderBy(AbstractModel::PrimaryKey, PageParameter::SortDesc);
         }
 
         return $this;
     }
 
     /**
-     * @param  string[]  $Keyzz
-     */
-    public function addWhereNotzz(array $Keyzz): self
-    {
-        foreach ($Keyzz as $Key) {
-            $this->addWhereNot($Key);
-        }
-
-        return $this;
-    }
-
-    public function addWhereNotIn(string $Key): self
-    {
-        $Valuezz = $this->PageParameter->getWhereNotInValuezz($Key);
-        if (count($Valuezz) === 0) {
-            return $this;
-        }
-
-        $this->Qb->whereNotIn($Key, $Valuezz);
-
-        return $this;
-    }
-
-    /**
-     * @param  string[]  $Keyzz
-     */
-    public function addWhereNotInzz(array $Keyzz): self
-    {
-        foreach ($Keyzz as $Key) {
-            $this->addWhereNotIn($Key);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return LengthAwarePaginator<Model>
+     * @return LengthAwarePaginator<int, Model>
      */
     public function paginate(): LengthAwarePaginator
     {
-        return $this->Qb->paginate(
+        return $this->Builder->paginate(
             $this->PageParameter->PerPage,
             ['*'],
             'Page',
@@ -128,11 +68,11 @@ class ReadPageQueryBuilder
     }
 
     /**
-     * @return Paginator<Model>
+     * @return Paginator<int, Model>
      */
     public function paginateSimple(): Paginator
     {
-        return $this->Qb->simplePaginate(
+        return $this->Builder->simplePaginate(
             $this->PageParameter->PerPage,
             ['*'],
             'Page',

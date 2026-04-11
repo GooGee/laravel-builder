@@ -70,6 +70,20 @@ class AbstractResponse
         );
     }
 
+    public static function sendErrorNotFound(string $Message): JsonResponse
+    {
+        return new JsonResponse(
+            static::makeData(
+                Response::HTTP_NOT_FOUND,
+                null,
+                null,
+                [],
+                $Message,
+            ),
+            Response::HTTP_NOT_FOUND,
+        );
+    }
+
     public static function sendModelItem(Model $Item, string $Message = self::MessageOk, int $Code = Response::HTTP_OK): JsonResponse
     {
         return static::sendItem(static::getData($Item), $Message, $Code);
