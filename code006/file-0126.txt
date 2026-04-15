@@ -41,10 +41,7 @@ class ReadPageQueryBuilder
     public function addSort(): self
     {
         foreach ($this->PageParameter->Sortzz as $item) {
-            $SortField = $item['Column'];
-            if ($SortField) {
-                $this->Builder->orderBy($SortField, $item['Order'] ?? PageParameter::SortAsc);
-            }
+            $this->Builder->orderBy($item['Column'], $item['Order']);
         }
 
         if (count($this->PageParameter->Sortzz) === 0) {

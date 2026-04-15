@@ -8,6 +8,7 @@ namespace {{ tree.getFullNameSpaceOfFile(file, entity, action) }};
 
 {% for dependency in dependencyzz %}
 use {{ dependency }};{% endfor %}
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -27,6 +28,9 @@ class {{ helper.getClassName(file, entity, action) }} extends AbstractModel
 
 {% for relation in relationzz %}
     const Relation_{{ relation.name1 }} = "{{ relation.name1 }}";{% endfor %}
+
+{% for relation in reversedrelationzz %}
+    const Relation_{{ relation.name0 }} = "{{ relation.name0 }}";{% endfor %}
 
     /**
      * The table associated with the model.

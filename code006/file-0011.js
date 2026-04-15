@@ -39,7 +39,8 @@ function run(data) {
     const relationzz = ddd.db.tables.Relation
         .filter((item) => item.entity0Id === ddd.entity.id || item.entity1Id === ddd.entity.id)
         .sort((aa, bb) => aa.name1.localeCompare(bb.name1))
-    ddd.relationzz = relationzz.filter(item => item.entity1Id === ddd.entity.id || item.type === "OneToOne" || item.addToModel)
+    ddd.relationzz = relationzz.filter(item => item.entity1Id === ddd.entity.id || item.type === "OneToOne")
+    ddd.reversedrelationzz = relationzz.filter(item => item.addToModel)
 
     const textzz = relationzz.map((item) => {
         const fk = columnmap.get(item.column1Id)
@@ -89,7 +90,7 @@ function run(data) {
         const entity1 = entitymap.get(relation.entity1Id)
         let type = entity1.name
         if (method === 'hasMany') {
-            type = `\\Illuminate\\Database\\Eloquent\\Collection<${type}>`
+            type = `Collection<int, ${type}>`
         }
         przz.push(type + ' $' + relation.name0)
         return `
