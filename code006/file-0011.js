@@ -39,44 +39,19 @@ function run(data) {
     const relationzz = ddd.db.tables.Relation
         .filter((item) => item.entity0Id === ddd.entity.id || item.entity1Id === ddd.entity.id)
         .sort((aa, bb) => aa.name1.localeCompare(bb.name1))
-    ddd.relationzz = relationzz.filter(item => item.entity1Id === ddd.entity.id || item.type === "OneToOne")
+    ddd.relationzz = relationzz.filter(item => item.entity1Id === ddd.entity.id)
     ddd.reversedrelationzz = relationzz.filter(item => item.addToModel)
 
-    const textzz = relationzz.map((item) => {
+    ddd.textzz = ddd.relationzz.map((item) => {
         const fk = columnmap.get(item.column1Id)
         if (item.entity1Id === ddd.entity.id) {
             return makeBelongsTo(item, fk)
-        }
-        if (item.type === "OneToOne") {
-            return makeHasMany(item, fk, 'hasOne')
         }
         if (item.addToModel) {
             return makeHasMany(item, fk)
         }
         return ''
     })
-
-    const pivotzz = relationzz.filter(item => item.type === 'OneToMany' && item.entity1Id !== ddd.entity.id)
-    const siSet = new Set(pivotzz.map(item => item.entity1Id))
-    // belongsToMany relation
-    const m2mzz = ddd.db.tables.Relation
-        .filter((item) => siSet.has(item.entity1Id) && item.entity0Id !== ddd.entity.id)
-        .map(item => {
-            const pivot = entitymap.get(item.entity1Id)
-            const fk1 = columnmap.get(item.column1Id)
-            const entity2 = entitymap.get(item.entity0Id)
-            const relation = pivotzz.find(one => one.entity1Id === item.entity1Id)
-            const fk0 = columnmap.get(relation.column1Id)
-            // przz.push(`${entity2.name}[] \$${item.name1}zz`)
-            return `
-    /** @phpstan-ignore-next-line */
-    public function ${item.name1}zz(): BelongsToMany
-    {
-        return $this->belongsToMany(${entity2.name}::class, '${pivot.name}', '${fk0.name}', '${fk1.name}');
-    }`
-        })
-    // ddd.textzz = textzz.concat(m2mzz)
-    ddd.textzz = textzz
     ddd.przz = przz
 
     /**

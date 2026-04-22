@@ -18,7 +18,8 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
         $User = $this->createUser();
         $Item = $this->makeItem($User);
         $Item->save();
-        $response = $this->postJson($this->makeUri($Item->Id), [])
+        $data = [];
+        $response = $this->postJson($this->makeUri($Item->Id), $data)
             ->assertStatus(401);
 
         $OtherUser = $this->createUser();
@@ -33,7 +34,6 @@ class {{ helper.getClassName(file, entity, action) }} extends {{ helper.getClass
 {% for column in columnzz %}
         $response->assertJsonValidationErrorFor('{{ column.alias }}', self::ErrorFieldName);{% endfor %}
 
-        $data = $Item->toArray();
         $response = $this->postJson($this->makeUri($Item->Id), $data)
             ->assertStatus(200);
         $this->seeItem($response);
