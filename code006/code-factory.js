@@ -46,16 +46,22 @@ function makeFaker(data) {
             column.fakeText = 'null'
             return column
         }
-        if (column.default) {
-            column.fakeText = column.default
-            return column
+        if (column.name.endsWith('Id')) {
+            const entity = relationMap.get(column.id)
+            if (entity) {
+                column.fakeRaw = true
+                column.fakeMethod = ''
+                column.fakeText = entity + 'Factory::new()'
+                return column
+            }
         }
 
-        const entity = relationMap.get(column.id)
-        if (entity) {
-            column.fakeRaw = true
-            column.fakeMethod = ''
-            column.fakeText = entity + 'Factory::new()'
+        if (column.default) {
+            if (column.type === 'boolean') {
+                column.fakeText = Boolean(column.fakeText) ? 'true' : 'false'
+                return column
+            }
+            column.fakeText = column.default
             return column
         }
 
