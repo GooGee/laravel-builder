@@ -27,7 +27,7 @@ class {{ helper.getClassName(file, entity, action) }}
         $Item->save();
         $Item->refresh();
 
-        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
+        Log::info(self::class, ['UserId' => $UserId, 'ItemId' => $Item->Id]);
 
         return $Item;
     }

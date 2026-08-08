@@ -15,7 +15,7 @@ class {{ helper.getClassName(file, entity, action) }}
 {
     static function run(int $UserId, {{ helper.getClassName(helper.findFile('Model'), entity, action) }} $Item): {{ helper.getClassName(helper.findFile('Model'), entity, action) }}
     {
-        Log::info(self::class, ['UserId' => $UserId, 'Item' => $Item]);
+        Log::info(self::class, ['UserId' => $UserId, 'Id' => $Item->Id]);
 
         $Item->delete();
 

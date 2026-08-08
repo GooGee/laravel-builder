@@ -8,6 +8,7 @@ use App\Models\User;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
@@ -37,6 +38,7 @@ abstract class AbstractApiTestBase extends TestCase
 
         $this->withoutMiddleware([ThrottleRequests::class]);
 
+        Event::fake();
         Notification::fake();
         Queue::fake();
         Storage::fake();

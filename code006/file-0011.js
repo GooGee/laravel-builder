@@ -42,7 +42,7 @@ function run(data) {
     ddd.relationzz = relationzz.filter(item => item.entity1Id === ddd.entity.id)
     ddd.reversedrelationzz = relationzz.filter(item => item.addToModel)
 
-    ddd.textzz = ddd.relationzz.map((item) => {
+    ddd.textzz = relationzz.map((item) => {
         const fk = columnmap.get(item.column1Id)
         if (item.entity1Id === ddd.entity.id) {
             return makeBelongsTo(item, fk)

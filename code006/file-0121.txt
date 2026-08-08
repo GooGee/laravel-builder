@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
  * @property array<int, array{'Column': string, 'Operator': string, 'Value': mixed}> $Filterzz
  * @property array<int, array{'Column': string, 'Order': string}> $Sortzz
  */
-class ReadPageRequest extends AbstractRequest
+class ReadPageBaseRequest extends AbstractRequest
 {
     /**
      * Get the validation rules that apply to the request.
