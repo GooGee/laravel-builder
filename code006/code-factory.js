@@ -61,6 +61,9 @@ function makeFaker(data) {
                 column.fakeText = Boolean(column.fakeText) ? 'true' : 'false'
                 return column
             }
+            if (column.fakeText.startsWith('\\App\\')) {
+                return column
+            }
             column.fakeText = column.default
             return column
         }
